@@ -1,0 +1,1030 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wanderings</title>
+<meta name="description" content="Wanderings by Whiskers &amp; Wanderings. Andiamo Firenze: your Florence travel companion.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Wanderings">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;background:#FFFFFF}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<style>
+/* Light only by design decision (Oct 7). Layout: single-column phone app, editorial rules instead of cards, fixed 5-tab bar. Peacock dominant, coral only for discovery and memories. */
+:root{
+  --bg:#FFFFFF; --surface:#F5F7F7; --ink:#23262A; --muted:#5F656C; --faint:#80878E; --rule:#E3E5E8;
+  --accent:#00677A; --accent-deep:#004C59; --accent-soft:#E3F0F2; --on-accent:#FFFFFF; --route:#A9C8CE;
+  --coral:#E5573E; --coral-ink:#B5391F; --amber:#E0A100; --amber-ink:#7A5200; --green:#3E8E55; --green-ink:#2C6A3E; --panel:#23262A; --panel-ink:#FFFFFF; --panel-muted:#B7BCC2;
+  --sans:"Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --serif:"Newsreader", Georgia, "Times New Roman", serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+:root,:root[data-theme="dark"]{color-scheme:light}
+
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.45;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--accent-deep)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.app{max-width:560px;margin:0 auto;padding:0 20px calc(100px + env(safe-area-inset-bottom,0px))}
+section[data-tab]{display:flex;flex-direction:column}
+
+/* type */
+.eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--accent-deep)}
+.label{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}
+.label.coral{color:var(--coral-ink)}
+h1{margin:0;font-size:38px;line-height:1.02;font-weight:700;letter-spacing:-.035em;text-wrap:balance}
+h2{margin:0;font-size:22px;font-weight:700;letter-spacing:-.02em;text-wrap:balance}
+h3{margin:0;font-size:16px;font-weight:600}
+.lede{font-family:var(--serif);font-style:italic;font-size:19px;line-height:1.32;color:var(--muted)}
+.serif{font-family:var(--serif);font-style:italic}
+.small{font-size:13px}.muted{color:var(--muted)}.faint{color:var(--faint)}
+p{margin:0}
+.block{padding-top:34px;display:flex;flex-direction:column;gap:12px}
+.head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+
+/* masthead */
+.mast{display:flex;justify-content:space-between;align-items:flex-start;padding:20px 0 6px}
+.word{font-weight:700;font-size:17px;letter-spacing:-.01em}.word span{color:var(--accent)}
+.stamp{display:flex;align-items:center;gap:10px;color:var(--accent-deep)}
+.stamp .t{display:flex;flex-direction:column;gap:3px;border-left:1px solid var(--rule);padding-left:10px}
+.stamp b{font-size:12px;font-weight:600;letter-spacing:.32em;color:var(--ink)}
+.stamp i{font-style:normal;font-family:var(--mono);font-size:9.5px;color:var(--muted)}
+.greet{padding:16px 0 18px;display:flex;flex-direction:column;gap:8px}
+
+/* illustrations */
+.ink{stroke:var(--ink);fill:none;stroke-linecap:round;stroke-linejoin:round}
+.wash{fill:var(--accent);fill-opacity:.13;stroke:none}
+.hero{margin:0 -20px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);position:relative}
+.hero svg{display:block;width:100%;height:auto}
+.hero .cap{position:absolute;left:20px;top:12px}
+
+/* rows */
+.rows{display:flex;flex-direction:column}
+.row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:start;padding:14px 0;border-top:1px solid var(--rule)}
+.rows > .row:last-child{border-bottom:1px solid var(--rule)}
+.row > div{min-width:0}
+.row .ill{width:52px;height:52px}
+.row .meta{font-size:12.5px;color:var(--muted)}
+.row .desc{font-size:13.5px;color:var(--muted);margin-top:3px}
+.acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.price{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
+
+/* controls */
+.btn{border:0;border-radius:999px;min-height:44px;padding:0 18px;font-weight:600;background:var(--accent);color:var(--on-accent);display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-size:14px}
+.btn.line{background:transparent;border:1px solid var(--rule);color:var(--ink);font-weight:500}
+.btn.sm{min-height:36px;padding:0 13px;font-size:13px}
+.btn[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent-deep);border-color:transparent}
+.text-btn{border:0;background:none;min-height:44px;padding:0;font-weight:600;font-size:13.5px;color:var(--accent-deep)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 6px;margin:0 -20px;padding-inline:20px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--rule);background:var(--bg);border-radius:999px;min-height:38px;padding:0 14px;font-size:14px;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+input[type=text],input[type=search],input[type=date],input[inputmode],textarea,select{width:100%;border:1px solid var(--rule);border-radius:10px;background:var(--bg);padding:11px 12px;min-height:44px}
+textarea{min-height:110px;resize:vertical;font-family:var(--serif);font-size:17px;line-height:1.4}
+label.f{display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--muted);min-width:0;flex:1 1 140px}
+.fields{display:flex;gap:10px;flex-wrap:wrap}
+.check{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:13.5px}
+.check input{width:20px;height:20px;accent-color:var(--accent)}
+
+/* quick actions */
+.quick{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:10px 0;margin-top:18px}
+.quick button{border:0;background:none;min-height:64px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;font-size:12px;font-weight:500}
+.quick svg{width:24px;height:24px;stroke:var(--accent)}
+.quick .rec span{width:36px;height:36px;border-radius:50%;background:var(--accent);display:grid;place-items:center}
+.quick .rec svg{width:18px;height:18px;stroke:var(--on-accent)}
+.quick .rec{color:var(--accent-deep);font-weight:600}
+
+/* note */
+.note{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;padding-top:22px}
+.note svg{width:26px;height:26px;stroke:var(--coral)}
+.note .serif{font-size:16.5px;line-height:1.35}
+
+/* phrase panel */
+.panel{background:var(--panel);color:var(--panel-ink);padding:20px;margin:0 -4px;display:flex;flex-direction:column;gap:10px}
+.panel .label{color:var(--panel-muted)}
+.panel .it{font-size:24px;font-weight:600;letter-spacing:-.015em}
+.panel .say{font-family:var(--mono);font-size:12.5px;color:var(--panel-muted)}
+.panel .en{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--panel-muted)}
+.panel a,.panel .text-btn{color:var(--panel-ink)}
+.hear{width:48px;height:48px;border-radius:50%;border:1px solid var(--rule);background:transparent;display:grid;place-items:center;flex:none}
+.panel .hear{border-color:#5A9EAA;color:var(--panel-ink)}
+.hear svg{width:20px;height:20px;stroke:currentColor}
+
+/* phrases list */
+.ph{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px;align-items:center;padding:12px 0;border-top:1px solid var(--rule)}
+.ph .it{font-weight:600;font-size:16px}
+.ph .say{font-family:var(--mono);font-size:12px;color:var(--accent-deep);margin-top:2px}
+.ph .en{font-size:13.5px;color:var(--muted);margin-top:1px}
+.star{width:40px;height:40px;border:0;background:none;display:grid;place-items:center;color:var(--faint)}
+.star svg{width:20px;height:20px}
+.star[aria-pressed="true"]{color:var(--coral)}
+.star[aria-pressed="true"] svg{fill:currentColor}
+
+/* journal */
+.entry{display:flex;flex-direction:column;gap:5px;padding:16px 0;border-top:1px solid var(--rule)}
+.entry .q{font-family:var(--serif);font-style:italic;font-size:18px;line-height:1.4;white-space:pre-wrap;overflow-wrap:anywhere}
+.entry .m{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.qm{font-family:var(--serif);font-size:38px;line-height:.6;height:14px;color:var(--coral)}
+.summary{background:var(--surface);padding:16px;font-family:var(--serif);font-size:16px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere}
+
+/* fare table */
+.kv{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;font-size:14px}
+.kv > span:nth-child(even){font-family:var(--mono);text-align:right;font-variant-numeric:tabular-nums}
+.kv .sep{grid-column:1/-1;border-top:1px solid var(--rule);margin:4px 0}
+.num{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;border-top:1px solid var(--rule);padding:4px 0}
+.num .n{font-family:var(--mono);font-size:17px;user-select:all}
+.conv{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
+.big{display:flex;align-items:center;border-bottom:2px solid var(--ink);padding:4px 0}
+.big span{font-family:var(--mono);font-size:22px;color:var(--muted)}
+.big input{border:0;background:transparent;font-family:var(--mono);font-size:30px;padding:6px 8px;min-width:0;font-variant-numeric:tabular-nums}
+.big input:focus{outline:none}.big:focus-within{border-color:var(--accent)}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 8px}
+.grid3 div{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums}
+.grid3 b{display:block;font-family:var(--sans);font-size:11.5px;font-weight:500;color:var(--muted)}
+ul.plain{margin:0;padding:0;list-style:none;display:flex;flex-direction:column}
+ul.plain li{padding:11px 0;border-top:1px solid var(--rule);font-size:14px}
+ul.plain li b{display:block;font-size:14.5px}
+.ph-flag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;border:1px dashed var(--faint);color:var(--muted);padding:2px 6px;border-radius:4px}
+
+/* driver card */
+.driver{position:fixed;inset:0;background:var(--bg);z-index:30;padding:calc(28px + env(safe-area-inset-top,0px)) 24px 24px;display:flex;flex-direction:column;gap:18px}
+.driver[hidden],.toast[hidden],[hidden]{display:none!important}
+.driver .big-it{font-size:40px;line-height:1.08;font-weight:700;letter-spacing:-.03em}
+
+/* tab bar */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;background:var(--bg);border-top:1px solid var(--rule);padding:6px 6px calc(8px + env(safe-area-inset-bottom,0px));z-index:20}
+nav.tabs .in{max-width:560px;margin:0 auto;display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+nav.tabs button{border:0;background:none;display:flex;flex-direction:column;align-items:center;gap:4px;padding:6px 0;font-size:11px;color:var(--muted);min-height:52px}
+nav.tabs svg{width:22px;height:22px;stroke:currentColor}
+nav.tabs button[aria-selected="true"]{color:var(--accent-deep);font-weight:600}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(86px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:999px;font-size:14px;z-index:40;max-width:calc(100% - 32px)}
+.went{color:var(--accent-deep);font-weight:600;font-size:12.5px}
+.lvl{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;margin-top:6px}
+.lvl::before{content:"";width:9px;height:9px;border-radius:50%;background:currentColor;flex:none}
+.lvl.required{color:var(--coral-ink)}.lvl.required::before{background:var(--coral)}
+.lvl.optional{color:var(--amber-ink)}.lvl.optional::before{background:var(--amber)}
+.lvl.free{color:var(--green-ink)}.lvl.free::before{background:var(--green)}
+.legend{display:flex;gap:14px;flex-wrap:wrap}.legend .lvl{margin:0;font-weight:500}
+@media (prefers-reduced-motion:no-preference){section[data-tab]{animation:fade .16s ease-out}@keyframes fade{from{opacity:.5}to{opacity:1}}}
+</style>
+
+<div class="app" id="app">
+  <section data-tab="today"></section>
+  <section data-tab="places" hidden></section>
+  <section data-tab="phrases" hidden></section>
+  <section data-tab="journal" hidden></section>
+  <section data-tab="essentials" hidden></section>
+</div>
+<nav class="tabs" aria-label="Sections"><div class="in" id="tabbar" role="tablist"></div></nav>
+<div class="driver" id="driver" hidden></div>
+<div class="driver" id="welcome" hidden style="overflow:auto"></div>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+(() => {
+/* ================= helpers ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+function toast(m){ const t=$('#toast'); t.textContent=m; t.hidden=false; clearTimeout(toast.h); toast.h=setTimeout(()=>t.hidden=true,2200); }
+async function copyText(t){
+  try{ await navigator.clipboard.writeText(t); toast('Copied'); }
+  catch(e){ const ta=document.createElement('textarea'); ta.value=t; ta.style.position='fixed'; ta.style.opacity='0'; document.body.appendChild(ta); ta.select(); try{ document.execCommand('copy'); toast('Copied'); }catch(_){ toast('Press and hold the text to copy it'); } ta.remove(); }
+}
+let itVoice=null;
+function pickVoice(){
+  try{
+    const vs = speechSynthesis.getVoices().filter(v=>/^it([-_]|$)/i.test(v.lang));
+    const score = v => (/premium/i.test(v.name)?40:0) + (/enhanced|enhanced|neural|natural/i.test(v.name)?30:0) + (/alice|federica|luca|paola|emma|google/i.test(v.name)?10:0) + (v.localService?2:0);
+    itVoice = vs.sort((a,b)=>score(b)-score(a))[0] || null;
+  }catch(e){ itVoice=null; }
+  return itVoice;
+}
+try{ pickVoice(); speechSynthesis.onvoiceschanged = () => { pickVoice(); if(S && S.tab==='essentials') RENDER.essentials(); }; }catch(e){}
+function speak(text){
+  if(!('speechSynthesis' in window)){ toast('Audio isn’t available in this browser'); return; }
+  if(!itVoice) pickVoice();
+  if(!itVoice){ toast('No Italian voice on this phone yet. See Essentials, “Pronunciation audio.”'); return; }
+  try{ const u=new SpeechSynthesisUtterance(text.replace(/…/g,'').replace(/\s*\/\s*/g,', ')); u.lang=itVoice.lang; u.voice=itVoice; u.rate=.9; speechSynthesis.cancel(); speechSynthesis.speak(u); }
+  catch(e){ toast('Audio didn’t play. Check silent mode.'); }
+}
+const fmtDate = (d, o={month:'short',day:'numeric'}) => new Date(d).toLocaleDateString('en-US', o);
+
+/* ================= icons ================= */
+const ICON = {
+  today:'<circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/>',
+  places:'<path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2"/>',
+  phrases:'<path d="M4.5 5.5h15v10h-9l-4.5 3.5v-3.5h-1.5z"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01"/>',
+  journal:'<path d="M6 3.5h10.5A1.5 1.5 0 0 1 18 5v15.5H7.5A1.5 1.5 0 0 1 6 19z"/><path d="M6 17.5h12M9.5 7.5h5M9.5 10.5h3.5"/>',
+  essentials:'<path d="M5 8h14v11H5z"/><path d="M9 8V6a3 3 0 0 1 6 0v2M5 12h14"/>',
+  convert:'<circle cx="9" cy="10" r="5.5"/><path d="M10.8 8.2a2.3 2.3 0 1 0 0 3.6M6.6 9.4h3M6.6 10.8h3"/><path d="M16 9.6a5.5 5.5 0 1 1-6.4 8.8"/>',
+  taxi:'<path d="M4.5 16v-3.5L6.5 8h11l2 4.5V16"/><path d="M3.5 16h17v2.5h-17z"/><path d="M10 8V5.5h4V8"/><path d="M7.5 13h1.5M15 13h1.5"/>',
+  mic:'<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/>',
+  speak:'<path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16 9a4 4 0 0 1 0 6"/>',
+  coffee:'<path d="M5 10h11v4a5 5 0 0 1-5 5h-1a5 5 0 0 1-5-5z"/><path d="M16 11h1.5a2.5 2.5 0 0 1 0 5H16"/><path d="M9 3.5c-.8 1 .8 2 0 3M12.5 3.5c-.8 1 .8 2 0 3"/>',
+  camera:'<path d="M4 8h3.5L9 5.5h6L16.5 8H20v11H4z"/><circle cx="12" cy="13.5" r="3.5"/>',
+  starO:'<path d="M12 3.8l2.5 5.2 5.7.8-4.1 4 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4.1-4 5.7-.8z"/>'
+};
+const ic = (k, extra='') => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ${extra}>${ICON[k]}</svg>`;
+
+/* place illustration vocabulary (original line art) */
+const ILL = {
+  landmark:'<circle class="wash" cx="40" cy="20" r="9"/><path class="ink" stroke-width="1.1" d="M22 56 V24 H42 V56 M27 56 V42 a5 5 0 0 1 10 0 V56 M20 24 H44 M24 24 V17 H40 V24 M28 17 V12 H36 V17"/><path class="ink" stroke-width=".7" d="M26 30 V35 M32 30 V35 M38 30 V35 M8 56 H56"/>',
+  restaurant:'<path class="wash" d="M44 21 H52 C52 30 50 33 48 33 C46 33 44 30 44 21 Z"/><ellipse class="ink" stroke-width="1.1" cx="28" cy="42" rx="16" ry="6"/><ellipse class="ink" stroke-width=".7" cx="28" cy="41" rx="9.5" ry="3.2"/><path class="ink" stroke-width="1.1" d="M10 18 V30 M8 18 V24 Q10 27 12 24 V18 M10 30 V50 M43 18 H53 Q53 32 48 33 Q43 32 43 18 Z M48 33 V46 M44 46 H52"/><path class="ink" stroke-width=".7" d="M6 56 H58"/>',
+  cafe:'<circle class="wash" cx="31" cy="38" r="12"/><path class="ink" stroke-width="1.1" d="M22 34 H40 V40 a9 9 0 0 1 -18 0 Z M40 36 a4 4 0 0 1 0 8 M16 51 H46"/><path class="ink" stroke-width=".8" d="M28 22 c-2 3 2 5 0 8 M34 22 c-2 3 2 5 0 8"/><path class="ink" stroke-width=".7" d="M10 56 H54"/>',
+  market:'<rect class="wash" x="12" y="20" width="40" height="8"/><path class="ink" stroke-width="1.1" d="M10 20 H54 L50 28 H14 Z M14 28 q4.5 4 9 0 q4.5 4 9 0 q4.5 4 9 0 q4.5 4 9 0 M16 30 V54 M48 30 V54 M20 44 h10 v10 h-10 z M32 42 h12 v12 h-12 z"/><circle class="ink" stroke-width="1.1" cx="23" cy="42" r="2"/><circle class="ink" stroke-width="1.1" cx="27" cy="42" r="2"/><circle class="ink" stroke-width="1.1" cx="36" cy="40" r="2"/><circle class="ink" stroke-width="1.1" cx="40" cy="40" r="2"/><path class="ink" stroke-width=".7" d="M8 54 H56"/>',
+  museum:'<path class="wash" d="M12 24 L32 13 L52 24 Z"/><path class="ink" stroke-width="1.1" d="M10 24 L32 12 L54 24 Z M12 28 H52 M17 28 V50 M27 28 V50 M37 28 V50 M47 28 V50 M10 52 H54 M8 56 H56"/>',
+  shop:'<path class="wash" d="M27 34 h10 l1.5 11 h-13 z"/><path class="ink" stroke-width="1.1" d="M18 56 V28 a14 14 0 0 1 28 0 V56 M27 34 h10 l1.5 11 h-13 z M29.5 34 a2.5 2.5 0 0 1 5 0"/><path class="ink" stroke-width=".6" d="M14 56 V26 a18 18 0 0 1 36 0 V56 M24 50 H40"/><path class="ink" stroke-width=".7" d="M8 56 H56"/>',
+  garden:'<path class="wash" d="M36 56 Q36 46 46 46 Q56 46 56 56 Z"/><path class="ink" stroke-width="1.1" d="M18 56 C13 42 15 24 20 12 C25 24 27 42 22 56 M30 56 C26 46 27 34 31 26 C35 34 36 46 32 56 M36 56 Q36 46 46 46 Q56 46 56 56"/><path class="ink" stroke-width=".5" d="M20 18 V54"/><path class="ink" stroke-width=".7" d="M6 56 H58"/>',
+  view:'<circle class="wash" cx="46" cy="22" r="7"/><path class="ink" stroke-width="1.1" d="M6 42 Q20 32 32 38 T58 34"/><path class="ink" stroke-width=".6" d="M6 48 Q30 44 58 46"/><path class="ink" stroke-width=".9" d="M29 42 V37 a4 5 0 0 1 8 0 V42 M33 32 V29.5"/><path class="ink" stroke-width=".7" d="M6 54 H58"/>'
+};
+const ill = (cat, size=52) => `<svg class="ill" width="${size}" height="${size}" viewBox="0 0 64 64" aria-hidden="true">${ILL[cat]||ILL.landmark}</svg>`;
+const CAT_NAME = {landmark:'Landmark',restaurant:'Restaurant',cafe:'Café',market:'Market',museum:'Museum & art',shop:'Shop & artisan',garden:'Garden',view:'Scenic view'};
+
+const DUOMO_MARK = '<svg width="40" height="34" viewBox="0 0 40 34" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 30.5h28M8.5 30.5v-6h23v6M9.5 24.5c0-8.6 4.6-14.7 10.5-15.8 5.9 1.1 10.5 7.2 10.5 15.8M15 24.5c0-6.6 2-11.6 5-15.6M25 24.5c0-6.6-2-11.6-5-15.6M18.4 8.6V5.4h3.2v3.2M20 5.4V2.6"/></svg>';
+const HERO = `<svg viewBox="0 0 390 290" role="img" aria-label="Pen and ink sketch of Brunelleschi’s dome and Giotto’s bell tower">
+<path class="wash" d="M152 172 C150 122 180 74 232 54 C286 66 320 114 324 174 C300 188 180 192 152 172 Z"/>
+<rect class="wash" x="45" y="98" width="16" height="16"/>
+<g class="ink">
+<path stroke-width="1.2" d="M160 168 C162 116 190 80 222 66 M300 168 C298 116 270 80 238 66"/>
+<path stroke-width=".5" d="M161.6 165 C164.5 118 192 84 221 69"/>
+<path stroke-width=".9" d="M230 168 V66 M194 168 C197 124 208 92 225 68 M266 168 C263 124 252 92 235 68 M158 168 H302 M156 174 H304"/>
+<path stroke-width=".6" d="M167 155 L175 150 M168 145 L177 140 M170 135 L179 130 M173 125 L182 120 M177 115 L185 110 M181 105 L189 100 M186 96 L193 91"/>
+<path stroke-width=".45" d="M200 160 L208 156 M202 150 L210 146 M205 140 L212 136"/>
+<path stroke-width="1" d="M222 66 V46 M238 66 V46 M219 46 H241 M222 46 L230 28 L238 46 M156 174 V206 M304 174 V206 M152 206 H308"/>
+<path stroke-width=".6" d="M226 64 V54 a4 4 0 0 1 8 0 V64 M200 174 V206 M260 174 V206"/>
+<circle stroke-width=".9" cx="230" cy="24.5" r="2.6"/><path stroke-width=".9" d="M230 21.5 V13 M227 16 H233"/>
+<circle stroke-width=".9" cx="180" cy="190" r="7.5"/><circle stroke-width=".9" cx="230" cy="190" r="7.5"/><circle stroke-width=".9" cx="280" cy="190" r="7.5"/><circle stroke-width=".5" cx="230" cy="190" r="4.5"/>
+<path stroke-width=".9" d="M304 206 V214 M304 222 C312 207 336 207 344 222 M300 222 H350 M344 222 V264 M308 222 V264 M152 206 V214 M88 222 L152 214 M88 222 V264 M88 236 H152"/>
+<path stroke-width=".7" d="M100 252 V240 a4 4 0 0 1 8 0 V252 M120 252 V240 a4 4 0 0 1 8 0 V252"/>
+<path stroke-width="1.1" d="M40 264 V82 M66 264 V82"/>
+<path stroke-width=".8" d="M37 82 H69 M37 77 H69 M37 77 V82 M69 77 V82 M37 87 H69 M45 114 V100 a8 8 0 0 1 16 0 V114 M53 100 V114"/>
+<path stroke-width=".45" d="M44 87 V264 M62 87 V264"/>
+<path stroke-width=".6" d="M40 122 H66 M40 162 H66 M40 202 H66 M40 238 H66 M46 194 V185 a3 3 0 0 1 6 0 V194 M54 194 V185 a3 3 0 0 1 6 0 V194"/>
+<path stroke-width=".7" d="M46 154 V142 a7 7 0 0 1 14 0 V154 M53 142 V154 M18 257 V248 H25 V255 M300 258 V249 H306 V260"/>
+<path stroke-width=".9" d="M0 266 L28 255 L58 263 V290 M58 263 L86 257 L112 264 V290 M112 264 L150 258 L178 266 M178 290 V266 L214 256 L250 266 V290 M250 266 L292 258 L330 268 V290 M330 268 L390 259"/>
+<path stroke-width=".4" d="M190 271 V288 M198 268 V288 M206 266 V288 M262 270 V288 M270 268 V288 M278 266 V288 M344 270 V288 M354 268 V288"/>
+</g></svg>`;
+
+/* ================= content (checked Oct 7, 2026) ================= */
+const BOOK = [
+  {id:'accademia', short:'€20', level:'required', name:'Accademia Gallery', sub:'Michelangelo’s David', cat:'museum', price:'€20', when:'Timed entry · book now',
+   tips:['Pick the earliest morning slot. Without a booking the line can be long.','Open Tue–Sun 8:15–18:50. Closed Mondays.','Deal: €26 covers the Accademia plus the Bargello sculpture museum within 48 hours.'],
+   link:'https://www.galleriaaccademiafirenze.it/en/', linkText:'Official museum site'},
+  {id:'uffizi', short:'€29', level:'required', name:'Uffizi Gallery', sub:'Botticelli, Leonardo, Caravaggio', cat:'museum', price:'€29 booked · €25 at door', when:'Timed entry · book now',
+   tips:['From 16:00 it’s €20 booked. The 8:15 slot is the calmest; avoid 10:30–13:00.','With a booking, use Door 1. Door 2 is the walk-up line. Arrive 15 min early.','Deal: PassePartout €40 for 5 days covers Uffizi, Pitti and Boboli.'],
+   link:'https://uffizi.it/en/tickets', linkText:'Official tickets'},
+  {id:'dome', short:'€30', level:'required', name:'Duomo dome climb', sub:'Brunelleschi Pass', cat:'landmark', price:'€30', when:'Timed dome slot · book now',
+   tips:['Pass covers the dome, bell tower, museum, Baptistery and crypt for 3 days. Only the dome needs a time.','The cathedral itself is free; there’s just a security line.','Cover shoulders and knees. It’s enforced.'],
+   link:'https://duomo.firenze.it/en/713/tickets', linkText:'Official tickets'},
+  {id:'pitti', short:'€25', level:'optional', name:'Palazzo Pitti & Boboli Gardens', sub:'Palace and terraced gardens', cat:'garden', price:'€25 booked · €22 at door', when:'Booking optional',
+   tips:['Boboli alone: €13 booked, €10 at the door. The gardens rarely need a booking.','Included in the PassePartout if you buy it for the Uffizi.'],
+   link:'https://uffizi.it/en/tickets', linkText:'Official tickets'},
+  {id:'smn', level:'free', name:'Santa Maria Novella pharmacy', sub:'Historic perfumery & apothecary', cat:'shop', price:'Free', when:'No ticket needed',
+   tips:['Open daily 9:30–20:00. Via della Scala 16.','There can be a short line at the door. Visitors only shopping can skip the museum line.'],
+   link:'https://www.smnovella.com', linkText:'Official site'}
+];
+
+const PLACES = [
+  {id:'uffizi', group:'must', name:'Uffizi Gallery', cat:'museum', area:'Piazzale degli Uffizi', desc:'Florence’s great Renaissance collection. Book a timed slot.', book:'uffizi'},
+  {id:'boboli', group:'must', name:'Boboli Gardens', cat:'garden', area:'Behind Palazzo Pitti, Oltrarno', desc:'Terraced Medici gardens with close views of the dome.', book:'pitti'},
+  {id:'smn', group:'must', name:'Santa Maria Novella pharmacy', cat:'shop', area:'Via della Scala 16', desc:'Centuries-old perfumery and apothecary. Free to walk in.', book:'smn'},
+  {id:'accademia', group:'popular', name:'Accademia Gallery', cat:'museum', area:'Via Ricasoli, San Marco', desc:'Michelangelo’s David. Book ahead.', book:'accademia'},
+  {id:'duomo', group:'popular', name:'Duomo & dome climb', cat:'landmark', area:'Piazza del Duomo', desc:'The cathedral is free. The dome climb needs a timed slot.', book:'dome'},
+  {id:'signoria', group:'uffizi', name:'Piazza della Signoria', cat:'landmark', area:'Next to the Uffizi', desc:'The city’s civic square, with open-air sculpture in the Loggia dei Lanzi.'},
+  {id:'vecchio', group:'uffizi', name:'Palazzo Vecchio', cat:'museum', area:'Piazza della Signoria', desc:'The fortress-like town hall with painted state rooms.'},
+  {id:'ponte', group:'uffizi', name:'Ponte Vecchio', cat:'landmark', area:'Over the Arno', desc:'The medieval bridge lined with jewelers’ shops.'},
+  {id:'pitti', group:'boboli', name:'Palazzo Pitti', cat:'museum', area:'Piazza de’ Pitti', desc:'The Medici palace. Combined ticket with Boboli.'},
+  {id:'bardini', group:'boboli', name:'Bardini Garden', cat:'garden', area:'Costa San Giorgio', desc:'Smaller and quieter than Boboli, with a wisteria walk and city views.'},
+  {id:'spirito', group:'boboli', name:'Piazza Santo Spirito', cat:'cafe', area:'Oltrarno', desc:'A local square for coffee by day and aperitivo at dusk.'},
+  {id:'maggio', group:'boboli', name:'Artisan workshops, Via Maggio', cat:'shop', area:'Oltrarno', desc:'Leatherwork, gilding and bookbinding in the side streets.'},
+  {id:'miniato', group:'boboli', name:'San Miniato al Monte', cat:'view', area:'Uphill past Piazzale Michelangelo', desc:'A hilltop church with one of the best views of the dome.'},
+  {id:'smnchurch', group:'smn', name:'Santa Maria Novella basilica', cat:'landmark', area:'Piazza Santa Maria Novella', desc:'Gothic church with a striking marble façade, steps from the pharmacy.'},
+  {id:'mercato', group:'smn', name:'Mercato Centrale', cat:'market', area:'San Lorenzo', desc:'Food market downstairs, food hall upstairs.'},
+  {id:'sanlorenzo', group:'smn', name:'San Lorenzo leather market', cat:'market', area:'Around Piazza San Lorenzo', desc:'Street stalls for leather goods. Check quality and compare before buying.'}
+];
+/* Experiences & day trips: typical figures from travel guides, checked Oct 7, 2026 */
+const EXP = [
+  {id:'pasta', cat:'restaurant', level:'required', name:'Pasta-making class', price:'€70–110', time:'2.5–4 hours', q:'pasta making class Florence',
+   why:'Make fresh pasta from scratch, then sit down to eat it, usually with wine. Recipes to take home.', book:'October is busy: book 2–4+ weeks ahead. Most allow free cancellation up to 7 days before.'},
+  {id:'market', cat:'market', level:'required', name:'Market tour + cooking class', price:'€95–140', time:'About 4 hours', q:'market tour cooking class Florence',
+   why:'Shop a Florentine food market with a chef, then cook a Tuscan meal together.', book:'Book 2–4+ weeks ahead in October.'},
+  {id:'gelato', cat:'cafe', level:'required', name:'Gelato or pizza class', price:'€60–95', time:'1.5–3 hours', q:'gelato making class Florence',
+   why:'Gelato classes run about 90 minutes; pizza classes 2–3 hours. Short, fun, and easy to fit in.', book:'Book a week or more ahead.'},
+  {id:'perfume', cat:'shop', level:'required', name:'Perfume-making workshop', price:'from about $80', time:'About 1.5 hours', q:'perfume making workshop Florence',
+   why:'Blend your own scent with a perfumer and take home a small bottle. A perfect pair with the Santa Maria Novella pharmacy.', book:'Small groups, limited spots. Book ahead. Private sessions cost far more.'},
+  {id:'leather', cat:'shop', level:'required', name:'Leather workshop', price:'varies, from about €50 to €300+', time:'1–6 hours', q:'leather workshop make your own Florence',
+   why:'Short classes make a small accessory. The Scuola del Cuoio leather school runs longer workshops (3 hours from €185 each for groups of 4+).', book:'Book ahead. The leather school is booked by email.', extra:{href:'https://scuoladelcuoio.it/en/content/8-workshops', text:'Leather school workshops'}},
+  {id:'chianti', cat:'view', level:'required', name:'Chianti wine tour', price:'€65–130', time:'Half day 4–6 h, full day up to 11 h', q:'Chianti wine tour from Florence',
+   why:'Vineyards, tastings and a hill village. Half-day small-group tours start around €65–80; full days include lunch.', book:'Book ahead. Estates take limited visitors.'},
+  {id:'photo', cat:'landmark', level:'optional', name:'Photography walk', price:'prices vary', time:'2–3 hours', q:'photography tour Florence',
+   why:'A local photographer shows the best angles and light, often at sunrise or sunset.', book:'Check reviews and times; sunrise walks fill first.'}
+];
+const TRIPS = [
+  {id:'siena', cat:'landmark', level:'free', name:'Siena', how:'Regional bus about 1 h 15 min (~€8), every 30 min; or train 1 h 20–1 h 40 (~€10)', stay:'4–6 hours', q:'Siena day trip from Florence',
+   why:'The shell-shaped Piazza del Campo and a striped cathedral. The bus drops you closer to the centre than the train.', book:'No booking needed for the bus or regional train. Book the Torre del Mangia climb online if you want it.'},
+  {id:'sangimignano', cat:'landmark', level:'optional', name:'San Gimignano', how:'Train to Poggibonsi (under 1 h), then bus 130 (20–25 min); or bus via Poggibonsi', stay:'3–4 hours', q:'San Gimignano Siena day tour from Florence',
+   why:'The medieval town of stone towers. Many people pair it with Siena on a guided day tour, which is easier than the connections.', book:'Self-guided needs no booking, but connections aren’t timed together and evening buses back are limited. A guided tour is optional.'},
+  {id:'pisa', cat:'landmark', level:'required', name:'Pisa', how:'Regional train 50–65 min (~€9)', stay:'3–4 hours', q:'Pisa Leaning Tower tickets',
+   why:'The Leaning Tower and the Square of Miracles. Pairs well with Lucca on the same line.', book:'The train needs no booking, but the tower climb (about €20) is timed and sells out days ahead.'},
+  {id:'lucca', cat:'garden', level:'free', name:'Lucca', how:'Regional train 1 h 10–1 h 30 (~€8)', stay:'Half day or more', q:'Lucca day trip from Florence',
+   why:'A calm walled town. Rent a bike near the station (about €15 a day) and ride the tree-lined walls.', book:'No booking needed.'},
+  {id:'bologna', cat:'restaurant', level:'optional', name:'Bologna', how:'High-speed train about 35 min (from ~€12)', stay:'Half day or more', q:'Bologna food tour',
+   why:'Italy’s food capital, all porticoes and pasta. Fast and easy from Florence.', book:'Booking the high-speed train early is much cheaper.'},
+  {id:'cinqueterre', cat:'view', level:'optional', name:'Cinque Terre', how:'About 2 h 30 min each way by train via La Spezia, usually one change', stay:'A very long day (13–15 h door to door)', q:'Cinque Terre day trip from Florence',
+   why:'Five cliffside fishing villages on the sea. Beautiful, but a big day.', book:'A Cinque Terre Train Card (about €16/day) covers trains between the villages.'}
+];
+const tripUrl = q => 'https://www.tripadvisor.com/Search?q='+encodeURIComponent(q);
+const gygUrl = q => 'https://www.getyourguide.com/s/?q='+encodeURIComponent(q);
+const GROUPS = [
+  ['must','Your must-sees'],['popular','Popular, book ahead'],
+  ['uffizi','Near the Uffizi'],['boboli','Near Boboli & the Oltrarno'],['smn','Near the pharmacy'],['custom','Your own places']
+];
+
+/* geography: approximate centre points, used only for straight-line distance */
+const GEO = {uffizi:[43.7678,11.2553], boboli:[43.7651,11.2500], smn:[43.7739,11.2491], accademia:[43.7768,11.2588], duomo:[43.7731,11.2560], signoria:[43.7696,11.2558], vecchio:[43.7693,11.2563], ponte:[43.7680,11.2532], pitti:[43.7651,11.2500], bardini:[43.7652,11.2580], spirito:[43.7670,11.2468], maggio:[43.7661,11.2497], miniato:[43.7593,11.2650], smnchurch:[43.7746,11.2494], mercato:[43.7766,11.2531], sanlorenzo:[43.7749,11.2539], __airport:[43.8100,11.2051], __station:[43.7765,11.2481]};
+const HOODS = {
+  centro:{name:'Historic centre (Duomo, Signoria)', at:[43.7710,11.2550], central:true, note:'You’re in the middle of it. Most sights are a short walk. Nearest main taxi rank: Piazza della Repubblica.'},
+  smn:{name:'Santa Maria Novella / San Lorenzo', at:[43.7755,11.2510], central:true, note:'Next to the main train station, which has a 24-hour taxi rank. The T2 tram to the airport leaves from Unità, nearby.'},
+  croce:{name:'Santa Croce', at:[43.7687,11.2622], central:true, note:'The lively east side of the centre, with leather workshops and evening bars. For a taxi, call or walk to Piazza della Repubblica.'},
+  marco:{name:'San Marco', at:[43.7790,11.2590], central:true, note:'A few minutes from the Accademia (David). There’s a main taxi rank at Piazza San Marco.'},
+  oltrarno:{name:'Oltrarno (Santo Spirito, San Frediano)', at:[43.7665,11.2450], central:true, note:'Across the river on the artisans’ side, close to Pitti and Boboli. Call 4242 or 4390 for a taxi.'},
+  niccolo:{name:'San Niccolò', at:[43.7640,11.2620], central:true, note:'Below Piazzale Michelangelo and San Miniato. Lovely for sunset walks, uphill in places.'},
+  fiesole:{name:'Fiesole (in the hills)', at:[43.8066,11.2930], central:false, note:'A hill town above the city. Bus 7 runs down to the centre. At night, call a taxi ahead; they rarely wait up there.'},
+  other:{name:'Somewhere else, or not sure', at:null, central:false, note:''}
+};
+const VIA = {'':'Not set', FLR:'Florence airport (Peretola)', PSA:'Pisa airport', BLQ:'Bologna airport', TRAIN:'Train to Santa Maria Novella', OTHER:'Other'};
+function km(a,b){ const R=6371, r=x=>x*Math.PI/180; const dA=r(b[0]-a[0]), dO=r(b[1]-a[1]); const h=Math.sin(dA/2)**2+Math.cos(r(a[0]))*Math.cos(r(b[0]))*Math.sin(dO/2)**2; return 2*R*Math.asin(Math.sqrt(h)); }
+/* City of Florence taxi tariff in force from 1 May 2024 */
+const TARIFF = {day:{label:'weekday daytime', start:3.80, min:5.80, b3:8.60, fixed:28}, holiday:{label:'Sunday & holiday', start:6.10, min:8.10, b3:10.90, fixed:30}, night:{label:'night (22:00–6:00)', start:7.70, min:9.70, b3:12.40, fixed:32}};
+function band(){ const d=new Date(), h=d.getHours(); if(h>=22||h<6) return 'night'; if(d.getDay()===0) return 'holiday'; return 'day'; }
+function meter(roadKm, slowMin, t){ let f=t.start; for(let x=0; x<roadKm; x+=0.05){ f += (f<t.b3?1.10:2.10)*0.05; } f += 30.10/60*slowMin; return Math.max(f, t.min); }
+const stay = () => S.stays[0] || {label:'', address:'', hood:''};
+function spot(id){
+  if(id==='__home'){ const h=HOODS[stay().hood]; return h&&h.at ? {at:h.at, central:h.central, name:stay().label||'Where I’m staying'} : null; }
+  if(id==='__airport') return {at:GEO.__airport, airport:true, name:'Florence airport'};
+  if(id==='__station') return {at:GEO.__station, central:true, name:'Santa Maria Novella station'};
+  const p = placeById(id); return p && GEO[id] ? {at:GEO[id], central:true, name:p.name} : null;
+}
+function fareEstimate(fromId, toId){
+  const a=spot(fromId), b=spot(toId), bk=band(), t=TARIFF[bk];
+  if(!a||!b) return {err:'Pick two places with a known location. For where you’re staying, set your neighborhood in “You & your trip.”'};
+  if(fromId===toId) return {err:'Pick two different places.'};
+  if((a.airport&&b.central)||(b.airport&&a.central)) return {fixed:true, lo:t.fixed, hi:t.fixed, band:t.label, note:'Official flat fare between the airport and central Florence. Bags are €1.20 each.'};
+  const road = km(a.at,b.at)*1.4;
+  const lo = meter(road, road*1.0, t) + (a.airport?3.10:0), hi = meter(road, road*3.0, t) + (a.airport?3.10:0);
+  return {lo:Math.max(Math.floor(lo), Math.ceil(t.min)), hi:Math.max(Math.ceil(hi), Math.ceil(t.min)), band:t.label, km:road, note:'Rough estimate from the city tariff, straight-line distance and light to heavy traffic. The meter decides. Calling for a taxi adds €2.50.'};
+}
+function routeOpts(sel){
+  const o=[]; const h=HOODS[stay().hood];
+  if(h&&h.at) o.push(['__home', (stay().label||'Where I’m staying')+' (home base)']);
+  o.push(['__airport','Florence airport'],['__station','Santa Maria Novella station']);
+  allPlaces().forEach(p=>{ if(GEO[p.id]) o.push([p.id,p.name]); });
+  return o.map(([v,l])=>`<option value="${v}" ${v===sel?'selected':''}>${esc(l)}</option>`).join('');
+}
+function setPath(path, val){ const k=path.split('.'); let o=S; for(let i=0;i<k.length-1;i++){ o=o[k[i]]; } o[k[k.length-1]]=val; save(); }
+const P = {
+  'Greetings':[
+    ['Buongiorno','bwon-JOR-no','Hello / good morning (until mid-afternoon)'],
+    ['Buonasera','bwo-na-SEH-ra','Good evening (from about 4 pm)'],
+    ['Per favore','pair fa-VO-reh','Please'],
+    ['Grazie mille','GRAHT-see-eh MEEL-leh','Thank you so much'],
+    ['Prego','PREH-go','You’re welcome / after you'],
+    ['Mi scusi','mee SKOO-zee','Excuse me (polite)'],
+    ['Parla inglese?','PAR-la een-GLEH-zeh','Do you speak English?'],
+    ['Non capisco','non ka-PEES-ko','I don’t understand'],
+    ['Piano, per favore','PYA-no pair fa-VO-reh','Slowly, please'],
+    ['Arrivederci','ar-ree-veh-DAIR-chee','Goodbye']
+  ],
+  'Restaurant':[
+    ['Un tavolo per due, per favore','oon TA-vo-lo pair DOO-eh','A table for two, please'],
+    ['Abbiamo una prenotazione','ab-BYA-mo OO-na pre-no-tat-SYO-neh','We have a reservation'],
+    ['Possiamo sederci fuori?','pos-SYA-mo seh-DAIR-chee FWO-ree','Can we sit outside?'],
+    ['Cosa ci consiglia?','KO-za chee kon-SEEL-ya','What do you recommend?'],
+    ['Un’acqua naturale, per favore','oon AK-kwa na-too-RA-leh','Still water, please'],
+    ['Un’acqua frizzante, per favore','oon AK-kwa freet-SAN-teh','Sparkling water, please'],
+    ['Un bicchiere di vino rosso','oon beek-KYEH-reh dee VEE-no ROS-so','A glass of red wine'],
+    ['Sono allergica a …','SO-no al-LAIR-jee-ka a','I’m allergic to … (allergico for a man)'],
+    ['Dov’è il bagno?','do-VEH eel BAN-yo','Where is the bathroom?'],
+    ['Il conto, per favore','eel KON-to pair fa-VO-reh','The bill, please'],
+    ['Possiamo pagare separatamente?','pos-SYA-mo pa-GA-reh seh-pa-ra-ta-MEN-teh','Can we pay separately?'],
+    ['Era tutto buonissimo!','EH-ra TOOT-to bwo-NEES-see-mo','Everything was delicious!']
+  ],
+  'Café & gelato':[
+    ['Un caffè, per favore','oon kaf-FEH','An espresso, please'],
+    ['Un cappuccino','oon kap-poo-CHEE-no','A cappuccino (locals drink it in the morning)'],
+    ['Un caffè macchiato','oon kaf-FEH mak-KYA-to','Espresso with a dash of milk'],
+    ['Una spremuta d’arancia','OO-na spreh-MOO-ta da-RAN-cha','Fresh-squeezed orange juice'],
+    ['Lo prendo al banco','lo PREN-do al BAN-ko','I’ll have it at the bar (cheaper than a table)'],
+    ['Una coppetta, due gusti','OO-na kop-PET-ta, DOO-eh GOO-stee','A cup, two flavors'],
+    ['Un cono','oon KO-no','A cone'],
+    ['Posso assaggiare?','POS-so as-sad-JA-reh','Can I taste it?']
+  ],
+  'Shopping':[
+    ['Quanto costa?','KWAN-to KOS-ta','How much is it?'],
+    ['Sto solo guardando, grazie','sto SO-lo gwar-DAN-do','Just looking, thanks'],
+    ['Posso provarlo?','POS-so pro-VAR-lo','Can I try it on?'],
+    ['Dov’è il camerino?','do-VEH eel ka-meh-REE-no','Where is the fitting room?'],
+    ['Avete una taglia più grande?','a-VEH-teh OO-na TAL-ya pyoo GRAN-deh','Do you have a bigger size?'],
+    ['Avete una taglia più piccola?','a-VEH-teh OO-na TAL-ya pyoo PEEK-ko-la','Do you have a smaller size?'],
+    ['Ce l’avete in un altro colore?','cheh la-VEH-teh een oon AL-tro ko-LO-reh','Do you have it in another color?'],
+    ['È vera pelle?','eh VEH-ra PEL-leh','Is this real leather?'],
+    ['È fatto a mano?','eh FAT-to a MA-no','Is it handmade?'],
+    ['Può farmi una confezione regalo?','pwo FAR-mee OO-na kon-fet-SYO-neh reh-GA-lo','Can you gift wrap it?'],
+    ['Posso avere il modulo tax free?','POS-so a-VEH-reh eel MO-doo-lo tax free','Can I have the tax-free form?'],
+    ['Posso pagare con la carta?','POS-so pa-GA-reh kon la KAR-ta','Can I pay by card?'],
+    ['Mi fa uno sconto?','mee fa OO-no SKON-to','Could you give me a discount? (markets only)'],
+    ['Lo prendo','lo PREN-do','I’ll take it']
+  ],
+  'Perfume & pharmacy':[
+    ['Vorrei provare questo profumo','vor-RAY pro-VA-reh KWES-to pro-FOO-mo','I’d like to try this perfume'],
+    ['Avete un campione?','a-VEH-teh oon kam-PYO-neh','Do you have a sample?'],
+    ['Qual è il più famoso?','kwal EH eel pyoo fa-MO-zo','Which one is the most famous?'],
+    ['Dov’è una farmacia?','do-VEH OO-na far-ma-CHEE-a','Where is a pharmacy?'],
+    ['Qualcosa per il mal di testa','kwal-KO-za pair eel mal dee TES-ta','Something for a headache'],
+    ['Qualcosa per il raffreddore','kwal-KO-za pair eel raf-fred-DO-reh','Something for a cold'],
+    ['Dei cerotti, per favore','day cheh-ROT-tee','Some band-aids, please']
+  ],
+  'Hotel':[
+    ['Ho una prenotazione a nome …','o OO-na pre-no-tat-SYO-neh a NO-meh','I have a reservation under …'],
+    ['A che ora è la colazione?','a keh O-ra eh la ko-lat-SYO-neh','What time is breakfast?'],
+    ['Qual è la password del Wi-Fi?','kwal EH la password del WEE-fee','What’s the Wi-Fi password?'],
+    ['Posso lasciare le valigie?','POS-so la-SHA-reh leh va-LEE-jeh','Can I leave my bags?'],
+    ['L’aria condizionata non funziona','LA-rya kon-deet-syo-NA-ta non foon-TSYO-na','The air conditioning doesn’t work'],
+    ['Potrebbe chiamarmi un taxi?','po-TREB-beh kya-MAR-mee oon TAK-see','Could you call me a taxi?'],
+    ['A che ora è il check-out?','a keh O-ra eh eel check-out','What time is check-out?']
+  ],
+  'Taxi & transport':[
+    ['Vorrei andare a …','vor-RAY an-DA-reh a','I’d like to go to …'],
+    ['Quanto costa fino a …?','KWAN-to KOS-ta FEE-no a','How much to …?'],
+    ['È tariffa fissa?','eh ta-REEF-fa FEES-sa','Is it a flat fare?'],
+    ['Mi porti a questo indirizzo','mee POR-tee a KWES-to een-dee-REET-so','Take me to this address'],
+    ['Si ferma qui, grazie','see FAIR-ma kwee','Stop here, thanks'],
+    ['Può darmi la ricevuta?','pwo DAR-mee la ree-cheh-VOO-ta','Can I have a receipt?'],
+    ['Grazie, tenga il resto','GRAHT-see-eh, TEN-ga eel RES-to','Thanks, keep the change'],
+    ['Un biglietto per Pisa','oon beel-YET-to pair PEE-za','A ticket to Pisa'],
+    ['Da che binario parte?','da keh bee-NA-ryo PAR-teh','Which platform does it leave from?'],
+    ['Dov’è la fermata del tram?','do-VEH la fair-MA-ta del tram','Where is the tram stop?']
+  ],
+  'Museums':[
+    ['Ho una prenotazione per le …','o OO-na pre-no-tat-SYO-neh pair leh','I have a booking for … o’clock'],
+    ['Due biglietti, per favore','DOO-eh beel-YET-tee','Two tickets, please'],
+    ['A che ora chiude?','a keh O-ra KYOO-deh','What time does it close?'],
+    ['C’è un’audioguida in inglese?','cheh oon OW-dyo-GWEE-da een een-GLEH-zeh','Is there an English audio guide?'],
+    ['Dov’è il guardaroba?','do-VEH eel gwar-da-RO-ba','Where is the cloakroom?'],
+    ['Si possono fare foto?','see POS-so-no FA-reh FO-to','Can we take photos?'],
+    ['Dov’è l’uscita?','do-VEH loo-SHEE-ta','Where is the exit?'],
+    ['È lontano a piedi?','eh lon-TA-no a PYEH-dee','Is it far on foot?']
+  ],
+  'Help':[
+    ['Aiuto!','a-YOO-to','Help!'],
+    ['Chiami un’ambulanza','KYA-mee oo-nam-boo-LAN-tsa','Call an ambulance'],
+    ['Chiami la polizia','KYA-mee la po-lee-TSEE-a','Call the police'],
+    ['Non mi sento bene','non mee SEN-to BEH-neh','I don’t feel well'],
+    ['Dov’è l’ospedale?','do-VEH los-peh-DA-leh','Where is the hospital?'],
+    ['Ho perso il passaporto','o PAIR-so eel pas-sa-POR-to','I lost my passport'],
+    ['Mi sono persa','mee SO-no PAIR-sa','I’m lost (perso for a man)']
+  ]
+};
+const NOTES = [
+  ['coffee','Travel note','Florentines drink coffee standing at the bar. A table usually costs more, so do as the locals do.'],
+  ['camera','Look up','The row of windows above the Ponte Vecchio shops is the Vasari Corridor, built so the Medici could cross the river unseen.'],
+  ['coffee','Travel note','Pay at the register first, then hand your receipt to the barista.'],
+  ['camera','Look up','From the Bardini Garden the dome looks close enough to touch, with a fraction of the crowds at Piazzale Michelangelo.'],
+  ['coffee','Travel note','Shoulders and knees covered for churches. A light scarf in your bag solves it.']
+];
+
+/* ================= state ================= */
+const KEY='andiamo2.state';
+let S = store.get(KEY, null);
+if(!S){
+  S = {name:'Jacke', onboarded:false, pview:'sights', exp:{}, trip:{inVia:'',outVia:'',inFlight:'',outFlight:'',refs:''}, stays:[{label:'Friend’s place', address:'', hood:''}], dates:{start:'',end:''}, status:{}, custom:[], entries:[], booked:{}, favs:[], rate:{v:null,d:null,src:''}, tab:'today', ptab:'Restaurant', pfilter:'all'};
+  const old = store.get('andiamo.state', null); // migrate entries from first beta
+  if(old && Array.isArray(old.entries)) S.entries = old.entries.map(e=>({id:e.id||Date.now().toString(36), d:e.d||Date.now(), txt:e.txt||'', placeId:'', place:e.p||'', stars:e.s||0}));
+  const oldRate = store.get('andiamo.rate', null); if(oldRate && oldRate.d) S.rate = {v:oldRate.v, d:oldRate.d, src:'manual'};
+}
+if(S.name===undefined) S.name='Jacke';
+if(!S.trip) S.trip={inVia:'',outVia:'',inFlight:'',outFlight:'',refs:''};
+if(!S.stays) S.stays=[{label:'Friend’s place', address:'', hood:''}];
+if(S.onboarded===undefined) S.onboarded=false;
+if(!S.exp) S.exp={}; if(!S.pview) S.pview='sights';
+const save = () => store.set(KEY, S);
+const allPlaces = () => PLACES.concat(S.custom);
+const placeById = id => allPlaces().find(p=>p.id===id);
+
+function stage(){
+  const {start,end} = S.dates;
+  const today = new Date(); today.setHours(0,0,0,0);
+  if(!start) return {k:'before', days:null};
+  const s = new Date(start+'T00:00:00'), e = end ? new Date(end+'T00:00:00') : s;
+  const total = Math.round((e-s)/864e5)+1;
+  if(today < s) return {k:'before', days:Math.round((s-today)/864e5), total};
+  if(today > e) return {k:'after', total};
+  return {k:'during', day:Math.round((today-s)/864e5)+1, total};
+}
+
+/* ================= tabs ================= */
+const TABS = [['today','Today'],['places','Places'],['phrases','Phrases'],['journal','Journal'],['essentials','Essentials']];
+$('#tabbar').innerHTML = TABS.map(([k,l])=>`<button role="tab" data-go="${k}" id="tab-${k}">${ic(k==='essentials'?'essentials':k)}<span>${l}</span></button>`).join('');
+const RENDER = {};
+function go(k, opts={}){
+  S.tab=k; save();
+  TABS.forEach(([t])=>{ document.querySelector(`[data-tab="${t}"]`).hidden = t!==k; $('#tab-'+t).setAttribute('aria-selected', t===k); });
+  RENDER[k](); window.scrollTo(0,0);
+  if(opts.focus){ const el=$(opts.focus); if(el){ setTimeout(()=>{ el.focus(); el.scrollIntoView({block:'center'}); },60); } }
+}
+
+function showInstallTip(){
+  try{
+    if(S.installTipDone) return false;
+    if(window.self !== window.top) return false;            /* inside a preview frame */
+    if(window.matchMedia('(display-mode: standalone)').matches || navigator.standalone) return false;
+    return /^https?:$/.test(location.protocol);
+  }catch(e){ return false; }
+}
+const masthead = () => `<div class="mast"><div style="display:flex;flex-direction:column;gap:5px"><div class="word">wanderings<span>.</span></div><div class="label">Andiamo Firenze · Beta</div></div>
+<div class="stamp">${DUOMO_MARK}<div class="t"><b>FIRENZE</b><i>43.77° N · 11.25° E<span style="color:var(--coral)"> ●</span></i></div></div></div>`;
+
+/* ---------- TODAY ---------- */
+function phraseNow(){
+  const h = new Date().getHours();
+  if(h<11) return ['Breakfast', P['Café & gelato'][1]];
+  if(h<15) return ['Lunch', P['Restaurant'][9]];
+  if(h<18) return ['Shopping', P['Shopping'][2]];
+  return ['Dinner', P['Restaurant'][0]];
+}
+RENDER.today = () => {
+  const st = stage();
+  let eyebrow, h1, lede;
+  if(st.k==='before'){ eyebrow = st.days==null ? 'Florence · add your dates' : (st.days===0?'Trip starts today':`Trip starts in ${st.days} day${st.days===1?'':'s'}`); h1= S.name ? `Florence awaits, ${S.name}!` : 'Florence awaits!'; lede='Book the few things that sell out, save some ideas, and leave room to wander.'; }
+  else if(st.k==='during'){ eyebrow=`Day ${st.day} of ${st.total} · Florence`; h1= S.name ? `Buongiorno, ${S.name}!` : 'Buongiorno!'; lede='A few ideas for today. Mark “Went here” as you go and it becomes your journal.'; }
+  else { eyebrow='Trip complete'; h1='Florence, remembered!'; lede='Your places and notes are ready to share.'; }
+  const unbooked = BOOK.filter(b=>!S.booked[b.id]);
+  const note = NOTES[new Date().getDate() % NOTES.length];
+  const [moment, ph] = phraseNow();
+  const wants = allPlaces().filter(p=>S.status[p.id]==='want');
+  const visited = allPlaces().filter(p=>S.status[p.id]==='went');
+  const ideas = suggestNearby().slice(0,3);
+
+  let html = masthead() + `<div class="greet"><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(h1)}</h1><p class="lede">${esc(lede)}</p></div>
+  <div class="hero">${HERO}<div class="cap label">Santa Maria del Fiore</div></div>`;
+
+  if(showInstallTip()){
+    const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    html += `<div class="block" style="padding-top:18px"><div style="border:1px solid var(--rule);padding:14px;display:flex;flex-direction:column;gap:8px"><div class="label">Install Wanderings</div>
+      <p class="small">${ios?'Tap the <b>Share</b> button at the bottom of Safari, then <b>Add to Home Screen</b>. It opens like an app and works offline.':'Open your browser menu and tap <b>Install app</b> or <b>Add to Home screen</b>. It opens like an app and works offline.'}</p>
+      <button class="text-btn" data-dismissinstall style="align-self:flex-start;min-height:36px">Got it</button></div></div>`;
+  }
+  html += `<div class="quick">
+    <button data-go="phrases">${ic('phrases')}Say it</button>
+    <button data-go="essentials" data-focus="#amtIn">${ic('convert')}Convert</button>
+    <button data-go="essentials" data-focus="#taxiBlock">${ic('taxi')}Taxi</button>
+    <button class="rec" data-go="journal" data-focus="#jText"><span>${ic('mic')}</span>Record</button></div>`;
+
+  if(st.k!=='after' && unbooked.length){
+    html += `<div class="block"><div class="head"><h2>${st.k==='before'?'Book before you go':'Still to book'}</h2><span class="label">${BOOK.length-unbooked.length}/${BOOK.length} done</span></div>
+    <p class="small muted">These sell out or have long lines. Prices checked Oct 7, 2026.</p>${legend()}<div class="rows">${unbooked.map(bookRow).join('')}</div></div>`;
+  } else if(st.k!=='after'){
+    html += `<div class="block"><h2>All booked</h2><p class="small muted">Everything that needs a ticket is sorted. Nice work.</p></div>`;
+  }
+
+  if(st.k==='before'){
+    const wantX = EXP.filter(x=>(S.exp[x.id]||{}).want && !(S.exp[x.id]||{}).booked);
+    html += `<div class="block"><div class="head"><h2>Classes &amp; day trips</h2><button class="text-btn" data-go="places" data-pviewgo="experiences">Browse</button></div>
+      <p class="small">${wantX.length?`On your list, not booked yet: ${wantX.map(x=>esc(x.name)).join(', ')}.`:'Pasta, perfume, leather and wine experiences, plus easy day trips to Siena, Pisa, Lucca and more.'}</p>
+      <div class="lvl required" style="margin-top:0">October is busy: cooking classes can book up weeks ahead</div></div>`;
+  }
+  html += baseBlock(st);
+  html += `<div class="note">${ic(note[0])}<div style="display:flex;flex-direction:column;gap:3px"><div class="label coral">${esc(note[1])}</div><p class="serif">${esc(note[2])}</p></div></div>`;
+
+  if(st.k!=='after'){
+    html += `<div class="block"><div class="head"><h2>${st.k==='during'?'Ideas for today':'Ideas to save'}</h2><button class="text-btn" data-go="places">All places</button></div>
+    ${wants.length?`<p class="small muted">On your list: ${wants.slice(0,4).map(p=>esc(p.name)).join(', ')}${wants.length>4?' and more':''}.</p>`:''}
+    <div class="rows">${ideas.map(p=>placeRow(p,true)).join('')}</div></div>`;
+  }
+
+  html += `<div class="block"><div class="panel"><div class="label">Phrase for ${esc(moment.toLowerCase())}</div>
+    <div style="display:flex;gap:12px;align-items:center;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:4px;min-width:0"><div class="it">${esc(ph[0])}</div><div class="say">${esc(ph[1])}</div><div class="en">${esc(ph[2])}</div></div>
+    <button class="hear" data-say="${esc(ph[0])}" aria-label="Hear it">${ic('speak')}</button></div>
+    <button class="text-btn" data-go="phrases" style="align-self:flex-start;min-height:32px">More phrases</button></div></div>`;
+
+  if(st.k==='after' || visited.length){
+    html += `<div class="block"><div class="head"><h2>${st.k==='after'?'Your trip':'So far'}</h2><button class="text-btn" data-go="journal">Journal</button></div>
+      <p class="serif" style="font-size:18px">${visited.length} place${visited.length===1?'':'s'} visited, ${S.entries.length} journal entr${S.entries.length===1?'y':'ies'}.</p>
+      ${st.k==='after'?`<button class="btn" data-go="journal" data-focus="#summary">See your trip summary</button>`:''}</div>`;
+  } else {
+    html += `<div class="block"><h2>Journal</h2><p class="serif" style="font-size:18px">Your first memory will appear here. Say it out loud or type it.</p>
+      <div style="display:flex;gap:8px"><button class="btn" data-go="journal" data-focus="#jText" style="flex:1">${ic('mic','style="width:18px;height:18px"')}Record a memory</button></div></div>`;
+  }
+  $('[data-tab="today"]').innerHTML = html;
+};
+const LVL = {required:'Timed entry · book now', optional:'Booking optional', free:'No ticket needed'};
+const badge = b => `<div class="lvl ${b.level}">${b.level==='required' ? esc(b.when) : LVL[b.level]}</div>`;
+const legend = () => `<div class="legend"><span class="lvl required">Must book</span><span class="lvl optional">Optional</span><span class="lvl free">No ticket</span></div>`;
+function baseBlock(st){
+  const sy=stay(), h=HOODS[sy.hood];
+  if(!sy.hood && !sy.address) return `<div class="block"><h2>Where are you staying?</h2><p class="small muted">Add your neighborhood to get local tips, walking times and a one-tap “take me home” for taxi drivers.</p><button class="btn line" data-welcome="3" style="align-self:flex-start">Add where you’re staying</button></div>`;
+  let walk='';
+  if(h&&h.at){ const m=Math.round(km(h.at,GEO.duomo)*1.3/4.5*60/5)*5; walk = m<=5 ? 'A few minutes’ walk to the Duomo.' : `About ${m} minutes’ walk to the Duomo.`; }
+  let arrive='';
+  if(st.k==='before' && (S.trip.inVia||S.trip.inFlight)){
+    const via=S.trip.inVia;
+    const tip = via==='FLR' ? 'Taxi to the centre is a flat €28 by day, €32 at night. The T2 tram is the cheap option.' : via==='PSA' ? 'From Pisa: PisaMover shuttle to Pisa Centrale, then a regional train to Florence (about 1 hour).' : via==='TRAIN' ? 'Santa Maria Novella station has a 24-hour taxi rank out front.' : '';
+    arrive = `<div style="display:flex;flex-direction:column;gap:4px;padding-top:6px"><div class="label">Arriving${S.dates.start?' '+esc(fmtDate(S.dates.start+'T00:00:00')):''}${via?' · '+esc(VIA[via]):''}</div>${tip?`<p class="small">${esc(tip)}</p>`:''}${S.trip.inFlight?`<a class="btn line sm" style="align-self:flex-start" href="https://www.google.com/search?q=${encodeURIComponent('flight '+S.trip.inFlight)}" target="_blank" rel="noopener">Track flight ${esc(S.trip.inFlight)} ↗</a>`:''}</div>`;
+  }
+  return `<div class="block"><div class="head"><h2>Your base</h2><button class="text-btn" data-go="essentials" data-focus="#tripBlock">Edit</button></div>
+    <div><h3>${esc(sy.label||'Where you’re staying')}</h3><div class="meta" style="font-size:12.5px;color:var(--muted)">${esc(h?h.name:'')}${sy.address?' · '+esc(sy.address):''}</div></div>
+    ${h&&h.note?`<p class="small">${esc(h.note)}</p>`:''}${walk?`<p class="small muted">${walk}</p>`:''}
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-homedriver>${ic('taxi','style="width:16px;height:16px"')}Take me home</button>${h&&h.at?`<button class="btn line sm" data-go="essentials" data-focus="#fareBlock">Taxi fare estimate</button>`:''}</div>${arrive}</div>`;
+}
+function bookRow(b){
+  return `<div class="row">${ill(b.cat)}<div><h3>${esc(b.name)}</h3><div class="meta">${esc(b.sub)}</div>${badge(b)}
+    <ul style="margin:6px 0 0;padding-left:16px;font-size:13.5px;color:var(--muted);display:flex;flex-direction:column;gap:3px">${b.tips.map(t=>`<li>${esc(t)}</li>`).join('')}</ul>
+    <div class="acts"><a class="btn sm" href="${b.link}" target="_blank" rel="noopener">${esc(b.linkText)}</a>
+    <label class="check"><input type="checkbox" data-booked="${b.id}" ${S.booked[b.id]?'checked':''}>Booked</label></div></div>
+    <div class="price">${esc(b.price)}</div></div>`;
+}
+function suggestNearby(){
+  const wantGroups = new Set(allPlaces().filter(p=>S.status[p.id]==='want'||p.group==='must').map(p=>({uffizi:'uffizi',boboli:'boboli',smn:'smn',pitti:'boboli'}[p.id]||p.group)));
+  const pool = PLACES.filter(p=>!['must','popular'].includes(p.group) && wantGroups.has(p.group) && !S.status[p.id]);
+  const offset = new Date().getDate() % Math.max(pool.length,1);
+  return pool.slice(offset).concat(pool.slice(0,offset));
+}
+
+/* ---------- PLACES ---------- */
+function placeRow(p, compact=false){
+  const s = S.status[p.id];
+  const b = p.book && BOOK.find(x=>x.id===p.book);
+  return `<div class="row" id="pl-${p.id}">${ill(p.cat)}<div><h3>${esc(p.name)}</h3><div class="meta">${esc(CAT_NAME[p.cat]||'')}${p.area?' · '+esc(p.area):''}</div>
+    ${p.desc && !compact?`<p class="desc">${esc(p.desc)}</p>`:''}
+    ${s==='went'?`<div class="went" style="margin-top:6px">✓ Went here</div>`:''}
+    ${b && b.short ? (S.booked[b.id] ? `<div class="went" style="margin-top:6px">✓ Tickets booked</div>` : badge(b)) : (b ? badge(b) : '')}
+    <div class="acts">
+      ${b && b.short && !S.booked[b.id] ? `<a class="btn line sm" href="${b.link}" target="_blank" rel="noopener">Buy tickets · ${esc(b.short)} ↗</a>` : ''}
+      ${s!=='went'?`<button class="btn line sm" data-want="${p.id}" aria-pressed="${s==='want'}">${s==='want'?'On your list':'Want to go'}</button>
+      <button class="btn sm" data-went="${p.id}">Went here</button>`:`<button class="btn line sm" data-unwent="${p.id}">Undo</button><button class="btn line sm" data-went="${p.id}">Add a note</button>`}
+    </div>
+    <div data-noteform="${p.id}" hidden></div></div>
+    <div></div></div>`;
+}
+function expRow(x, trip){
+  const st = S.exp[x.id]||{};
+  return `<div class="row">${ill(x.cat)}<div><h3>${esc(x.name)}</h3>
+    <div class="meta">${trip?esc(x.how):`${esc(x.price)} per person · ${esc(x.time)}`}</div>
+    ${trip?`<div class="meta">Plan for ${esc(x.stay)}</div>`:''}
+    <p class="desc">${esc(x.why)}</p>
+    ${st.booked?`<div class="went" style="margin-top:6px">✓ Booked</div>`:`<div class="lvl ${x.level}">${x.level==='required'?(trip?'Book the timed part ahead':'Book ahead'):x.level==='optional'?(trip?'Booking optional':'Booking recommended'):'No booking needed'}</div>`}
+    <p class="small muted" style="margin-top:3px">${esc(x.book)}</p>
+    <div class="acts"><a class="btn line sm" href="${tripUrl(x.q)}" target="_blank" rel="noopener">Tripadvisor ↗</a><a class="btn line sm" href="${gygUrl(x.q)}" target="_blank" rel="noopener">GetYourGuide ↗</a>${x.extra?`<a class="btn line sm" href="${x.extra.href}" target="_blank" rel="noopener">${esc(x.extra.text)} ↗</a>`:''}</div>
+    <div class="acts"><button class="btn line sm" data-expwant="${x.id}" aria-pressed="${!!st.want}">${st.want?'On your list':'Interested'}</button><label class="check"><input type="checkbox" data-expbooked="${x.id}" ${st.booked?'checked':''}>Booked</label></div>
+  </div><div></div></div>`;
+}
+RENDER.places = () => {
+  const views = [['sights','Sights'],['experiences','Experiences'],['trips','Day trips']];
+  const seg = `<div class="chips" role="tablist" aria-label="Places views" style="margin-bottom:4px">${views.map(([k,l])=>`<button class="chip" data-pview="${k}" aria-pressed="${S.pview===k}">${l}</button>`).join('')}</div>`;
+  if(S.pview==='experiences' || S.pview==='trips'){
+    const isTrip = S.pview==='trips';
+    const list = isTrip ? TRIPS : EXP;
+    $('[data-tab="places"]').innerHTML = masthead() + `<div class="greet"><div class="eyebrow">${isTrip?'Day trips':'Experiences'}</div><h1>${isTrip?'Beyond the city.':'Learn something by hand.'}</h1><p class="lede">${isTrip?'Easy escapes by train or bus, and the ones that are better as a tour.':'Classes and tastings worth booking. The links show current options, prices and reviews from many providers.'}</p></div>${seg}
+      <div class="block" style="padding-top:12px">${legend()}<div class="rows">${list.map(x=>expRow(x,isTrip)).join('')}</div>
+      <p class="small faint">Typical prices and times from travel guides, checked Oct 7, 2026. Providers set their own prices; check when booking.</p></div>`;
+    return;
+  }
+  const f = S.pfilter;
+  const filt = p => f==='all' || (f==='want' && S.status[p.id]==='want') || (f==='went' && S.status[p.id]==='went');
+  let html = masthead() + `<div class="greet"><div class="eyebrow">Places</div><h1>Where to wander.</h1><p class="lede">Save what catches your eye. Tap “Went here” when you visit and it lands in your journal.</p></div>${seg}
+  <div class="chips" role="toolbar" aria-label="Filter">${[['all','All'],['want','Want to go'],['went','Visited']].map(([k,l])=>`<button class="chip" data-pfilter="${k}" aria-pressed="${f===k}">${l}</button>`).join('')}</div>`;
+  GROUPS.forEach(([g,label])=>{
+    const list = (g==='custom'?S.custom:PLACES.filter(p=>p.group===g)).filter(filt);
+    if(!list.length && g!=='custom') return;
+    if(g==='custom' && f!=='all' && !list.length) return;
+    html += `<div class="block"><h2>${esc(label)}</h2>${list.length?`<div class="rows">${list.map(p=>placeRow(p)).join('')}</div>`:''}
+      ${g==='custom'?`<div class="fields" style="margin-top:4px"><label class="f">Place name<input type="text" id="cName" placeholder="e.g. a trattoria a friend recommended"></label>
+      <label class="f">Type<select id="cCat">${Object.entries(CAT_NAME).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select></label></div>
+      <button class="btn line" data-addplace style="align-self:flex-start">Add place</button>`:''}</div>`;
+  });
+  if(f!=='all' && !allPlaces().some(filt)) html += `<div class="block"><p class="serif" style="font-size:18px">${f==='want'?'Nothing saved yet. Tap “Want to go” on any place.':'No visits yet. Tap “Went here” when you get somewhere.'}</p></div>`;
+  $('[data-tab="places"]').innerHTML = html;
+};
+function openNoteForm(id){
+  document.querySelectorAll('[data-noteform]').forEach(el=>{ el.hidden=true; el.innerHTML=''; });
+  const box = document.querySelector(`[data-noteform="${id}"]`); if(!box) return;
+  const p = placeById(id);
+  box.hidden=false;
+  box.innerHTML = `<div style="display:flex;flex-direction:column;gap:8px;margin-top:10px"><label class="f" style="flex:none">A quick note (optional). Tap the keyboard mic to talk.<textarea id="nf-${id}" style="min-height:80px" placeholder="What was it like?"></textarea></label>
+    <div class="fields" style="align-items:flex-end"><label class="f" style="flex:0 1 150px">Rating<select id="ns-${id}"><option value="0">No rating</option><option value="5">Loved it</option><option value="4">Really good</option><option value="3">Fine</option><option value="2">Skip it</option></select></label>
+    <button class="btn" data-savevisit="${id}">Save visit</button><button class="btn line" data-cancelvisit="${id}">Cancel</button></div></div>`;
+  setTimeout(()=>$('#nf-'+id)?.focus(),50);
+}
+function saveVisit(id){
+  const p = placeById(id); const txt = ($('#nf-'+id)?.value||'').trim(); const stars = +($('#ns-'+id)?.value||0);
+  S.status[id]='went';
+  S.entries.push({id:Date.now().toString(36), d:Date.now(), txt: txt || `Visited ${p.name}.`, placeId:id, place:p.name, stars, visit:true});
+  save(); toast('Saved to your journal'); RENDER[S.tab]();
+}
+
+/* ---------- PHRASES ---------- */
+let pq='';
+RENDER.phrases = () => {
+  const tabs = ['Favorites', ...Object.keys(P)];
+  const cur = S.ptab;
+  const q = pq.trim().toLowerCase();
+  let rows;
+  if(q) rows = Object.values(P).flat().filter(r=>r.join(' ').toLowerCase().includes(q));
+  else if(cur==='Favorites') rows = Object.values(P).flat().filter(r=>S.favs.includes(r[0]));
+  else rows = P[cur] || [];
+  let html = masthead() + `<div class="greet"><div class="eyebrow">Phrases</div><h1>Say it in Italian.</h1><p class="lede">Tap the speaker to hear it. Star the ones you’ll use again.</p></div>
+  <div class="chips" role="toolbar" aria-label="Situations">${tabs.map(t=>`<button class="chip" data-ptab="${esc(t)}" aria-pressed="${!q && t===cur}">${t==='Favorites'?'★ Favorites':esc(t)}</button>`).join('')}</div>
+  <input type="search" id="phq" placeholder="Search, e.g. “water” or “size”" value="${esc(pq)}" aria-label="Search phrases" style="margin-top:8px">`;
+  if(!q && cur==='Taxi & transport'){
+    const opts = `<option value="__home">${esc(stay().label||'Where I’m staying')}</option>` + allPlaces().map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('');
+    html += `<div class="block" style="padding-top:22px"><h2>Tell the driver</h2><p class="small muted">Pick a place and show the screen to the driver, or tap to hear it.</p>
+      <div class="fields" style="align-items:flex-end"><label class="f">Destination<select id="dest">${opts}<option value="__airport">Florence Airport (Peretola)</option><option value="__station">Santa Maria Novella train station</option></select></label>
+      <button class="btn" data-driver>Show driver</button></div></div>`;
+  }
+  html += `<div class="rows" style="margin-top:14px">${rows.length? rows.map(([it,say,en])=>`<div class="ph"><div><div class="it">${esc(it)}</div><div class="say">${esc(say)}</div><div class="en">${esc(en)}</div></div>
+    <button class="star" data-fav="${esc(it)}" aria-pressed="${S.favs.includes(it)}" aria-label="Save to favorites">${ic('starO')}</button>
+    <button class="hear" data-say="${esc(it)}" aria-label="Hear ${esc(it)}">${ic('speak')}</button></div>`).join('')
+    : `<p class="serif" style="font-size:18px;padding:16px 0">${q?`No phrase matches “${esc(pq)}”.`:'No favorites yet. Tap the star on any phrase.'}</p>`}</div>`;
+  $('[data-tab="phrases"]').innerHTML = html;
+};
+function showDriver(forced){
+  const v = forced || $('#dest').value;
+  if(v==='__home'){
+    const sy=stay(), h=HOODS[sy.hood];
+    const target = sy.address || (h&&h.at ? h.name : '');
+    const d=$('#driver');
+    if(!target){ toast('Add the address in Essentials, “You & your trip,” so drivers can read it.'); return; }
+    const it = `Vorrei andare a ${target}, per favore.`;
+    d.innerHTML = `<div class="label">Show this to the driver</div><div class="big-it">${esc(it)}</div>${sy.address?'':'<p class="small muted">Tip: add the full street address in Essentials for the driver.</p>'}
+    <div class="panel" style="margin:0"><div class="it" style="font-size:20px">Quanto costa, più o meno?</div><div class="say">KWAN-to KOS-ta, pyoo o MEH-no</div><div class="en">About how much will it cost?</div></div>
+    <div style="display:flex;gap:8px;margin-top:auto"><button class="btn" data-say="${esc(it)}" style="flex:1">${ic('speak','style="width:18px;height:18px"')}Play aloud</button><button class="btn line" data-closedriver style="flex:1">Close</button></div>`;
+    d.hidden=false; return;
+  }
+  const name = v==='__airport' ? 'Aeroporto di Firenze, Peretola' : v==='__station' ? 'Stazione di Santa Maria Novella' : placeById(v)?.name;
+  const area = v.startsWith('__') ? '' : (placeById(v)?.area||'');
+  const it = `Vorrei andare a ${name}, per favore.`;
+  const d = $('#driver');
+  d.innerHTML = `<div class="label">Show this to the driver</div><div class="big-it">${esc(it)}</div>${area?`<div class="lede">${esc(area)}</div>`:''}
+    <div class="panel" style="margin:0"><div class="it" style="font-size:20px">Quanto costa, più o meno?</div><div class="say">KWAN-to KOS-ta, pyoo o MEH-no</div><div class="en">About how much will it cost?</div></div>
+    <div style="display:flex;gap:8px;margin-top:auto"><button class="btn" data-say="${esc(it)}" style="flex:1">${ic('speak','style="width:18px;height:18px"')}Play aloud</button><button class="btn line" data-closedriver style="flex:1">Close</button></div>`;
+  d.hidden=false;
+}
+
+/* ---------- JOURNAL ---------- */
+function summaryText(){
+  const st = stage();
+  const visited = allPlaces().filter(p=>S.status[p.id]==='went');
+  const loved = S.entries.filter(e=>e.stars>=4);
+  const best = loved.find(e=>!e.visit || e.txt.length>30) || S.entries.slice().reverse().find(e=>e.txt.length>30);
+  const dates = S.dates.start ? `${fmtDate(S.dates.start+'T00:00:00')}${S.dates.end?' to '+fmtDate(S.dates.end+'T00:00:00'):''}` : '';
+  const lines = [`Florence${dates?', '+dates:''}${st.total?` · ${st.total} days`:''}`];
+  if(visited.length) lines.push('', `Where I went: ${visited.map(p=>p.name).join(', ')}.`);
+  if(loved.length) lines.push('', `Loved: ${[...new Set(loved.map(e=>e.place).filter(Boolean))].join(', ') || 'see notes'}.`);
+  if(best) lines.push('', `“${best.txt}”`);
+  lines.push('', '#Florence #Firenze #Italy #travel');
+  return lines.join('\n');
+}
+RENDER.journal = () => {
+  const opts = `<option value="">No place</option>` + allPlaces().map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('');
+  const list = S.entries.slice().reverse();
+  let html = masthead() + `<div class="greet"><div class="eyebrow">Journal</div><h1>What happened today.</h1><p class="lede">Tap in the box, then tap the microphone on your keyboard to talk instead of type.</p></div>
+  <label class="f" style="flex:none"><span class="sr" style="position:absolute;left:-9999px">Journal entry</span><textarea id="jText" placeholder="Where were you, what did you eat, what made you stop?">${esc(store.get('andiamo2.draft',''))}</textarea></label>
+  <div class="fields" style="margin-top:10px"><label class="f">Place<select id="jPlace">${opts}</select></label>
+  <label class="f">Rating<select id="jStars"><option value="0">No rating</option><option value="5">Loved it</option><option value="4">Really good</option><option value="3">Fine</option><option value="2">Skip it</option></select></label></div>
+  <div style="display:flex;gap:8px;margin-top:12px"><button class="btn" data-savej style="flex:1">Save entry</button></div>
+  <p class="small faint" style="margin-top:8px">Saved on this phone only. Use “Copy everything” below now and then as a backup.</p>`;
+  html += `<div class="block"><div class="head"><h2>Entries</h2><span class="label">${S.entries.length}</span></div><div>${list.length? list.map(e=>`<div class="entry"><div class="qm">“</div><div class="q">${esc(e.txt)}</div>
+    <div class="m">${fmtDate(e.d,{weekday:'short',month:'short',day:'numeric'})}${e.place?' · '+esc(e.place):''}${e.stars?` · <span style="color:var(--coral-ink)">${['','','Skip it','Fine','Really good','Loved it'][e.stars]}</span>`:''}</div>
+    <button class="text-btn" data-delj="${e.id}" style="align-self:flex-start;min-height:36px;color:var(--muted);font-weight:500">Delete</button></div>`).join('')
+    : `<p class="serif" style="font-size:18px;border-top:1px solid var(--rule);padding-top:16px">Nothing yet. Your first memory goes here, or tap “Went here” on any place.</p>`}</div></div>`;
+  html += `<div class="block" id="summary"><div class="head"><h2>Trip summary</h2><span class="label">For Instagram</span></div>
+    <p class="small muted">Built from your visits and notes. Copy it, then paste it as your caption with your own photos.</p>
+    <div class="summary">${esc(summaryText())}</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-copysum>Copy caption</button><button class="btn line" data-copyall>Copy everything</button></div>
+    <p class="small faint"><span class="ph-flag">Later</span> Building the summary from your photos’ time and location is planned, not built yet.</p></div>`;
+  $('[data-tab="journal"]').innerHTML = html;
+};
+
+/* ---------- ESSENTIALS ---------- */
+const fmt = n => isFinite(n) ? n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}) : '';
+const num = s => parseFloat(String(s).replace(/,/g,'.').replace(/[^\d.]/g,''));
+/* reference rate: European Central Bank based, via frankfurter.dev, Oct 7, 2026 */
+const BASE_RATE = {v:1.1243, d:'2026-10-07T12:00:00', src:'base'};
+function rateNow(){ return (S.rate && S.rate.v && (S.rate.src==='manual' || S.rate.src==='live')) ? S.rate : BASE_RATE; }
+function rateLine(){
+  const r = rateNow(), when = fmtDate(r.d);
+  if(r.src==='manual') return `Using your own rate: €1 = $${r.v.toFixed(4).replace(/0+$/,'')} (set ${when}).`;
+  if(r.src==='live') return `Based on today’s reference rate: €1 ≈ $${r.v.toFixed(2)} (European Central Bank, ${when}).`;
+  return `Based on a reference rate of €1 ≈ $${r.v.toFixed(2)} (European Central Bank, ${when}). It updates automatically once the app has its own web address.`;
+}
+async function fetchRate(){
+  try{
+    const ctl = new AbortController(); setTimeout(()=>ctl.abort(), 6000);
+    const r = await fetch('https://api.frankfurter.dev/v2/rate/eur/usd', {signal:ctl.signal});
+    if(!r.ok) return;
+    const j = await r.json();
+    const v = Number(j && j.rate);
+    if(v>0.5 && v<3 && S.rate.src!=='manual'){ S.rate = {v, d:j.date ? j.date+'T12:00:00' : Date.now(), src:'live'}; save(); if(S.tab==='essentials') RENDER.essentials(); }
+  }catch(e){ /* offline or blocked: keep last saved rate */ }
+}
+RENDER.essentials = () => {
+  const r = S.rate.v;
+  let html = masthead() + `<div class="greet"><div class="eyebrow">Essentials</div><h1>The practical bits.</h1></div>
+  <div class="block" id="tripBlock" tabindex="-1" style="padding-top:8px"><h2>You &amp; your trip</h2>
+    <div class="fields"><label class="f">Your first name<input type="text" data-bind="name" value="${esc(S.name)}" autocomplete="given-name"></label></div>
+    <div class="fields"><label class="f">Arrive<input type="date" data-bind="dates.start" value="${esc(S.dates.start)}"></label><label class="f">Leave<input type="date" data-bind="dates.end" value="${esc(S.dates.end)}"></label></div>
+    <div class="fields"><label class="f">Arriving by<select data-bind="trip.inVia">${Object.entries(VIA).map(([k,v])=>`<option value="${k}" ${S.trip.inVia===k?'selected':''}>${v}</option>`).join('')}</select></label><label class="f">Leaving by<select data-bind="trip.outVia">${Object.entries(VIA).map(([k,v])=>`<option value="${k}" ${S.trip.outVia===k?'selected':''}>${v}</option>`).join('')}</select></label></div>
+    <div class="fields"><label class="f">Arrival flight (optional)<input type="text" data-bind="trip.inFlight" value="${esc(S.trip.inFlight)}" placeholder="e.g. AZ 611" autocapitalize="characters"></label><label class="f">Departure flight (optional)<input type="text" data-bind="trip.outFlight" value="${esc(S.trip.outFlight)}" placeholder="e.g. AZ 610" autocapitalize="characters"></label></div>
+    <div class="fields"><label class="f">Booking references (optional)<input type="text" data-bind="trip.refs" value="${esc(S.trip.refs)}" placeholder="Airline or train codes"></label></div>
+    <p class="small faint">Saved only on this phone. Booking references are never included in your shared trip summary.</p>
+    ${S.trip.outFlight?`<a class="btn line sm" style="align-self:flex-start" href="https://www.google.com/search?q=${encodeURIComponent('flight '+S.trip.outFlight)}" target="_blank" rel="noopener">Track departure flight ${esc(S.trip.outFlight)} ↗</a>`:''}
+    <h3 style="margin-top:10px">Where are you staying?</h3>
+    <div class="fields"><label class="f">Name it<input type="text" data-bind="stays.0.label" value="${esc(stay().label)}" placeholder="e.g. Friend’s place, Hotel name"></label><label class="f">Neighborhood<select data-bind="stays.0.hood"><option value="">Choose…</option>${Object.entries(HOODS).map(([k,v])=>`<option value="${k}" ${stay().hood===k?'selected':''}>${esc(v.name)}</option>`).join('')}</select></label></div>
+    <label class="f" style="flex:none">Street address (for taxi drivers)<input type="text" data-bind="stays.0.address" value="${esc(stay().address)}" placeholder="e.g. Via dei Serragli 12"></label>
+    <button class="text-btn" data-welcome="1" style="align-self:flex-start">Show the welcome steps again</button></div>
+
+  <div class="block" id="convBlock"><div class="head"><h2>Currency</h2><span class="ph-flag">Estimate</span></div>
+    <div class="chips" role="tablist" aria-label="Direction" style="margin-top:-2px">
+      <button class="chip" data-cdir="eur2usd" aria-pressed="${S.cdir!=='usd2eur'}">Euro → Dollar</button>
+      <button class="chip" data-cdir="usd2eur" aria-pressed="${S.cdir==='usd2eur'}">Dollar → Euro</button></div>
+    <label class="f" style="flex:none">${S.cdir==='usd2eur'?'Amount in US dollars':'Price in euros'}<div class="big"><span>${S.cdir==='usd2eur'?'$':'€'}</span><input id="amtIn" inputmode="decimal" value="${esc(S.camt||'20')}" aria-describedby="convOut"></div></label>
+    <div id="convOut" aria-live="polite" style="font-family:var(--mono);font-size:30px;font-variant-numeric:tabular-nums;padding:4px 0"></div>
+    <p class="small muted">${esc(rateLine())} Your card or bank uses its own rate and may add fees, so treat this as a close estimate.</p>
+    <h3 style="margin-top:6px">Typical prices in Florence</h3>
+    <div class="grid3">${[['Espresso',1.5],['Gelato',4],['Pizza',12],['Accademia',20],['Uffizi',29],['Airport taxi',28]].map(([l,e])=>`<div><b>${l}</b>€${e} ≈ $${fmt(e*rateNow().v)}</div>`).join('')}</div>
+    <p class="small faint">Food prices are typical examples. Ticket and taxi prices are official.</p>
+    <details style="margin-top:4px"><summary class="small" style="cursor:pointer;min-height:44px;display:flex;align-items:center;color:var(--accent-deep);font-weight:600">Use my own rate</summary>
+      <p class="small muted">For example, the rate your bank app shows.</p>
+      <div class="fields" style="align-items:flex-end"><label class="f" style="flex:0 1 160px">€1 equals $<input id="rateIn" inputmode="decimal" value="${S.rate.src==='manual'?S.rate.v:''}" placeholder="e.g. 1.12"></label><button class="btn line" data-saverate>Save rate</button>${S.rate.src==='manual'?'<button class="btn line" data-resetrate>Use reference rate</button>':''}</div></details></div>
+
+  <div class="block" id="taxiBlock" tabindex="-1"><h2>Taxis</h2><p class="small"><b>No street hailing in Florence.</b> Go to a taxi rank or call. Main ranks: Santa Maria Novella station (24 h), Piazza della Repubblica, Piazza San Marco.</p>
+    <div><div class="num"><div><div class="n">+39 055 4242</div><div class="small muted">Radio taxi</div></div><button class="text-btn" data-copy="+39 055 4242">Copy</button></div>
+    <div class="num" style="border-bottom:1px solid var(--rule)"><div><div class="n">+39 055 4390</div><div class="small muted">Radio taxi · has accessible cabs</div></div><button class="text-btn" data-copy="+39 055 4390">Copy</button></div></div>
+    <p class="small muted">The itTaxi and appTaxi apps book the same licensed cabs without a phone call.</p>
+    <div id="fareBlock" tabindex="-1" style="display:flex;flex-direction:column;gap:10px;padding-top:10px"><h3>Fare estimate</h3>
+      <div class="fields"><label class="f">From<select id="fFrom">${routeOpts(stay().hood&&HOODS[stay().hood].at?'__home':'__station')}</select></label><label class="f">To<select id="fTo">${routeOpts('uffizi')}</select></label></div>
+      <div id="fareOut"></div></div>
+    <h3 style="margin-top:10px">Official fares</h3>
+    <div class="kv"><span>Meter start, weekdays 6:00–22:00</span><span>€3.80</span><span>Meter start, Sundays &amp; holidays</span><span>€6.10</span><span>Meter start, night 22:00–6:00</span><span>€7.70</span>
+    <span>Then per km</span><span>€1.10–2.10</span><span>Plus time in slow traffic</span><span>€30.10/h</span>
+    <span class="sep"></span><span>Airport ↔ centre, day</span><span>€28</span><span>Airport ↔ centre, Sundays &amp; holidays</span><span>€30</span><span>Airport ↔ centre, night</span><span>€32</span>
+    <span class="sep"></span><span>Calling for a taxi</span><span>+€2.50</span><span>Each bag</span><span>+€1.20</span></div>
+    <p class="small"><b>Taxi Rosa:</b> women riding from 21:00 to 4:00 get 10% off. Ask for it when you call.</p>
+    <p class="small faint">City of Florence tariff in force from May 2024, the latest official table we found.</p>
+    <p class="small muted"><b>Rush hour:</b> fares don’t change at rush hour, only by day, night or holiday. Traffic still costs more because the meter also counts time.</p>
+    <button class="btn line" data-go="phrases" data-ptabgo="Taxi & transport" style="align-self:flex-start">Taxi phrases &amp; “Show driver”</button></div>
+
+  <div class="block" id="voiceBlock"><h2>Pronunciation audio</h2>
+    <p class="small">${itVoice?`Using the Italian voice “${esc(itVoice.name)}” on this phone.`:'<b>This phone has no Italian voice installed</b>, so phrases can’t play correctly yet.'}</p>
+    <p class="small muted">The audio uses your phone’s built-in Italian voice. For the most natural sound, download a better one (free):</p>
+    <ul class="plain"><li><b>iPhone</b>Settings → Accessibility → Spoken Content → Voices → Italian. Pick a voice and download its Enhanced or Premium version.</li>
+    <li><b>Android</b>Settings → search “Text-to-speech” → preferred engine settings → install voice data → Italian. Menu names vary by phone.</li></ul>
+    <p class="small muted">Then close and reopen this app.</p>
+    <button class="btn line" data-say="Buongiorno! Il conto, per favore." style="align-self:flex-start">${ic('speak','style="width:18px;height:18px"')}Test: “Buongiorno! Il conto, per favore.”</button></div>
+
+  <div class="block"><h2>Local know-how</h2><ul class="plain">
+    <li><b>Restaurants</b>Coperto is a per-person cover charge, not a tip. If the bill says “servizio incluso,” don’t add more. Otherwise round up, leave €1–2 each, or up to about 10% for great service. Card machines often have no tip option, so carry coins.</li>
+    <li><b>Cafés</b>Pay at the register, then show your receipt at the bar. Standing is cheaper than sitting. Small change on the counter is a nice, optional thank-you.</li>
+    <li><b>Taxis</b>Round up to the next euro, a little more if the driver helps with bags.</li>
+    <li><b>Hotels</b>About €1–2 per bag for a porter. €1–2 a night for housekeeping is kind, not expected. Florence adds a nightly tourist tax at the hotel, often not in the booking price.</li>
+    <li><b>Guided tours</b>€5–10 per person is a common thank-you for a good group tour.</li>
+    <li><b>Gelato, shops, markets</b>No tipping.</li>
+    <li><b>Churches</b>Shoulders and knees covered. A light scarf solves it.</li>
+    <li><b>Restrooms</b>Public ones often cost a coin. Keep change handy.</li></ul>
+    <p class="small faint">General customs, not rules.</p></div>
+
+  <div class="block"><h2>Emergencies</h2>
+    <div><div class="num"><div><div class="n">112</div><div class="small muted">Police, ambulance, fire. English spoken.</div></div><button class="text-btn" data-copy="112">Copy</button></div>
+    <div class="num" style="border-bottom:1px solid var(--rule)"><div><div class="n">US Consulate, Florence</div><div class="small muted"><a href="https://it.usembassy.gov/embassy-consulates/florence/" target="_blank" rel="noopener">Official contact page</a></div></div></div></div>
+    <p class="small muted">Pharmacies have a green cross sign.</p></div>
+  <p class="small faint" style="padding-top:28px">Prices, hours and fares checked Oct 7, 2026 from official sites and travel sources. They change, so confirm when booking.</p>
+  <p class="small faint" style="padding-top:10px">Wanderings by Whiskers &amp; Wanderings · Andiamo Firenze edition</p>`;
+  $('[data-tab="essentials"]').innerHTML = html;
+  updateConv(); showFare();
+};
+function showFare(){
+  const out=$('#fareOut'); if(!out) return;
+  const r=fareEstimate($('#fFrom').value, $('#fTo').value);
+  if(r.err){ out.innerHTML=`<p class="small muted">${esc(r.err)}</p>`; return; }
+  out.innerHTML = `<div style="display:flex;align-items:baseline;gap:10px"><span style="font-family:var(--mono);font-size:30px;font-variant-numeric:tabular-nums">€${r.lo}${r.hi!==r.lo?'–'+r.hi:''}</span><span class="small muted">${r.fixed?'flat fare':'estimate'} · ${esc(r.band)} rates${r.km?` · about ${r.km.toFixed(1)} km`:''}</span></div><p class="small faint">${esc(r.note)}</p>`;
+}
+function updateConv(){
+  const out=$('#convOut'), inp=$('#amtIn'); if(!out||!inp) return;
+  const a=num(inp.value), r=rateNow().v;
+  if(!isFinite(a)){ out.textContent=''; return; }
+  out.textContent = S.cdir==='usd2eur' ? `≈ €${fmt(a/r)}` : `≈ $${fmt(a*r)}`;
+}
+
+/* ================= events ================= */
+document.addEventListener('click', e => {
+  const t = e.target.closest('button, a, input[type=checkbox]'); if(!t) return;
+  const d = t.dataset;
+  if(d.go){ if(d.pviewgo){ S.pview=d.pviewgo; } if(d.go==='places' && !d.pviewgo && t.closest('[data-tab="today"]')) S.pview='sights'; if(d.ptabgo){ S.ptab = d.ptabgo; pq=''; } go(d.go, {focus:d.focus}); return; }
+  if(d.say!==undefined){ speak(d.say); return; }
+  if(d.booked){ S.booked[d.booked] = t.checked; save(); toast(t.checked?'Marked as booked':'Unmarked'); setTimeout(()=>RENDER[S.tab](),350); return; }
+  if(d.want){ S.status[d.want] = S.status[d.want]==='want' ? undefined : 'want'; if(!S.status[d.want]) delete S.status[d.want]; save(); RENDER[S.tab](); return; }
+  if(d.went){ openNoteForm(d.went); return; }
+  if(d.savevisit){ saveVisit(d.savevisit); return; }
+  if(d.cancelvisit){ const b=document.querySelector(`[data-noteform="${d.cancelvisit}"]`); b.hidden=true; b.innerHTML=''; return; }
+  if(d.unwent){ delete S.status[d.unwent]; save(); RENDER[S.tab](); toast('Visit removed. Journal notes are kept.'); return; }
+  if(d.pview){ S.pview=d.pview; save(); RENDER.places(); return; }
+  if(d.expwant){ const o=S.exp[d.expwant]=S.exp[d.expwant]||{}; o.want=!o.want; save(); RENDER.places(); return; }
+  if(d.expbooked){ const o=S.exp[d.expbooked]=S.exp[d.expbooked]||{}; o.booked=t.checked; save(); toast(t.checked?'Marked as booked':'Unmarked'); setTimeout(()=>RENDER[S.tab](),300); return; }
+  if(d.pfilter){ S.pfilter=d.pfilter; save(); RENDER.places(); return; }
+  if(d.addplace!==undefined){ const n=$('#cName').value.trim(); if(!n){ toast('Type a place name first'); return; } S.custom.push({id:'c'+Date.now().toString(36), group:'custom', name:n, cat:$('#cCat').value, area:'', desc:''}); save(); RENDER.places(); toast('Added'); return; }
+  if(d.ptab){ S.ptab=d.ptab; pq=''; save(); RENDER.phrases(); return; }
+  if(d.fav){ const i=S.favs.indexOf(d.fav); i>=0?S.favs.splice(i,1):S.favs.push(d.fav); save(); t.setAttribute('aria-pressed', i<0); if(S.ptab==='Favorites') RENDER.phrases(); return; }
+  if(d.driver!==undefined){ showDriver(); return; }
+  if(d.dismissinstall!==undefined){ S.installTipDone=true; save(); RENDER.today(); return; }
+  if(d.homedriver!==undefined){ showDriver('__home'); return; }
+  if(d.welcome){ wStep=+d.welcome; renderWelcome(); return; }
+  if(d.wnext!==undefined){ wStep=Math.min(3,wStep+1); renderWelcome(); return; }
+  if(d.wback!==undefined){ wStep=Math.max(1,wStep-1); renderWelcome(); return; }
+  if(d.wdone!==undefined){ S.onboarded=true; save(); $('#welcome').hidden=true; RENDER[S.tab](); return; }
+  if(d.closedriver!==undefined){ $('#driver').hidden=true; return; }
+  if(d.savej!==undefined){
+    const txt=$('#jText').value.trim(); if(!txt){ toast('Write or dictate something first'); return; }
+    const pid=$('#jPlace').value; const p=pid?placeById(pid):null;
+    S.entries.push({id:Date.now().toString(36), d:Date.now(), txt, placeId:pid, place:p?p.name:'', stars:+$('#jStars').value});
+    if(pid && S.status[pid]!=='went') S.status[pid]='went';
+    store.set('andiamo2.draft',''); save(); RENDER.journal(); toast('Saved'); return;
+  }
+  if(d.delj){ if(t.dataset.armed){ S.entries=S.entries.filter(x=>x.id!==d.delj); save(); RENDER.journal(); toast('Deleted'); } else { t.dataset.armed='1'; t.textContent='Tap again to delete'; } return; }
+  if(d.copysum!==undefined){ copyText(summaryText()); return; }
+  if(d.copyall!==undefined){ copyText(['MY FLORENCE JOURNAL',''].concat(S.entries.map(e=>`${fmtDate(e.d,{weekday:'short',month:'short',day:'numeric'})}${e.place?' · '+e.place:''}\n${e.txt}\n`)).join('\n')); return; }
+  if(d.copy){ copyText(d.copy); return; }
+  if(d.cdir){ S.cdir=d.cdir; save(); RENDER.essentials(); const i=$('#amtIn'); if(i){ i.focus(); i.select&&i.select(); } return; }
+  if(d.resetrate!==undefined){ S.rate={v:null,d:null,src:''}; save(); RENDER.essentials(); fetchRate(); toast('Using the reference rate'); return; }
+  if(d.saverate!==undefined){ const v=num($('#rateIn').value); if(!(v>0.5&&v<3)){ toast('Enter a rate like 1.12'); return; } S.rate={v,d:Date.now(),src:'manual'}; save(); RENDER.essentials(); toast('Rate saved'); return; }
+});
+document.addEventListener('input', e => {
+  if(e.target.id==='phq'){ pq=e.target.value; const pos=e.target.selectionStart; RENDER.phrases(); const n=$('#phq'); n.focus(); try{ n.setSelectionRange(pos,pos); }catch(_){} }
+  if(e.target.id==='amtIn'){ S.camt=e.target.value; save(); updateConv(); }
+  if(e.target.id==='jText') store.set('andiamo2.draft', e.target.value);
+});
+document.addEventListener('change', e => {
+  const bp = e.target.dataset && e.target.dataset.bind;
+  if(bp){ let v=e.target.value; if(/Flight$/.test(bp)) v=v.toUpperCase().trim(); else if(e.target.type==='text') v=v.trim(); setPath(bp, v); if(!$('#welcome').hidden) return; toast('Saved'); if(S.tab==='essentials' && /hood|Flight|label/.test(bp)) RENDER.essentials(); return; }
+  if(e.target.id==='fFrom' || e.target.id==='fTo'){ showFare(); return; }
+
+});
+
+let wStep=1;
+function renderWelcome(){
+  const w=$('#welcome'); const sy=stay();
+  const dots = [1,2,3].map(i=>`<span style="width:${i===wStep?22:8}px;height:8px;border-radius:999px;background:${i===wStep?'var(--accent)':'var(--rule)'}"></span>`).join('');
+  let body='';
+  if(wStep===1) body = `<div class="eyebrow">Welcome to Wanderings</div><h1>Let’s plan your trip!</h1><p class="lede">This is Andiamo Firenze, your Florence edition. Three quick questions. Everything stays on this phone, and you can change it anytime.</p>
+    <label class="f" style="flex:none">What should we call you?<input type="text" data-bind="name" value="${esc(S.name)}" autocomplete="given-name"></label>`;
+  if(wStep===2) body = `<div class="eyebrow">Step 2 of 3</div><h1>When are you in Florence?</h1>
+    <div class="fields"><label class="f">Arrive<input type="date" data-bind="dates.start" value="${esc(S.dates.start)}"></label><label class="f">Leave<input type="date" data-bind="dates.end" value="${esc(S.dates.end)}"></label></div>
+    <div class="fields"><label class="f">Arriving by<select data-bind="trip.inVia">${Object.entries(VIA).map(([k,v])=>`<option value="${k}" ${S.trip.inVia===k?'selected':''}>${v}</option>`).join('')}</select></label><label class="f">Leaving by<select data-bind="trip.outVia">${Object.entries(VIA).map(([k,v])=>`<option value="${k}" ${S.trip.outVia===k?'selected':''}>${v}</option>`).join('')}</select></label></div>
+    <div class="fields"><label class="f">Arrival flight (optional)<input type="text" data-bind="trip.inFlight" value="${esc(S.trip.inFlight)}" placeholder="e.g. AZ 611" autocapitalize="characters"></label><label class="f">Departure flight (optional)<input type="text" data-bind="trip.outFlight" value="${esc(S.trip.outFlight)}" placeholder="e.g. AZ 610" autocapitalize="characters"></label></div>`;
+  if(wStep===3) body = `<div class="eyebrow">Step 3 of 3</div><h1>Where are you staying?</h1><p class="lede">So we can tell taxi drivers where home is and suggest what’s nearby.</p>
+    <label class="f" style="flex:none">Name it<input type="text" data-bind="stays.0.label" value="${esc(sy.label)}" placeholder="e.g. Friend’s place, Hotel name"></label>
+    <label class="f" style="flex:none">Neighborhood<select data-bind="stays.0.hood"><option value="">Choose…</option>${Object.entries(HOODS).map(([k,v])=>`<option value="${k}" ${sy.hood===k?'selected':''}>${esc(v.name)}</option>`).join('')}</select></label>
+    <label class="f" style="flex:none">Street address (optional, for taxi drivers)<input type="text" data-bind="stays.0.address" value="${esc(sy.address)}" placeholder="e.g. Via dei Serragli 12"></label>`;
+  w.innerHTML = `<div style="display:flex;gap:6px">${dots}</div>${body}
+    <div style="display:flex;gap:8px;margin-top:auto;padding-top:16px">${wStep>1?'<button class="btn line" data-wback style="flex:1">Back</button>':'<button class="btn line" data-wdone style="flex:1">Skip for now</button>'}<button class="btn" ${wStep<3?'data-wnext':'data-wdone'} style="flex:1">${wStep<3?'Next':'Done'}</button></div>`;
+  w.hidden=false;
+}
+
+go(TABS.some(([k])=>k===S.tab) ? S.tab : 'today');
+let forceWelcome=false; try{ forceWelcome = location.hash==='#welcome'; }catch(e){}
+if(!S.onboarded || forceWelcome){ wStep=1; renderWelcome(); }
+window.addEventListener('hashchange',()=>{ try{ if(location.hash==='#welcome'){ wStep=1; renderWelcome(); } }catch(e){} });
+fetchRate();
+})();
+</script>
+
+<script>
+/* offline support: register the service worker (version 202610071640) */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
+}
+</script>
+</body>
+</html>
