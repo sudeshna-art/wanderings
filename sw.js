@@ -1,5 +1,5 @@
-/* Wanderings offline support. Version 202610071720 */
-const CACHE = 'wanderings-202610071720';
+/* Wanderings offline support. Version 202610071746 */
+const CACHE = 'wanderings-202610071746';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', e => {
