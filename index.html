@@ -213,6 +213,16 @@ nav.tabs button[aria-selected="true"]{color:var(--accent-deep);font-weight:600}
 .daypick button[aria-pressed="true"]{border:2px solid var(--accent);background:var(--accent-soft);color:var(--accent-deep)}
 .daypick button[aria-pressed="true"] span{color:var(--accent-deep)}
 .scrim[hidden],.sheet[hidden]{display:none!important}
+.ph-row{display:flex;gap:8px;flex-wrap:wrap}
+.ph-thumb,.ph-wrap{position:relative;width:76px;height:76px;padding:0;border:0;border-radius:6px;overflow:hidden;background:var(--surface);flex:none}
+.ph-thumb img,.ph-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.ph-wrap button{position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;border:0;background:rgba(35,38,42,.75);color:#fff;font-size:15px;line-height:1;display:grid;place-items:center}
+.ph-thumb[aria-pressed="true"]{outline:3px solid var(--accent);outline-offset:-3px}
+.ph-thumb[aria-pressed="true"]::after{content:"✓";position:absolute;right:4px;top:4px;width:22px;height:22px;border-radius:50%;background:var(--accent);color:#fff;font-size:13px;display:grid;place-items:center}
+.ph-thumb.sm,.ph-wrap.sm{width:64px;height:64px}
+.pick-photos{display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.offscreen{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.cover-img{display:block;width:100%;height:300px;object-fit:cover;background:var(--surface)}
 .when-chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12.5px;color:var(--accent-deep);margin-top:6px}
 .opt{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start;border:1px solid var(--rule);border-radius:10px;padding:12px;cursor:pointer}
 .opt input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--accent)}
@@ -240,6 +250,8 @@ nav.tabs button[aria-selected="true"]{color:var(--accent-deep);font-weight:600}
 <div class="driver" id="driver" hidden></div>
 <div class="driver" id="welcome" hidden style="overflow:auto"></div>
 <div class="scrim" id="scrim" hidden></div>
+<input type="file" id="photoInput" class="offscreen" accept="image/*" multiple aria-hidden="true" tabindex="-1">
+<div class="driver" id="viewer" hidden style="overflow:auto"></div>
 <div class="sheet" id="sheet" role="dialog" aria-modal="true" hidden></div>
 <div class="toast" id="toast" hidden></div>
 
@@ -306,6 +318,41 @@ const ILL = {
   view:'<circle class="wash" cx="46" cy="22" r="7"/><path class="ink" stroke-width="1.1" d="M6 42 Q20 32 32 38 T58 34"/><path class="ink" stroke-width=".6" d="M6 48 Q30 44 58 46"/><path class="ink" stroke-width=".9" d="M29 42 V37 a4 5 0 0 1 8 0 V42 M33 32 V29.5"/><path class="ink" stroke-width=".7" d="M6 54 H58"/>'
 };
 const ill = (cat, size=52) => `<svg class="ill" width="${size}" height="${size}" viewBox="0 0 64 64" aria-hidden="true">${ILL[cat]||ILL.landmark}</svg>`;
+/* ---------- photos: smaller copies kept on this phone (IndexedDB); originals stay in Photos ---------- */
+let _pdb=null;
+function photoDB(){ if(_pdb) return _pdb; _pdb=new Promise((res,rej)=>{ try{ const r=indexedDB.open('wanderings-photos',1); r.onupgradeneeded=()=>r.result.createObjectStore('photos',{keyPath:'id'}); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); }catch(e){ rej(e); } }); return _pdb; }
+async function pPut(rec){ const db=await photoDB(); return new Promise((res,rej)=>{ const tx=db.transaction('photos','readwrite'); tx.objectStore('photos').put(rec); tx.oncomplete=()=>res(); tx.onerror=()=>rej(tx.error); }); }
+async function pGet(id){ const db=await photoDB(); return new Promise((res,rej)=>{ const r=db.transaction('photos').objectStore('photos').get(id); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); }); }
+async function pDel(id){ const db=await photoDB(); return new Promise((res,rej)=>{ const tx=db.transaction('photos','readwrite'); tx.objectStore('photos').delete(id); tx.oncomplete=()=>res(); tx.onerror=()=>rej(tx.error); }); }
+const urlCache={}, blobCache={};
+async function photoBlob(id){ if(blobCache[id]) return blobCache[id]; try{ const r=await pGet(id); if(r&&r.blob){ blobCache[id]=r.blob; return r.blob; } }catch(e){} return null; }
+async function photoURL(id){ if(urlCache[id]) return urlCache[id]; const b=await photoBlob(id); if(!b) return ''; try{ return urlCache[id]=URL.createObjectURL(b); }catch(e){ return ''; } }
+function hydratePhotos(){ document.querySelectorAll('img[data-photo]:not([src])').forEach(img=>{ img.setAttribute('src',''); photoURL(img.dataset.photo).then(u=>{ if(u) img.src=u; }); }); }
+async function compressPhoto(file, max=1600, q=0.82){
+  try{
+    const url=URL.createObjectURL(file);
+    const img=await new Promise((res,rej)=>{ const i=new Image(); const to=setTimeout(()=>rej(new Error('timeout')),8000); i.onload=()=>{ clearTimeout(to); res(i); }; i.onerror=()=>{ clearTimeout(to); rej(new Error('decode')); }; i.src=url; });
+    let w=img.naturalWidth, h=img.naturalHeight; const k=Math.min(1, max/Math.max(w,h)); w=Math.round(w*k); h=Math.round(h*k);
+    const c=document.createElement('canvas'); c.width=w; c.height=h; c.getContext('2d').drawImage(img,0,0,w,h);
+    URL.revokeObjectURL(url);
+    const blob=await new Promise(res=>c.toBlob(res,'image/jpeg',q));
+    return {blob: blob||file, w, h};
+  }catch(e){ return {blob:file, w:0, h:0}; }
+}
+async function savePhotos(files){
+  const ids=[];
+  for(const f of files){
+    try{ const {blob,w,h}=await compressPhoto(f); const id='p'+Date.now().toString(36)+Math.random().toString(36).slice(2,6); await pPut({id, blob, w, h, d:Date.now()}); blobCache[id]=blob; ids.push(id); }
+    catch(e){ toast('A photo couldn’t be saved on this phone.'); }
+  }
+  try{ if(navigator.storage && navigator.storage.persist) navigator.storage.persist(); }catch(e){}
+  return ids;
+}
+const thumb = (id, sm) => `<button class="ph-thumb${sm?' sm':''}" data-viewphoto="${id}" aria-label="Open photo"><img data-photo="${id}" alt=""></button>`;
+const allPhotoIds = () => S.entries.slice().reverse().flatMap(e=>e.photos||[]);
+const entryOfPhoto = id => S.entries.find(e=>(e.photos||[]).includes(id));
+function placePhoto(pid){ const e=S.entries.slice().reverse().find(x=>x.placeId===pid && (x.photos||[]).length); return e?e.photos[0]:null; }
+const placeMedia = (p, size=52) => { const ph=placePhoto(p.id); return ph ? `<div style="width:${size}px;height:${size}px;border-radius:4px;overflow:hidden;background:var(--surface);flex:none"><img data-photo="${ph}" alt="Your photo of ${esc(p.name)}" style="width:100%;height:100%;object-fit:cover;display:block"></div>` : ill(p.cat,size); };
 const CAT_NAME = {landmark:'Landmark',restaurant:'Restaurant',cafe:'Café',market:'Market',museum:'Museum & art',shop:'Shop & artisan',garden:'Garden',view:'Scenic view'};
 
 const DUOMO_MARK = '<svg width="40" height="34" viewBox="0 0 40 34" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 30.5h28M8.5 30.5v-6h23v6M9.5 24.5c0-8.6 4.6-14.7 10.5-15.8 5.9 1.1 10.5 7.2 10.5 15.8M15 24.5c0-6.6 2-11.6 5-15.6M25 24.5c0-6.6-2-11.6-5-15.6M18.4 8.6V5.4h3.2v3.2M20 5.4V2.6"/></svg>';
@@ -565,17 +612,18 @@ const NOTES = [
 const KEY='andiamo2.state';
 let S = store.get(KEY, null);
 if(!S){
-  S = {name:'Jacke', onboarded:false, pview:'sights', exp:{}, trip:{inVia:'',outVia:'',inFlight:'',outFlight:'',refs:''}, stays:[{label:'Friend’s place', address:'', hood:''}], dates:{start:'',end:''}, status:{}, custom:[], entries:[], booked:{}, favs:[], rate:{v:null,d:null,src:''}, tab:'today', ptab:'Restaurant', pfilter:'all'};
+  S = {name:'', onboarded:false, pview:'sights', exp:{}, trip:{inVia:'',outVia:'',inFlight:'',outFlight:'',refs:''}, stays:[{label:'', address:'', hood:''}], dates:{start:'',end:''}, status:{}, custom:[], entries:[], booked:{}, favs:[], rate:{v:null,d:null,src:''}, tab:'today', ptab:'Restaurant', pfilter:'all'};
   const old = store.get('andiamo.state', null); // migrate entries from first beta
   if(old && Array.isArray(old.entries)) S.entries = old.entries.map(e=>({id:e.id||Date.now().toString(36), d:e.d||Date.now(), txt:e.txt||'', placeId:'', place:e.p||'', stars:e.s||0}));
   const oldRate = store.get('andiamo.rate', null); if(oldRate && oldRate.d) S.rate = {v:oldRate.v, d:oldRate.d, src:'manual'};
 }
-if(S.name===undefined) S.name='Jacke';
+if(S.name===undefined) S.name='';
 if(!S.trip) S.trip={inVia:'',outVia:'',inFlight:'',outFlight:'',refs:''};
-if(!S.stays) S.stays=[{label:'Friend’s place', address:'', hood:''}];
+if(!S.stays) S.stays=[{label:'', address:'', hood:''}];
 if(S.onboarded===undefined) S.onboarded=false;
 if(!S.exp) S.exp={}; if(!S.pview) S.pview='sights';
 if(!S.style) S.style='flow'; if(!S.sched) S.sched={};
+if(!S.igSel) S.igSel=[];
 const save = () => store.set(KEY, S);
 const allPlaces = () => PLACES.concat(S.custom);
 const placeById = id => allPlaces().find(p=>p.id===id);
@@ -638,7 +686,8 @@ RENDER.today = () => {
   const ideas = suggestNearby().slice(0,3);
 
   let html = masthead() + `<div class="greet"><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(h1)}</h1><p class="lede">${esc(lede)}</p></div>
-  <div class="hero">${HERO}<div class="cap label">Santa Maria del Fiore</div></div>`;
+  ${S.cover ? `<div class="hero"><img class="cover-img" data-photo="${S.cover}" alt="Your trip cover photo"><div style="position:absolute;right:20px;bottom:12px;display:flex;align-items:center;gap:6px;color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))">${DUOMO_MARK.replace('width="40" height="34"','width="28" height="24"')}<span style="font-size:10px;font-weight:600;letter-spacing:.28em">FIRENZE</span></div></div>` : `<div class="hero">${HERO}<div class="cap label">Santa Maria del Fiore</div></div>`}
+  <div class="head" style="padding-top:4px"><span class="label">Cover · ${S.cover?'your photo':'Florence sketch'}</span>${S.cover?'<button class="text-btn" data-uncover>Back to the sketch</button>':(allPhotoIds().length?'<button class="text-btn" data-coverpick>Use one of your photos</button>':'')}</div>`;
 
   if(showInstallTip()){
     const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -837,7 +886,7 @@ function suggestNearby(){
 function placeRow(p, compact=false){
   const s = S.status[p.id];
   const b = p.book && BOOK.find(x=>x.id===p.book);
-  return `<div class="row" id="pl-${p.id}">${ill(p.cat)}<div><h3>${esc(p.name)}</h3><div class="meta">${esc(CAT_NAME[p.cat]||'')}${p.area?' · '+esc(p.area):''}</div>
+  return `<div class="row" id="pl-${p.id}">${placeMedia(p)}<div><h3>${esc(p.name)}</h3><div class="meta">${esc(CAT_NAME[p.cat]||'')}${p.area?' · '+esc(p.area):''}</div>
     ${p.desc && !compact?`<p class="desc">${esc(p.desc)}</p>`:''}
     ${s==='went'?`<div class="went" style="margin-top:6px">✓ Went here</div>`:''}
     ${b && b.short ? (S.booked[b.id] ? `<div class="went" style="margin-top:6px">✓ Tickets booked</div>` : badge(b)) : (b ? badge(b) : '')}
@@ -1052,6 +1101,40 @@ function summaryText(){
   lines.push('', '#Florence #Firenze #Italy #travel');
   return lines.join('\n');
 }
+function consentText(id){
+  const e=entryOfPhoto(id); const when=new Date().toLocaleDateString('en-US',{month:'long',year:'numeric'});
+  return `I give Whiskers & Wanderings permission to use this photo in the Wanderings app and its promotion. Shared by ${S.name||'a Wanderings traveler'}, ${when}.${e&&e.place?' Photo: '+e.place+', Florence.':''}`;
+}
+function openViewer(id){
+  photoBlob(id);
+  const e=entryOfPhoto(id), v=$('#viewer');
+  v.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><div class="label">${e?esc(fmtDate(e.d,{weekday:'short',month:'short',day:'numeric'}))+(e.place?' · '+esc(e.place):''):'Photo'}</div><button class="btn line sm" data-closeviewer>Close</button></div>
+    <img data-photo="${id}" alt="${e&&e.place?'Your photo of '+esc(e.place):'Your photo'}" style="width:100%;max-height:52vh;object-fit:contain;background:var(--surface);border-radius:6px">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">${S.cover===id?'<button class="btn line sm" data-uncover>Back to the sketch</button><span class="went" style="align-self:center">✓ Trip cover</span>':`<button class="btn sm" data-setcover="${id}">Use as trip cover</button>`}<button class="btn line sm" data-delphoto="${id}">Delete photo</button></div>
+    <div style="border-top:1px solid var(--rule);padding-top:14px;display:flex;flex-direction:column;gap:10px">
+      <h3>Share with Wanderings</h3>
+      <p class="small muted">Send this photo to the Wanderings team by message, email or AirDrop. Your permission note goes with it.</p>
+      <label class="check" style="align-items:flex-start;min-height:0"><input type="checkbox" id="consentChk" style="margin-top:2px"><span class="small">${esc(consentText(id))}</span></label>
+      <button class="btn" data-sharewander="${id}" id="shareWanderBtn" disabled style="align-self:flex-start;opacity:.5">Share photo</button>
+    </div>`;
+  v.hidden=false;
+}
+async function deletePhoto(id){
+  try{ await pDel(id); }catch(e){}
+  S.entries.forEach(e=>{ if(e.photos) e.photos=e.photos.filter(x=>x!==id); });
+  if(S.cover===id) S.cover=null;
+  S.igSel=S.igSel.filter(x=>x!==id);
+  jPending=jPending.filter(x=>x!==id); store.set('andiamo2.pending', jPending);
+  try{ if(urlCache[id]) URL.revokeObjectURL(urlCache[id]); }catch(e){} delete urlCache[id]; delete blobCache[id];
+  save();
+}
+function shareFiles(files, text, okMsg){
+  try{
+    if(navigator.canShare && navigator.canShare({files})){ navigator.share({files, text}).then(()=>{ if(okMsg) toast(okMsg); }).catch(()=>{}); return true; }
+  }catch(e){}
+  return false;
+}
+let jPending = store.get('andiamo2.pending', []);
 RENDER.journal = () => {
   const opts = `<option value="">No place</option>` + allPlaces().map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('');
   const list = S.entries.slice().reverse();
@@ -1059,16 +1142,22 @@ RENDER.journal = () => {
   <label class="f" style="flex:none"><span class="sr" style="position:absolute;left:-9999px">Journal entry</span><textarea id="jText" placeholder="Where were you, what did you eat, what made you stop?">${esc(store.get('andiamo2.draft',''))}</textarea></label>
   <div class="fields" style="margin-top:10px"><label class="f">Place<select id="jPlace">${opts}</select></label>
   <label class="f">Rating<select id="jStars"><option value="0">No rating</option><option value="5">Loved it</option><option value="4">Really good</option><option value="3">Fine</option><option value="2">Skip it</option></select></label></div>
+  <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
+    <label class="btn line pick-photos" for="photoInput" data-phtarget="composer" style="align-self:flex-start">${ic('camera','style="width:18px;height:18px"')}Add photos</label>
+    ${jPending.length?`<div class="ph-row">${jPending.map(id=>`<div class="ph-wrap"><img data-photo="${id}" alt=""><button data-unpend="${id}" aria-label="Remove photo">×</button></div>`).join('')}</div>`:''}
+  </div>
   <div style="display:flex;gap:8px;margin-top:12px"><button class="btn" data-savej style="flex:1">Save entry</button></div>
-  <p class="small faint" style="margin-top:8px">Saved on this phone only. Use “Copy everything” below now and then as a backup.</p>`;
+  <p class="small faint" style="margin-top:8px">Saved on this phone only. Photos are smaller copies; your originals stay in your Photos app. Use “Copy everything” below now and then to back up your notes.</p>`;
   html += `<div class="block"><div class="head"><h2>Entries</h2><span class="label">${S.entries.length}</span></div><div>${list.length? list.map(e=>`<div class="entry"><div class="qm">“</div><div class="q">${esc(e.txt)}</div>
     <div class="m">${fmtDate(e.d,{weekday:'short',month:'short',day:'numeric'})}${e.place?' · '+esc(e.place):''}${e.stars?` · <span style="color:var(--coral-ink)">${['','','Skip it','Fine','Really good','Loved it'][e.stars]}</span>`:''}</div>
-    <button class="text-btn" data-delj="${e.id}" style="align-self:flex-start;min-height:36px;color:var(--muted);font-weight:500">Delete</button></div>`).join('')
+    ${(e.photos||[]).length?`<div class="ph-row" style="margin-top:4px">${e.photos.map(id=>thumb(id)).join('')}</div>`:''}
+    <div style="display:flex;gap:16px;align-items:center"><label class="text-btn pick-photos" for="photoInput" data-phtarget="${e.id}" style="min-height:36px">${ic('camera','style="width:16px;height:16px"')}Add photos</label><button class="text-btn" data-delj="${e.id}" style="min-height:36px;color:var(--muted);font-weight:500">Delete</button></div></div>`).join('')
     : `<p class="serif" style="font-size:18px;border-top:1px solid var(--rule);padding-top:16px">Nothing yet. Your first memory goes here, or tap “Went here” on any place.</p>`}</div></div>`;
   html += `<div class="block" id="summary"><div class="head"><h2>Trip summary</h2><span class="label">For Instagram</span></div>
-    <p class="small muted">Built from your visits and notes. Copy it, then paste it as your caption with your own photos.</p>
+    <p class="small muted">Built from your visits and notes. Pick photos, tap Share to Instagram and choose Instagram. We copy the caption for you, so just paste it in.</p>
     <div class="summary">${esc(summaryText())}</div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" data-copysum>Copy caption</button><button class="btn line" data-copyall>Copy everything</button></div>
+    ${allPhotoIds().length?`<div class="label" style="margin-top:4px">Choose photos · ${S.igSel.filter(id=>allPhotoIds().includes(id)).length} selected</div><div class="ph-row">${allPhotoIds().map(id=>`<button class="ph-thumb sm" data-igpick="${id}" aria-pressed="${S.igSel.includes(id)}" aria-label="Select photo"><img data-photo="${id}" alt=""></button>`).join('')}</div>`:'<p class="small muted">Add photos to your journal entries and they’ll appear here to share.</p>'}
+    <div style="display:flex;gap:8px;flex-wrap:wrap">${allPhotoIds().length?'<button class="btn" data-igshare>Share to Instagram</button>':''}<button class="btn ${allPhotoIds().length?'line':''}" data-copysum>Copy caption</button><button class="btn line" data-copyall>Copy everything</button></div>
     <p class="small faint"><span class="ph-flag">Later</span> Building the summary from your photos’ time and location is planned, not built yet.</p></div>`;
   $('[data-tab="journal"]').innerHTML = html;
 };
@@ -1099,7 +1188,7 @@ RENDER.essentials = () => {
   const r = S.rate.v;
   let html = masthead() + `<div class="greet"><div class="eyebrow">Essentials</div><h1>The practical bits.</h1></div>
   <div class="block" id="tripBlock" tabindex="-1" style="padding-top:8px"><h2>You &amp; your trip</h2>
-    <div class="fields"><label class="f">Your first name<input type="text" data-bind="name" value="${esc(S.name)}" autocomplete="given-name"></label></div>
+    <div class="fields"><label class="f">Your first name<input type="text" data-bind="name" value="${esc(S.name)}" autocomplete="given-name" placeholder="Used in your greeting"></label></div>
     ${styleChoice('estyle')}
     <div class="fields"><label class="f">Arrive<input type="date" data-bind="dates.start" value="${esc(S.dates.start)}"></label><label class="f">Leave<input type="date" data-bind="dates.end" value="${esc(S.dates.end)}"></label></div>
     <div class="fields"><label class="f">Arriving by<select data-bind="trip.inVia">${Object.entries(VIA).map(([k,v])=>`<option value="${k}" ${S.trip.inVia===k?'selected':''}>${v}</option>`).join('')}</select></label><label class="f">Leaving by<select data-bind="trip.outVia">${Object.entries(VIA).map(([k,v])=>`<option value="${k}" ${S.trip.outVia===k?'selected':''}>${v}</option>`).join('')}</select></label></div>
@@ -1226,14 +1315,36 @@ document.addEventListener('click', e => {
   if(d.wback!==undefined){ wStep=Math.max(1,wStep-1); renderWelcome(); return; }
   if(d.wdone!==undefined){ S.onboarded=true; save(); $('#welcome').hidden=true; renderTabs(); if(planner()){ S.pview='plan'; } RENDER[S.tab](); return; }
   if(d.closedriver!==undefined){ $('#driver').hidden=true; return; }
+  if(d.unpend){ const id=d.unpend; jPending=jPending.filter(x=>x!==id); store.set('andiamo2.pending', jPending); pDel(id).catch(()=>{}); RENDER.journal(); return; }
+  if(d.viewphoto){ openViewer(d.viewphoto); return; }
+  if(d.closeviewer!==undefined){ $('#viewer').hidden=true; return; }
+  if(d.setcover){ S.cover=d.setcover; save(); toast('Set as your trip cover'); $('#viewer').hidden=true; closeSheet(); RENDER[S.tab](); return; }
+  if(d.uncover!==undefined){ S.cover=null; save(); toast('Back to the Florence sketch'); $('#viewer').hidden=true; RENDER[S.tab](); return; }
+  if(d.coverpick!==undefined){ const sh=$('#sheet'); sh.innerHTML=`<div class="grab"></div><h2>Choose a cover photo</h2><p class="small muted">The Florence sketch is always kept. You can switch back anytime.</p><div class="ph-row">${allPhotoIds().map(id=>`<button class="ph-thumb" data-setcover="${id}" aria-label="Use as cover"><img data-photo="${id}" alt=""></button>`).join('')}</div><button class="btn line" data-sheetclose>Cancel</button>`; $('#scrim').hidden=false; sh.hidden=false; return; }
+  if(d.delphoto){ if(t.dataset.armed){ deletePhoto(d.delphoto).then(()=>{ $('#viewer').hidden=true; toast('Photo deleted from the app. Your original is still in Photos.'); RENDER[S.tab](); }); } else { t.dataset.armed='1'; t.textContent='Tap again to delete'; } return; }
+  if(d.sharewander){ const b=blobCache[d.sharewander]; if(!b){ toast('One moment, preparing the photo'); photoBlob(d.sharewander); return; }
+    const f=new File([b], 'wanderings-photo.jpg', {type:'image/jpeg'}); const text=consentText(d.sharewander);
+    if(!shareFiles([f], text, 'Shared. Thank you!')){ copyText(text); toast('Photo sharing isn’t available here. Permission note copied; send the photo from your Photos app.'); } return; }
+  if(d.igpick){ const id=d.igpick, i=S.igSel.indexOf(id); if(i>=0) S.igSel.splice(i,1); else { if(S.igSel.length>=10){ toast('Instagram allows up to 10 at a time'); return; } S.igSel.push(id); photoBlob(id); } save(); t.setAttribute('aria-pressed', i<0); const lb=t.closest('.block').querySelector('.label'); if(lb) lb.textContent='Choose photos · '+S.igSel.length+' selected'; return; }
+  if(d.igshare!==undefined){
+    const sel=S.igSel.filter(id=>allPhotoIds().includes(id));
+    if(!sel.length){ toast('Tap the photos you want to share first'); return; }
+    const missing=sel.filter(id=>!blobCache[id]); if(missing.length){ missing.forEach(id=>photoBlob(id)); toast('One moment, preparing photos. Tap again.'); return; }
+    const cap=summaryText();
+    try{ navigator.clipboard && navigator.clipboard.writeText(cap).catch(()=>{}); }catch(e){}
+    const files=sel.map((id,i)=>new File([blobCache[id]], `florence-${i+1}.jpg`, {type:'image/jpeg'}));
+    if(shareFiles(files, cap)){ toast('Caption copied. Choose Instagram, then paste it.'); }
+    else { copyText(cap); toast('Photo sharing isn’t available here. Caption copied; post your photos from Instagram.'); }
+    return; }
   if(d.savej!==undefined){
-    const txt=$('#jText').value.trim(); if(!txt){ toast('Write or dictate something first'); return; }
+    const txt=$('#jText').value.trim(); if(!txt && !jPending.length){ toast('Write, dictate or add a photo first'); return; }
     const pid=$('#jPlace').value; const p=pid?placeById(pid):null;
-    S.entries.push({id:Date.now().toString(36), d:Date.now(), txt, placeId:pid, place:p?p.name:'', stars:+$('#jStars').value});
+    S.entries.push({id:Date.now().toString(36), d:Date.now(), txt: txt || (p?'At '+p.name+'.':'A moment in Florence.'), placeId:pid, place:p?p.name:'', stars:+$('#jStars').value, photos:jPending.slice()});
     if(pid && S.status[pid]!=='went') S.status[pid]='went';
+    jPending=[]; store.set('andiamo2.pending', jPending);
     store.set('andiamo2.draft',''); save(); RENDER.journal(); toast('Saved'); return;
   }
-  if(d.delj){ if(t.dataset.armed){ S.entries=S.entries.filter(x=>x.id!==d.delj); save(); RENDER.journal(); toast('Deleted'); } else { t.dataset.armed='1'; t.textContent='Tap again to delete'; } return; }
+  if(d.delj){ if(t.dataset.armed){ const gone=S.entries.find(x=>x.id===d.delj); (gone&&gone.photos||[]).forEach(id=>deletePhoto(id)); S.entries=S.entries.filter(x=>x.id!==d.delj); save(); RENDER.journal(); toast('Deleted'); } else { t.dataset.armed='1'; t.textContent='Tap again to delete'; } return; }
   if(d.copysum!==undefined){ copyText(summaryText()); return; }
   if(d.copyall!==undefined){ copyText(['MY FLORENCE JOURNAL',''].concat(S.entries.map(e=>`${fmtDate(e.d,{weekday:'short',month:'short',day:'numeric'})}${e.place?' · '+e.place:''}\n${e.txt}\n`)).join('\n')); return; }
   if(d.copy){ copyText(d.copy); return; }
@@ -1245,10 +1356,27 @@ document.addEventListener('click', e => {
   const g = e.target.closest && e.target.closest('[data-pin]'); if(g){ S.pin=g.dataset.pin; RENDER.places(); }
   if(e.target.id==='scrim'){ closeSheet(); }
 });
+let photoTarget='composer';
+document.addEventListener('click', e => { const l=e.target.closest && e.target.closest('[data-phtarget]'); if(l) photoTarget=l.dataset.phtarget; }, true);
+document.addEventListener('change', async e => {
+  if(e.target.id==='consentChk'){ const b=$('#shareWanderBtn'); if(b){ b.disabled=!e.target.checked; b.style.opacity=e.target.checked?'1':'.5'; } return; }
+  if(e.target.id!=='photoInput') return;
+  const files=[...e.target.files||[]]; e.target.value='';
+  if(!files.length) return;
+  toast(files.length>1?'Adding '+files.length+' photos…':'Adding photo…');
+  const ids=await savePhotos(files);
+  if(!ids.length) return;
+  if(photoTarget==='composer'){ jPending=jPending.concat(ids); store.set('andiamo2.pending', jPending); }
+  else { const en=S.entries.find(x=>x.id===photoTarget); if(en){ en.photos=(en.photos||[]).concat(ids); save(); } }
+  toast(ids.length>1?ids.length+' photos added':'Photo added');
+  RENDER[S.tab]();
+});
+try{ new MutationObserver(()=>hydratePhotos()).observe(document.body,{childList:true,subtree:true}); }catch(e){}
 document.addEventListener('keydown', e => {
   const g = e.target.closest && e.target.closest('[data-pin]');
   if(g && (e.key==='Enter'||e.key===' ')){ e.preventDefault(); S.pin=g.dataset.pin; RENDER.places(); }
   if(e.key==='Escape' && !$('#sheet').hidden) closeSheet();
+  if(e.key==='Escape' && !$('#viewer').hidden) $('#viewer').hidden=true;
 });
 document.addEventListener('input', e => {
   if(e.target.id==='phq'){ pq=e.target.value; const pos=e.target.selectionStart; RENDER.phrases(); const n=$('#phq'); n.focus(); try{ n.setSelectionRange(pos,pos); }catch(_){} }
@@ -1274,7 +1402,7 @@ function renderWelcome(){
   const dots = [1,2,3].map(i=>`<span style="width:${i===wStep?22:8}px;height:8px;border-radius:999px;background:${i===wStep?'var(--accent)':'var(--rule)'}"></span>`).join('');
   let body='';
   if(wStep===1) body = `<div class="eyebrow">Welcome to Wanderings</div><h1>Let’s plan your trip!</h1><p class="lede">This is Andiamo Firenze, your Florence edition. Three quick questions. Everything stays on this phone, and you can change it anytime.</p>
-    <label class="f" style="flex:none">What should we call you?<input type="text" data-bind="name" value="${esc(S.name)}" autocomplete="given-name"></label>
+    <label class="f" style="flex:none">What should we call you?<input type="text" data-bind="name" value="${esc(S.name)}" autocomplete="given-name" placeholder="Your first name"></label>
     ${styleChoice('wstyle')}`;
   if(wStep===2) body = `<div class="eyebrow">Step 2 of 3</div><h1>When are you in Florence?</h1>
     <div class="fields"><label class="f">Arrive<input type="date" data-bind="dates.start" value="${esc(S.dates.start)}"></label><label class="f">Leave<input type="date" data-bind="dates.end" value="${esc(S.dates.end)}"></label></div>
@@ -1298,7 +1426,7 @@ fetchRate();
 </script>
 
 <script>
-/* offline support: register the service worker (version 202610071746) */
+/* offline support: register the service worker (version 202610072113) */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
 }
