@@ -223,6 +223,17 @@ nav.tabs button[aria-selected="true"]{color:var(--accent-deep);font-weight:600}
 .pick-photos{display:inline-flex;align-items:center;gap:8px;cursor:pointer}
 .offscreen{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .cover-img{display:block;width:100%;height:300px;object-fit:cover;background:var(--surface)}
+.slides{position:relative;height:300px;overflow:hidden}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .9s ease}
+.slide.on{opacity:1}
+.slide.sk{background:var(--bg);display:flex;align-items:center}
+.slide.sk svg{width:100%;height:auto}
+.sdots{position:absolute;left:12px;bottom:6px;display:flex;gap:0;z-index:2}
+.sdots button{width:24px;height:28px;border:0;background:none;display:grid;place-items:center;padding:0}
+.sdots button::before{content:"";width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.6);box-shadow:0 0 0 1px rgba(35,38,42,.35)}
+.sdots button[aria-current="true"]::before{background:#fff;width:9px;height:9px}
+.ph-thumb .shared{position:absolute;left:4px;bottom:4px;background:rgba(35,38,42,.78);color:#fff;font-family:var(--mono);font-size:9px;letter-spacing:.06em;text-transform:uppercase;padding:2px 5px;border-radius:3px}
+@media (prefers-reduced-motion: reduce){.slide{transition:none}}
 .when-chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:12.5px;color:var(--accent-deep);margin-top:6px}
 .opt{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;align-items:start;border:1px solid var(--rule);border-radius:10px;padding:12px;cursor:pointer}
 .opt input{width:18px;height:18px;margin:2px 0 0;accent-color:var(--accent)}
@@ -624,6 +635,8 @@ if(S.onboarded===undefined) S.onboarded=false;
 if(!S.exp) S.exp={}; if(!S.pview) S.pview='sights';
 if(!S.style) S.style='flow'; if(!S.sched) S.sched={};
 if(!S.igSel) S.igSel=[];
+if(!S.wSel) S.wSel=[]; if(!S.wShared) S.wShared=[];
+if(!S.coverMode) S.coverMode = S.cover ? 'photo' : 'sketch';
 const save = () => store.set(KEY, S);
 const allPlaces = () => PLACES.concat(S.custom);
 const placeById = id => allPlaces().find(p=>p.id===id);
@@ -653,6 +666,49 @@ function go(k, opts={}){
   if(opts.focus){ const el=$(opts.focus); if(el){ setTimeout(()=>{ el.focus(); el.scrollIntoView({block:'center'}); },60); } }
 }
 
+const BADGE = `<div style="position:absolute;right:20px;bottom:12px;display:flex;align-items:center;gap:6px;color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.55));z-index:2;pointer-events:none">${DUOMO_MARK.replace('width="40" height="34"','width="28" height="24"')}<span style="font-size:10px;font-weight:600;letter-spacing:.28em">FIRENZE</span></div>`;
+let slideTimer=null, slideIdx=0;
+function coverHero(){
+  const photos=allPhotoIds();
+  let mode=S.coverMode;
+  if(mode==='slides' && !photos.length) mode='sketch';
+  if(mode==='photo' && !(S.cover && photos.includes(S.cover))) mode='sketch';
+  let hero, label, btns='';
+  if(mode==='slides'){
+    const ids=photos.slice(0,12);
+    slideIdx=0;
+    hero = `<div class="hero slides" id="slideshow" aria-roledescription="slideshow" aria-label="Your trip slideshow">
+      <div class="slide sk on" data-slide="0">${HERO}</div>
+      ${ids.map((id,i)=>`<img class="slide cover-img" data-slide="${i+1}" data-photo="${id}" alt="Your photo ${i+1} of ${ids.length}">`).join('')}
+      ${BADGE}
+      <div class="sdots">${[0].concat(ids.map((_,i)=>i+1)).map(i=>`<button data-slideto="${i}" aria-label="${i===0?'Florence sketch':'Photo '+i}" aria-current="${i===0}"></button>`).join('')}</div></div>`;
+    label=`slideshow of ${ids.length} photo${ids.length===1?'':'s'}`;
+    btns='<button class="text-btn" data-uncover>Back to the sketch</button>';
+  } else if(mode==='photo'){
+    hero = `<div class="hero"><img class="cover-img" data-photo="${S.cover}" alt="Your trip cover photo">${BADGE}</div>`;
+    label='your photo';
+    btns='<button class="text-btn" data-slideshow>Slideshow instead</button><button class="text-btn" data-uncover>Back to the sketch</button>';
+  } else {
+    hero = `<div class="hero">${HERO}<div class="cap label">Santa Maria del Fiore</div></div>`;
+    label='Florence sketch';
+    if(photos.length) btns='<button class="text-btn" data-slideshow>Slideshow of my photos</button>';
+  }
+  return hero + `<div class="head" style="padding-top:4px;flex-wrap:wrap"><span class="label">Cover · ${label}</span><span style="display:flex;gap:14px">${btns}</span></div>`;
+}
+function showSlide(i){
+  const el=$('#slideshow'); if(!el) return;
+  const slides=el.querySelectorAll('.slide'); if(!slides.length) return;
+  slideIdx=(i+slides.length)%slides.length;
+  slides.forEach(sl=>sl.classList.toggle('on', +sl.dataset.slide===slideIdx));
+  el.querySelectorAll('[data-slideto]').forEach(b=>b.setAttribute('aria-current', +b.dataset.slideto===slideIdx));
+}
+function startSlides(){
+  clearInterval(slideTimer);
+  const el=$('#slideshow'); if(!el) return;
+  let reduce=false; try{ reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+  if(reduce) return;
+  slideTimer=setInterval(()=>{ if(!document.body.contains(el) || el.closest('[hidden]')){ clearInterval(slideTimer); return; } showSlide(slideIdx+1); }, 5000);
+}
 function showInstallTip(){
   try{
     if(S.installTipDone) return false;
@@ -686,8 +742,7 @@ RENDER.today = () => {
   const ideas = suggestNearby().slice(0,3);
 
   let html = masthead() + `<div class="greet"><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(h1)}</h1><p class="lede">${esc(lede)}</p></div>
-  ${S.cover ? `<div class="hero"><img class="cover-img" data-photo="${S.cover}" alt="Your trip cover photo"><div style="position:absolute;right:20px;bottom:12px;display:flex;align-items:center;gap:6px;color:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))">${DUOMO_MARK.replace('width="40" height="34"','width="28" height="24"')}<span style="font-size:10px;font-weight:600;letter-spacing:.28em">FIRENZE</span></div></div>` : `<div class="hero">${HERO}<div class="cap label">Santa Maria del Fiore</div></div>`}
-  <div class="head" style="padding-top:4px"><span class="label">Cover · ${S.cover?'your photo':'Florence sketch'}</span>${S.cover?'<button class="text-btn" data-uncover>Back to the sketch</button>':(allPhotoIds().length?'<button class="text-btn" data-coverpick>Use one of your photos</button>':'')}</div>`;
+  ${coverHero()}`;
 
   if(showInstallTip()){
     const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -738,6 +793,7 @@ RENDER.today = () => {
       <div style="display:flex;gap:8px"><button class="btn" data-go="journal" data-focus="#jText" style="flex:1">${ic('mic','style="width:18px;height:18px"')}Record a memory</button></div></div>`;
   }
   $('[data-tab="today"]').innerHTML = html;
+  startSlides();
 };
 const LVL = {required:'Timed entry · book now', optional:'Booking optional', free:'No ticket needed'};
 const badge = b => `<div class="lvl ${b.level}">${b.level==='required' ? esc(b.when) : LVL[b.level]}</div>`;
@@ -1101,6 +1157,20 @@ function summaryText(){
   lines.push('', '#Florence #Firenze #Italy #travel');
   return lines.join('\n');
 }
+function consentMany(n){
+  const when=new Date().toLocaleDateString('en-US',{month:'long',year:'numeric'});
+  return `I give Whiskers & Wanderings permission to use ${n===1?'this photo':'these photos'} in the Wanderings app and its promotion. Shared by ${S.name||'a Wanderings traveler'}, ${when}.`;
+}
+function shareWBlock(){
+  const photos=allPhotoIds(); const sel=S.wSel.filter(id=>photos.includes(id));
+  return `<div class="block" id="shareW"><div class="head"><h2>Share with Wanderings</h2><span class="label">Optional</span></div>
+    <p class="small muted">Want to help shape Wanderings? You can send favorite photos to the Wanderings team. Nothing is ever shared unless you choose it here, and you pick every photo.</p>
+    ${photos.length?`<div class="label">Choose photos · ${sel.length} selected</div>
+    <div class="ph-row">${photos.map(id=>`<button class="ph-thumb sm" data-wpick="${id}" aria-pressed="${sel.includes(id)}" aria-label="Select photo to share with Wanderings"><img data-photo="${id}" alt="">${S.wShared.includes(id)?'<span class="shared">Shared</span>':''}</button>`).join('')}</div>
+    <label class="check" style="align-items:flex-start;min-height:0"><input type="checkbox" id="wConsent" style="margin-top:2px"><span class="small">${esc(consentMany(sel.length||2))}</span></label>
+    <button class="btn" data-wsend id="wSendBtn" disabled style="align-self:flex-start;opacity:.5">Send selected photos</button>
+    <p class="small faint">Opens your share menu (Messages, email or AirDrop) so you choose who it goes to.</p>`:'<p class="small muted">Add photos to your journal entries first, then choose any you’d like to share.</p>'}</div>`;
+}
 function consentText(id){
   const e=entryOfPhoto(id); const when=new Date().toLocaleDateString('en-US',{month:'long',year:'numeric'});
   return `I give Whiskers & Wanderings permission to use this photo in the Wanderings app and its promotion. Shared by ${S.name||'a Wanderings traveler'}, ${when}.${e&&e.place?' Photo: '+e.place+', Florence.':''}`;
@@ -1113,7 +1183,7 @@ function openViewer(id){
     <div style="display:flex;gap:8px;flex-wrap:wrap">${S.cover===id?'<button class="btn line sm" data-uncover>Back to the sketch</button><span class="went" style="align-self:center">✓ Trip cover</span>':`<button class="btn sm" data-setcover="${id}">Use as trip cover</button>`}<button class="btn line sm" data-delphoto="${id}">Delete photo</button></div>
     <div style="border-top:1px solid var(--rule);padding-top:14px;display:flex;flex-direction:column;gap:10px">
       <h3>Share with Wanderings</h3>
-      <p class="small muted">Send this photo to the Wanderings team by message, email or AirDrop. Your permission note goes with it.</p>
+      <p class="small muted">${S.wShared.includes(id)?'You’ve shared this photo with Wanderings. ':''}Send this photo to the Wanderings team by message, email or AirDrop. Your permission note goes with it. To send several at once, use Share with Wanderings at the bottom of the Journal.</p>
       <label class="check" style="align-items:flex-start;min-height:0"><input type="checkbox" id="consentChk" style="margin-top:2px"><span class="small">${esc(consentText(id))}</span></label>
       <button class="btn" data-sharewander="${id}" id="shareWanderBtn" disabled style="align-self:flex-start;opacity:.5">Share photo</button>
     </div>`;
@@ -1123,14 +1193,14 @@ async function deletePhoto(id){
   try{ await pDel(id); }catch(e){}
   S.entries.forEach(e=>{ if(e.photos) e.photos=e.photos.filter(x=>x!==id); });
   if(S.cover===id) S.cover=null;
-  S.igSel=S.igSel.filter(x=>x!==id);
+  S.igSel=S.igSel.filter(x=>x!==id); S.wSel=S.wSel.filter(x=>x!==id);
   jPending=jPending.filter(x=>x!==id); store.set('andiamo2.pending', jPending);
   try{ if(urlCache[id]) URL.revokeObjectURL(urlCache[id]); }catch(e){} delete urlCache[id]; delete blobCache[id];
   save();
 }
-function shareFiles(files, text, okMsg){
+function shareFiles(files, text, okMsg, onDone){
   try{
-    if(navigator.canShare && navigator.canShare({files})){ navigator.share({files, text}).then(()=>{ if(okMsg) toast(okMsg); }).catch(()=>{}); return true; }
+    if(navigator.canShare && navigator.canShare({files})){ navigator.share({files, text}).then(()=>{ if(okMsg) toast(okMsg); if(onDone) onDone(); }).catch(()=>{}); return true; }
   }catch(e){}
   return false;
 }
@@ -1159,6 +1229,7 @@ RENDER.journal = () => {
     ${allPhotoIds().length?`<div class="label" style="margin-top:4px">Choose photos · ${S.igSel.filter(id=>allPhotoIds().includes(id)).length} selected</div><div class="ph-row">${allPhotoIds().map(id=>`<button class="ph-thumb sm" data-igpick="${id}" aria-pressed="${S.igSel.includes(id)}" aria-label="Select photo"><img data-photo="${id}" alt=""></button>`).join('')}</div>`:'<p class="small muted">Add photos to your journal entries and they’ll appear here to share.</p>'}
     <div style="display:flex;gap:8px;flex-wrap:wrap">${allPhotoIds().length?'<button class="btn" data-igshare>Share to Instagram</button>':''}<button class="btn ${allPhotoIds().length?'line':''}" data-copysum>Copy caption</button><button class="btn line" data-copyall>Copy everything</button></div>
     <p class="small faint"><span class="ph-flag">Later</span> Building the summary from your photos’ time and location is planned, not built yet.</p></div>`;
+  html += shareWBlock();
   $('[data-tab="journal"]').innerHTML = html;
 };
 
@@ -1318,13 +1389,26 @@ document.addEventListener('click', e => {
   if(d.unpend){ const id=d.unpend; jPending=jPending.filter(x=>x!==id); store.set('andiamo2.pending', jPending); pDel(id).catch(()=>{}); RENDER.journal(); return; }
   if(d.viewphoto){ openViewer(d.viewphoto); return; }
   if(d.closeviewer!==undefined){ $('#viewer').hidden=true; return; }
-  if(d.setcover){ S.cover=d.setcover; save(); toast('Set as your trip cover'); $('#viewer').hidden=true; closeSheet(); RENDER[S.tab](); return; }
-  if(d.uncover!==undefined){ S.cover=null; save(); toast('Back to the Florence sketch'); $('#viewer').hidden=true; RENDER[S.tab](); return; }
+  if(d.setcover){ S.cover=d.setcover; S.coverMode='photo'; save(); toast('Set as your trip cover'); $('#viewer').hidden=true; closeSheet(); RENDER[S.tab](); return; }
+  if(d.uncover!==undefined){ S.cover=null; S.coverMode='sketch'; clearInterval(slideTimer); save(); toast('Back to the Florence sketch'); $('#viewer').hidden=true; RENDER[S.tab](); return; }
+  if(d.slideshow!==undefined){ S.coverMode='slides'; save(); toast('Slideshow on. The sketch opens the show.'); RENDER.today(); return; }
+  if(d.slideto!==undefined && d.slideto!==''){ showSlide(+d.slideto); startSlides(); return; }
+  if(d.wpick){ const id=d.wpick, i=S.wSel.indexOf(id); if(i>=0) S.wSel.splice(i,1); else { S.wSel.push(id); photoBlob(id); } save(); t.setAttribute('aria-pressed', i<0); const blk=t.closest('.block'); const lb=blk.querySelector('.label'); if(lb) lb.textContent='Choose photos · '+S.wSel.length+' selected'; const cs=blk.querySelector('#wConsent + span'); if(cs) cs.textContent=consentMany(S.wSel.length||2); return; }
+  if(d.wsend!==undefined){
+    const sel=S.wSel.filter(id=>allPhotoIds().includes(id));
+    if(!sel.length){ toast('Tap the photos you want to share first'); return; }
+    if(!($('#wConsent')||{}).checked){ toast('Tick the permission box first'); return; }
+    const missing=sel.filter(id=>!blobCache[id]); if(missing.length){ missing.forEach(id=>photoBlob(id)); toast('One moment, preparing photos. Tap again.'); return; }
+    const files=sel.map((id,i)=>new File([blobCache[id]], `wanderings-${i+1}.jpg`, {type:'image/jpeg'}));
+    const text=consentMany(sel.length);
+    if(!shareFiles(files, text, 'Sent. Thank you!', ()=>{ sel.forEach(id=>{ if(!S.wShared.includes(id)) S.wShared.push(id); }); S.wSel=[]; save(); RENDER.journal(); })){ copyText(text); toast('Photo sharing isn’t available here. Permission note copied; send the photos from your Photos app.'); }
+    return; }
   if(d.coverpick!==undefined){ const sh=$('#sheet'); sh.innerHTML=`<div class="grab"></div><h2>Choose a cover photo</h2><p class="small muted">The Florence sketch is always kept. You can switch back anytime.</p><div class="ph-row">${allPhotoIds().map(id=>`<button class="ph-thumb" data-setcover="${id}" aria-label="Use as cover"><img data-photo="${id}" alt=""></button>`).join('')}</div><button class="btn line" data-sheetclose>Cancel</button>`; $('#scrim').hidden=false; sh.hidden=false; return; }
   if(d.delphoto){ if(t.dataset.armed){ deletePhoto(d.delphoto).then(()=>{ $('#viewer').hidden=true; toast('Photo deleted from the app. Your original is still in Photos.'); RENDER[S.tab](); }); } else { t.dataset.armed='1'; t.textContent='Tap again to delete'; } return; }
   if(d.sharewander){ const b=blobCache[d.sharewander]; if(!b){ toast('One moment, preparing the photo'); photoBlob(d.sharewander); return; }
     const f=new File([b], 'wanderings-photo.jpg', {type:'image/jpeg'}); const text=consentText(d.sharewander);
-    if(!shareFiles([f], text, 'Shared. Thank you!')){ copyText(text); toast('Photo sharing isn’t available here. Permission note copied; send the photo from your Photos app.'); } return; }
+    const sid=d.sharewander;
+    if(!shareFiles([f], text, 'Shared. Thank you!', ()=>{ if(!S.wShared.includes(sid)) S.wShared.push(sid); save(); })){ copyText(text); toast('Photo sharing isn’t available here. Permission note copied; send the photo from your Photos app.'); } return; }
   if(d.igpick){ const id=d.igpick, i=S.igSel.indexOf(id); if(i>=0) S.igSel.splice(i,1); else { if(S.igSel.length>=10){ toast('Instagram allows up to 10 at a time'); return; } S.igSel.push(id); photoBlob(id); } save(); t.setAttribute('aria-pressed', i<0); const lb=t.closest('.block').querySelector('.label'); if(lb) lb.textContent='Choose photos · '+S.igSel.length+' selected'; return; }
   if(d.igshare!==undefined){
     const sel=S.igSel.filter(id=>allPhotoIds().includes(id));
@@ -1359,6 +1443,7 @@ document.addEventListener('click', e => {
 let photoTarget='composer';
 document.addEventListener('click', e => { const l=e.target.closest && e.target.closest('[data-phtarget]'); if(l) photoTarget=l.dataset.phtarget; }, true);
 document.addEventListener('change', async e => {
+  if(e.target.id==='wConsent'){ const b=$('#wSendBtn'); if(b){ b.disabled=!e.target.checked; b.style.opacity=e.target.checked?'1':'.5'; } return; }
   if(e.target.id==='consentChk'){ const b=$('#shareWanderBtn'); if(b){ b.disabled=!e.target.checked; b.style.opacity=e.target.checked?'1':'.5'; } return; }
   if(e.target.id!=='photoInput') return;
   const files=[...e.target.files||[]]; e.target.value='';
@@ -1426,7 +1511,7 @@ fetchRate();
 </script>
 
 <script>
-/* offline support: register the service worker (version 202610072113) */
+/* offline support: register the service worker (version 202610072135) */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
 }
