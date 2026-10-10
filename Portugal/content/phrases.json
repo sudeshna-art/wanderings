@@ -1,0 +1,112 @@
+{
+  "language": "pt-PT",
+  "language_name": "Portuguese",
+  "title": "Say it in Portuguese.",
+  "note": "European Portuguese. Pronunciation is a rough guide for English speakers.",
+  "gender_note": "Women say obrigada, men say obrigado.",
+  "situations": {
+    "Greetings": [
+      ["Olá", "oh-LAH", "Hello"],
+      ["Bom dia", "bohn DEE-ah", "Good morning (until lunch)"],
+      ["Boa tarde", "BOH-ah TARD", "Good afternoon"],
+      ["Boa noite", "BOH-ah NOYT", "Good evening, good night"],
+      ["Por favor", "poor fah-VOHR", "Please"],
+      ["Obrigada", "oh-bree-GAH-dah", "Thank you (a man says obrigado)"],
+      ["De nada", "deh NAH-dah", "You're welcome"],
+      ["Desculpe", "dush-KOOLP", "Excuse me, sorry"],
+      ["Fala inglês?", "FAH-lah een-GLAYSH", "Do you speak English?"],
+      ["Não percebo", "nowng per-SEH-boo", "I don't understand"],
+      ["Mais devagar, por favor", "mysh d'vah-GAR, poor fah-VOHR", "Slower, please"],
+      ["Até logo", "ah-TEH LOH-goo", "See you later"]
+    ],
+    "Restaurant": [
+      ["Uma mesa para duas pessoas, por favor", "OO-mah MAY-zah PAH-rah DOO-ash peh-SOH-ash", "A table for two, please"],
+      ["Temos uma reserva", "TEH-moosh OO-mah reh-ZEHR-vah", "We have a reservation"],
+      ["Podemos ficar na esplanada?", "poo-DEH-moosh fee-KAR nah shplah-NAH-dah", "Can we sit on the terrace?"],
+      ["O que recomenda?", "oo keh reh-koo-MEHN-dah", "What do you recommend?"],
+      ["Não queremos o couvert, obrigada", "nowng keh-REH-moosh oo koo-VEHR", "We don't want the bread and starters, thanks"],
+      ["Uma água sem gás", "OO-mah AH-gwah sayng gash", "Still water"],
+      ["Uma água com gás", "OO-mah AH-gwah kohng gash", "Sparkling water"],
+      ["Um copo de vinho branco", "oong KOH-poo deh VEE-nyoo BRAHN-koo", "A glass of white wine"],
+      ["Um copo de vinho tinto", "oong KOH-poo deh VEE-nyoo TEEN-too", "A glass of red wine"],
+      ["Sou alérgica a …", "soh ah-LEHR-zhee-kah ah", "I'm allergic to … (alérgico for a man)"],
+      ["Onde é a casa de banho?", "OHN-deh eh ah KAH-zah deh BAH-nyoo", "Where is the bathroom?"],
+      ["A conta, por favor", "ah KOHN-tah, poor fah-VOHR", "The bill, please"],
+      ["Estava tudo delicioso!", "shTAH-vah TOO-doo deh-lee-see-OH-zoo", "Everything was delicious!"]
+    ],
+    "Café and pastries": [
+      ["Uma bica, por favor", "OO-mah BEE-kah", "An espresso, please (Lisbon's word)"],
+      ["Um galão", "oong gah-LOWNG", "A milky coffee in a glass"],
+      ["Uma meia de leite", "OO-mah MAY-ah deh LAYT", "Coffee with milk in a cup"],
+      ["Um pastel de nata, por favor", "oong pahsh-TEHL deh NAH-tah", "A custard tart, please"],
+      ["Com canela", "kohng kah-NEH-lah", "With cinnamon"],
+      ["Um sumo de laranja natural", "oong SOO-moo deh lah-RAHN-zhah nah-too-RAHL", "A fresh orange juice"],
+      ["Para levar", "PAH-rah leh-VAR", "To take away"]
+    ],
+    "Shopping": [
+      ["Quanto custa?", "KWAN-too KOOSH-tah", "How much is it?"],
+      ["Estou só a ver, obrigada", "shtoh soh ah vehr", "Just looking, thanks"],
+      ["Posso experimentar?", "POH-soo shpeh-ree-mehn-TAR", "Can I try it on?"],
+      ["Tem um tamanho maior?", "tayng oong tah-MAH-nyoo my-OR", "Do you have a bigger size?"],
+      ["Tem um tamanho mais pequeno?", "tayng oong tah-MAH-nyoo mysh peh-KEH-noo", "Do you have a smaller size?"],
+      ["Tem noutra cor?", "tayng NOH-trah kohr", "Do you have it in another color?"],
+      ["É feito à mão?", "eh FAY-too ah mowng", "Is it handmade?"],
+      ["Pode embrulhar para oferta?", "POH-deh ehm-broo-LYAR PAH-rah oh-FEHR-tah", "Can you gift wrap it?"],
+      ["Posso pagar com cartão?", "POH-soo pah-GAR kohng kar-TOWNG", "Can I pay by card?"],
+      ["Fico com este", "FEE-koo kohng EHSHT", "I'll take this one"]
+    ],
+    "Hotel": [
+      ["Tenho uma reserva em nome de …", "TEH-nyoo OO-mah reh-ZEHR-vah ayng NOH-meh deh", "I have a reservation under …"],
+      ["A que horas é o pequeno-almoço?", "ah keh OH-rash eh oo peh-KEH-noo al-MOH-soo", "What time is breakfast?"],
+      ["Qual é a password do wi-fi?", "kwahl eh ah PASS-word doo wee-fee", "What's the Wi-Fi password?"],
+      ["Posso deixar as malas?", "POH-soo day-SHAR ash MAH-lash", "Can I leave my bags?"],
+      ["Pode chamar-me um táxi?", "POH-deh shah-MAR-meh oong TAHK-see", "Could you call me a taxi?"],
+      ["A que horas é o check-out?", "ah keh OH-rash eh oo check-out", "What time is check-out?"]
+    ],
+    "Taxi and transport": [
+      ["Para esta morada, por favor", "PAH-rah EHSH-tah moo-RAH-dah", "To this address, please"],
+      ["Quanto custa até …?", "KWAN-too KOOSH-tah ah-TEH", "How much to …?"],
+      ["Pode ligar o taxímetro?", "POH-deh lee-GAR oo tahk-SEE-meh-troo", "Could you turn on the meter?"],
+      ["Pare aqui, por favor", "PAH-reh ah-KEE", "Stop here, please"],
+      ["Pode dar-me um recibo?", "POH-deh DAR-meh oong reh-SEE-boo", "Can I have a receipt?"],
+      ["Fique com o troco", "FEE-keh kohng oo TROH-koo", "Keep the change"],
+      ["Um bilhete para Faro", "oong bee-LYEHT PAH-rah FAH-roo", "A ticket to Faro"],
+      ["De que linha parte?", "deh keh LEE-nyah PART", "Which platform does it leave from?"],
+      ["Onde é a paragem do autocarro?", "OHN-deh eh ah pah-RAH-zhayng doo ow-toh-KAH-roo", "Where is the bus stop?"]
+    ],
+    "Beach and boats": [
+      ["Onde se apanha o barco?", "OHN-deh seh ah-PAH-nyah oo BAR-koo", "Where do we catch the boat?"],
+      ["A que horas volta o barco?", "ah keh OH-rash VOL-tah oo BAR-koo", "What time does the boat come back?"],
+      ["Duas espreguiçadeiras e um chapéu de sol", "DOO-ash shpreh-gee-sah-DAY-rash ee oong shah-PEH-oo deh sol", "Two sunbeds and an umbrella"],
+      ["É seguro nadar aqui?", "eh seh-GOO-roo nah-DAR ah-KEE", "Is it safe to swim here?"],
+      ["A água está fria?", "ah AH-gwah shtah FREE-ah", "Is the water cold?"]
+    ],
+    "Museums and palaces": [
+      ["Tenho bilhete para as …", "TEH-nyoo bee-LYEHT PAH-rah ash", "I have a ticket for … o'clock"],
+      ["Duas entradas, por favor", "DOO-ash ehn-TRAH-dash", "Two tickets, please"],
+      ["A que horas fecha?", "ah keh OH-rash FAY-shah", "What time does it close?"],
+      ["Onde é a entrada?", "OHN-deh eh ah ehn-TRAH-dah", "Where is the entrance?"],
+      ["Posso tirar fotografias?", "POH-soo tee-RAR foo-too-grah-FEE-ash", "Can I take photos?"],
+      ["Onde é a saída?", "OHN-deh eh ah sah-EE-dah", "Where is the exit?"]
+    ],
+    "Help": [
+      ["Socorro!", "soo-KOH-roo", "Help!"],
+      ["Chame uma ambulância", "SHAH-meh OO-mah ahm-boo-LAHN-see-ah", "Call an ambulance"],
+      ["Chame a polícia", "SHAH-meh ah poo-LEE-see-ah", "Call the police"],
+      ["Não me sinto bem", "nowng meh SEEN-too bayng", "I don't feel well"],
+      ["Onde é a farmácia?", "OHN-deh eh ah far-MAH-see-ah", "Where is the pharmacy?"],
+      ["Perdi o passaporte", "per-DEE oo pah-sah-PORT", "I lost my passport"],
+      ["Estou perdida", "shtoh per-DEE-dah", "I'm lost (perdido for a man)"]
+    ]
+  },
+  "moments": [
+    { "until": 11, "label": "Breakfast", "situation": "Café and pastries", "index": 3 },
+    { "until": 15, "label": "Lunch", "situation": "Restaurant", "index": 11 },
+    { "until": 18, "label": "Shopping", "situation": "Shopping", "index": 0 },
+    { "until": 24, "label": "Dinner", "situation": "Restaurant", "index": 0 }
+  ],
+  "driver": {
+    "template": "Para {place}, por favor.",
+    "ask": ["Quanto custa, mais ou menos?", "KWAN-too KOOSH-tah, myz oh MEH-noosh", "About how much will it cost?"]
+  }
+}
