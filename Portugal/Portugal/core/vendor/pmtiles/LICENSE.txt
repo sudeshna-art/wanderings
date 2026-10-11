@@ -1,3 +1,0 @@
-pmtiles (JavaScript), version 4.4.1, by Protomaps LLC. BSD-3-Clause license.
-Full text: https://github.com/protomaps/PMTiles/blob/main/LICENSE
-Map data in the edition map packs: © OpenStreetMap contributors, ODbL (https://www.openstreetmap.org/copyright), packaged by Protomaps.
