@@ -45,7 +45,7 @@ function coverHero(cityId) {
     label = cityName(cityId) + ' sketch';
     if (photos.length) btns = '<button class="text-btn" data-act="slideshow">Slideshow of my photos</button>';
   }
-  return hero + `<div class="head" style="padding-top:4px;flex-wrap:wrap"><span class="label">Cover · ${esc(label)}</span><span style="display:flex;gap:14px">${btns}</span></div>`;
+  return hero + (btns ? `<div class="head" style="padding-top:4px;flex-wrap:wrap"><span></span><span style="display:flex;gap:14px">${btns}</span></div>` : '');
 }
 export function showSlide(i) {
   const el = document.getElementById('slideshow'); if (!el) return;
@@ -144,7 +144,6 @@ function planBlock(st) {
       const items = itemsOn(S.trip, today());
       return `<div class="block"><div class="head"><h2>Today’s plan</h2><button class="text-btn" data-act="pview" data-v="plan" data-tab="places">Full plan</button></div>${items.length ? timelineView(today(), items, true) : '<p class="serif" style="font-size:17px">Nothing scheduled today. An open day to wander.</p>'}</div>`;
     }
-    if (st.k === 'before') return `<div class="block"><div class="head"><h2>Your plan</h2><button class="text-btn" data-act="pview" data-v="plan" data-tab="places">Open plan</button></div><p class="small">${n ? `${plural(n, 'thing')} scheduled so far.` : 'Pick a day and time for the places you want to see. You can always change it.'}${hasStays() ? '' : ' Add your stays and dates first.'}</p></div>`;
     return '';
   }
   if (st.k === 'after' || !n) return '';
@@ -187,7 +186,7 @@ export function renderToday() {
   const wants = placesIn(cityId).filter(p => statusOf(S.trip, p.id) === 'want');
   const visited = S.trip.saved.filter(s => s.status === 'went').length;
 
-  let html = masthead() + `<div class="greet"><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(h1)}</h1><p class="lede">${esc(lede)}</p></div><button class="askbar" data-act="ask">${ic('search')}<span>Ask anything: tipping, taxi, 20 euros…</span></button>${cityBar()}<div style="height:10px"></div>${coverHero(cityId)}`;
+  let html = masthead({ noAsk: true }) + `<div class="greet"><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(h1)}</h1><p class="lede">${esc(lede)}</p></div><button class="askbar" data-act="ask">${ic('search')}<span>Ask anything: tipping, taxi, 20 euros…</span></button>${cityBar()}<div style="height:10px"></div>${coverHero(cityId)}`;
 
   if (!hasStays()) {
     html += `<div class="block" style="padding-top:18px"><div style="border:1px solid var(--rule);padding:14px;display:flex;flex-direction:column;gap:8px"><div class="label">Your trip</div><p class="small">${cityIds().length > 1 ? `Add where you’re staying in ${esc(copyOf('place_list', placeName()))}, with dates, and the app follows you from place to place.` : 'Add where you’re staying, with dates, for local tips, walking times and a one-tap ride home.'} Have booking emails? Import them instead.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-act="welcome" data-step="2">Add my stays</button><button class="btn line sm" data-act="imopen">Import bookings</button></div></div></div>`;
@@ -201,7 +200,7 @@ export function renderToday() {
   const convert = S.trip.home_currency && S.trip.home_currency !== c.currency_code;
   html += `<div class="quick">
     ${isWanderer() ? `<button data-act="pview" data-v="nearby" data-tab="places">${ic('compass')}Nearby</button>` : `<button data-act="go" data-tab="phrases">${ic('phrases')}Say it</button>`}
-    ${convert ? `<button data-act="go" data-tab="essentials" data-focus="#amtIn">${ic('convert')}Convert</button>` : `<button data-act="go" data-tab="phrases">${ic('phrases')}Say it</button>`}
+    ${convert ? `<button data-act="go" data-tab="essentials" data-focus="#amtIn">${ic('convert')}Convert</button>` : ''}
     <button data-act="go" data-tab="essentials" data-focus="#taxiBlock">${ic('taxi')}Taxi</button>
     <button class="rec" data-act="go" data-tab="journal" data-focus="#jText"><span>${ic('mic')}</span>Record</button></div>`;
 

@@ -3,7 +3,7 @@
 import { EDITION } from '../../../edition.config.js';
 import { S, P, save, curCityId, cityOf, cityName, placeById, addMount, addCleanup, isWanderer } from '../state.js';
 import { esc, ic, ill, KIND_NAME, metres, $, toast } from '../dom.js';
-import { masthead, illustrationFor, statusLine, ticketButtons, searchButtons, pricePlaceholder, closedLine } from '../components.js';
+import { masthead, illustrationFor, statusLine, ticketButtons, searchButtons, pricePlaceholder, closedLine, tipsOf } from '../components.js';
 import { statusOf, isBooked, walkMinutes, km, priceText } from '../../models/schema.js';
 import { mapService } from '../../services/map-service.js';
 import { locationService } from '../../services/location-service.js';
@@ -59,7 +59,7 @@ async function refresh() {
 export function renderWanderer(seg) {
   W.mode = 'locating'; W.centered = false; W.fallbackMap = false;
   addMount(mount);
-  return masthead() + `<div class="greet"><div class="eyebrow">${isWanderer() ? 'Nearby · True Wanderer' : 'Near me'}</div><h1>What’s near you.</h1><p class="lede" id="wHead">${esc(headline())}</p></div>${seg}
+  return masthead() + `<div class="greet"><h1>What’s near you.</h1><p class="lede" id="wHead">${esc(headline())}</p></div>${seg}
     <div class="wmap"><div class="wcanvas" id="wMap"></div><div class="wm-over"><span class="wm-pillnote" id="wPill">Locating you…</span></div><button class="wm-recenter" data-act="recenter" aria-label="Center on me">${ic('locate')}</button></div>
     <div data-mapstatus id="wMapStatus" style="padding-top:8px"></div>
     <div id="meetHere" hidden style="padding-top:6px"><button class="btn line sm" data-act="meetform" data-box="meetHereBox">${ic('pin', 'style="width:16px;height:16px"')}Splitting up? Meet back here</button><div id="meetHereBox" hidden></div></div>
@@ -102,7 +102,7 @@ export async function openSpot(id) {
     <p class="small" style="font-size:14.5px">${esc(p.description)}</p>
     ${p.audio ? `<div class="spot-audio"><button class="hear" data-act="audio" data-id="${p.id}" aria-label="Play the audio stop">${ic('speak')}</button><div><b style="font-size:14px">Audio stop</b><div class="small muted">A short story about this place, read aloud.</div></div></div>` : ''}
     <div>${booked ? '<div class="went">✓ Tickets booked</div>' : statusLine(p)}${priceText(p.price) ? `<div class="price" style="margin-top:6px">${esc(priceText(p.price))}</div>` : pricePlaceholder(p)}</div>
-    ${p.tips && p.tips.length ? `<ul class="tips">${p.tips.slice(0, 3).map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
+    ${tipsOf(p).length ? `<ul class="tips">${tipsOf(p).slice(0, 3).map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
     ${(p.ticket_url || p.search_q) ? `<div class="acts" style="margin-top:0">${p.ticket_url ? ticketButtons(p) : searchButtons(p.search_q)}</div>` : ''}
     <div class="kv" style="border-top:1px solid var(--rule);padding-top:12px">
       <span>Walking</span><span>${walk != null ? (walk > 120 ? 'Too far to walk' : `about ${walk} min · ${metres(dist)}`) : 'Turn on location'}</span>

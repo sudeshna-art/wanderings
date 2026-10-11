@@ -81,7 +81,7 @@ function mapView(day, items) {
     pinCard(items, home);
     addCleanup(() => { mapService.destroy(planMap); planMap = null; });
   });
-  return `<div class="block" style="padding-top:12px"><div class="wmap small"><div class="wcanvas" id="planMap"></div></div><div data-mapstatus id="planMapStatus" style="padding-top:8px"></div><div id="pinCard"></div>${list}<p class="small faint">Directions open in your maps app.</p></div>`;
+  return `<div class="block" style="padding-top:12px"><div class="wmap small"><div class="wcanvas" id="planMap"></div></div><div data-mapstatus id="planMapStatus" style="padding-top:8px"></div><div id="pinCard"></div>${list}</div>`;
 }
 function pinCard(items, home) {
   const el = document.getElementById('pinCard'); if (!el) return;
@@ -99,7 +99,7 @@ function trayBlock() {
   const scheduled = new Set(S.trip.plan.map(p => p.item_id));
   const ids = [...new Set(S.trip.saved.filter(s => s.status === 'want').map(s => s.place_id).concat(S.trip.booked))].filter(id => !scheduled.has(id) && placeById(id));
   const days = tripDays(S.trip);
-  return `<div class="block"><div class="head"><h2>Saved, not on a day yet</h2><span class="label">${ids.length}</span></div>${ids.length ? `<div>${ids.map(id => { const nb = nearbyDay(id), info = itemInfo(id); return `<div class="prow" style="grid-template-columns:40px minmax(0,1fr) auto">${ill(info.kind, 40)}<div><div style="font-weight:600">${esc(info.name)}</div><div class="small muted">${esc(cityName(info.city_id))}${nb ? ` · near ${esc(nb.name)}, fits Day ${days.indexOf(nb.day) + 1}` : ''}</div></div><button class="btn line sm" data-act="addsheet" data-id="${id}">Add to a day</button></div>`; }).join('')}</div>` : '<p class="small muted">Tap “Want to go” or “Interested” on places, experiences and day trips. They wait here until you give them a day.</p>'}
+  return `<div class="block"><div class="head"><h2>Saved, not on a day yet</h2><span class="label">${ids.length}</span></div>${ids.length ? `<div>${ids.map(id => { const nb = nearbyDay(id), info = itemInfo(id); return `<div class="prow" style="grid-template-columns:40px minmax(0,1fr) auto">${ill(info.kind, 40)}<div><div style="font-weight:600">${esc(info.name)}</div><div class="small muted">${esc(cityName(info.city_id))}${nb ? ` · near ${esc(nb.name)}, fits Day ${days.indexOf(nb.day) + 1}` : ''}</div></div><button class="btn line sm" data-act="addsheet" data-id="${id}">Add to a day</button></div>`; }).join('')}</div>` : '<p class="small muted">Tap “Want to go” on any place and it waits here until you give it a day.</p>'}
     <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn line sm" data-act="pview" data-v="sights">Browse sights</button><button class="btn line sm" data-act="pview" data-v="experiences">Experiences</button><button class="btn line sm" data-act="pview" data-v="trips">Day trips</button></div></div>`;
 }
 
@@ -125,11 +125,12 @@ export function nearbyDay(id) {
 
 export function renderPlan(seg) {
   const days = tripDays(S.trip);
-  const head = masthead() + `<div class="greet"><div class="eyebrow">Plan · Planner mode</div><h1>Day by day.</h1><p class="lede">${days.length ? `${plural(days.length, 'day')} in ${esc(placeName())}. Fill what you like, leave the rest open.` : 'Give things a day, and a time if you like. Everything can move.'}</p></div>${seg}`;
+  const head = masthead() + `<div class="greet"><h1>Day by day.</h1>${days.length ? '' : '<p class="lede">Give things a day, and a time if you like. Everything can move.</p>'}</div>${seg}`;
   if (!days.length) return head + `<div class="block" style="padding-top:14px"><p class="serif" style="font-size:18px">Add your stays with dates to lay out your days.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn line" data-act="welcome" data-step="2">Add my stays</button><button class="btn line" data-act="imopen">Import bookings</button></div></div>` + trayBlock();
   if (!P().pday || !days.includes(P().pday)) P().pday = days.includes(today()) ? today() : days[0];
   const day = P().pday, di = days.indexOf(day), items = itemsOn(S.trip, day), city = dayCity(day);
-  const strip = `<div class="daystrip" role="group" aria-label="Trip days">${days.map(d => { const n = itemsOn(S.trip, d).length + bookingsOn(S.trip, d).length, dt = new Date(d + 'T00:00:00'), dc = dayCity(d); return `<button class="day" data-act="pday" data-v="${d}" aria-pressed="${d === day}" aria-label="${esc(fmtDay(d))}${dc ? ', ' + esc(cityName(dc)) : ''}, ${n} planned"><span class="dw">${dt.toLocaleDateString('en-US', { weekday: 'short' })}</span><span class="dn">${dt.getDate()}</span><span class="dc">${esc(dc ? cityName(dc) : '')}</span><span class="dots">${'<i></i>'.repeat(Math.min(n, 4))}</span></button>`; }).join('')}</div>`;
+  const multi = S.C.edition.city_ids.length > 1;   /* single-city trips: no city under every day */
+  const strip = `<div class="daystrip" role="group" aria-label="Trip days">${days.map(d => { const n = itemsOn(S.trip, d).length + bookingsOn(S.trip, d).length, dt = new Date(d + 'T00:00:00'), dc = dayCity(d); return `<button class="day" data-act="pday" data-v="${d}" aria-pressed="${d === day}" aria-label="${esc(fmtDay(d))}${dc ? ', ' + esc(cityName(dc)) : ''}, ${n} planned"><span class="dw">${dt.toLocaleDateString('en-US', { weekday: 'short' })}</span><span class="dn">${dt.getDate()}</span><span class="dc">${esc(dc && multi ? cityName(dc) : '')}</span><span class="dots">${'<i></i>'.repeat(Math.min(n, 4))}</span></button>`; }).join('')}</div>`;
   const toggle = `<div class="seg2" role="group" aria-label="View" style="margin-top:16px"><button data-act="pmode" data-v="timeline" aria-pressed="${P().pmode !== 'map'}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><path d="M6 7v10M11 5h9M11 19h9M11 12h6"/></svg>Timeline</button><button data-act="pmode" data-v="map" aria-pressed="${P().pmode === 'map'}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20z"/><path d="M9 4v13.5M15 6.5V20"/></svg>Map</button></div>`;
   const leg = S.trip.legs.find(l => l.date === day);
   const mode = leg && S.C.edition.leg_modes.find(m => m.id === leg.mode);

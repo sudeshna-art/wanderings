@@ -117,7 +117,7 @@ async function voiceBlock() {
 
 export function renderEssentials() {
   const c = cityOf(curCityId()), ess = S.C.essentials, ga = c.getting_around;
-  let html = masthead() + `<div class="greet"><div class="eyebrow">Essentials</div><h1>The practical bits.</h1></div>
+  let html = masthead() + `<div class="greet"><h1>The practical bits.</h1></div>
   <button class="btn line" data-act="emergency" style="align-self:flex-start">${ic('sos', 'style="width:18px;height:18px"')}Emergency card · works offline</button>
   <div class="block" id="tripBlock" tabindex="-1" style="padding-top:22px"><h2>You &amp; your trip</h2>
     <div class="fields"><label class="f">Your first name<input type="text" data-bind="traveler_name" value="${esc(S.trip.traveler_name)}" autocomplete="given-name" placeholder="Used in your greeting"></label></div>
@@ -125,7 +125,7 @@ export function renderEssentials() {
     ${homeCurrencySelect()}
     ${styleChoice('estyle')}
     <h3 style="margin-top:10px">Where you’re staying</h3>
-    ${staysEditor()}
+    ${staysEditor({ info: cityIds().length < 2 })}
     <h3 style="margin-top:10px">Arriving and leaving</h3>
     ${arrivalFields()}
     ${S.trip.departure.flight ? `<a class="btn line sm" style="align-self:flex-start" href="https://www.google.com/search?q=${encodeURIComponent('flight ' + S.trip.departure.flight)}" target="_blank" rel="noopener">Track departure flight ${esc(S.trip.departure.flight)} ↗</a>` : ''}

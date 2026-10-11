@@ -51,7 +51,7 @@ export function renderPhrases() {
   else if (cur === TOP) rows = top;
   else rows = P_[cur] || [];
   const local = speaksLocal(lang, ph.language);
-  let html = masthead() + `<div class="greet"><div class="eyebrow">Phrases</div><h1>${esc(ph.title)}</h1><p class="lede">Tap the speaker to hear it. Star the ones you’ll use again and they open first.</p></div>
+  let html = masthead() + `<div class="greet"><h1>${esc(ph.title)}</h1></div>
   <div class="fields" style="align-items:flex-end;margin:-6px 0 6px">${languageSelect('phLang')}</div>
   <p class="small muted" style="margin:0 0 10px">${local ? esc(ph.local_note || `You already speak ${ph.language_name}. These are the everyday phrases for the trip, and the audio can still help.`) : esc(ph.note)}${lang !== 'en' && !local ? ' Tap the speaker to hear how each phrase sounds.' : ''}</p>
   <div class="chips" role="toolbar" aria-label="Situations">${tabs.map(t => `<button class="chip" data-act="ptab" data-v="${esc(t)}" aria-pressed="${!q && t === cur}">${t === FAV ? `★ Mine${S.trip.favs.length ? ' · ' + S.trip.favs.length : ''}` : esc(t)}</button>`).join('')}</div>

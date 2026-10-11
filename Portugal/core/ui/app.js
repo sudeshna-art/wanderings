@@ -192,7 +192,7 @@ const A = {
 };
 async function copy(text, quiet) { const ok = await shareService.copy(text); if (!quiet) toast(ok ? 'Copied' : 'Press and hold the text to copy it'); return ok; }
 function rerenderBehindSheet() { if (P().tab === 'places' && P().pview === 'nearby') refreshWanderer(); else rerender(); }
-function refreshStays() { const ed = $('#staysEd'); if (ed) ed.outerHTML = staysEditor(); }
+function refreshStays() { const ed = $('#staysEd'); if (ed) ed.outerHTML = staysEditor({ info: !$('#welcome').hidden }); }
 
 document.addEventListener('click', e => {
   if (e.target.id === 'scrim') { closeSheet(); return; }
