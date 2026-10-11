@@ -1,0 +1,289 @@
+[
+ {
+  "city_id": "florence",
+  "name": "Florence",
+  "local_name": "Firenze",
+  "stamp": "FIRENZE",
+  "coords_label": "43.77° N · 11.25° E",
+  "country_code": "IT",
+  "currency_code": "EUR",
+  "language": "it-IT",
+  "timezone": "Europe/Rome",
+  "center": {
+   "lat": 43.771,
+   "lng": 11.254
+  },
+  "landmark_center": {
+   "lat": 43.7731,
+   "lng": 11.256,
+   "name": "the Duomo"
+  },
+  "hero": {
+   "art": "florence.svg",
+   "caption": "Santa Maria del Fiore",
+   "alt": "Pen and ink sketch of Brunelleschi’s dome and Giotto’s bell tower"
+  },
+  "mark": "florence-mark.svg",
+  "illustrated_map": {
+   "art": "florence-map.svg",
+   "bbox": [
+    11.236,
+    43.755,
+    11.272,
+    43.782
+   ]
+  },
+  "groups": [
+   {
+    "id": "popular",
+    "name": "Popular, book ahead"
+   },
+   {
+    "id": "uffizi",
+    "name": "Near the Uffizi"
+   },
+   {
+    "id": "boboli",
+    "name": "Near Boboli and the Oltrarno"
+   },
+   {
+    "id": "smn",
+    "name": "Near the pharmacy"
+   }
+  ],
+  "neighborhoods": [
+   {
+    "id": "centro",
+    "name": "Historic center (Duomo, Signoria)",
+    "center": {
+     "lat": 43.771,
+     "lng": 11.255
+    },
+    "central": true,
+    "tip": "You’re in the middle of it. Most sights are a short walk. Nearest main taxi rank: Piazza della Repubblica."
+   },
+   {
+    "id": "smn",
+    "name": "Santa Maria Novella and San Lorenzo",
+    "center": {
+     "lat": 43.7755,
+     "lng": 11.251
+    },
+    "central": true,
+    "tip": "Next to the main train station, which has a 24-hour taxi rank. The T2 tram to the airport leaves from Unità, nearby."
+   },
+   {
+    "id": "croce",
+    "name": "Santa Croce",
+    "center": {
+     "lat": 43.7687,
+     "lng": 11.2622
+    },
+    "central": true,
+    "tip": "The lively east side of the center, with leather workshops and evening bars. For a taxi, call or walk to Piazza della Repubblica."
+   },
+   {
+    "id": "marco",
+    "name": "San Marco",
+    "center": {
+     "lat": 43.779,
+     "lng": 11.259
+    },
+    "central": true,
+    "tip": "A few minutes from the Accademia (David). There’s a main taxi rank at Piazza San Marco."
+   },
+   {
+    "id": "oltrarno",
+    "name": "Oltrarno (Santo Spirito, San Frediano)",
+    "center": {
+     "lat": 43.7665,
+     "lng": 11.245
+    },
+    "central": true,
+    "tip": "Across the river on the artisans’ side, close to Pitti and Boboli. Call 4242 or 4390 for a taxi."
+   },
+   {
+    "id": "niccolo",
+    "name": "San Niccolò",
+    "center": {
+     "lat": 43.764,
+     "lng": 11.262
+    },
+    "central": true,
+    "tip": "Below Piazzale Michelangelo and San Miniato. Lovely for sunset walks, uphill in places."
+   },
+   {
+    "id": "fiesole",
+    "name": "Fiesole (in the hills)",
+    "center": {
+     "lat": 43.8066,
+     "lng": 11.293
+    },
+    "central": false,
+    "tip": "A hill town above the city. Bus 7 runs down to the center. At night, call a taxi ahead; they rarely wait up there."
+   },
+   {
+    "id": "other",
+    "name": "Somewhere else, or not sure",
+    "center": null,
+    "central": false,
+    "tip": ""
+   }
+  ],
+  "airports": [
+   {
+    "id": "FLR",
+    "name": "Florence airport (Peretola)",
+    "short": "Florence airport",
+    "local": "Aeroporto di Firenze (Peretola)",
+    "location": {
+     "lat": 43.81,
+     "lng": 11.2051
+    },
+    "tip": "Taxi to the center is a flat €28 by day, €32 at night. The T2 tram is the cheap option."
+   }
+  ],
+  "stations": [
+   {
+    "id": "smn",
+    "name": "Santa Maria Novella station",
+    "local": "Stazione di Santa Maria Novella",
+    "location": {
+     "lat": 43.7765,
+     "lng": 11.2481
+    },
+    "tip": "Florence’s main station, with a 24-hour taxi rank out front. Trains to Pisa, Lucca, Siena, Bologna and beyond."
+   }
+  ],
+  "getting_around": {
+   "items": [
+    {
+     "title": "Walking",
+     "text": "The historic center is compact and mostly flat. Most sights are 5 to 20 minutes apart on foot. Much of it is closed to ordinary traffic, so walking is often quicker than a taxi."
+    },
+    {
+     "title": "Taxis",
+     "text": "No street hailing. Go to a taxi rank or call. More in Taxis, below."
+    },
+    {
+     "title": "Tram to the airport",
+     "text": "The T2 tram runs between the airport and Unità, near Santa Maria Novella station."
+    },
+    {
+     "title": "Trains out of town",
+     "text": "Day trips to Pisa, Lucca, Siena and Bologna leave from Santa Maria Novella station."
+    }
+   ],
+   "links": [
+    {
+     "label": "Trenitalia trains (official)",
+     "url": "https://www.trenitalia.com/"
+    }
+   ],
+   "checked": "2026-10-07",
+   "source": "City of Florence and Trenitalia"
+  },
+  "taxis": {
+   "intro_bold": "No street hailing in Florence.",
+   "intro": "Go to a taxi rank or call. Main ranks: Santa Maria Novella station (24 hours), Piazza della Repubblica, Piazza San Marco.",
+   "numbers": [
+    {
+     "number": "+39 055 4242",
+     "label": "Radio taxi"
+    },
+    {
+     "number": "+39 055 4390",
+     "label": "Radio taxi · has accessible cabs"
+    }
+   ],
+   "apps": "The itTaxi and appTaxi apps book the same licensed cabs without a phone call.",
+   "checked": "2026-10-07"
+  },
+  "taxi_tariff": {
+   "currency_code": "EUR",
+   "periods": [
+    {
+     "id": "day",
+     "label": "weekday daytime",
+     "rule": "weekdays 6:00–22:00",
+     "base": 3.8,
+     "minimum": 5.8,
+     "per_km_switch_at": 8.6
+    },
+    {
+     "id": "holiday",
+     "label": "Sunday & holiday",
+     "rule": "Sundays & holidays",
+     "days": [
+      0
+     ],
+     "base": 6.1,
+     "minimum": 8.1,
+     "per_km_switch_at": 10.9
+    },
+    {
+     "id": "night",
+     "label": "night",
+     "rule": "night 22:00–6:00",
+     "from": "22:00",
+     "to": "06:00",
+     "base": 7.7,
+     "minimum": 9.7,
+     "per_km_switch_at": 12.4
+    }
+   ],
+   "per_km": 1.1,
+   "per_km_after": 2.1,
+   "per_hour_slow": 30.1,
+   "slow_min_per_km": [
+    1,
+    3
+   ],
+   "road_factor": 1.4,
+   "fixed_fares": [
+    {
+     "label": "Airport ↔ center",
+     "airport_id": "FLR",
+     "radius_km": 2.6,
+     "amounts": {
+      "day": 28,
+      "holiday": 30,
+      "night": 32
+     },
+     "note": "Official flat fare between the airport and central Florence. Bags are €1.20 each."
+    }
+   ],
+   "airport_meter_supplement": 3.1,
+   "supplements": [
+    {
+     "label": "Calling for a taxi",
+     "amount": 2.5
+    },
+    {
+     "label": "Each bag",
+     "amount": 1.2
+    },
+    {
+     "label": "Leaving the airport on the meter",
+     "amount": 3.1
+    }
+   ],
+   "call_fee": 2.5,
+   "discounts": [
+    {
+     "title": "Taxi Rosa",
+     "text": "Women riding from 21:00 to 4:00 get 10% off. Ask for it when you call."
+    }
+   ],
+   "rush_note": "Fares don’t change at rush hour, only by day, night or holiday. Traffic still costs more because the meter also counts time.",
+   "note": "Rough estimate from the city tariff, straight-line distance and light to heavy traffic. The meter decides. Calling for a taxi adds €2.50.",
+   "checked": "2026-10-07",
+   "source": "City of Florence taxi tariff in force from May 2024, the latest official table we found"
+  },
+  "connections": [],
+  "emergency": {
+   "checked": "2026-10-07",
+   "source": "European emergency number 112"
+  }
+ }
+]

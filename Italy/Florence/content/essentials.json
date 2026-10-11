@@ -1,0 +1,137 @@
+{
+ "reference_rates": {
+  "base": "EUR",
+  "rates": {
+   "USD": 1.1206,
+   "GBP": 0.84763,
+   "CAD": 1.5942,
+   "AUD": 1.6052,
+   "INR": 108.3965,
+   "CHF": 0.9313,
+   "SGD": 1.4348,
+   "JPY": 177.34
+  },
+  "checked": "2026-10-09",
+  "source": "European Central Bank via frankfurter.dev"
+ },
+ "typical_prices": [
+  {
+   "label": "Espresso",
+   "amount": 1.5,
+   "kind": "typical"
+  },
+  {
+   "label": "Gelato",
+   "amount": 4,
+   "kind": "typical"
+  },
+  {
+   "label": "Pizza",
+   "amount": 12,
+   "kind": "typical"
+  },
+  {
+   "label": "Accademia",
+   "amount": 20,
+   "kind": "official"
+  },
+  {
+   "label": "Uffizi",
+   "amount": 29,
+   "kind": "official"
+  },
+  {
+   "label": "Airport taxi",
+   "amount": 28,
+   "kind": "official"
+  }
+ ],
+ "typical_note": "Food prices are typical examples. Ticket and taxi prices are official, checked Oct 7, 2026.",
+ "know_how": [
+  {
+   "title": "Restaurants",
+   "text": "Coperto is a per-person cover charge, not a tip. If the bill says “servizio incluso,” don’t add more. Otherwise round up, leave €1 to €2 each, or up to about 10% for great service. Card machines often have no tip option, so carry coins."
+  },
+  {
+   "title": "Cafés",
+   "text": "Pay at the register, then show your receipt at the bar. Standing is cheaper than sitting. Small change on the counter is a nice, optional thank-you."
+  },
+  {
+   "title": "Taxis",
+   "text": "Round up to the next euro, a little more if the driver helps with bags."
+  },
+  {
+   "title": "Hotels",
+   "text": "About €1 to €2 per bag for a porter. €1 to €2 a night for housekeeping is kind, not expected. Florence adds a nightly tourist tax at the hotel, often not in the booking price."
+  },
+  {
+   "title": "Guided tours",
+   "text": "€5 to €10 per person is a common thank-you for a good group tour."
+  },
+  {
+   "title": "Gelato, shops, markets",
+   "text": "No tipping."
+  },
+  {
+   "title": "Churches",
+   "text": "Shoulders and knees covered. A light scarf solves it."
+  },
+  {
+   "title": "Restrooms",
+   "text": "Public ones often cost a coin. Keep change handy."
+  }
+ ],
+ "know_how_note": "General customs, not rules.",
+ "emergency": [
+  {
+   "number": "112",
+   "label": "Police, ambulance, fire. English spoken."
+  }
+ ],
+ "embassies": [
+  {
+   "label": "US Consulate General, Florence (official contact page)",
+   "url": "https://it.usembassy.gov/embassy-consulates/florence/"
+  }
+ ],
+ "emergency_note": "Pharmacies have a green cross sign.",
+ "voice_help": [
+  {
+   "title": "iPhone",
+   "text": "Settings, Accessibility, Spoken Content, Voices, Italian. Pick a voice and download its Enhanced or Premium version."
+  },
+  {
+   "title": "Android",
+   "text": "Settings, search for Text-to-speech, preferred engine settings, install voice data, Italian. Menu names vary by phone."
+  }
+ ],
+ "voice_test": "Buongiorno! Il conto, per favore.",
+ "travel_notes": [
+  [
+   "coffee",
+   "Travel note",
+   "Florentines drink coffee standing at the bar. A table usually costs more, so do as the locals do."
+  ],
+  [
+   "camera",
+   "Look up",
+   "The row of windows above the Ponte Vecchio shops is the Vasari Corridor, built so the Medici could cross the river unseen."
+  ],
+  [
+   "coffee",
+   "Travel note",
+   "Pay at the register first, then hand your receipt to the barista."
+  ],
+  [
+   "camera",
+   "Look up",
+   "From the Bardini Garden the dome looks close enough to touch, with a fraction of the crowds at Piazzale Michelangelo."
+  ],
+  [
+   "coffee",
+   "Travel note",
+   "Shoulders and knees covered for churches. A light scarf in your bag solves it."
+  ]
+ ],
+ "checked": "2026-10-07"
+}

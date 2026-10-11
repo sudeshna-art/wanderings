@@ -1,5 +1,7 @@
-/* Wanderings offline support. Version 202610072135 */
-const CACHE = 'wanderings-202610072135';
+/* Wanderings offline support. Version 202610102217 */
+const EDITION = 'v0-florence';
+const CACHE = 'wanderings-' + EDITION + '-202610102217';
+const SCOPE = new URL(self.registration.scope).pathname;
 const CORE = ['./', './index.html', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png', './apple-touch-icon.png'];
 
 self.addEventListener('install', e => {
@@ -8,7 +10,7 @@ self.addEventListener('install', e => {
 });
 
 self.addEventListener('activate', e => {
-  e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))));
+  e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k !== CACHE && (k.startsWith('wanderings-' + EDITION + '-') || /^wanderings-\d+$/.test(k))).map(k => caches.delete(k)))));
   self.clients.claim();
 });
 
@@ -17,6 +19,7 @@ self.addEventListener('fetch', e => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
   if (url.hostname === 'api.frankfurter.dev') return;              /* live rate: always from the network */
+  if (url.origin === location.origin && url.pathname.startsWith(SCOPE) && url.pathname.slice(SCOPE.length).includes('/')) return;  /* another edition's folder: leave it alone */
   if (req.mode === 'navigate') {                                    /* the app page: newest version when online */
     e.respondWith(fetch(req).then(r => { const c = r.clone(); caches.open(CACHE).then(ca => ca.put('./index.html', c)); return r; })
       .catch(() => caches.match('./index.html')));
