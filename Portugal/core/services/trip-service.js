@@ -2,13 +2,26 @@
    Later provider: Firestore under an optional account, only if the owner approves accounts. */
 import { storageService } from './storage-service.js';
 import { newTrip, migrateTrip } from '../models/schema.js';
+import { fromV0 } from '../models/legacy.js';
 import { EDITION } from '../../edition.config.js';
 
 let saveTimer = null;
 
 export const tripService = {
   async load() {
-    const raw = await storageService.get('state', null);
+    let raw = await storageService.get('state', null);
+    /* First open on the shared core: bring over the trip saved by the first app on this web address, if any.
+       Photos need no copying when the edition keeps the old photo store name. */
+    if (!raw && EDITION.legacy) {
+      const old = await storageService.getLegacy(EDITION.legacy.state);
+      if (old) {
+        raw = fromV0(old, { editionId: EDITION.id, legacy: EDITION.legacy });
+        await storageService.set('state', raw);
+        const pend = await storageService.getLegacy(EDITION.legacy.pending), draft = await storageService.getLegacy(EDITION.legacy.draft);
+        if (Array.isArray(pend) && pend.length) await storageService.set('pending', pend);
+        if (draft) await storageService.set('draft', draft);
+      }
+    }
     return migrateTrip(raw, EDITION.id);
   },
   /* Debounced so quick taps do not hammer storage. Returns when written. */

@@ -47,7 +47,15 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [
+   1
+  ],
+  "closed_note": "Closed Mondays",
+  "closed_source": {
+   "text": "Official site (already in this guide)",
+   "checked": "2026-10-11"
+  }
  },
  {
   "id": "lisbon-belem-tower",
@@ -97,7 +105,15 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [
+   1
+  ],
+  "closed_note": "Closed Mondays",
+  "closed_source": {
+   "text": "Official site (already in this guide)",
+   "checked": "2026-10-11"
+  }
  },
  {
   "id": "lisbon-pasteis",
@@ -135,7 +151,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-maat",
@@ -167,13 +186,22 @@
   "lead_time": "",
   "description": "Art, architecture and technology in a wave-shaped building on the river.",
   "tips": [
-   "Walk up over the curved roof for river views."
+   "Walk up over the curved roof for river views.",
+   "Open noon to 7pm, closed Tuesdays (Time Out Lisbon, checked Oct 11 2026)."
   ],
   "audio": null,
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [
+   2
+  ],
+  "closed_note": "Closed Tuesdays",
+  "closed_source": {
+   "text": "Time Out Lisbon",
+   "checked": "2026-10-11"
+  }
  },
  {
   "id": "lisbon-castle",
@@ -222,7 +250,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-alfama",
@@ -271,7 +302,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-santa-luzia",
@@ -307,7 +341,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-senhora-monte",
@@ -343,7 +380,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-feira-ladra",
@@ -375,13 +415,26 @@
   "lead_time": "",
   "description": "Lisbon's flea market for tiles, vintage finds and odds and ends. Tuesdays and Saturdays.",
   "tips": [
-   "Go in the morning. Check tiles carefully and bargain politely."
+   "Go in the morning. Check tiles carefully and bargain politely.",
+   "Many sellers pack up by about 2pm."
   ],
   "audio": null,
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [
+   0,
+   1,
+   3,
+   4,
+   5
+  ],
+  "closed_note": "Only on Tuesdays and Saturdays",
+  "closed_source": {
+   "text": "whereisthemarket.com",
+   "checked": "2026-10-11"
+  }
  },
  {
   "id": "lisbon-tram28",
@@ -420,7 +473,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-comercio",
@@ -456,7 +512,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-santa-justa",
@@ -494,7 +553,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-bertrand",
@@ -530,7 +592,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-sao-pedro",
@@ -566,7 +631,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-principe-real",
@@ -602,7 +670,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-timeout",
@@ -640,7 +711,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-lxfactory",
@@ -678,7 +752,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-gulbenkian",
@@ -709,12 +786,22 @@
   },
   "lead_time": "",
   "description": "A remarkable private art collection in calm modern galleries, set in a lovely garden.",
-  "tips": [],
+  "tips": [
+   "Museum open 10:00 to 18:00, closed Tuesdays (gulbenkian.pt, checked Oct 11 2026). The garden is a calm place to rest."
+  ],
   "audio": null,
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [
+   2
+  ],
+  "closed_note": "Museum closed Tuesdays",
+  "closed_source": {
+   "text": "gulbenkian.pt",
+   "checked": "2026-10-11"
+  }
  },
  {
   "id": "lisbon-oceanario",
@@ -753,7 +840,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-azulejo",
@@ -791,7 +881,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-pena",
@@ -841,7 +934,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-regaleira",
@@ -890,7 +986,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-moorish",
@@ -926,7 +1025,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-monserrate",
@@ -962,7 +1064,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-nata-class",
@@ -995,7 +1100,10 @@
   "search_q": "pastel de nata baking class Lisbon",
   "duration": "Usually about 2 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-tile-class",
@@ -1028,7 +1136,10 @@
   "search_q": "azulejo tile painting workshop Lisbon",
   "duration": "Usually 2 to 3 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-fado",
@@ -1061,7 +1172,10 @@
   "search_q": "fado dinner Alfama Lisbon",
   "duration": "An evening",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-food-tour",
@@ -1094,7 +1208,10 @@
   "search_q": "food and wine walking tour Lisbon",
   "duration": "Usually 3 to 4 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-sunset-sail",
@@ -1127,7 +1244,10 @@
   "search_q": "sunset sailing Tagus Lisbon",
   "duration": "Usually about 2 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-wine-tasting",
@@ -1160,7 +1280,10 @@
   "search_q": "Portuguese wine tasting Lisbon",
   "duration": "Usually 1.5 to 2 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-trip-sintra",
@@ -1191,12 +1314,20 @@
   },
   "lead_time": "Book Pena Palace before you go. A guided tour or private driver avoids the uphill shuttle lines.",
   "description": "Fairy-tale palaces and gardens in misty green hills. Pena needs a dated ticket; the rest are flexible.",
-  "tips": [],
+  "tips": [
+   "Go on a weekday and arrive early. Crowds build fast by late morning.",
+   "With a driver, ask to be dropped at the palace gates rather than trying to park.",
+   "Pena tickets are for a set time, so plan the rest of the day around it.",
+   "Wear shoes with grip: steep paths, steps and tunnels."
+  ],
   "audio": null,
   "search_q": "Sintra day trip from Lisbon",
   "duration": null,
   "how": "Train from Rossio station, then the local bus or a taxi up to the palaces",
-  "stay": "A full day"
+  "stay": "A full day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-trip-cascais",
@@ -1232,7 +1363,10 @@
   "search_q": "Cascais day trip from Lisbon",
   "duration": null,
   "how": "Train from Cais do Sodré along the coast",
-  "stay": "Half a day or more"
+  "stay": "Half a day or more",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-trip-arrabida",
@@ -1268,7 +1402,10 @@
   "search_q": "Arrabida Setubal wine tour from Lisbon",
   "duration": null,
   "how": "Best by tour or private driver",
-  "stay": "A full day"
+  "stay": "A full day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "lisbon-trip-obidos",
@@ -1304,7 +1441,10 @@
   "search_q": "Obidos day trip from Lisbon",
   "duration": null,
   "how": "Bus, tour or private driver",
-  "stay": "Half a day"
+  "stay": "Half a day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-piedade",
@@ -1353,7 +1493,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-dona-ana",
@@ -1389,7 +1532,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-camilo",
@@ -1425,7 +1571,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-lagos",
@@ -1461,7 +1610,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-cabo",
@@ -1510,7 +1662,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-sagres",
@@ -1548,7 +1703,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-benagil",
@@ -1598,7 +1756,10 @@
   "search_q": "Benagil cave boat tour",
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-marinha",
@@ -1637,7 +1798,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-seven-valleys",
@@ -1677,7 +1841,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-algar-seco",
@@ -1713,7 +1880,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-falesia",
@@ -1749,7 +1919,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-albufeira",
@@ -1785,7 +1958,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-faro",
@@ -1821,7 +1997,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-bones",
@@ -1857,7 +2036,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-ria-formosa",
@@ -1895,7 +2077,10 @@
   "search_q": "Ria Formosa boat trip",
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-tavira",
@@ -1941,7 +2126,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-ilha-tavira",
@@ -1973,13 +2161,17 @@
   "lead_time": "",
   "description": "A long, wild island beach reached by a short ferry. Fine sand and calm water.",
   "tips": [
-   "Check the last ferry back."
+   "Don’t miss the last boat back. In October it has been around 6pm to 6:30pm from the island to Quatro Águas (approximate). Ask at the island dock when you arrive.",
+   "Wind can cancel sailings; keep an eye on the sky and leave a little early."
   ],
   "audio": null,
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-silves",
@@ -2015,7 +2207,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-loule",
@@ -2053,7 +2248,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-foia",
@@ -2089,7 +2287,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-benagil-boat",
@@ -2122,7 +2323,10 @@
   "search_q": "Benagil caves boat tour",
   "duration": "Usually 1 to 2.5 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-piedade-kayak",
@@ -2155,7 +2359,10 @@
   "search_q": "Ponta da Piedade kayak tour Lagos",
   "duration": "Usually 1 to 3 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-ria-boat",
@@ -2188,7 +2395,10 @@
   "search_q": "Ria Formosa islands boat trip Faro",
   "duration": "Usually 2 to 4 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-dolphins",
@@ -2221,7 +2431,10 @@
   "search_q": "dolphin watching Algarve",
   "duration": "Usually about 2 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-wine",
@@ -2254,7 +2467,10 @@
   "search_q": "Algarve winery wine tasting",
   "duration": "Usually 1.5 to 2 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-cataplana",
@@ -2287,7 +2503,10 @@
   "search_q": "cataplana cooking class Algarve",
   "duration": "Usually 3 to 4 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-spa",
@@ -2320,7 +2539,10 @@
   "search_q": "spa day Algarve",
   "duration": "Half a day",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-sunset-sail",
@@ -2353,7 +2575,10 @@
   "search_q": "sunset cruise Algarve",
   "duration": "Usually about 2 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-trip-sagres",
@@ -2389,7 +2614,10 @@
   "search_q": "Sagres Cape St Vincent tour",
   "duration": null,
   "how": "By car, private driver or tour from Lagos",
-  "stay": "Half a day, ending at sunset"
+  "stay": "Half a day, ending at sunset",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-trip-tavira",
@@ -2425,7 +2653,10 @@
   "search_q": "Tavira day trip",
   "duration": null,
   "how": "Regional train along the coast, or by car or driver",
-  "stay": "A full day"
+  "stay": "A full day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-trip-silves",
@@ -2461,7 +2692,10 @@
   "search_q": "Silves Monchique tour",
   "duration": null,
   "how": "By car, private driver or tour",
-  "stay": "A full day"
+  "stay": "A full day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "algarve-trip-seville",
@@ -2497,6 +2731,9 @@
   "search_q": "Seville day trip from Algarve",
   "duration": null,
   "how": "Organized tour or private driver; a long day",
-  "stay": "A very long day"
+  "stay": "A very long day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  }
 ]

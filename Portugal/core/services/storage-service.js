@@ -43,6 +43,10 @@ export const storageService = {
   async get(key, dflt) {
     try { const v = localStorage.getItem(PREFIX + '.' + key); return v ? JSON.parse(v) : dflt; } catch (e) { return dflt; }
   },
+  /* A key saved by an older app on this same web address (no edition prefix). Read only. */
+  async getLegacy(fullKey) {
+    try { const v = localStorage.getItem(fullKey); return v ? JSON.parse(v) : null; } catch (e) { return null; }
+  },
   async set(key, val) {
     try { localStorage.setItem(PREFIX + '.' + key, JSON.stringify(val)); return true; } catch (e) { return false; }
   },

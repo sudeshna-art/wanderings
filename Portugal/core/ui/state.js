@@ -11,7 +11,7 @@ export const cityIds = () => S.C.edition.city_ids;
 export const cityOf = id => S.C.cities.find(c => c.city_id === id) || S.C.cities[0];
 export const cityName = id => { const c = cityOf(id); return c.short_name || c.name; };
 /* "Lisbon awaits" / "The Algarve awaits" */
-export const cityTitle = id => { const n = cityOf(id).name; return n.charAt(0).toUpperCase() + n.slice(1); };
+export const cityTitle = id => { const c = cityOf(id), n = c.greeting_name || c.name; return n.charAt(0).toUpperCase() + n.slice(1); };   /* greeting_name: e.g. Firenze in the greeting */
 export const curCityId = () => currentCityId(S.trip, cityIds());
 export const curCity = () => cityOf(curCityId());
 export const autoCityId = () => currentCityId(Object.assign({}, S.trip, { prefs: Object.assign({}, S.trip.prefs, { city: '' }) }), cityIds());
@@ -30,6 +30,10 @@ export function homePoint(cityId = curCityId()) {
   const s = stayHere(cityId); const h = s && hoodOf(cityId, s.neighborhood_id);
   return h && h.center ? { lat: h.center.lat, lng: h.center.lng, name: s.label || 'Where I’m staying', hood: h } : null;
 }
+/* Edition wording (place names, hashtags), so screens never hard-code a destination. */
+export const copyOf = (k, dflt = '') => { const c = (S.C && S.C.edition && S.C.edition.copy) || {}; return c[k] != null ? c[k] : dflt; };
+export const placeName = () => copyOf('place', S.C.edition.tagline || '');
+export const checkedText = (iso = S.C.edition.checked) => iso ? new Date(iso + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
 export const myLang = () => (S.trip && S.trip.traveler_language) || 'en';
 export const isPlanner = () => S.trip.travel_style === 'planner';
 export const isWanderer = () => S.trip.travel_style === 'wanderer';
@@ -39,7 +43,7 @@ export const hasStays = () => sortedStays(S.trip).length > 0;
 export function spot(id, cityId = curCityId()) {
   const c = cityOf(cityId);
   if (id === '__home') { const h = homePoint(cityId); const s = stayHere(cityId); return h ? { location: h, name: h.name, local: (s && s.address) || h.hood.name } : null; }
-  if (id.startsWith('__air:')) { const a = (c.airports || []).find(x => x.id === id.slice(6)); return a ? { location: a.location, name: a.short, local: a.local } : null; }
+  if (id.startsWith('__air:')) { const a = (c.airports || []).find(x => x.id === id.slice(6)); return a ? { location: a.location, name: a.short, local: a.local, airport_id: a.id } : null; }
   if (id.startsWith('__st:')) { const st = (c.stations || []).find(x => x.id === id.slice(5)); return st ? { location: st.location, name: st.name, local: st.local } : null; }
   const p = placeById(id); return p && p.location ? { location: p.location, name: p.name, local: p.name } : null;
 }

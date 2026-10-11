@@ -2,10 +2,12 @@
 import { EDITION } from '../../edition.config.js';
 import { S, P, cityOf, cityName, curCityId, autoCityId, cityIds, placeById, isPlanner, today } from './state.js';
 import { esc, ic, ill, KIND_NAME, fmtDay } from './dom.js';
-import { statusOf, isBooked, planOf, BOOKING_LABEL, URGENCY_LABEL, priceText, priceShort } from '../models/schema.js';
+import { statusOf, isBooked, planOf, BOOKING_LABEL, URGENCY_LABEL, priceText, priceShort, closedText, bookingKindLabel } from '../models/schema.js';
 import { linkService } from '../services/link-service.js';
 
 export const art = file => (S.art && S.art[file]) || '';
+/* A city's own illustrated map (original line art drawn to a known area), for the offline sketch map. */
+export const illustrationFor = c => c && c.illustrated_map && art(c.illustrated_map.art) ? { svg: art(c.illustrated_map.art), bbox: c.illustrated_map.bbox } : null;
 
 export function masthead() {
   const c = cityOf(curCityId());
@@ -15,6 +17,7 @@ export function masthead() {
 
 /* City switcher. Follows the traveler's dates unless they pick a city. */
 export function cityBar() {
+  if (cityIds().length < 2) return '';
   const cur = curCityId(), auto = autoCityId();
   return `<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><div class="citybar" role="group" aria-label="Choose a place">${cityIds().map(id => `<button data-act="city" data-id="${id}" aria-pressed="${id === cur}">${esc(cityName(id))}</button>`).join('')}</div>
   ${P().city && P().city !== auto ? `<button class="text-btn" data-act="cityauto" style="min-height:36px;font-size:12.5px">Follow my dates</button>` : ''}</div>`;
@@ -38,12 +41,13 @@ export function pricePlaceholder(p) {
 /* Official link first. An affiliate link would only ever be second, with a disclosure, once approved. */
 export function ticketButtons(p, line = false) {
   if (!p.ticket_url) return '';
-  const t = priceText(p.price);
   return `<a class="btn ${line ? 'line ' : ''}sm" href="${esc(p.ticket_url)}" target="_blank" rel="noopener">${p.booking_status === 'none' ? 'Official site' : 'Official tickets'}${line && priceShort(p.price) ? ' · ' + esc(priceShort(p.price)) : ''} ↗</a>`;
 }
 export function searchButtons(q) {
   return q ? `<a class="btn line sm" href="${esc(linkService.tripadvisor(q))}" target="_blank" rel="noopener">Tripadvisor ↗</a><a class="btn line sm" href="${esc(linkService.getyourguide(q))}" target="_blank" rel="noopener">GetYourGuide ↗</a>` : '';
 }
+/* "Closed Mondays" under a place's name (opening days, Oct 11 2026). */
+export const closedLine = p => closedText(p) ? `<div class="closed-day">${esc(closedText(p))}</div>` : '';
 
 /* ---------- plan helpers on rows ---------- */
 export function schedChip(id) {
@@ -64,7 +68,7 @@ export function placeMedia(p, size = 52) {
 export function placeRow(p, compact = false) {
   const s = statusOf(S.trip, p.id), booked = isBooked(S.trip, p.id);
   const ticketed = p.booking_status !== 'none';
-  return `<div class="row" id="pl-${p.id}">${placeMedia(p)}<div><h3>${esc(p.name)}</h3><div class="meta">${esc(KIND_NAME[p.kind] || '')}${p.area ? ' · ' + esc(p.area) : ''}</div>
+  return `<div class="row" id="pl-${p.id}">${placeMedia(p)}<div><h3>${esc(p.name)}</h3><div class="meta">${esc(KIND_NAME[p.kind] || '')}${p.area ? ' · ' + esc(p.area) : ''}</div>${closedLine(p)}
     ${p.description && !compact ? `<p class="desc">${esc(p.description)}</p>` : ''}
     ${s === 'went' ? `<div class="went" style="margin-top:6px">✓ Went here</div>` : ''}
     ${ticketed ? (booked ? `<div class="went" style="margin-top:6px">✓ Tickets booked</div>` : statusLine(p)) : (compact ? '' : statusLine(p))}
@@ -84,11 +88,12 @@ export function expRow(x) {
   const st = statusOf(S.trip, x.id), booked = isBooked(S.trip, x.id), trip = x.category === 'day_trip';
   return `<div class="row">${ill(x.kind)}<div><h3>${esc(x.name)}</h3>
     <div class="meta">${trip ? esc(x.how || '') : esc([x.area, x.duration].filter(Boolean).join(' · '))}</div>
-    ${trip && x.stay ? `<div class="meta">Plan for ${esc(x.stay.toLowerCase())}</div>` : ''}
+    ${trip && x.stay ? `<div class="meta">Plan for ${esc(x.stay.toLowerCase())}</div>` : ''}${closedLine(x)}
     <p class="desc">${esc(x.description)}</p>
     ${booked ? `<div class="went" style="margin-top:6px">✓ Booked</div>` : statusLine(x)}
     ${x.lead_time ? `<p class="small muted" style="margin-top:3px">${esc(x.lead_time)}</p>` : ''}
-    ${!trip ? `<p style="margin-top:4px"><span class="ph-flag">Prices vary by provider</span></p>` : ''}
+    ${(x.tips || []).length ? `<ul class="tips">${x.tips.slice(0, 4).map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
+    ${x.price && x.price.text ? `<p class="small" style="margin-top:4px"><b style="font-family:var(--mono);font-weight:500">${esc(x.price.text)}</b> <span class="small muted">${x.price.kind === 'typical' ? 'typical, varies by provider' : ''}</span></p>` : (!trip ? `<p style="margin-top:4px"><span class="ph-flag">Prices vary by provider</span></p>` : '')}
     <div class="acts">${x.ticket_url ? ticketButtons(x, true) : ''}${searchButtons(x.search_q)}</div>
     <div class="acts"><button class="btn line sm" data-act="want" data-id="${x.id}" aria-pressed="${st === 'want'}">${st === 'want' ? 'On your list' : 'Interested'}</button>
       <label class="check"><input type="checkbox" data-act="booked" data-id="${x.id}" ${booked ? 'checked' : ''}>Booked</label>${schedBtn(x.id, booked)}</div>
@@ -98,13 +103,25 @@ export function expRow(x) {
 
 /* Book-ahead row for Today */
 export function bookRow(p) {
-  return `<div class="row">${ill(p.kind)}<div><h3>${esc(p.name)}</h3><div class="meta">${esc(p.area || '')}</div>${statusLine(p)}
+  return `<div class="row">${ill(p.kind)}<div><h3>${esc(p.name)}</h3><div class="meta">${esc(p.area || '')}</div>${closedLine(p)}${statusLine(p)}
     ${p.tips.length ? `<ul class="tips">${p.tips.map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
     <div class="acts">${p.ticket_url ? ticketButtons(p) : searchButtons(p.search_q)}
     <label class="check"><input type="checkbox" data-act="booked" data-id="${p.id}" ${isBooked(S.trip, p.id) ? 'checked' : ''}>Booked</label>${schedBtn(p.id, isBooked(S.trip, p.id))}</div>
     ${priceText(p.price) && priceText(p.price) !== priceShort(p.price) ? `<p class="small muted">${esc(priceText(p.price))}</p>` : pricePlaceholder(p)}
     ${schedChip(p.id)}${schedSlot(p.id)}</div>
     <div class="price">${esc(priceShort(p.price))}</div></div>`;
+}
+
+/* ---------- bookings (flights, stays, trains, tours) ---------- */
+const BK_ICON = { flight: 'arrow', stay: 'home', train: 'train', bus: 'train', car: 'car', tour: 'ticket', restaurant: 'food', other: 'plan' };
+export const bookingIcon = k => BK_ICON[k] || 'plan';
+/* One line for a booking. role 'end' marks a check-out. */
+export function bookingLine(b, role = 'start', opts = {}) {
+  const t = role === 'end' ? b.end_time : b.time;
+  const what = b.title || bookingKindLabel(b.kind);
+  const route = b.from && b.to ? `${b.from} to ${b.to}` : '';
+  const sub = [role === 'end' ? 'Check out' : b.kind === 'stay' ? 'Check in' : bookingKindLabel(b.kind), route, b.where && b.kind !== 'flight' ? b.where : ''].filter(Boolean).join(' · ');
+  return `<div class="bk">${ic(bookingIcon(b.kind))}<div style="min-width:0"><div class="bk-t">${opts.day ? esc(fmtDay(role === 'end' ? b.end_date : b.date)) + (t ? ' · ' : '') : ''}${t ? esc(t) : opts.day ? '' : 'Anytime'}</div><b>${esc(what)}</b><div class="small muted">${esc(sub)}</div>${opts.ref && b.ref ? `<div class="small" style="font-family:var(--mono)">Ref ${esc(b.ref)}</div>` : ''}</div>${opts.edit ? `<button class="text-btn" data-act="bkedit" data-id="${b.id}" style="min-height:36px">Edit</button>` : ''}</div>`;
 }
 
 /* ---------- travel style choice ---------- */
@@ -114,11 +131,19 @@ export function styleChoice(name) {
   return `<fieldset style="border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;min-width:0"><legend style="font-size:12px;color:var(--muted);margin-bottom:6px;padding:0">How do you like to travel?</legend>
     ${opt('flow', 'Go with the flow', 'A list of ideas and must-sees. Decide as you go.')}
     ${opt('planner', 'Planner', 'Put places on a day and time, with a day-by-day view. Everything can move.')}
-    ${opt('wanderer', 'True Wanderer', 'No plan at all. A live map shows what’s worth seeing near you, right now.')}
-    </fieldset>`;
+    ${opt('wanderer', 'True Wanderer', 'No plan at all. The app opens on a live map of what’s worth seeing near you.')}
+    </fieldset><p class="small faint" style="margin:0">Everyone gets the “Near me” map in Places.</p>`;
 }
 
 /* ---------- stays editor (welcome steps and Essentials) ---------- */
+/* The chosen way of getting between two places, with the edition's notes and official link. */
+export function legInfo(l) {
+  if (!l || !l.mode) return '';
+  const con = (cityOf(l.from_city_id).connections || []).find(x => x.to_city_id === l.to_city_id);
+  const it = con && con.items.find(x => x.mode === l.mode || (l.mode === 'taxi' && x.mode === 'driver'));
+  if (!it) return '';
+  return `<p class="small muted" style="margin:0">${esc(it.text)}${it.link ? ` <a href="${esc(it.link.url)}" target="_blank" rel="noopener">${esc(it.link.label)} ↗</a>` : ''}</p>`;
+}
 export function staysEditor() {
   const stays = S.trip.stays;
   const cityOpts = sel => cityIds().map(id => `<option value="${id}" ${id === sel ? 'selected' : ''}>${esc(cityOf(id).short_name ? 'The ' + cityOf(id).short_name : cityOf(id).name)}</option>`).join('');
@@ -127,15 +152,15 @@ export function staysEditor() {
     const hoods = (c.neighborhoods || []).map(n => `<option value="${n.id}" ${s.neighborhood_id === n.id ? 'selected' : ''}>${esc(n.name)}${n.area ? ' (' + esc(n.area) + ')' : ''}</option>`).join('');
     const h = (c.neighborhoods || []).find(n => n.id === s.neighborhood_id);
     return `<div class="stay"><div class="stay-h"><span class="label">Stay ${i + 1}</span>${stays.length > 1 ? `<button class="text-btn" data-act="staydel" data-i="${i}" style="min-height:32px;color:var(--muted);font-weight:500">Remove</button>` : ''}</div>
-      <div class="fields"><label class="f">Where<select data-bind="stays.${i}.city_id">${cityOpts(s.city_id)}</select></label>
+      <div class="fields">${cityIds().length > 1 ? `<label class="f">Where<select data-bind="stays.${i}.city_id">${cityOpts(s.city_id)}</select></label>` : ''}
       <label class="f">${c.region ? 'Town' : 'Neighborhood'}<select data-bind="stays.${i}.neighborhood_id"><option value="">Choose…</option>${hoods}</select></label></div>
       ${h && h.tip ? `<p class="small muted" style="margin-top:-2px">${esc(h.tip)}</p>` : ''}
       <div class="fields"><label class="f">From<input type="date" data-bind="stays.${i}.start" value="${esc(s.start)}"></label><label class="f">To<input type="date" data-bind="stays.${i}.end" value="${esc(s.end)}" ${s.start ? `min="${s.start}"` : ''}></label></div>
       <div class="fields"><label class="f">Name it (optional)<input type="text" data-bind="stays.${i}.label" value="${esc(s.label)}" placeholder="e.g. Hotel name"></label>
       <label class="f">Street address (for drivers)<input type="text" data-bind="stays.${i}.address" value="${esc(s.address)}" placeholder="Optional"></label></div></div>`;
   }).join('');
-  const legs = S.trip.legs.map((l, i) => `<div class="legrow">${ic(l.mode ? modeIconName(l.mode) : 'arrow')}<span style="flex:none">${esc(cityName(l.from_city_id))} to ${esc(cityName(l.to_city_id))}${l.date ? ', ' + esc(fmtDay(l.date)) : ''}</span>
-    <select data-bind="legs.${i}.mode" aria-label="How you’ll travel"><option value="">How? Not sure yet</option>${S.C.edition.leg_modes.map(m => `<option value="${m.id}" ${l.mode === m.id ? 'selected' : ''}>${esc(m.label)}</option>`).join('')}</select></div>`).join('');
+  const legs = S.trip.legs.map((l, i) => `<div style="display:flex;flex-direction:column;gap:6px"><div class="legrow">${ic(l.mode ? modeIconName(l.mode) : 'arrow')}<span style="flex:none">${esc(cityName(l.from_city_id))} to ${esc(cityName(l.to_city_id))}${l.date ? ', ' + esc(fmtDay(l.date)) : ''}</span>
+    <select data-bind="legs.${i}.mode" aria-label="How you’ll travel"><option value="">How? Not sure yet</option>${S.C.edition.leg_modes.map(m => `<option value="${m.id}" ${l.mode === m.id ? 'selected' : ''}>${esc(m.label)}</option>`).join('')}</select></div>${legInfo(l)}</div>`).join('');
   return `<div id="staysEd" style="display:flex;flex-direction:column;gap:6px">${rows || '<p class="small muted">No stays yet.</p>'}
     <button class="btn line sm" data-act="stayadd" style="align-self:flex-start;margin-top:6px">+ Add another stay</button>
     ${legs ? `<div style="display:flex;flex-direction:column;gap:8px;margin-top:10px"><span class="label">Getting between places</span>${legs}</div>` : ''}</div>`;

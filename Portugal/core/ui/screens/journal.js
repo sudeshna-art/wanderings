@@ -1,5 +1,5 @@
 /* Journal: dictation-friendly entries, photos, trip summary for Instagram, Share with Wanderings, backup. */
-import { S, P, save, allPlaces, placeById, cityName, curCityId, cityIds } from '../state.js';
+import { S, P, save, allPlaces, placeById, cityName, curCityId, cityIds, copyOf, placeName } from '../state.js';
 import { esc, ic, fmtDate, fmtISO, toast, $ } from '../dom.js';
 import { masthead } from '../components.js';
 import { stage, statusOf, setStatus, tripRange } from '../../models/schema.js';
@@ -19,11 +19,12 @@ export function summaryText() {
   const loved = S.trip.journal.filter(e => e.stars >= 4);
   const best = loved.find(e => !e.visit || e.txt.length > 30) || S.trip.journal.slice().reverse().find(e => e.txt.length > 30);
   const places = cityIds().filter(id => S.trip.stays.some(s => s.city_id === id)).map(id => cityName(id));
-  const lines = [`Portugal${places.length ? ': ' + places.join(' and ') : ''}${start ? ', ' + fmtISO(start) + (end && end !== start ? ' to ' + fmtISO(end) : '') : ''}${st.total ? ` · ${st.total} days` : ''}`];
+  const showCities = places.length && !(places.length === 1 && places[0] === placeName());
+  const lines = [`${placeName()}${showCities ? ': ' + places.join(' and ') : ''}${start ? ', ' + fmtISO(start) + (end && end !== start ? ' to ' + fmtISO(end) : '') : ''}${st.total ? ` · ${st.total} days` : ''}`];
   cityIds().forEach(id => { const v = visited.filter(p => p.city_id === id); if (v.length) lines.push('', `${cityName(id)}: ${v.map(p => p.name).join(', ')}.`); });
   if (loved.length) lines.push('', `Loved: ${[...new Set(loved.map(e => e.place).filter(Boolean))].join(', ') || 'see notes'}.`);
   if (best) lines.push('', `“${best.txt}”`);
-  lines.push('', '#Portugal #Lisbon #Algarve #travel');
+  lines.push('', copyOf('hashtags', '#travel'));
   return lines.join('\n');
 }
 export function consentMany(n) {
@@ -32,7 +33,7 @@ export function consentMany(n) {
 }
 export function consentOne(id) {
   const e = entryOfPhoto(id);
-  return consentMany(1) + (e && e.place ? ` Photo: ${e.place}, Portugal.` : '');
+  return consentMany(1) + (e && e.place ? ` Photo: ${e.place}, ${placeName()}.` : '');
 }
 
 function shareWBlock() {
@@ -78,7 +79,7 @@ export async function saveEntry() {
   const txt = $('#jText').value.trim();
   if (!txt && !J.pending.length) { toast('Write, dictate or add a photo first'); return false; }
   const pid = $('#jPlace').value, p = pid ? placeById(pid) : null;
-  S.trip.journal.push({ id: Date.now().toString(36), d: Date.now(), txt: txt || (p ? 'At ' + p.name + '.' : 'A moment in Portugal.'), place_id: pid, place: p ? p.name : '', city_id: p ? p.city_id : curCityId(), stars: +$('#jStars').value, photos: J.pending.slice() });
+  S.trip.journal.push({ id: Date.now().toString(36), d: Date.now(), txt: txt || (p ? 'At ' + p.name + '.' : 'A moment in ' + placeName() + '.'), place_id: pid, place: p ? p.name : '', city_id: p ? p.city_id : curCityId(), stars: +$('#jStars').value, photos: J.pending.slice() });
   if (pid && statusOf(S.trip, pid) !== 'went') setStatus(S.trip, pid, 'went');
   J.pending = []; J.draft = '';
   tripService.setPending([]); tripService.setDraft('');
@@ -93,7 +94,7 @@ export async function deletePhoto(id) {
   save();
 }
 export function backupText() {
-  return ['MY PORTUGAL JOURNAL', ''].concat(S.trip.journal.map(e => `${fmtDate(e.d, { weekday: 'short', month: 'short', day: 'numeric' })}${e.place ? ' · ' + e.place : ''}${e.city_id ? ' · ' + cityName(e.city_id) : ''}\n${e.txt}\n`)).join('\n');
+  return [`MY ${placeName().toUpperCase()} JOURNAL`, ''].concat(S.trip.journal.map(e => `${fmtDate(e.d, { weekday: 'short', month: 'short', day: 'numeric' })}${e.place ? ' · ' + e.place : ''}${e.city_id ? ' · ' + cityName(e.city_id) : ''}\n${e.txt}\n`)).join('\n');
 }
 /* Shares photos through the phone's share sheet. Falls back to copying the text. */
 export async function sharePhotos(ids, text, prefix) {

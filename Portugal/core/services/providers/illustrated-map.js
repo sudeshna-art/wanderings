@@ -8,15 +8,22 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
 function draw(h) {
   const pts = h.places.filter(p => p.location).map(p => p.location).concat(h.you ? [h.you] : [], h.routeOn && h.routeStart ? [h.routeStart] : []);
   if (!pts.length) pts.push(h.center);
-  let la0 = Math.min(...pts.map(p => p.lat)), la1 = Math.max(...pts.map(p => p.lat));
-  let lo0 = Math.min(...pts.map(p => p.lng)), lo1 = Math.max(...pts.map(p => p.lng));
-  const span = Math.max(la1 - la0, (lo1 - lo0) * 0.8, 0.004);
-  const cla = (la0 + la1) / 2, clo = (lo0 + lo1) / 2;
-  la0 = cla - span / 2; la1 = cla + span / 2; lo0 = clo - span / 1.6; lo1 = clo + span / 1.6;
-  const proj = p => [PAD + (p.lng - lo0) / (lo1 - lo0) * (W - 2 * PAD), PAD + (la1 - p.lat) / (la1 - la0) * (H - 2 * PAD)];
-  let s = `<svg viewBox="0 0 ${W} ${H}" xmlns="${NS}" role="img" aria-label="Illustrated map of nearby places, not to scale">`;
-  for (let i = 1; i < 7; i++) s += `<path d="M0 ${i * H / 7} H${W}" stroke="var(--rule)" stroke-width=".6"/><path d="M${i * W / 6} 0 V${H}" stroke="var(--rule)" stroke-width=".6"/>`;
-  s += `<path d="M326 22 V42 M321 28 L326 22 L331 28" fill="none" stroke="var(--ink)" stroke-width=".9" stroke-linecap="round"/><text x="322.5" y="54" font-family="IBM Plex Mono, monospace" font-size="8" fill="var(--muted)">N</text>`;
+  /* The city's own drawing, when every point fits inside the area it was drawn for (west, south, east, north). */
+  const b = h.art && h.art.bbox, onArt = b && pts.every(p => p.lng >= b[0] && p.lng <= b[2] && p.lat >= b[1] && p.lat <= b[3]);
+  let proj, s = `<svg viewBox="0 0 ${W} ${H}" xmlns="${NS}" role="img" aria-label="Illustrated map of nearby places, not to scale">`;
+  if (onArt) {
+    proj = p => [(p.lng - b[0]) / (b[2] - b[0]) * W, (b[3] - p.lat) / (b[3] - b[1]) * H];
+    s += String(h.art.svg).replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '');
+  } else {
+    let la0 = Math.min(...pts.map(p => p.lat)), la1 = Math.max(...pts.map(p => p.lat));
+    let lo0 = Math.min(...pts.map(p => p.lng)), lo1 = Math.max(...pts.map(p => p.lng));
+    const span = Math.max(la1 - la0, (lo1 - lo0) * 0.8, 0.004);
+    const cla = (la0 + la1) / 2, clo = (lo0 + lo1) / 2;
+    la0 = cla - span / 2; la1 = cla + span / 2; lo0 = clo - span / 1.6; lo1 = clo + span / 1.6;
+    proj = p => [PAD + (p.lng - lo0) / (lo1 - lo0) * (W - 2 * PAD), PAD + (la1 - p.lat) / (la1 - la0) * (H - 2 * PAD)];
+    for (let i = 1; i < 7; i++) s += `<path d="M0 ${i * H / 7} H${W}" stroke="var(--rule)" stroke-width=".6"/><path d="M${i * W / 6} 0 V${H}" stroke="var(--rule)" stroke-width=".6"/>`;
+    s += `<path d="M326 22 V42 M321 28 L326 22 L331 28" fill="none" stroke="var(--ink)" stroke-width=".9" stroke-linecap="round"/><text x="322.5" y="54" font-family="IBM Plex Mono, monospace" font-size="8" fill="var(--muted)">N</text>`;
+  }
   const placed = h.places.filter(p => p.location);
   if (h.routeOn && placed.length > 1) {
     const r = (h.routeStart ? [h.routeStart] : []).concat(placed.map(p => p.location)).map(proj);
@@ -47,7 +54,7 @@ function draw(h) {
 
 export const illustratedMap = {
   ready() { return true; },
-  create(el, { center }) { const h = { kind: 'illustrated', el, center, places: [], you: null }; draw(h); return h; },
+  create(el, { center, art }) { const h = { kind: 'illustrated', el, center, art: art || null, places: [], you: null }; draw(h); return h; },
   setUserLocation(h, pos) { h.you = pos || null; draw(h); },
   setMarkers(h, places, opts = {}) { h.places = places; h.onTap = opts.onTap; h.selectedId = opts.selectedId; h.routeOn = !!opts.route; h.routeStart = opts.routeStart; draw(h); },
   focus() {}, fitTo() {}, resize() {},

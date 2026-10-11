@@ -1,4 +1,5 @@
-/* Essentials: you and your trip, getting between places, currency, getting around, taxis, audio, know-how, emergencies. */
+/* Essentials: emergency card, you and your trip, bookings, getting between places, currency, getting around,
+   taxis, audio, know-how, emergencies. */
 import { EDITION } from '../../../edition.config.js';
 import { S, P, save, curCityId, cityOf, cityName, cityIds, spot, spotOptions, homePoint, addMount } from '../state.js';
 import { esc, ic, fmtNum, parseNum, fmtISO, $, modeIcon } from '../dom.js';
@@ -8,6 +9,7 @@ import { fareService } from '../../services/fare-service.js';
 import { speechService } from '../../services/speech-service.js';
 import { languageSelect } from './phrases.js';
 import { offlineMapsBlock, fillOfflineMaps } from './offline.js';
+import { bookingsBlock } from './bookings.js';
 
 export const E = { rate: null };
 
@@ -64,37 +66,60 @@ export function updateConv() {
   out.textContent = toHome ? `≈ ${currencyService.symbol(S.trip.home_currency)}${fmtNum(a * r)}` : `≈ ${currencyService.symbol(c.currency_code)}${fmtNum(a / r)}`;
 }
 
+const SEP = '<span class="sep"></span><span class="sep" style="display:none"></span>';   /* two spans keep the label/value columns aligned */
+const money = n => '€' + n.toFixed(2);
+const whole = n => '€' + (Number.isInteger(n) ? n : n.toFixed(2));   /* flat fares read better without cents */
+/* Official tariff table. Simple tariffs (flag fall, per km, per minute) and period tariffs (day, holiday, night). */
+function tariffRows(t) {
+  if (!(t.periods || []).length) {
+    return `<span>Flag fall</span><span>${money(t.base)}</span><span>Per km</span><span>${money(t.per_km)}</span>${t.per_min ? `<span>Per minute of travel</span><span>${money(t.per_min)}</span>` : ''}${t.call_fee ? `<span>Calling for a taxi</span><span>+${money(t.call_fee)}</span>` : ''}`;
+  }
+  let h = t.periods.map(p => `<span>Meter start, ${esc(p.rule || p.label)}</span><span>${money(p.base)}</span>`).join('');
+  h += `<span>Then per km</span><span>${money(t.per_km)}${t.per_km_after ? '–' + money(t.per_km_after).slice(1) : ''}</span>`;
+  if (t.per_hour_slow) h += `<span>Plus time in slow traffic</span><span>${money(t.per_hour_slow)}/h</span>`;
+  (t.fixed_fares || []).forEach(ff => { h += SEP + t.periods.filter(p => ff.amounts[p.id] != null).map(p => `<span>${esc(ff.label)}, ${esc(p.label)}</span><span>${whole(ff.amounts[p.id])}</span>`).join(''); });
+  if ((t.supplements || []).length) h += SEP + t.supplements.map(x => `<span>${esc(x.label)}</span><span>+${money(x.amount)}</span>`).join('');
+  return h;
+}
 function taxiBlock(c) {
   const t = c.taxi_tariff, from = homePoint() ? '__home' : ((c.airports || [])[0] ? '__air:' + c.airports[0].id : '');
   const opts = sel => spotOptions().map(([v, l]) => `<option value="${esc(v)}" ${v === sel ? 'selected' : ''}>${esc(l)}</option>`).join('');
   const firstPlace = spotOptions().find(([v]) => !v.startsWith('__'));
+  const tx = c.taxis || {};
   return `<div class="block" id="taxiBlock" tabindex="-1"><h2>Taxis in ${esc(cityName(c.city_id))}</h2>
-    <div id="fareBlock" tabindex="-1" style="display:flex;flex-direction:column;gap:10px"><h3>Fare estimate</h3>
+    ${tx.intro ? `<p class="small">${tx.intro_bold ? `<b>${esc(tx.intro_bold)}</b> ` : ''}${esc(tx.intro)}</p>` : ''}
+    ${(tx.numbers || []).length ? `<div>${tx.numbers.map(n => `<div class="numrow"><div><div class="n">${esc(n.number)}</div><div class="small muted">${esc(n.label)}</div></div><button class="text-btn" data-act="copy" data-text="${esc(n.number)}">Copy</button></div>`).join('')}</div>` : ''}
+    ${tx.apps ? `<p class="small muted">${esc(tx.apps)}</p>` : ''}
+    <div id="fareBlock" tabindex="-1" style="display:flex;flex-direction:column;gap:10px;padding-top:6px"><h3>Fare estimate</h3>
       <div class="fields"><label class="f">From<select id="fFrom">${opts(from)}</select></label><label class="f">To<select id="fTo">${opts(firstPlace ? firstPlace[0] : '')}</select></label></div>
       <div id="fareOut"></div></div>
-    <h3 style="margin-top:10px">Official tariff</h3>
-    <div class="kv"><span>Flag fall</span><span>€${t.base.toFixed(2)}</span><span>Per km</span><span>€${t.per_km.toFixed(2)}</span><span>Per minute of travel</span><span>€${t.per_min.toFixed(2)}</span>${t.call_fee ? `<span>Calling for a taxi</span><span>+€${t.call_fee.toFixed(2)}</span>` : ''}</div>
-    <p class="small faint">${esc(t.note)} Source: ${esc(t.source)}, checked ${esc(fmtISO(t.checked))}.</p>
-    <button class="btn line" data-act="ptabgo" data-v="Taxi and transport" style="align-self:flex-start">Taxi phrases &amp; “Show driver”</button></div>`;
+    <h3 style="margin-top:10px">Official ${t.periods ? 'fares' : 'tariff'}</h3>
+    <div class="kv">${tariffRows(t)}</div>
+    ${(t.discounts || []).map(d => `<p class="small"><b>${esc(d.title)}:</b> ${esc(d.text)}</p>`).join('')}
+    <p class="small faint">${t.periods ? '' : esc(t.note) + ' '}Source: ${esc(t.source)}, checked ${esc(fmtISO(t.checked))}.</p>
+    ${t.rush_note ? `<p class="small muted"><b>Rush hour:</b> ${esc(t.rush_note)}</p>` : ''}
+    <button class="btn line" data-act="ptabgo" data-v="${esc((S.C.phrases.driver && S.C.phrases.driver.situation) || 'Taxi and transport')}" style="align-self:flex-start">Taxi phrases &amp; “Show driver”</button></div>`;
 }
 export async function showFare() {
   const out = $('#fareOut'); if (!out) return;
   const a = spot($('#fFrom').value), b = spot($('#fTo').value);
-  const r = await fareService.estimate(a && a.location, b && b.location, curCityId());
+  const pt = s => s && s.location ? Object.assign({}, s.location, s.airport_id ? { airport_id: s.airport_id } : {}) : null;
+  const r = await fareService.estimate(pt(a), pt(b), curCityId());
   if (r.err) { out.innerHTML = `<p class="small muted">${esc(r.err)}</p>`; return; }
-  out.innerHTML = `<div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span style="font-family:var(--mono);font-size:30px;font-variant-numeric:tabular-nums">€${r.lo}${r.hi !== r.lo ? '–' + r.hi : ''}</span><span class="small muted">estimate · about ${r.km.toFixed(1)} km by road</span></div>`;
+  out.innerHTML = `<div style="display:flex;align-items:baseline;gap:10px;flex-wrap:wrap"><span style="font-family:var(--mono);font-size:30px;font-variant-numeric:tabular-nums">€${r.lo}${r.hi !== r.lo ? '–' + r.hi : ''}</span><span class="small muted">${r.fixed ? 'flat fare' : 'estimate'}${r.period ? ' · ' + esc(r.period.label) + ' rates' : ''}${r.fixed ? '' : ` · about ${r.km.toFixed(1)} km by road`}</span></div>${r.period || r.fixed ? `<p class="small faint">${esc(r.note)}</p>` : ''}`;
 }
 
 async function voiceBlock() {
-  const ph = S.C.phrases, v = await speechService.voiceInfo(ph.language), ess = S.C.essentials;
+  const ph = S.C.phrases, v = await speechService.voiceInfo(ph.language);
   const el = $('#voiceInfo'); if (!el) return;
-  el.innerHTML = v ? (v.exact ? `Using the ${esc(ph.language_name)} voice “${esc(v.name)}” on this phone.` : `Using “${esc(v.name)}” (${esc(v.lang)}). It sounds Brazilian rather than European Portuguese. A Portugal voice is better:`) : `<b>This phone has no ${esc(ph.language_name)} voice installed</b>, so phrases can’t play yet.`;
+  el.innerHTML = v ? (v.exact ? `Using the ${esc(ph.language_name)} voice “${esc(v.name)}” on this phone.` : `Using “${esc(v.name)}” (${esc(v.lang)}). ${esc(ph.voice_region_note || 'It is a voice from another region, so a local voice is better:')}`) : `<b>This phone has no ${esc(ph.language_name)} voice installed</b>, so phrases can’t play yet.`;
 }
 
 export function renderEssentials() {
   const c = cityOf(curCityId()), ess = S.C.essentials, ga = c.getting_around;
   let html = masthead() + `<div class="greet"><div class="eyebrow">Essentials</div><h1>The practical bits.</h1></div>
-  <div class="block" id="tripBlock" tabindex="-1" style="padding-top:8px"><h2>You &amp; your trip</h2>
+  <button class="btn line" data-act="emergency" style="align-self:flex-start">${ic('sos', 'style="width:18px;height:18px"')}Emergency card · works offline</button>
+  <div class="block" id="tripBlock" tabindex="-1" style="padding-top:22px"><h2>You &amp; your trip</h2>
     <div class="fields"><label class="f">Your first name<input type="text" data-bind="traveler_name" value="${esc(S.trip.traveler_name)}" autocomplete="given-name" placeholder="Used in your greeting"></label></div>
     ${languageSelect('eLang')}
     ${homeCurrencySelect()}
@@ -103,13 +128,13 @@ export function renderEssentials() {
     ${staysEditor()}
     <h3 style="margin-top:10px">Arriving and leaving</h3>
     ${arrivalFields()}
-    <div class="fields"><label class="f">Booking references (optional)<input type="text" data-bind="refs" value="${esc(S.trip.refs)}" placeholder="Airline, train or hotel codes"></label></div>
-    <p class="small faint">Saved only on this phone. Booking references are never included in your shared trip summary.</p>
     ${S.trip.departure.flight ? `<a class="btn line sm" style="align-self:flex-start" href="https://www.google.com/search?q=${encodeURIComponent('flight ' + S.trip.departure.flight)}" target="_blank" rel="noopener">Track departure flight ${esc(S.trip.departure.flight)} ↗</a>` : ''}
+    ${S.trip.refs ? `<div class="fields"><label class="f">Booking notes<input type="text" data-bind="refs" value="${esc(S.trip.refs)}"></label></div><p class="small faint">From before bookings had their own list. You can move these into Your bookings below.</p>` : ''}
     <button class="text-btn" data-act="welcome" data-step="1" style="align-self:flex-start">Show the welcome steps again</button></div>
-  <div class="block" id="connBlock" tabindex="-1"><h2>Getting between places</h2>${connections()}<p class="small faint">Times are approximate. Check live times when you book.</p></div>
+  ${bookingsBlock()}
+  ${cityIds().length > 1 ? `<div class="block" id="connBlock" tabindex="-1"><h2>Getting between places</h2>${connections()}<p class="small faint">Times are approximate. Check live times on the official sites when you book.</p></div>` : ''}
   ${offlineMapsBlock()}
-  <div class="block" style="padding-top:28px"><span class="label">Now showing</span>${cityBar()}</div>
+  ${cityIds().length > 1 ? `<div class="block" style="padding-top:28px"><span class="label">Now showing</span>${cityBar()}</div>` : ''}
   ${currencyBlock(c)}
   <div class="block"><h2>Getting around ${esc(cityName(c.city_id))}</h2><ul class="plain">${ga.items.map(i => `<li><b>${esc(i.title)}</b>${esc(i.text)}${i.link ? `<br><a href="${esc(i.link.url)}" target="_blank" rel="noopener">${esc(i.link.label)} ↗</a>` : ''}</li>`).join('')}</ul>
     ${(ga.links || []).map(l => `<a class="btn line sm" style="align-self:flex-start" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('')}</div>
@@ -119,10 +144,11 @@ export function renderEssentials() {
     <ul class="plain">${ess.voice_help.map(v => `<li><b>${esc(v.title)}</b>${esc(v.text)}</li>`).join('')}</ul><p class="small muted">Then close and reopen this app.</p>
     <button class="btn line" data-act="say" data-text="${esc(ess.voice_test)}" style="align-self:flex-start">${ic('speak', 'style="width:18px;height:18px"')}Test: “${esc(ess.voice_test)}”</button></div>
   <div class="block"><h2>Local know-how</h2><ul class="plain">${ess.know_how.map(k => `<li><b>${esc(k.title)}</b>${esc(k.text)}</li>`).join('')}</ul><p class="small faint">${esc(ess.know_how_note)}</p></div>
-  <div class="block"><h2>Emergencies</h2><div>${ess.emergency.map(e => `<div class="numrow"><div><div class="n">${esc(e.number)}</div><div class="small muted">${esc(e.label)}</div></div><button class="text-btn" data-act="copy" data-text="${esc(e.number)}">Copy</button></div>`).join('')}</div>
+  <div class="block"><h2>Emergencies</h2><div>${ess.emergency.map(e => `<div class="numrow"><div><div class="n">${esc(e.number)}</div><div class="small muted">${esc(e.label)}</div></div><a class="text-btn" href="tel:${esc(String(e.number).replace(/[^\d+]/g, ''))}">Call</a></div>`).join('')}</div>
     <ul class="plain">${ess.embassies.map(e => `<li><a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.label)} ↗</a></li>`).join('')}</ul>
-    <p class="small muted">${esc(ess.emergency_note)}</p></div>
-  <p class="small faint" style="padding-top:28px">Prices, hours and fares checked Oct 9, 2026 from official sites and travel sources. They change, so confirm when booking.</p>
+    <p class="small muted">${esc(ess.emergency_note)}</p>
+    <button class="btn line sm" data-act="emergency" style="align-self:flex-start">${ic('sos', 'style="width:16px;height:16px"')}Open the emergency card</button></div>
+  <p class="small faint" style="padding-top:28px">Prices, hours and fares checked ${esc(fmtISO(ess.checked, { month: 'short', day: 'numeric', year: 'numeric' }))} from official sites and travel sources. They change, so confirm when booking.</p>
   <p class="small faint" style="padding-top:10px">Wanderings by Whiskers &amp; Wanderings · ${esc(EDITION.name)} edition</p>`;
   document.querySelector('section[data-tab="essentials"]').innerHTML = html;
   addMount(() => { loadRate(); showFare(); voiceBlock(); fillOfflineMaps(); });

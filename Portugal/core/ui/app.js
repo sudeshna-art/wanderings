@@ -1,6 +1,6 @@
 /* Wanderings app shell: boot, tabs, taps and form binding. All outside access goes through services. */
 import { CONFIG } from '../config/default-config.js';
-import { S, P, save, myLang, curCityId, cityIds, cityName, placeById, isPlanner, isWanderer, runMounts, runCleanups, today } from './state.js';
+import { S, P, save, copyOf, myLang, curCityId, cityIds, cityName, placeById, isPlanner, isWanderer, runMounts, runCleanups, today } from './state.js';
 import { $, $$, esc, ic, toast } from './dom.js';
 import { staysEditor } from './components.js';
 import { contentService } from '../services/content-service.js';
@@ -13,12 +13,14 @@ import { newStay, syncLegs, setStatus, statusOf, setBooked, addToDay, removeFrom
 import { renderToday, showSlide, startSlides, stopSlides } from './screens/today.js';
 import { renderPlaces, defaultView, addCustomPlace } from './screens/places.js';
 import { openSched, openAddSheet, closeSheet, setSheetDay, sheetDay, openAddStop } from './screens/plan.js';
-import { openSpot, recenter, refreshWanderer } from './screens/wanderer.js';
+import { openSpot, recenter, refreshWanderer, wanderPos } from './screens/wanderer.js';
 import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js';
 import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js';
 import { renderEssentials, showFare, updateConv, loadRate } from './screens/essentials.js';
 import { renderWelcome, W, STEP_COUNT } from './screens/welcome.js';
-import { downloadPack, downloadAll, removePack } from './screens/offline.js';
+import { downloadPack, downloadAll, removePack, autoSaveMaps } from './screens/offline.js';
+import { openImport, importFind, importFile, importBack, importSave, openEditor, editorSave, editorDelete, changeKind } from './screens/bookings.js';
+import { showEmergency, sharePlan, meetForm, meetSave, meetShare } from './screens/safety.js';
 
 const TABS = [['today', 'Today'], ['places', 'Places'], ['phrases', 'Phrases'], ['journal', 'Journal'], ['essentials', 'Essentials']];
 const RENDER = { today: renderToday, places: renderPlaces, phrases: renderPhrases, journal: renderJournal, essentials: renderEssentials };
@@ -45,6 +47,8 @@ function go(k, opts = {}) {
   if (opts.focus) { const el = $(opts.focus); if (el) setTimeout(() => { el.focus(); el.scrollIntoView({ block: 'center' }); }, 80); }
 }
 const rerender = () => render(P().tab, true);
+/* After the trip changes from a full-screen layer (import, bookings): refresh what's underneath. */
+function afterTripChange() { syncLegs(S.trip); if (!$('#welcome').hidden) renderWelcome(); rerender(); }
 
 /* ---------- visits ---------- */
 function openNoteForm(id) {
@@ -112,11 +116,11 @@ const A = {
   homedriver: () => showDriver('__home'),
   closedriver: () => { $('#driver').hidden = true; },
   dismissinstall: () => { P().installTipDone = true; save(); rerender(); },
-  welcome: el => { W.step = +el.dataset.step || 1; renderWelcome(); },
+  welcome: el => { W.step = Math.min(+el.dataset.step || 1, STEP_COUNT); renderWelcome(); },
   wnext: () => { W.step = Math.min(STEP_COUNT, W.step + 1); renderWelcome(); $('#welcome').scrollTo(0, 0); },
   wback: () => { W.step = Math.max(1, W.step - 1); renderWelcome(); },
   wdone: () => { S.trip.onboarded = true; syncLegs(S.trip); P().pview = defaultView(); save(); $('#welcome').hidden = true; renderTabs(); go(P().tab); },
-  stayadd: () => { const last = sortedStays(S.trip).slice(-1)[0]; const ns = newStay(last && last.city_id === cityIds()[0] ? cityIds()[1] : cityIds()[0]); if (last && last.end) ns.start = last.end; S.trip.stays.push(ns); syncLegs(S.trip); save(); refreshStays(); },
+  stayadd: () => { const last = sortedStays(S.trip).slice(-1)[0]; const ns = newStay(last && last.city_id === cityIds()[0] ? (cityIds()[1] || cityIds()[0]) : cityIds()[0]); if (last && last.end) ns.start = last.end; S.trip.stays.push(ns); syncLegs(S.trip); save(); refreshStays(); },
   staydel: el => { S.trip.stays.splice(+el.dataset.i, 1); syncLegs(S.trip); save(); refreshStays(); },
   slideto: el => { showSlide(+el.dataset.i); startSlides(); },
   slideshow: () => { P().coverMode = 'slides'; save(); toast('Slideshow on. The sketch opens the show.'); render('today', true); },
@@ -135,7 +139,7 @@ const A = {
   igshare: async () => {
     const sel = P().igSel.filter(id => allPhotoIds().includes(id)); if (!sel.length) { toast('Tap the photos you want to share first'); return; }
     const cap = summaryText(); await shareService.copy(cap);
-    const r = await sharePhotos(sel, cap, 'portugal');
+    const r = await sharePhotos(sel, cap, copyOf('file_prefix', 'wanderings'));
     if (r === 'shared' || r === 'cancelled') { if (r === 'shared') toast('Caption copied. Choose Instagram, then paste it.'); }
     else { await copy(cap, true); toast('Photo sharing isn’t available here. Caption copied; post your photos from Instagram.'); }
   },
@@ -157,7 +161,23 @@ const A = {
   mapdel: el => removePack(el.dataset.id),
   cdir: el => { P().cdir = el.dataset.v; save(); render('essentials', true); },
   saverate: async () => { const v = parseFloat(String(($('#rateIn') || {}).value || '').replace(',', '.')); if (!(v > 0)) { toast('Enter a rate like 4.1'); return; } const c = S.C.cities.find(x => x.city_id === curCityId()); await currencyService.setManualRate(c.currency_code, S.trip.home_currency, v); toast('Rate saved'); loadRate(); },
-  resetrate: async () => { await currencyService.clearManualRate(); toast('Using the reference rate'); loadRate(); }
+  resetrate: async () => { await currencyService.clearManualRate(); toast('Using the reference rate'); loadRate(); },
+  /* bookings and import (Oct 11 2026) */
+  imopen: () => openImport(),
+  imfind: () => importFind(),
+  imback: () => importBack(),
+  imsave: () => { if (importSave()) afterTripChange(); },
+  bkadd: () => openEditor(),
+  bkedit: el => openEditor(el.dataset.id),
+  bksave: () => { if (editorSave()) afterTripChange(); },
+  bkdel: el => { if (editorDelete(el)) afterTripChange(); },
+  /* safety (Oct 11 2026) */
+  emergency: () => showEmergency(),
+  shareplan: () => sharePlan(),
+  meetform: el => meetForm(el.dataset.box, el.dataset.id),
+  meetsave: el => { if (meetSave(el.dataset.id, wanderPos())) { closeSheet(); const b = $('#meetHereBox'); if (b) { b.hidden = true; b.innerHTML = ''; } } },
+  meetshare: () => meetShare(),
+  meetclear: () => { S.trip.meetup = null; save(); rerender(); toast('Meeting point cleared'); }
 };
 async function copy(text, quiet) { const ok = await shareService.copy(text); if (!quiet) toast(ok ? 'Copied' : 'Press and hold the text to copy it'); return ok; }
 function rerenderBehindSheet() { if (P().tab === 'places' && P().pview === 'nearby') refreshWanderer(); else rerender(); }
@@ -173,10 +193,16 @@ document.addEventListener('click', e => {
 let photoTarget = 'composer';
 document.addEventListener('click', e => { const l = e.target.closest && e.target.closest('[data-phtarget]'); if (l) photoTarget = l.dataset.phtarget; }, true);
 
-function setPath(obj, path, val) { const k = path.split('.'); let o = obj; for (let i = 0; i < k.length - 1; i++) o = o[k[i]]; o[k[k.length - 1]] = val; }
+function setPath(obj, path, val) { const k = path.split('.'); let o = obj; for (let i = 0; i < k.length - 1; i++) { if (o[k[i]] == null) o[k[i]] = {}; o = o[k[i]]; } o[k[k.length - 1]] = val; }
 document.addEventListener('change', async e => {
   const el = e.target;
   if (el.dataset && el.dataset.act === 'booked') return;           // handled on click
+  if (el.dataset && el.dataset.act === 'bkkind') { changeKind(el.dataset.i); return; }
+  if (el.id === 'icsInput') {
+    const f = (el.files || [])[0]; el.value = ''; if (!f) return;
+    try { importFile(await f.text()); } catch (err) { toast('That file couldn’t be read'); }
+    return;
+  }
   if (el.id === 'wConsent') { const b = $('#wSendBtn'); if (b) b.disabled = !el.checked; return; }
   if (el.id === 'consentChk') { const b = $('#shareWanderBtn'); if (b) b.disabled = !el.checked; return; }
   if (el.id === 'fFrom' || el.id === 'fTo') { showFare(); return; }
@@ -201,6 +227,7 @@ document.addEventListener('change', async e => {
   save();
   if (bp === 'travel_style') { P().pview = defaultView(); renderTabs(); if (!inWelcome) toast(v === 'planner' ? 'Planner mode on. Places is now Plan.' : v === 'wanderer' ? 'True Wanderer on. Places is now Nearby.' : 'Go with the flow'); }
   if (/^(stays|legs)\./.test(bp)) { refreshStays(); }
+  if (/^emergency\./.test(bp)) { toast('Saved on this phone'); showEmergency(); return; }
   if (inWelcome) return;
   toast('Saved');
   if (bp === 'traveler_language') { rerender(); return; }
@@ -226,7 +253,7 @@ async function boot() {
   if (!S.trip.stays.length) { S.trip.stays = cityIds().map(id => newStay(id)); syncLegs(S.trip); }
   J.pending = await tripService.getPending(); J.draft = await tripService.getDraft();
   S.art = {};
-  await Promise.all(S.C.cities.flatMap(c => [c.hero.art, c.mark]).map(async f => { S.art[f] = await contentService.art(f); }));
+  await Promise.all(S.C.cities.flatMap(c => [c.hero.art, c.mark].concat(c.illustrated_map ? [c.illustrated_map.art] : [])).map(async f => { S.art[f] = await contentService.art(f); }));
   root.querySelector('.loading')?.remove();
   TABS.forEach(([k]) => { if (!document.querySelector(`section[data-tab="${k}"]`)) root.insertAdjacentHTML('beforeend', `<section data-tab="${k}" hidden></section>`); });
   renderTabs();
@@ -235,6 +262,8 @@ async function boot() {
   if (!S.trip.onboarded || force) { W.step = 1; renderWelcome(); }
   window.addEventListener('hashchange', () => { try { if (location.hash === '#welcome') { W.step = 1; renderWelcome(); } } catch (e) {} });
   speechService.onVoicesChanged(() => { if (P().tab === 'essentials') rerender(); });
+  setTimeout(autoSaveMaps, 2500);                                   // editions that save their offline map by themselves
+  window.addEventListener('online', () => autoSaveMaps());
   window.__wanderings = { S, go, render };   // for testing only
 }
 boot();

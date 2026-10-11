@@ -1,5 +1,6 @@
 /* Phrases by situation, shown with meanings in the traveler's own language.
-   Tap to hear with the best local voice (never an English fallback). Favorites, search, driver card. */
+   Tap to hear with the best local voice (never an English fallback). Top 10, favorites, search, driver card.
+   Oct 11 2026: opens on your starred phrases, or the edition's Top 10 ("top" in phrases.json) until you star some. */
 import { S, P, curCityId, cityName, spot, spotOptions, stayHere, myLang } from '../state.js';
 import { esc, ic, toast, $ } from '../dom.js';
 import { masthead } from '../components.js';
@@ -10,6 +11,7 @@ import { phraseFor, speaksLocal } from '../../models/schema.js';
 let pq = '';
 export const setQuery = q => { pq = q; };
 export const getQuery = () => pq;
+const TOP = 'Top 10', FAV = 'Favorites';
 
 export async function say(text) {
   const ph = S.C.phrases;
@@ -38,19 +40,21 @@ export function phraseRow(entry) {
 
 export function renderPhrases() {
   const ph = S.C.phrases, P_ = ph.situations, lang = myLang();
-  const tabs = ['Favorites', ...Object.keys(P_)];
-  if (!P().ptab || !tabs.includes(P().ptab)) P().ptab = 'Restaurant';
-  const cur = P().ptab, q = pq.trim().toLowerCase();
   const all = Object.values(P_).flat();
+  const top = (ph.top || []).map(k => all.find(e => view(e).key === k)).filter(Boolean);
+  const tabs = (top.length ? [TOP] : []).concat([FAV], Object.keys(P_));
+  if (!P().ptab || !tabs.includes(P().ptab)) P().ptab = S.trip.favs.length ? FAV : top.length ? TOP : (P_.Restaurant ? 'Restaurant' : Object.keys(P_)[0]);
+  const cur = P().ptab, q = pq.trim().toLowerCase();
   let rows;
   if (q) rows = all.filter(e => { const v = view(e); return [v.t, v.m, v.say].join(' ').toLowerCase().includes(q); });
-  else if (cur === 'Favorites') rows = all.filter(e => S.trip.favs.includes(view(e).key));
+  else if (cur === FAV) rows = all.filter(e => S.trip.favs.includes(view(e).key));
+  else if (cur === TOP) rows = top;
   else rows = P_[cur] || [];
   const local = speaksLocal(lang, ph.language);
-  let html = masthead() + `<div class="greet"><div class="eyebrow">Phrases</div><h1>${esc(ph.title)}</h1><p class="lede">Tap the speaker to hear it. Star the ones you’ll use again.</p></div>
+  let html = masthead() + `<div class="greet"><div class="eyebrow">Phrases</div><h1>${esc(ph.title)}</h1><p class="lede">Tap the speaker to hear it. Star the ones you’ll use again and they open first.</p></div>
   <div class="fields" style="align-items:flex-end;margin:-6px 0 6px">${languageSelect('phLang')}</div>
-  <p class="small muted" style="margin:0 0 10px">${local ? `You already speak ${esc(ph.language_name)}. These are the local versions, which differ from Brazil in places, so the audio can still help.` : esc(ph.note)}${lang !== 'en' && !local ? ' Tap the speaker to hear how each phrase sounds.' : ''}</p>
-  <div class="chips" role="toolbar" aria-label="Situations">${tabs.map(t => `<button class="chip" data-act="ptab" data-v="${esc(t)}" aria-pressed="${!q && t === cur}">${t === 'Favorites' ? '★ Favorites' : esc(t)}</button>`).join('')}</div>
+  <p class="small muted" style="margin:0 0 10px">${local ? esc(ph.local_note || `You already speak ${ph.language_name}. These are the everyday phrases for the trip, and the audio can still help.`) : esc(ph.note)}${lang !== 'en' && !local ? ' Tap the speaker to hear how each phrase sounds.' : ''}</p>
+  <div class="chips" role="toolbar" aria-label="Situations">${tabs.map(t => `<button class="chip" data-act="ptab" data-v="${esc(t)}" aria-pressed="${!q && t === cur}">${t === FAV ? `★ Mine${S.trip.favs.length ? ' · ' + S.trip.favs.length : ''}` : esc(t)}</button>`).join('')}</div>
   <input type="search" id="phq" placeholder="Search phrases" value="${esc(pq)}" aria-label="Search phrases" style="margin-top:8px">`;
   if (!q && cur === 'Taxi and transport') {
     html += `<div class="block" style="padding-top:22px"><h2>Tell the driver</h2><p class="small muted">Pick a place in ${esc(cityName(curCityId()))} and show the screen to the driver, or tap to hear it.</p>
@@ -58,7 +62,7 @@ export function renderPhrases() {
       <button class="btn" data-act="driver">Show driver</button></div></div>`;
   }
   html += `<div class="rows" style="margin-top:14px">${rows.length ? rows.map(phraseRow).join('')
-    : `<p class="serif" style="font-size:18px;padding:16px 0">${q ? `No phrase matches “${esc(pq)}”.` : 'No favorites yet. Tap the star on any phrase.'}</p>`}</div>`;
+    : `<p class="serif" style="font-size:18px;padding:16px 0">${q ? `No phrase matches “${esc(pq)}”.` : 'Nothing starred yet. Tap the star on any phrase and it lands here, ready for the moment you need it.'}</p>`}</div>`;
   document.querySelector('section[data-tab="phrases"]').innerHTML = html;
 }
 

@@ -3,6 +3,34 @@
  "language_name": "Portuguese",
  "title": "Say it in Portuguese.",
  "note": "European Portuguese, as spoken in Portugal.",
+ "local_note": "You already speak Portuguese. These are the everyday phrases for the trip, in European Portuguese, and the audio can still help.",
+ "voice_region_note": "It is a Portuguese voice from another region (often Brazil), so a Portugal voice sounds more natural:",
+ "greetings": [
+  {
+   "until": 12,
+   "t": "Bom dia"
+  },
+  {
+   "until": 20,
+   "t": "Boa tarde"
+  },
+  {
+   "until": 24,
+   "t": "Boa noite"
+  }
+ ],
+ "top": [
+  "Olá",
+  "Bom dia",
+  "Por favor",
+  "Obrigada",
+  "Desculpe",
+  "Fala inglês?",
+  "Não queremos o couvert, obrigada",
+  "A conta, por favor",
+  "Quanto custa?",
+  "Onde é a casa de banho?"
+ ],
  "situations": {
   "Greetings": [
    {
@@ -732,6 +760,18 @@
     }
    },
    {
+    "t": "A que horas é o último barco de volta?",
+    "say": "ah keh OH-rash eh oo OOL-tee-moo BAR-koo deh VOHL-tah",
+    "m": {
+     "en": "What time is the last boat back?",
+     "es": "¿A qué hora sale el último barco de vuelta?",
+     "fr": "À quelle heure part le dernier bateau pour le retour ?",
+     "pt": "Que horas sai o último barco de volta?",
+     "de": "Wann fährt das letzte Boot zurück?",
+     "it": "A che ora parte l’ultima barca per il ritorno?"
+    }
+   },
+   {
     "t": "Duas espreguiçadeiras e um chapéu de sol",
     "say": "DOO-ash shpreh-gee-sah-DAY-rash ee oong shah-PEH-oo deh sol",
     "m": {
@@ -926,6 +966,54 @@
      "de": "Ich habe mich verlaufen (Männer sagen perdido)",
      "it": "Mi sono persa (gli uomini dicono perdido)"
     }
+   },
+   {
+    "t": "Não, obrigada",
+    "say": "now, oh-bree-GAH-dah",
+    "m": {
+     "en": "No, thank you (to street sellers, or anything you don’t want)",
+     "es": "No, gracias",
+     "fr": "Non, merci",
+     "pt": "Não, obrigada",
+     "de": "Nein, danke",
+     "it": "No, grazie"
+    }
+   },
+   {
+    "t": "Deixe-me em paz, por favor",
+    "say": "DAY-sheh meh ayn PAHSH, poor fah-VOR",
+    "m": {
+     "en": "Please leave me alone",
+     "es": "Déjeme en paz, por favor",
+     "fr": "Laissez-moi tranquille, s’il vous plaît",
+     "pt": "Me deixe em paz, por favor",
+     "de": "Bitte lassen Sie mich in Ruhe",
+     "it": "Mi lasci in pace, per favore"
+    }
+   },
+   {
+    "t": "Há uma farmácia de serviço aqui perto?",
+    "say": "AH OO-mah far-MAH-see-ah deh ser-VEE-soo ah-KEE PAIR-too",
+    "m": {
+     "en": "Is there a late-night (on-duty) pharmacy near here?",
+     "es": "¿Hay una farmacia de guardia cerca?",
+     "fr": "Y a-t-il une pharmacie de garde près d’ici ?",
+     "pt": "Tem uma farmácia de plantão aqui perto?",
+     "de": "Gibt es hier in der Nähe eine Notdienst-Apotheke?",
+     "it": "C’è una farmacia di turno qui vicino?"
+    }
+   },
+   {
+    "t": "Tem alguma coisa para …?",
+    "say": "tayn ahl-GOO-mah KOY-zah PAH-rah",
+    "m": {
+     "en": "Do you have something for …?",
+     "es": "¿Tiene algo para …?",
+     "fr": "Vous avez quelque chose contre … ?",
+     "pt": "Tem alguma coisa para …?",
+     "de": "Haben Sie etwas gegen …?",
+     "it": "Ha qualcosa per …?"
+    }
    }
   ]
  },
@@ -968,6 +1056,7 @@
     "de": "Was wird das ungefähr kosten?",
     "it": "Quanto costerà, più o meno?"
    }
-  }
+  },
+  "situation": "Taxi and transport"
  }
 }

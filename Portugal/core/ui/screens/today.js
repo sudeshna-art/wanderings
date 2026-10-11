@@ -1,19 +1,24 @@
-/* Today: stage-aware home screen for the current city. */
-import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount } from '../state.js';
+/* Today: answers "what now?" for the current city. Simplified Oct 11 2026: the time-sensitive things first
+   (meeting point, travel, bookings, clashes), then what to book, ideas, your base and a phrase. */
+import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js';
 import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js';
-import { masthead, cityBar, legend, bookRow, placeRow, art } from '../components.js';
-import { stage, statusOf, isBooked, itemsOn, walkMinutes, km, sortedStays } from '../../models/schema.js';
+import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js';
+import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js';
+import { tripChecks } from '../../models/checks.js';
 import { timelineView } from './plan.js';
 import { allPhotoIds } from './journal.js';
 import { view as phraseView } from './phrases.js';
-import { myLang } from '../state.js';
+import { meetBlock } from './safety.js';
+import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js';
+import { speaksLocal } from '../../models/schema.js';
 import { mapPackService } from '../../services/mappack-service.js';
 
 let slideTimer = null, slideIdx = 0;
 
+/* Local greeting by time of day, from phrases.json "greetings": [{ until: <hour>, t }]. */
 function greeting() {
-  const h = new Date().getHours();
-  return h < 12 ? 'Bom dia' : h < 19 ? 'Boa tarde' : 'Boa noite';
+  const h = new Date().getHours(), g = S.C.phrases.greetings || [];
+  return (g.find(x => h < x.until) || g[g.length - 1] || { t: 'Hello' }).t;
 }
 
 function coverHero(cityId) {
@@ -67,22 +72,52 @@ function showInstallTip() {
   } catch (e) { return false; }
 }
 
-function travelBlock() {
+/* ---------- "what now": only things that matter in the next day or so ---------- */
+const nextDay = d => { const x = new Date(d + 'T00:00:00'); x.setDate(x.getDate() + 1); return localISO(x); };
+function travelAlert() {
   const t = today();
   const next = S.trip.legs.filter(l => l.date && l.date >= t).sort((a, b) => a.date.localeCompare(b.date))[0];
   if (!next) return '';
   const days = Math.round((new Date(next.date + 'T00:00:00') - new Date(t + 'T00:00:00')) / 864e5);
   if (days > 3) return '';
   const mode = S.C.edition.leg_modes.find(m => m.id === next.mode);
-  return `<div class="block"><div class="head"><h2>${days === 0 ? 'Travel day' : days === 1 ? 'Travel tomorrow' : `Travel in ${days} days`}</h2><button class="text-btn" data-act="go" data-tab="essentials" data-focus="#connBlock">Options</button></div>
-    <div class="legrow">${ic(modeIcon(next.mode))}<span>${esc(cityName(next.from_city_id))} to ${esc(cityName(next.to_city_id))}, ${esc(fmtDay(next.date))}${mode ? ' · ' + esc(mode.label) : ''}</span></div>
-    ${!mode ? '<p class="small muted">Decide how you’re getting there in Essentials. Drivers and trains are worth booking a day or two ahead.</p>' : ''}</div>`;
+  return `<div class="alert">${ic(modeIcon(next.mode))}<div style="min-width:0;display:flex;flex-direction:column;gap:4px"><b>${days === 0 ? 'Travel day' : days === 1 ? 'Travel tomorrow' : `Travel in ${days} days`}: ${esc(cityName(next.from_city_id))} to ${esc(cityName(next.to_city_id))}${mode ? ' · ' + esc(mode.label) : ''}</b>
+    ${mode ? legInfo(next) : '<p class="small muted" style="margin:0">Decide how you’re getting there. Drivers and trains are worth booking a day or two ahead.</p>'}
+    <button class="text-btn" data-act="go" data-tab="essentials" data-focus="#tripBlock" style="min-height:32px;align-self:flex-start">${mode ? 'Change' : 'Choose how'}</button></div></div>`;
+}
+function bookingAlerts(st) {
+  const t = today(), tm = nextDay(t);
+  let rows = bookingsOn(S.trip, t).map(x => ({ x, label: 'Today' }));
+  rows = rows.concat(bookingsOn(S.trip, tm).map(x => ({ x, label: 'Tomorrow' })));
+  if (!rows.length && st.k === 'before') { const nb = sortedBookings(S.trip).find(b => b.date && b.date >= t); if (nb) rows = [{ x: { b: nb, role: 'start' }, label: 'Next' }]; }
+  if (!rows.length) return '';
+  return `<div class="alert">${ic('ticket')}<div style="min-width:0;flex:1">${rows.slice(0, 4).map(r => `<div class="label" style="margin-top:2px">${esc(r.label)}</div>${bookingLine(r.x.b, r.x.role, { day: r.label === 'Next' })}`).join('')}
+    <button class="text-btn" data-act="go" data-tab="essentials" data-focus="#bookBlock" style="min-height:32px">All bookings</button></div></div>`;
+}
+function checkAlerts() {
+  const t = today(), tm = nextDay(t);
+  const cs = tripChecks(S.trip, { placeById, cityName }).filter(c => c.level === 'warn' && (c.day === t || c.day === tm));
+  if (!cs.length) return '';
+  return `<div class="alert warn">${ic('sos')}<div style="min-width:0;display:flex;flex-direction:column;gap:4px"><b>Worth a look</b>${cs.slice(0, 3).map(c => `<p class="small" style="margin:0">${esc(c.text)}</p>`).join('')}</div></div>`;
+}
+function whatNow(st) {
+  if (st.k === 'after') return '';
+  let h = meetBlock() + travelAlert() + bookingAlerts(st) + checkAlerts();
+  if ((S.C.maps || {}).packs && S.C.maps.packs.length) {
+    h += `<div class="alert" id="todayOffline" hidden>${ic('compass')}<div style="min-width:0;display:flex;flex-direction:column;gap:6px"><b>Before you lose signal</b><p class="small" style="margin:0">Save the offline maps on Wi-Fi so maps work on trails, beaches and anywhere without coverage.</p>
+      <button class="btn sm" data-act="go" data-tab="essentials" data-focus="#offlineBlock" style="align-self:flex-start">Save offline maps</button></div></div>`;
+    addMount(async () => { const have = await mapPackService.downloaded(); const el = document.getElementById('todayOffline'); if (el) el.hidden = S.C.maps.packs.every(p => have.includes(p.id)); });
+  }
+  if (st.k === 'during' && !isWanderer()) h += `<button class="btn line" data-act="pview" data-v="nearby" data-tab="places" style="align-self:flex-start">${ic('compass', 'style="width:18px;height:18px"')}What’s near me</button>`;
+  if (!h) return '';
+  return `<div class="block"><h2>${st.k === 'during' ? 'Now' : 'Coming up'}</h2>${h}</div>`;
 }
 
 function baseBlock(cityId, st) {
   const sy = stayHere(cityId), c = cityOf(cityId);
+  const sos = `<button class="btn line sm" data-act="emergency">${ic('sos', 'style="width:16px;height:16px"')}Emergency card</button>`;
   if (!sy || (!sy.neighborhood_id && !sy.address)) {
-    return `<div class="block"><h2>Where are you staying in ${esc(cityName(cityId))}?</h2><p class="small muted">Add your ${c.region ? 'town' : 'neighborhood'} for local tips, walking times and a one-tap “take me home” for drivers.</p><button class="btn line" data-act="welcome" data-step="3" style="align-self:flex-start">Add where you’re staying</button></div>`;
+    return `<div class="block"><h2>Where are you staying in ${esc(cityName(cityId))}?</h2><p class="small muted">Add your ${c.region ? 'town' : 'neighborhood'} for local tips, walking times and a one-tap “take me home” for drivers.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn line" data-act="welcome" data-step="2">Add where you’re staying</button>${sos}</div></div>`;
   }
   const h = hoodOf(cityId, sy.neighborhood_id), home = homePoint(cityId);
   let walk = '';
@@ -92,13 +127,13 @@ function baseBlock(cityId, st) {
   if (st.k === 'before' && firstStay && firstStay.city_id === cityId && (S.trip.arrival.via || S.trip.arrival.flight)) {
     const via = S.trip.arrival.via, opt = S.C.edition.arrival_options.find(o => o.id === via);
     const ap = (c.airports || []).find(a => a.id === via);
-    arrive = `<div style="display:flex;flex-direction:column;gap:4px;padding-top:6px"><div class="label">Arriving${firstStay.start ? ' ' + esc(fmtISO(firstStay.start)) : ''}${opt ? ' · ' + esc(opt.label) : ''}</div>${ap ? `<p class="small">${esc(ap.tip)}</p>` : ''}
+    arrive = `<div style="display:flex;flex-direction:column;gap:4px;padding-top:6px"><div class="label">Arriving${firstStay.start ? ' ' + esc(fmtISO(firstStay.start)) : ''}${opt ? ' · ' + esc(opt.label) : ''}</div>${ap || (opt && opt.tip) ? `<p class="small">${esc(ap ? ap.tip : opt.tip)}</p>` : ''}
       ${S.trip.arrival.flight ? `<a class="btn line sm" style="align-self:flex-start" href="https://www.google.com/search?q=${encodeURIComponent('flight ' + S.trip.arrival.flight)}" target="_blank" rel="noopener">Track flight ${esc(S.trip.arrival.flight)} ↗</a>` : ''}</div>`;
   }
   return `<div class="block"><div class="head"><h2>Your base</h2><button class="text-btn" data-act="go" data-tab="essentials" data-focus="#tripBlock">Edit</button></div>
     <div><h3>${esc(sy.label || 'Where you’re staying')}</h3><div class="meta" style="font-size:12.5px;color:var(--muted)">${esc(h ? h.name : '')}${sy.address ? ' · ' + esc(sy.address) : ''}${sy.start ? ' · ' + esc(fmtISO(sy.start)) + (sy.end ? ' to ' + esc(fmtISO(sy.end)) : '') : ''}</div></div>
     ${h && h.tip ? `<p class="small">${esc(h.tip)}</p>` : ''}${walk ? `<p class="small muted">${esc(walk)}</p>` : ''}
-    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-act="homedriver">${ic('taxi', 'style="width:16px;height:16px"')}Take me home</button>${home ? `<button class="btn line sm" data-act="go" data-tab="essentials" data-focus="#fareBlock">Taxi fare estimate</button>` : ''}</div>${arrive}</div>`;
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-act="homedriver">${ic('taxi', 'style="width:16px;height:16px"')}Take me home</button>${home ? `<button class="btn line sm" data-act="go" data-tab="essentials" data-focus="#fareBlock">Taxi fare</button>` : ''}${sos}</div>${arrive}</div>`;
 }
 
 function planBlock(st) {
@@ -135,19 +170,18 @@ export function renderToday() {
   const st = stage(S.trip), cityId = curCityId(), c = cityOf(cityId), name = S.trip.traveler_name;
   let eyebrow, h1, lede;
   if (st.k === 'before') {
-    eyebrow = st.days == null ? 'Portugal · add your stays' : (st.days === 0 ? 'Your trip starts today' : `Trip starts in ${plural(st.days, 'day')}`);
+    eyebrow = st.days == null ? `${placeName()} · add your stays` : (st.days === 0 ? 'Your trip starts today' : `Trip starts in ${plural(st.days, 'day')}`);
     h1 = `${cityTitle(cityId)} awaits${name ? ', ' + name : ''}!`;
     lede = isWanderer() ? 'No plan needed. When you arrive, open Nearby and see what’s worth a look around you.' : 'Book the few things that sell out, save some ideas, and leave room to wander.';
   } else if (st.k === 'during') {
     eyebrow = `Day ${st.day} of ${st.total} · ${cityName(cityId)}`;
     h1 = `${greeting()}${name ? ', ' + name : ''}!`;
-    lede = isWanderer() ? 'Open Nearby to see what’s close, or just walk and see where the day goes.' : 'A few ideas for today. Mark “Went here” as you go and it becomes your journal.';
-  } else { eyebrow = 'Trip complete'; h1 = 'Portugal, remembered!'; lede = 'Your places and notes are ready to share.'; }
+    lede = isWanderer() ? 'Open Nearby to see what’s close, or just walk and see where the day goes.' : 'Mark “Went here” as you go and it becomes your journal.';
+  } else { eyebrow = 'Trip complete'; h1 = `${copyOf('greeting_place', placeName())}, remembered!`; lede = 'Your places and notes are ready to share.'; }
 
   const toBook = placesIn(cityId).filter(p => p.booking_status === 'required' && (p.must || p.urgency_level === 'book_soon') && p.category !== 'experience' && p.category !== 'day_trip')
     .sort((a, b) => (a.urgency_level === 'book_soon' ? 0 : 1) - (b.urgency_level === 'book_soon' ? 0 : 1));
   const unbooked = toBook.filter(p => !isBooked(S.trip, p.id));
-  const note = S.C.essentials.travel_notes[new Date().getDate() % S.C.essentials.travel_notes.length];
   const [moment, ph] = phraseNow();
   const wants = placesIn(cityId).filter(p => statusOf(S.trip, p.id) === 'want');
   const visited = S.trip.saved.filter(s => s.status === 'went').length;
@@ -155,7 +189,7 @@ export function renderToday() {
   let html = masthead() + `<div class="greet"><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(h1)}</h1><p class="lede">${esc(lede)}</p></div>${cityBar()}<div style="height:10px"></div>${coverHero(cityId)}`;
 
   if (!hasStays()) {
-    html += `<div class="block" style="padding-top:18px"><div style="border:1px solid var(--rule);padding:14px;display:flex;flex-direction:column;gap:8px"><div class="label">Your trip</div><p class="small">Add where you’re staying in Lisbon and the Algarve, with dates, and the app follows you from place to place.</p><button class="btn sm" data-act="welcome" data-step="3" style="align-self:flex-start">Add my stays</button></div></div>`;
+    html += `<div class="block" style="padding-top:18px"><div style="border:1px solid var(--rule);padding:14px;display:flex;flex-direction:column;gap:8px"><div class="label">Your trip</div><p class="small">${cityIds().length > 1 ? `Add where you’re staying in ${esc(copyOf('place_list', placeName()))}, with dates, and the app follows you from place to place.` : 'Add where you’re staying, with dates, for local tips, walking times and a one-tap ride home.'} Have booking emails? Import them instead.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-act="welcome" data-step="2">Add my stays</button><button class="btn line sm" data-act="imopen">Import bookings</button></div></div></div>`;
   }
   if (showInstallTip()) {
     const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -170,41 +204,27 @@ export function renderToday() {
     <button data-act="go" data-tab="essentials" data-focus="#taxiBlock">${ic('taxi')}Taxi</button>
     <button class="rec" data-act="go" data-tab="journal" data-focus="#jText"><span>${ic('mic')}</span>Record</button></div>`;
 
-  if (isWanderer() && st.k !== 'after') {
-    html += `<div class="block"><div class="head"><h2>Wander now</h2><span class="label">True Wanderer</span></div><p class="serif" style="font-size:17px">See the curated spots closest to you on a live map, with what they cost and how to get there.</p>
-      <button class="btn" data-act="pview" data-v="nearby" data-tab="places" style="align-self:flex-start">${ic('compass', 'style="width:18px;height:18px"')}What’s near me</button></div>`;
-  }
-  if (st.k !== 'after' && (S.C.maps || {}).packs && S.C.maps.packs.length) {
-    html += `<div class="block" id="todayOffline" hidden><div style="border:1px solid var(--rule);padding:14px;display:flex;flex-direction:column;gap:8px"><div class="label">Before you lose signal</div>
-      <p class="small">Save the offline maps on Wi-Fi so Nearby and your plan map work on trails, beaches and anywhere without coverage.</p>
-      <button class="btn sm" data-act="go" data-tab="essentials" data-focus="#offlineBlock" style="align-self:flex-start">Save offline maps</button></div></div>`;
-    addMount(async () => { const have = await mapPackService.downloaded(); const el = document.getElementById('todayOffline'); if (el) el.hidden = S.C.maps.packs.every(p => have.includes(p.id)); });
-  }
-  html += travelBlock();
+  html += whatNow(st);
 
   if (st.k !== 'after' && toBook.length) {
-    html += unbooked.length ? `<div class="block"><div class="head"><h2>${st.k === 'before' ? 'Book before you go' : 'Still to book'}</h2><span class="label">${toBook.length - unbooked.length}/${toBook.length} done</span></div>
-      <p class="small muted">${esc(cityName(cityId))} sights that sell out or have timed entry. Checked Oct 9, 2026.</p>${legend()}<div class="rows">${unbooked.map(bookRow).join('')}</div></div>`
-      : `<div class="block"><h2>All booked in ${esc(cityName(cityId))}</h2><p class="small muted">Everything that needs a ticket is sorted. Nice work.</p></div>`;
-  }
-  if (st.k === 'before') {
-    const xs = placesIn(cityId, ['experience', 'day_trip']);
-    const wantX = xs.filter(x => statusOf(S.trip, x.id) === 'want' && !isBooked(S.trip, x.id));
-    html += `<div class="block"><div class="head"><h2>Experiences &amp; day trips</h2><button class="text-btn" data-act="pview" data-v="experiences" data-tab="places">Browse</button></div>
-      <p class="small">${wantX.length ? `On your list, not booked yet: ${wantX.map(x => esc(x.name)).join(', ')}.` : esc(xs.slice(0, 4).map(x => x.name).join(', ')) + ' and more.'}</p></div>`;
+    if (st.k === 'before') {
+      html += unbooked.length ? `<div class="block"><div class="head"><h2>Book before you go</h2><span class="label">${toBook.length - unbooked.length}/${toBook.length} done</span></div>
+        <p class="small muted">${esc(cityName(cityId))} sights that sell out or have timed entry. Checked ${esc(checkedText())}.</p>${legend()}<div class="rows">${unbooked.map(bookRow).join('')}</div></div>`
+        : `<div class="block"><h2>All booked in ${esc(cityName(cityId))}</h2><p class="small muted">Everything that needs a ticket is sorted. Nice work.</p></div>`;
+    } else if (unbooked.length) {
+      html += `<div class="block"><div class="head"><h2>Still to book</h2><span class="label">${toBook.length - unbooked.length}/${toBook.length} done</span></div><p class="small">${unbooked.map(p => esc(p.name)).join(', ')}.</p><button class="btn line sm" data-act="pview" data-v="sights" data-tab="places" style="align-self:flex-start">See tickets</button></div>`;
+    }
   }
   html += planBlock(st);
-  html += baseBlock(cityId, st);
-  html += `<div class="note">${ic(note[0])}<div style="display:flex;flex-direction:column;gap:3px"><div class="label coral">${esc(note[1])}</div><p class="serif">${esc(note[2])}</p></div></div>`;
-
   if (st.k !== 'after') {
     const id = ideas(cityId);
     if (id.length) html += `<div class="block"><div class="head"><h2>${st.k === 'during' ? 'Ideas for today' : 'Ideas to save'}</h2><button class="text-btn" data-act="pview" data-v="sights" data-tab="places">All places</button></div>
       ${wants.length ? `<p class="small muted">On your list: ${wants.slice(0, 4).map(p => esc(p.name)).join(', ')}${wants.length > 4 ? ' and more' : ''}.</p>` : ''}
       <div class="rows">${id.map(p => placeRow(p, true)).join('')}</div></div>`;
   }
+  html += baseBlock(cityId, st);
   html += `<div class="block"><div class="panel"><div class="label">Phrase for ${esc(moment.toLowerCase())}</div>
-    <div style="display:flex;gap:12px;align-items:center;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:4px;min-width:0"><div class="it">${esc(ph.t)}</div>${myLang() === 'en' ? `<div class="say">${esc(ph.say)}</div>` : ''}<div class="en">${esc(ph.m)}</div></div>
+    <div style="display:flex;gap:12px;align-items:center;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:4px;min-width:0"><div class="it">${esc(ph.t)}</div>${myLang() === 'en' ? `<div class="say">${esc(ph.say)}</div>` : ''}${speaksLocal(myLang(), S.C.phrases.language) ? '' : `<div class="en">${esc(ph.m)}</div>`}</div>
     <button class="hear" data-act="say" data-text="${esc(ph.t)}" aria-label="Hear it">${ic('speak')}</button></div>
     <button class="text-btn" data-act="go" data-tab="phrases" style="align-self:flex-start;min-height:32px">More phrases</button></div></div>`;
 
@@ -212,9 +232,6 @@ export function renderToday() {
     html += `<div class="block"><div class="head"><h2>${st.k === 'after' ? 'Your trip' : 'So far'}</h2><button class="text-btn" data-act="go" data-tab="journal">Journal</button></div>
       <p class="serif" style="font-size:18px">${plural(visited, 'place')} visited, ${S.trip.journal.length} journal entr${S.trip.journal.length === 1 ? 'y' : 'ies'}.</p>
       ${st.k === 'after' ? `<button class="btn" data-act="go" data-tab="journal" data-focus="#summary">See your trip summary</button>` : ''}</div>`;
-  } else {
-    html += `<div class="block"><h2>Journal</h2><p class="serif" style="font-size:18px">Your first memory will appear here. Say it out loud or type it.</p>
-      <button class="btn" data-act="go" data-tab="journal" data-focus="#jText" style="align-self:flex-start">${ic('mic', 'style="width:18px;height:18px"')}Record a memory</button></div>`;
   }
   document.querySelector('section[data-tab="today"]').innerHTML = html;
   addMount(startSlides);

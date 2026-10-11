@@ -32,7 +32,10 @@ export function newTrip(editionId) {
     journal: [],     // [{ id, d, txt, place_id, place, city_id, stars, photos: [], visit }]
     custom: [],      // traveler's own places
     favs: [],        // favorite phrases
-    prefs: { tab: 'today', city: '', pview: '', ptab: 'Restaurant', pfilter: 'all', cdir: 'local2home', camt: '20', pmode: 'timeline', pday: '', cover: null, coverMode: 'sketch', igSel: [], wSel: [], wShared: [], installTipDone: false }
+    bookings: [],    // [{ id, kind, title, date, time, end_date, end_time, from, to, where, ref, note, city_id, source }] (Oct 11 2026)
+    emergency: { name: '', phone: '' },   // the traveler's own emergency contact, on this phone only
+    meetup: null,    // { name, location, date, time, place_id } "Meet back here at…"
+    prefs: { tab: 'today', city: '', pview: '', ptab: '', pfilter: 'all', cdir: 'local2home', camt: '20', pmode: 'timeline', pday: '', cover: null, coverMode: 'sketch', igSel: [], wSel: [], wShared: [], installTipDone: false }
   };
 }
 
@@ -44,7 +47,8 @@ export function migrateTrip(t, editionId) {
   out.prefs = Object.assign({}, base.prefs, t.prefs || {});
   out.arrival = Object.assign({}, base.arrival, t.arrival || {});
   out.departure = Object.assign({}, base.departure, t.departure || {});
-  ['stays', 'legs', 'saved', 'booked', 'plan', 'journal', 'custom', 'favs'].forEach(k => { if (!Array.isArray(out[k])) out[k] = []; });
+  ['stays', 'legs', 'saved', 'booked', 'plan', 'journal', 'custom', 'favs', 'bookings'].forEach(k => { if (!Array.isArray(out[k])) out[k] = []; });
+  out.emergency = Object.assign({}, base.emergency, t.emergency || {});
   if (!TRAVEL_STYLES.includes(out.travel_style)) out.travel_style = 'flow';
   if (!out.traveler_language) out.traveler_language = 'en';
   out.schema_version = SCHEMA_VERSION;
@@ -160,6 +164,39 @@ export function moveItem(trip, id, dir) {
   [items[i], items[j]] = [items[j], items[i]];
   items.forEach((x, n) => { x.ord = n; });
 }
+
+/* ---------- bookings in one place (Oct 11 2026) ---------- */
+export const BOOKING_KINDS = [
+  ['flight', 'Flight'], ['stay', 'Hotel or stay'], ['train', 'Train'], ['bus', 'Coach or bus'],
+  ['car', 'Driver, transfer or car'], ['tour', 'Tour or tickets'], ['restaurant', 'Restaurant'], ['other', 'Other']
+];
+export const bookingKindLabel = k => (BOOKING_KINDS.find(x => x[0] === k) || BOOKING_KINDS[BOOKING_KINDS.length - 1])[1];
+export function newBooking(kind = 'other') {
+  return { id: uid('b'), kind, title: '', date: '', time: '', end_date: '', end_time: '', from: '', to: '', where: '', ref: '', note: '', city_id: '', source: 'manual' };
+}
+const bkey = b => (b.date || '9999') + ' ' + (b.time || '99:99');
+export const sortedBookings = trip => (trip.bookings || []).slice().sort((a, b) => bkey(a).localeCompare(bkey(b)));
+/* What happens on a day: each booking that starts that day, plus check-outs and arrivals that end that day. */
+export function bookingsOn(trip, day) {
+  const out = [];
+  sortedBookings(trip).forEach(b => {
+    if (b.date === day) out.push({ b, role: 'start', time: b.time });
+    else if (b.end_date === day && b.kind === 'stay') out.push({ b, role: 'end', time: b.end_time });
+  });
+  return out.sort((x, y) => (x.time || '99').localeCompare(y.time || '99'));
+}
+export function upsertBooking(trip, b) {
+  const i = trip.bookings.findIndex(x => x.id === b.id);
+  if (i >= 0) trip.bookings[i] = b; else trip.bookings.push(b);
+}
+export function removeBooking(trip, id) { trip.bookings = trip.bookings.filter(x => x.id !== id); }
+
+/* ---------- opening days ---------- */
+const DAY_NAMES = ['Sundays', 'Mondays', 'Tuesdays', 'Wednesdays', 'Thursdays', 'Fridays', 'Saturdays'];
+export const weekdayOf = iso => new Date(iso + 'T00:00:00').getDay();
+/* place.closed: weekday numbers (0 = Sunday). True when the place is shut on that date. */
+export const closedOn = (place, iso) => !!(place && iso && (place.closed || []).includes(weekdayOf(iso)));
+export const closedText = place => (place && place.closed_note) || ((place && (place.closed || []).length) ? 'Closed ' + place.closed.map(d => DAY_NAMES[d]).join(' and ') : '');
 
 /* ---------- edition content helpers ---------- */
 export const BOOKING_LABEL = { required: 'Must book', optional: 'Booking optional', none: 'No ticket needed' };
