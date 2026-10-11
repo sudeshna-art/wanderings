@@ -1,0 +1,51 @@
+{
+  "reference_rates": {
+    "base": "EUR",
+    "rates": { "USD": 1.1206, "GBP": 0.84763, "CAD": 1.5942, "AUD": 1.6052, "INR": 108.3965, "CHF": 0.9313, "SGD": 1.4348, "JPY": 177.34 },
+    "checked": "2026-10-09",
+    "source": "European Central Bank via frankfurter.dev"
+  },
+  "typical_prices": [
+    { "label": "Espresso (bica)", "amount": 1, "kind": "typical" },
+    { "label": "Pastel de nata", "amount": 1.5, "kind": "typical" },
+    { "label": "Glass of wine", "amount": 4, "kind": "typical" },
+    { "label": "Pena Palace", "amount": 45, "kind": "official" },
+    { "label": "Oceanário, from", "amount": 25.5, "kind": "official" },
+    { "label": "Taxi flag fall", "amount": 2, "kind": "official" }
+  ],
+  "typical_note": "Café and wine prices are rough typical examples. Ticket and taxi prices are official, checked Oct 9, 2026.",
+  "know_how": [
+    { "title": "Restaurants", "text": "Bread, olives, cheese or butter put on the table (the couvert) are charged if you eat them. Send them back if you don't want them. Tipping is not required; 5 to 10% for good service is a kind gesture." },
+    { "title": "Cafés", "text": "Standing at the counter is usual and quick. Rounding up is a nice, optional thank-you." },
+    { "title": "Taxis", "text": "Round up to the next euro, a little more if the driver helps with bags." },
+    { "title": "Hotels", "text": "About €1 to €2 per bag for a porter. Lisbon and several Algarve towns add a nightly tourist tax at check-in, often not in the booking price." },
+    { "title": "Mondays", "text": "Many museums and monuments close on Mondays. Plan beaches, markets or Sintra's parks instead." },
+    { "title": "Shoes", "text": "Lisbon's hills and polished stone pavements get slippery, especially when wet. Flat shoes with grip make a big difference." },
+    { "title": "Bags", "text": "Keep bags zipped and in front on Tram 28, in crowds and at viewpoints. Pickpockets work the busiest spots." },
+    { "title": "Beaches", "text": "Check the lifeguard flag: red means no swimming. Outside the summer season, many beaches have no lifeguard. Atlantic water is cool even when the air is warm." }
+  ],
+  "know_how_note": "General customs, not rules.",
+  "emergency": [
+    { "number": "112", "label": "Police, ambulance, fire. English spoken." },
+    { "number": "808 24 24 24", "label": "SNS 24 health line, for advice when it isn't an emergency." }
+  ],
+  "embassies": [
+    { "label": "US Embassy in Lisbon", "url": "https://pt.usembassy.gov/" },
+    { "label": "UAE Ministry of Foreign Affairs (embassy finder)", "url": "https://www.mofa.gov.ae/" }
+  ],
+  "emergency_note": "Pharmacies have a green cross sign. Each town keeps one pharmacy open late on a rota; the address is posted on every pharmacy door.",
+  "voice_help": [
+    { "title": "iPhone", "text": "Settings, Accessibility, Spoken Content, Voices, Portuguese (Portugal). Pick a voice and download its Enhanced or Premium version." },
+    { "title": "Android", "text": "Settings, search for Text-to-speech, preferred engine settings, install voice data, Portuguese (Portugal). Menu names vary by phone." }
+  ],
+  "voice_test": "Bom dia! A conta, por favor.",
+  "travel_notes": [
+    ["coffee", "Travel note", "In Lisbon an espresso is a bica. Order it at the counter, like the locals."],
+    ["camera", "Look down", "The wave patterns underfoot are calçada portuguesa, small stones laid by hand, one by one."],
+    ["coffee", "Travel note", "Pastéis de nata are best warm, with a dusting of cinnamon and a little powdered sugar."],
+    ["camera", "Look up", "Many building fronts are covered in tiles, azulejos, which keep houses cool and shrug off the rain."],
+    ["coffee", "Travel note", "In the Algarve, cataplana is both a seafood stew and the clam-shaped copper pan it is cooked in."],
+    ["camera", "Look around", "Ginjinha, a sour cherry liqueur, is sold by the shot from tiny bars near Rossio."]
+  ],
+  "checked": "2026-10-09"
+}

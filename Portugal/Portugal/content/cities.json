@@ -1,0 +1,539 @@
+[
+  {
+    "city_id": "lisbon",
+    "name": "Lisbon",
+    "local_name": "Lisboa",
+    "stamp": "LISBOA",
+    "coords_label": "38.72° N · 9.14° W",
+    "country_code": "PT",
+    "currency_code": "EUR",
+    "language": "pt-PT",
+    "timezone": "Europe/Lisbon",
+    "center": {
+      "lat": 38.711,
+      "lng": -9.139
+    },
+    "landmark_center": {
+      "lat": 38.7075,
+      "lng": -9.1364,
+      "name": "Praça do Comércio"
+    },
+    "hero": {
+      "art": "lisbon.svg",
+      "caption": "Torre de Belém",
+      "alt": "Pen and ink sketch of the Belém Tower on the Tagus"
+    },
+    "mark": "lisbon-mark.svg",
+    "groups": [
+      {
+        "id": "belem",
+        "name": "Belém, by the river"
+      },
+      {
+        "id": "alfama",
+        "name": "Alfama, Graça and the castle"
+      },
+      {
+        "id": "baixa",
+        "name": "Baixa, Chiado and Bairro Alto"
+      },
+      {
+        "id": "west",
+        "name": "Alcântara and the west riverside"
+      },
+      {
+        "id": "avenidas",
+        "name": "Avenidas and the Gulbenkian"
+      },
+      {
+        "id": "east",
+        "name": "East Lisbon and Parque das Nações"
+      },
+      {
+        "id": "sintra",
+        "name": "Sintra and the coast"
+      }
+    ],
+    "neighborhoods": [
+      {
+        "id": "baixa",
+        "name": "Baixa and Chiado",
+        "center": {
+          "lat": 38.7106,
+          "lng": -9.139
+        },
+        "central": true,
+        "tip": "Flat, central and walkable, between the river and the hills. Most sights are a short walk or tram ride."
+      },
+      {
+        "id": "alfama",
+        "name": "Alfama and Graça",
+        "center": {
+          "lat": 38.7125,
+          "lng": -9.13
+        },
+        "central": true,
+        "tip": "Steep lanes and fado houses below the castle. Cars cannot reach many streets, so give drivers the nearest square."
+      },
+      {
+        "id": "bairro",
+        "name": "Bairro Alto and Príncipe Real",
+        "center": {
+          "lat": 38.7145,
+          "lng": -9.1465
+        },
+        "central": true,
+        "tip": "Boutiques, gardens and viewpoints by day. Bairro Alto gets loud late at night, Príncipe Real stays calmer."
+      },
+      {
+        "id": "avenida",
+        "name": "Avenida da Liberdade",
+        "center": {
+          "lat": 38.72,
+          "lng": -9.145
+        },
+        "central": true,
+        "tip": "A leafy boulevard of designer shops, with Metro stations along it."
+      },
+      {
+        "id": "cais",
+        "name": "Cais do Sodré",
+        "center": {
+          "lat": 38.706,
+          "lng": -9.144
+        },
+        "central": true,
+        "tip": "By the river, next to the Time Out Market and the station for trains to Belém and Cascais."
+      },
+      {
+        "id": "estrela",
+        "name": "Estrela and Lapa",
+        "center": {
+          "lat": 38.711,
+          "lng": -9.16
+        },
+        "central": true,
+        "tip": "Calm and residential, with a big park and the domed Estrela Basilica. Tram 28 passes by."
+      },
+      {
+        "id": "belem",
+        "name": "Belém",
+        "center": {
+          "lat": 38.697,
+          "lng": -9.206
+        },
+        "central": false,
+        "tip": "Monuments by the river, west of the center. Quiet in the evening; the center is a tram, train or taxi ride away."
+      },
+      {
+        "id": "nacoes",
+        "name": "Parque das Nações",
+        "center": {
+          "lat": 38.766,
+          "lng": -9.095
+        },
+        "central": false,
+        "tip": "Modern riverside district by the Oceanário, close to the airport and Oriente station, where trains leave for the Algarve."
+      },
+      {
+        "id": "cascais",
+        "name": "Cascais (by the sea)",
+        "center": {
+          "lat": 38.6968,
+          "lng": -9.4207
+        },
+        "central": false,
+        "tip": "A seaside town west of Lisbon, connected by train from Cais do Sodré."
+      },
+      {
+        "id": "sintra",
+        "name": "Sintra",
+        "center": {
+          "lat": 38.798,
+          "lng": -9.388
+        },
+        "central": false,
+        "tip": "Palaces in the hills. Trains run to Lisbon from Sintra station."
+      },
+      {
+        "id": "other",
+        "name": "Somewhere else, or not sure",
+        "center": null,
+        "central": false,
+        "tip": ""
+      }
+    ],
+    "airports": [
+      {
+        "id": "LIS",
+        "name": "Lisbon airport (Humberto Delgado)",
+        "short": "Lisbon airport",
+        "local": "Aeroporto de Lisboa",
+        "location": {
+          "lat": 38.7742,
+          "lng": -9.1342
+        },
+        "tip": "Taxis and ride-hailing pickups are outside arrivals. The Metro red line also runs from the airport into the city."
+      }
+    ],
+    "stations": [
+      {
+        "id": "oriente",
+        "name": "Oriente station",
+        "local": "Estação do Oriente",
+        "location": {
+          "lat": 38.7678,
+          "lng": -9.099
+        },
+        "tip": "Main station for trains to the Algarve."
+      },
+      {
+        "id": "rossio",
+        "name": "Rossio station",
+        "local": "Estação do Rossio",
+        "location": {
+          "lat": 38.7142,
+          "lng": -9.1411
+        },
+        "tip": "Trains to Sintra."
+      },
+      {
+        "id": "caissodre",
+        "name": "Cais do Sodré station",
+        "local": "Estação do Cais do Sodré",
+        "location": {
+          "lat": 38.7059,
+          "lng": -9.1446
+        },
+        "tip": "Trains to Belém and Cascais."
+      }
+    ],
+    "getting_around": {
+      "items": [
+        {
+          "title": "Taxis",
+          "text": "Licensed taxis are metered. In Lisbon you can hail one with its roof light on, find one at a rank, or call. Ride-hailing apps such as Uber and Bolt also operate."
+        },
+        {
+          "title": "Metro and trams",
+          "text": "The Metro covers the center and the airport. Buy a reusable card at any Metro station and top it up. Tram 28 is scenic and very crowded, so watch your bag."
+        },
+        {
+          "title": "Hills",
+          "text": "Lisbon is steep, and the limestone pavements get slippery. Flat shoes with grip help. The Glória and Bica funiculars and the Santa Justa lift save some climbs."
+        },
+        {
+          "title": "Trains out of town",
+          "text": "Sintra trains leave from Rossio. Cascais and Belém trains leave from Cais do Sodré. Algarve trains leave from Oriente."
+        }
+      ],
+      "links": [
+        {
+          "label": "CP trains (official)",
+          "url": "https://www.cp.pt/"
+        }
+      ],
+      "checked": "2026-10-09",
+      "source": "CP (cp.pt) and general travel guidance"
+    },
+    "taxi_tariff": {
+      "base": 2.0,
+      "per_km": 0.73,
+      "per_min": 0.34,
+      "minimum": null,
+      "call_fee": 0.8,
+      "currency_code": "EUR",
+      "road_factor": 1.35,
+      "fast_kmh": 25,
+      "slow_kmh": 12,
+      "note": "Rough estimate from Portugal's new national taxi tariff and straight-line distance. The new tariff is rolling out during 2026, so some meters may still use the old one. The meter decides.",
+      "checked": "2026-10-09",
+      "source": "AMT Regulamento n.º 717/2026, as reported by e-konomista.pt and tradersunion.com"
+    },
+    "connections": [
+      {
+        "to_city_id": "algarve",
+        "items": [
+          {
+            "mode": "driver",
+            "title": "Private driver or taxi",
+            "text": "About 3 hours by road to Faro and a little more to Lagos (estimate). Agree the price before you set off; many travelers pre-book a transfer."
+          },
+          {
+            "mode": "train",
+            "title": "Train",
+            "text": "CP trains run from Lisbon Oriente to Faro: about 3 hours on the Alfa Pendular, about 3.5 hours on the Intercidades. Fares usually from about €29. For Lagos, change at Tunes.",
+            "link": {
+              "label": "Times and tickets on cp.pt",
+              "url": "https://www.cp.pt/"
+            },
+            "checked": "2026-10-09",
+            "source": "everyrail.com Lisbon to Faro guide; CP"
+          },
+          {
+            "mode": "bus",
+            "title": "Express coach",
+            "text": "Express coaches link Lisbon with the main Algarve towns.",
+            "link": {
+              "label": "Rede Expressos (official)",
+              "url": "https://rede-expressos.pt/"
+            }
+          },
+          {
+            "mode": "car",
+            "title": "Rental car",
+            "text": "The Algarve's A22 motorway has electronic tolls only. Ask the rental company about a toll device."
+          }
+        ]
+      }
+    ],
+    "emergency": {
+      "checked": "2026-10-09",
+      "source": "European emergency number 112; SNS 24"
+    }
+  },
+  {
+    "city_id": "algarve",
+    "name": "the Algarve",
+    "short_name": "Algarve",
+    "local_name": "Algarve",
+    "stamp": "ALGARVE",
+    "coords_label": "37.09° N · 8.25° W",
+    "country_code": "PT",
+    "currency_code": "EUR",
+    "language": "pt-PT",
+    "timezone": "Europe/Lisbon",
+    "center": {
+      "lat": 37.09,
+      "lng": -8.25
+    },
+    "landmark_center": {
+      "lat": 37.0806,
+      "lng": -8.6697,
+      "name": "Ponta da Piedade"
+    },
+    "hero": {
+      "art": "algarve.svg",
+      "caption": "Ponta da Piedade",
+      "alt": "Pen and ink sketch of sea stacks and cliffs at Ponta da Piedade"
+    },
+    "mark": "algarve-mark.svg",
+    "region": true,
+    "groups": [
+      {
+        "id": "west",
+        "name": "Lagos and the wild west"
+      },
+      {
+        "id": "central",
+        "name": "Carvoeiro, Benagil and Albufeira"
+      },
+      {
+        "id": "east",
+        "name": "Faro, Olhão and Tavira"
+      },
+      {
+        "id": "inland",
+        "name": "Inland: Silves, Loulé and Monchique"
+      }
+    ],
+    "neighborhoods": [
+      {
+        "id": "lagos",
+        "name": "Lagos",
+        "area": "West",
+        "center": {
+          "lat": 37.1028,
+          "lng": -8.673
+        },
+        "central": true,
+        "tip": "Old town walls, the Ponta da Piedade cliffs and plenty of restaurants. A good base for the west."
+      },
+      {
+        "id": "sagres",
+        "name": "Sagres",
+        "area": "Far west",
+        "center": {
+          "lat": 37.0086,
+          "lng": -8.94
+        },
+        "central": false,
+        "tip": "Wild cliffs, surf beaches and sunsets near Cape St Vincent. Quieter, with fewer services."
+      },
+      {
+        "id": "portimao",
+        "name": "Portimão and Praia da Rocha",
+        "area": "West",
+        "center": {
+          "lat": 37.1195,
+          "lng": -8.5364
+        },
+        "central": true,
+        "tip": "A working town with a long beach, and many boat trips to the caves."
+      },
+      {
+        "id": "carvoeiro",
+        "name": "Carvoeiro and Lagoa",
+        "area": "Central",
+        "center": {
+          "lat": 37.0969,
+          "lng": -8.472
+        },
+        "central": true,
+        "tip": "Closest base to the Benagil caves and the Seven Hanging Valleys trail."
+      },
+      {
+        "id": "albufeira",
+        "name": "Albufeira",
+        "area": "Central",
+        "center": {
+          "lat": 37.0889,
+          "lng": -8.2511
+        },
+        "central": true,
+        "tip": "The busiest resort, with an old town and big beaches. Central for day trips both ways."
+      },
+      {
+        "id": "vilamoura",
+        "name": "Vilamoura and Quarteira",
+        "area": "Central",
+        "center": {
+          "lat": 37.077,
+          "lng": -8.117
+        },
+        "central": true,
+        "tip": "Marina, golf and resort hotels, near Praia da Falésia."
+      },
+      {
+        "id": "faro",
+        "name": "Faro",
+        "area": "East",
+        "center": {
+          "lat": 37.0194,
+          "lng": -7.9322
+        },
+        "central": true,
+        "tip": "The airport city, with a walled old town and boats into the Ria Formosa lagoon."
+      },
+      {
+        "id": "tavira",
+        "name": "Tavira",
+        "area": "East",
+        "center": {
+          "lat": 37.1273,
+          "lng": -7.6506
+        },
+        "central": true,
+        "tip": "A calm, elegant river town. Island beaches are a short ferry ride away."
+      },
+      {
+        "id": "other",
+        "name": "Not sure yet, or somewhere else",
+        "center": null,
+        "central": false,
+        "tip": ""
+      }
+    ],
+    "airports": [
+      {
+        "id": "FAO",
+        "name": "Faro airport",
+        "short": "Faro airport",
+        "local": "Aeroporto de Faro",
+        "location": {
+          "lat": 37.0144,
+          "lng": -7.9659
+        },
+        "tip": "Taxis wait outside arrivals. Faro town is a short ride; Lagos and Tavira are much longer drives, so many travelers pre-book a transfer."
+      }
+    ],
+    "stations": [],
+    "getting_around": {
+      "items": [
+        {
+          "title": "Taxis and private drivers",
+          "text": "Towns are spread out along the coast, so rides between them add up. For longer trips, agree the price first or book a transfer. Ride-hailing apps work in the bigger towns; in small villages, ask your hotel to call a taxi."
+        },
+        {
+          "title": "Regional train",
+          "text": "A regional CP line runs along the coast between Lagos, Faro and Tavira. It is slow but easy, and stations are not always close to the beaches.",
+          "link": {
+            "label": "Times on cp.pt",
+            "url": "https://www.cp.pt/"
+          }
+        },
+        {
+          "title": "Driving",
+          "text": "A rental car gives the most freedom for cliffs and beaches. The A22 motorway uses electronic tolls only, so ask the rental company about a toll device."
+        },
+        {
+          "title": "Boats",
+          "text": "Cave, coast and lagoon trips leave from Lagos, Portimão, Benagil, Faro, Olhão and Tavira."
+        }
+      ],
+      "links": [
+        {
+          "label": "CP trains (official)",
+          "url": "https://www.cp.pt/"
+        }
+      ],
+      "checked": "2026-10-09",
+      "source": "CP (cp.pt) and general travel guidance"
+    },
+    "taxi_tariff": {
+      "base": 2.0,
+      "per_km": 0.73,
+      "per_min": 0.34,
+      "minimum": null,
+      "call_fee": 0.8,
+      "currency_code": "EUR",
+      "road_factor": 1.3,
+      "fast_kmh": 55,
+      "slow_kmh": 30,
+      "note": "Rough estimate from Portugal's new national taxi tariff and straight-line distance. Towns may set local variations, and some meters may still use the old tariff during 2026. Long rides between towns are often quoted as a fixed price; agree it first.",
+      "checked": "2026-10-09",
+      "source": "AMT Regulamento n.º 717/2026, as reported by e-konomista.pt and tradersunion.com"
+    },
+    "connections": [
+      {
+        "to_city_id": "lisbon",
+        "items": [
+          {
+            "mode": "driver",
+            "title": "Private driver or taxi",
+            "text": "About 3 hours by road from Faro, a little more from Lagos (estimate). Agree the price first or pre-book a transfer."
+          },
+          {
+            "mode": "train",
+            "title": "Train",
+            "text": "CP trains run from Faro to Lisbon Oriente: about 3 hours on the Alfa Pendular, about 3.5 hours on the Intercidades. Fares usually from about €29. From Lagos, change at Tunes.",
+            "link": {
+              "label": "Times and tickets on cp.pt",
+              "url": "https://www.cp.pt/"
+            },
+            "checked": "2026-10-09",
+            "source": "everyrail.com Lisbon to Faro guide; CP"
+          },
+          {
+            "mode": "bus",
+            "title": "Express coach",
+            "text": "Express coaches link the main Algarve towns with Lisbon.",
+            "link": {
+              "label": "Rede Expressos (official)",
+              "url": "https://rede-expressos.pt/"
+            }
+          },
+          {
+            "mode": "car",
+            "title": "Rental car",
+            "text": "The A22 motorway has electronic tolls only. Ask the rental company about a toll device."
+          }
+        ]
+      }
+    ],
+    "emergency": {
+      "checked": "2026-10-09",
+      "source": "European emergency number 112; SNS 24"
+    }
+  }
+]
