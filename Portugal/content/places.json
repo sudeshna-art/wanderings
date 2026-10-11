@@ -35,6 +35,13 @@
   ],
   "audio": {
    "script": "Jerónimos Monastery was begun in the early fifteen hundreds, paid for by the spice trade that followed the sea voyages to India. Look for the rope, coral and sea creatures carved into the stone. That style is called Manueline, after King Manuel the First. The explorer Vasco da Gama is buried in the church.",
+   "scripts": {
+    "es": "El Monasterio de los Jerónimos se empezó a construir a principios del siglo dieciséis, pagado con el comercio de especias que siguió a los viajes por mar a la India. Busca las cuerdas, los corales y las criaturas marinas talladas en la piedra. Ese estilo se llama manuelino, por el rey Manuel primero. El explorador Vasco da Gama está enterrado en la iglesia.",
+    "fr": "Le monastère des Hiéronymites a été commencé au début du seizième siècle, financé par le commerce des épices né des voyages maritimes vers l’Inde. Cherchez les cordages, les coraux et les créatures marines sculptés dans la pierre. Ce style s’appelle manuélin, d’après le roi Manuel premier. L’explorateur Vasco de Gama repose dans l’église.",
+    "pt": "O Mosteiro dos Jerónimos começou a ser construído no início do século dezesseis, pago pelo comércio de especiarias que veio depois das viagens marítimas à Índia. Repare nas cordas, nos corais e nas criaturas marinhas esculpidas na pedra. Esse estilo se chama manuelino, por causa do rei Manuel primeiro. O navegador Vasco da Gama está sepultado na igreja.",
+    "de": "Mit dem Bau des Hieronymitenklosters wurde Anfang des sechzehnten Jahrhunderts begonnen, bezahlt mit dem Gewürzhandel, der auf die Seereisen nach Indien folgte. Achten Sie auf die Taue, Korallen und Meerestiere, die in den Stein gemeißelt sind. Dieser Stil heißt Manuelinik, nach König Manuel dem Ersten. Der Entdecker Vasco da Gama liegt in der Kirche begraben.",
+    "it": "Il Monastero dei Jerónimos fu iniziato all’inizio del Cinquecento, pagato con il commercio delle spezie seguito ai viaggi per mare verso l’India. Cerca le corde, i coralli e le creature marine scolpite nella pietra. Questo stile si chiama manuelino, dal re Manuele primo. L’esploratore Vasco da Gama è sepolto nella chiesa."
+   },
    "recording": null
   },
   "search_q": null,
@@ -78,6 +85,13 @@
   ],
   "audio": {
    "script": "The Belém Tower was built in the early fifteen hundreds to defend the mouth of the river Tagus. Ships setting out on voyages of discovery passed right here. Look for the carved rhinoceros head on the outside wall, inspired by a real rhino sent to Lisbon as a royal gift.",
+   "scripts": {
+    "es": "La Torre de Belém se construyó a principios del siglo dieciséis para defender la desembocadura del río Tajo. Los barcos que partían a los viajes de descubrimiento pasaban justo por aquí. Busca la cabeza de rinoceronte tallada en el muro exterior, inspirada en un rinoceronte de verdad enviado a Lisboa como regalo real.",
+    "fr": "La tour de Belém a été construite au début du seizième siècle pour défendre l’embouchure du Tage. Les navires partant pour les grandes découvertes passaient juste ici. Cherchez la tête de rhinocéros sculptée sur le mur extérieur, inspirée d’un vrai rhinocéros envoyé à Lisbonne comme cadeau royal.",
+    "pt": "A Torre de Belém foi construída no início do século dezesseis para defender a foz do rio Tejo. Os navios que partiam para as viagens dos descobrimentos passavam bem aqui. Procure a cabeça de rinoceronte esculpida na parede externa, inspirada num rinoceronte de verdade enviado a Lisboa como presente real.",
+    "de": "Der Turm von Belém wurde Anfang des sechzehnten Jahrhunderts gebaut, um die Mündung des Tejo zu verteidigen. Die Schiffe, die zu den Entdeckungsfahrten aufbrachen, fuhren genau hier vorbei. Suchen Sie den in die Außenmauer gemeißelten Nashornkopf. Vorbild war ein echtes Nashorn, das als königliches Geschenk nach Lissabon kam.",
+    "it": "La Torre di Belém fu costruita all’inizio del Cinquecento per difendere la foce del fiume Tago. Le navi in partenza per i viaggi di scoperta passavano proprio da qui. Cerca la testa di rinoceronte scolpita sul muro esterno, ispirata a un vero rinoceronte mandato a Lisbona come dono reale."
+   },
    "recording": null
   },
   "search_q": null,
@@ -196,6 +210,13 @@
   ],
   "audio": {
    "script": "São Jorge Castle sits on one of the hills where Lisbon began. Its walls date mostly from the Moorish period and the centuries after, when Portugal's kings lived here. From the ramparts you can see the river Tagus, the Baixa grid rebuilt after the 1755 earthquake, and the bridge to the south bank.",
+   "scripts": {
+    "es": "El Castillo de San Jorge se alza sobre una de las colinas donde nació Lisboa. Sus murallas son en su mayoría de la época morisca y de los siglos siguientes, cuando aquí vivían los reyes de Portugal. Desde las almenas se ven el río Tajo, la cuadrícula de la Baixa reconstruida tras el terremoto de 1755 y el puente hacia la orilla sur.",
+    "fr": "Le château Saint-Georges domine l’une des collines où Lisbonne est née. Ses murailles datent surtout de l’époque maure et des siècles suivants, quand les rois du Portugal vivaient ici. Depuis les remparts, on voit le Tage, le quadrillage de la Baixa reconstruit après le tremblement de terre de 1755 et le pont vers la rive sud.",
+    "pt": "O Castelo de São Jorge fica numa das colinas onde Lisboa começou. Suas muralhas são, na maior parte, do período mouro e dos séculos seguintes, quando os reis de Portugal moravam aqui. Das muralhas dá para ver o rio Tejo, o traçado da Baixa reconstruído depois do terremoto de 1755 e a ponte para a margem sul.",
+    "de": "Die Burg São Jorge steht auf einem der Hügel, auf denen Lissabon entstand. Ihre Mauern stammen größtenteils aus maurischer Zeit und den folgenden Jahrhunderten, als hier Portugals Könige lebten. Von den Wehrgängen sehen Sie den Tejo, das Straßenraster der Baixa, das nach dem Erdbeben von 1755 neu gebaut wurde, und die Brücke zum Südufer.",
+    "it": "Il Castello di São Jorge sorge su uno dei colli dove nacque Lisbona. Le mura risalgono per lo più al periodo moresco e ai secoli successivi, quando qui vivevano i re del Portogallo. Dai bastioni si vedono il Tago, la griglia della Baixa ricostruita dopo il terremoto del 1755 e il ponte verso la riva sud."
+   },
    "recording": null
   },
   "search_q": null,
@@ -238,6 +259,13 @@
   ],
   "audio": {
    "script": "Alfama is Lisbon's oldest district. Much of it survived the great earthquake of 1755, so the street plan is still a tangle of stairways and alleys. Listen in the evenings: this is the home of fado, songs of longing sung to the Portuguese guitar.",
+   "scripts": {
+    "es": "Alfama es el barrio más antiguo de Lisboa. Gran parte sobrevivió al gran terremoto de 1755, así que sus calles siguen siendo un laberinto de escaleras y callejones. Escucha por la noche: aquí nació el fado, canciones de añoranza acompañadas por la guitarra portuguesa.",
+    "fr": "L’Alfama est le plus vieux quartier de Lisbonne. Une grande partie a survécu au grand tremblement de terre de 1755, si bien que ses rues restent un enchevêtrement d’escaliers et de ruelles. Tendez l’oreille le soir : c’est le berceau du fado, des chants de nostalgie accompagnés par la guitare portugaise.",
+    "pt": "Alfama é o bairro mais antigo de Lisboa. Boa parte dele sobreviveu ao grande terremoto de 1755, por isso as ruas ainda são um emaranhado de escadarias e becos. Preste atenção à noite: aqui é a casa do fado, canções de saudade cantadas ao som da guitarra portuguesa.",
+    "de": "Die Alfama ist Lissabons ältestes Viertel. Vieles hat das große Erdbeben von 1755 überstanden, deshalb ist der Grundriss bis heute ein Gewirr aus Treppen und Gassen. Hören Sie abends hin: Hier ist der Fado zu Hause, Lieder der Sehnsucht, begleitet von der portugiesischen Gitarre.",
+    "it": "L’Alfama è il quartiere più antico di Lisbona. Gran parte sopravvisse al grande terremoto del 1755, così le strade sono ancora un intrico di scalinate e vicoli. Ascolta la sera: qui è nato il fado, canti di nostalgia accompagnati dalla chitarra portoghese."
+   },
    "recording": null
   },
   "search_q": null,
@@ -801,6 +829,13 @@
   ],
   "audio": {
    "script": "Pena Palace was built in the eighteen hundreds for King Ferdinand the Second, on the ruins of a monastery. He mixed Gothic, Moorish and Manueline styles, then painted it yellow and red. On a clear day you can see from the terraces all the way to the Atlantic.",
+   "scripts": {
+    "es": "El Palacio da Pena se construyó en el siglo diecinueve para el rey Fernando segundo, sobre las ruinas de un monasterio. Mezcló los estilos gótico, morisco y manuelino, y luego lo pintó de amarillo y rojo. En un día despejado, desde las terrazas se ve hasta el Atlántico.",
+    "fr": "Le palais de Pena a été construit au dix-neuvième siècle pour le roi Ferdinand deux, sur les ruines d’un monastère. Il a mêlé les styles gothique, mauresque et manuélin, puis l’a peint en jaune et en rouge. Par temps clair, on voit depuis les terrasses jusqu’à l’Atlantique.",
+    "pt": "O Palácio da Pena foi construído no século dezenove para o rei Fernando segundo, sobre as ruínas de um mosteiro. Ele misturou os estilos gótico, mourisco e manuelino e depois pintou tudo de amarelo e vermelho. Num dia claro, dá para ver das varandas até o Atlântico.",
+    "de": "Der Pena-Palast wurde im neunzehnten Jahrhundert für König Ferdinand den Zweiten auf den Ruinen eines Klosters gebaut. Er mischte Gotik, maurischen Stil und Manuelinik und ließ alles gelb und rot streichen. An klaren Tagen sieht man von den Terrassen bis zum Atlantik.",
+    "it": "Il Palazzo da Pena fu costruito nell’Ottocento per il re Ferdinando secondo, sulle rovine di un monastero. Mescolò gli stili gotico, moresco e manuelino, poi lo dipinse di giallo e di rosso. Nelle giornate limpide, dalle terrazze si vede fino all’Atlantico."
+   },
    "recording": null
   },
   "search_q": null,
@@ -843,6 +878,13 @@
   ],
   "audio": {
    "script": "Quinta da Regaleira was created in the early nineteen hundreds by a wealthy collector and an Italian architect. The famous Initiation Well is not for water: it is a spiral staircase nine floors deep, full of symbols. Tunnels at the bottom lead out into the garden.",
+   "scripts": {
+    "es": "La Quinta da Regaleira se creó a principios del siglo veinte por un rico coleccionista y un arquitecto italiano. El famoso Pozo Iniciático no es para el agua: es una escalera de caracol de nueve pisos de profundidad, llena de símbolos. Los túneles del fondo salen al jardín.",
+    "fr": "La Quinta da Regaleira a été créée au début du vingtième siècle par un riche collectionneur et un architecte italien. Le célèbre puits initiatique n’a jamais servi à l’eau : c’est un escalier en spirale profond de neuf étages, couvert de symboles. Des tunnels au fond ressortent dans le jardin.",
+    "pt": "A Quinta da Regaleira foi criada no início do século vinte por um colecionador rico e um arquiteto italiano. O famoso Poço Iniciático não é para água: é uma escada em espiral com nove andares de profundidade, cheia de símbolos. Túneis lá embaixo levam para o jardim.",
+    "de": "Die Quinta da Regaleira entstand Anfang des zwanzigsten Jahrhunderts, geschaffen von einem reichen Sammler und einem italienischen Architekten. Der berühmte Initiationsbrunnen war nie für Wasser gedacht: Er ist eine neun Stockwerke tiefe Wendeltreppe voller Symbole. Tunnel am Grund führen hinaus in den Garten.",
+    "it": "La Quinta da Regaleira fu creata all’inizio del Novecento da un ricco collezionista e da un architetto italiano. Il famoso Pozzo Iniziatico non è per l’acqua: è una scala a chiocciola profonda nove piani, piena di simboli. In fondo, alcuni tunnel sbucano nel giardino."
+   },
    "recording": null
   },
   "search_q": null,
@@ -1299,6 +1341,13 @@
   ],
   "audio": {
    "script": "Ponta da Piedade is a headland of soft golden limestone. Wind and waves have carved it into arches, pillars and caves over thousands of years. The lighthouse marks the point. Below, small boats and kayaks slip between the rocks into the grottoes.",
+   "scripts": {
+    "es": "Ponta da Piedade es un cabo de piedra caliza dorada y blanda. El viento y las olas la han tallado en arcos, columnas y cuevas durante miles de años. El faro marca la punta. Abajo, barquitas y kayaks se cuelan entre las rocas hacia las grutas.",
+    "fr": "La Ponta da Piedade est un promontoire de calcaire doré et tendre. Le vent et les vagues l’ont sculpté en arches, en piliers et en grottes pendant des milliers d’années. Le phare marque la pointe. En contrebas, petits bateaux et kayaks se glissent entre les rochers jusqu’aux grottes.",
+    "pt": "A Ponta da Piedade é um promontório de calcário dourado e macio. O vento e as ondas o esculpiram em arcos, pilares e cavernas ao longo de milhares de anos. O farol marca a ponta. Lá embaixo, barquinhos e caiaques passam entre as rochas até as grutas.",
+    "de": "Die Ponta da Piedade ist eine Landspitze aus weichem, goldenem Kalkstein. Wind und Wellen haben daraus über Jahrtausende Bögen, Säulen und Höhlen geformt. Der Leuchtturm markiert die Spitze. Unten gleiten kleine Boote und Kajaks zwischen den Felsen in die Grotten.",
+    "it": "Ponta da Piedade è un promontorio di calcare dorato e tenero. Vento e onde l’hanno scolpito in archi, pilastri e grotte nel corso di migliaia di anni. Il faro segna la punta. Sotto, barchette e kayak scivolano tra le rocce fino alle grotte."
+   },
    "recording": null
   },
   "search_q": null,
@@ -1449,6 +1498,13 @@
   ],
   "audio": {
    "script": "Cape Saint Vincent is the southwestern corner of mainland Europe. For centuries sailors saw it as the edge of the known world. The lighthouse here is one of the most powerful in Europe, guiding ships around the corner between the Atlantic and the Mediterranean routes.",
+   "scripts": {
+    "es": "El Cabo de San Vicente es la esquina suroeste de la Europa continental. Durante siglos, los marineros lo vieron como el fin del mundo conocido. Su faro es uno de los más potentes de Europa y guía a los barcos en la curva entre las rutas del Atlántico y del Mediterráneo.",
+    "fr": "Le cap Saint-Vincent est l’angle sud-ouest de l’Europe continentale. Pendant des siècles, les marins y ont vu la limite du monde connu. Son phare est l’un des plus puissants d’Europe et guide les navires dans le virage entre les routes de l’Atlantique et de la Méditerranée.",
+    "pt": "O Cabo de São Vicente é o canto sudoeste da Europa continental. Durante séculos, os marinheiros o viram como o fim do mundo conhecido. O farol daqui é um dos mais potentes da Europa e guia os navios na curva entre as rotas do Atlântico e do Mediterrâneo.",
+    "de": "Das Kap São Vicente ist die Südwestecke des europäischen Festlands. Jahrhundertelang hielten Seeleute es für das Ende der bekannten Welt. Sein Leuchtturm gehört zu den stärksten Europas und lotst die Schiffe um die Ecke zwischen den Routen von Atlantik und Mittelmeer.",
+    "it": "Capo San Vincenzo è l’angolo sud-occidentale dell’Europa continentale. Per secoli i marinai lo considerarono il confine del mondo conosciuto. Il suo faro è uno dei più potenti d’Europa e guida le navi attorno alla curva tra le rotte dell’Atlantico e del Mediterraneo."
+   },
    "recording": null
   },
   "search_q": null,
@@ -1530,6 +1586,13 @@
   ],
   "audio": {
    "script": "The Benagil cave was hollowed out of the soft limestone by the sea. Its domed ceiling has a round opening, the eye, that lets daylight pour onto the small beach inside. To protect it, visitors now enter only by guided boat or kayak, and no one may land on the beach.",
+   "scripts": {
+    "es": "El mar excavó la cueva de Benagil en la piedra caliza blanda. Su techo en forma de cúpula tiene una abertura redonda, el ojo, por donde entra la luz del día hasta la pequeña playa interior. Para protegerla, ahora solo se entra en barco o kayak con guía, y nadie puede desembarcar en la playa.",
+    "fr": "La mer a creusé la grotte de Benagil dans le calcaire tendre. Sa voûte en coupole est percée d’une ouverture ronde, l’œil, qui laisse entrer la lumière du jour sur la petite plage intérieure. Pour la protéger, on n’y entre plus qu’en bateau ou en kayak guidé, et personne ne peut débarquer sur la plage.",
+    "pt": "A gruta de Benagil foi escavada pelo mar no calcário macio. O teto em forma de cúpula tem uma abertura redonda, o olho, que deixa a luz do dia entrar na pequena praia lá dentro. Para protegê-la, agora só se entra de barco ou caiaque com guia, e ninguém pode desembarcar na praia.",
+    "de": "Das Meer hat die Höhle von Benagil aus dem weichen Kalkstein gewaschen. Ihre Kuppel hat eine runde Öffnung, das Auge, durch das Tageslicht auf den kleinen Strand im Inneren fällt. Zum Schutz darf man heute nur noch mit geführtem Boot oder Kajak hinein, und niemand darf am Strand anlegen.",
+    "it": "La grotta di Benagil è stata scavata dal mare nel calcare tenero. La volta a cupola ha un’apertura rotonda, l’occhio, che lascia entrare la luce del giorno sulla piccola spiaggia interna. Per proteggerla, oggi si entra solo in barca o in kayak con guida, e nessuno può sbarcare sulla spiaggia."
+   },
    "recording": null
   },
   "search_q": "Benagil cave boat tour",
@@ -1866,6 +1929,13 @@
   "tips": [],
   "audio": {
    "script": "Tavira sits on both banks of the river Gilão. Look up at the rooftops: many have four-sided hipped roofs, a local tradition. From the castle walls you can count the town's church towers and see across the salt marshes to the sea.",
+   "scripts": {
+    "es": "Tavira se extiende a ambas orillas del río Gilão. Mira los tejados: muchos son de cuatro aguas, una tradición local. Desde las murallas del castillo puedes contar los campanarios de la ciudad y ver, más allá de las salinas, el mar.",
+    "fr": "Tavira s’étend sur les deux rives du Gilão. Levez les yeux vers les toits : beaucoup ont quatre pans, une tradition locale. Depuis les remparts du château, vous pouvez compter les clochers de la ville et voir la mer au-delà des marais salants.",
+    "pt": "Tavira fica nas duas margens do rio Gilão. Olhe para os telhados: muitos têm quatro águas, uma tradição local. Das muralhas do castelo dá para contar as torres das igrejas da cidade e ver o mar além das salinas.",
+    "de": "Tavira liegt an beiden Ufern des Flusses Gilão. Schauen Sie auf die Dächer: Viele sind vierseitige Walmdächer, eine örtliche Tradition. Von der Burgmauer aus können Sie die Kirchtürme der Stadt zählen und über die Salzwiesen bis zum Meer blicken.",
+    "it": "Tavira si stende su entrambe le rive del fiume Gilão. Guarda i tetti: molti sono a quattro falde, una tradizione locale. Dalle mura del castello puoi contare i campanili della città e vedere il mare oltre le saline."
+   },
    "recording": null
   },
   "search_q": null,

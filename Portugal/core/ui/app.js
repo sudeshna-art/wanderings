@@ -1,5 +1,6 @@
 /* Wanderings app shell: boot, tabs, taps and form binding. All outside access goes through services. */
-import { S, P, save, curCityId, cityIds, cityName, placeById, isPlanner, isWanderer, runMounts, runCleanups, today } from './state.js';
+import { CONFIG } from '../config/default-config.js';
+import { S, P, save, myLang, curCityId, cityIds, cityName, placeById, isPlanner, isWanderer, runMounts, runCleanups, today } from './state.js';
 import { $, $$, esc, ic, toast } from './dom.js';
 import { staysEditor } from './components.js';
 import { contentService } from '../services/content-service.js';
@@ -17,6 +18,7 @@ import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js';
 import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js';
 import { renderEssentials, showFare, updateConv, loadRate } from './screens/essentials.js';
 import { renderWelcome, W, STEP_COUNT } from './screens/welcome.js';
+import { downloadPack, downloadAll, removePack } from './screens/offline.js';
 
 const TABS = [['today', 'Today'], ['places', 'Places'], ['phrases', 'Phrases'], ['journal', 'Journal'], ['essentials', 'Essentials']];
 const RENDER = { today: renderToday, places: renderPlaces, phrases: renderPhrases, journal: renderJournal, essentials: renderEssentials };
@@ -70,7 +72,13 @@ const A = {
   city: el => { P().city = el.dataset.id; save(); rerender(); },
   cityauto: () => { P().city = ''; save(); rerender(); },
   say: el => say(el.dataset.text),
-  audio: async el => { const p = placeById(el.dataset.id); if (!p || !p.audio) return; const r = await speechService.playStop(p.audio, 'en'); if (!r.ok) toast('Audio isn’t available on this phone right now'); },
+  audio: async el => {
+    const p = placeById(el.dataset.id); if (!p || !p.audio) return;
+    const l = CONFIG.languages.find(x => x.code === myLang()) || CONFIG.languages[0];
+    const r = await speechService.playStop(p.audio, l.code, l.voice);
+    if (!r.ok) toast('Audio isn’t available on this phone right now');
+    else if (r.fellBack) toast(`No ${l.label} voice on this phone, so this story plays in English.`);
+  },
   want: el => { const id = el.dataset.id; setStatus(S.trip, id, statusOf(S.trip, id) === 'want' ? null : 'want'); save(); const now = statusOf(S.trip, id) === 'want'; if (!$('#sheet').hidden) { openSpot(id); rerenderBehindSheet(); return; } rerender(); if (isPlanner() && now && !planOf(S.trip, id)) openAddSheet(id); },
   went: el => openNoteForm(el.dataset.id),
   savevisit: el => { const id = el.dataset.id; recordVisit(id, ($('#nf-' + id) || {}).value ? $('#nf-' + id).value.trim() : '', +(($('#ns-' + id) || {}).value || 0)); rerender(); },
@@ -144,6 +152,9 @@ const A = {
     if (r === 'shared') { if (!P().wShared.includes(id)) P().wShared.push(id); save(); toast('Shared. Thank you!'); }
     else if (r !== 'cancelled') { await copy(text, true); toast('Photo sharing isn’t available here. Permission note copied; send the photo from your Photos app.'); }
   },
+  mapdl: el => downloadPack(el.dataset.id, ok => { if (ok && P().tab === 'places') rerender(); }),
+  mapdlall: () => downloadAll(() => { if (P().tab === 'places') rerender(); }),
+  mapdel: el => removePack(el.dataset.id),
   cdir: el => { P().cdir = el.dataset.v; save(); render('essentials', true); },
   saverate: async () => { const v = parseFloat(String(($('#rateIn') || {}).value || '').replace(',', '.')); if (!(v > 0)) { toast('Enter a rate like 4.1'); return; } const c = S.C.cities.find(x => x.city_id === curCityId()); await currencyService.setManualRate(c.currency_code, S.trip.home_currency, v); toast('Rate saved'); loadRate(); },
   resetrate: async () => { await currencyService.clearManualRate(); toast('Using the reference rate'); loadRate(); }
@@ -192,6 +203,7 @@ document.addEventListener('change', async e => {
   if (/^(stays|legs)\./.test(bp)) { refreshStays(); }
   if (inWelcome) return;
   toast('Saved');
+  if (bp === 'traveler_language') { rerender(); return; }
   if (P().tab === 'essentials' && /^(stays|legs|home_currency|travel_style|arrival|departure)/.test(bp)) rerender();
 });
 document.addEventListener('input', e => {

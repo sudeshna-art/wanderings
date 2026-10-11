@@ -8,6 +8,7 @@ import { locationService } from '../../services/location-service.js';
 import { placesService } from '../../services/places-service.js';
 import { fareService } from '../../services/fare-service.js';
 import { currencyService } from '../../services/currency-service.js';
+import { showStatus } from './offline.js';
 
 const RADIUS = 3000;           // metres counted as "near you"
 const W = { map: null, stop: null, pos: null, list: [], mode: 'locating', fallbackMap: false, centered: false };
@@ -57,20 +58,23 @@ export function renderWanderer(seg) {
   addMount(mount);
   return masthead() + `<div class="greet"><div class="eyebrow">Nearby · True Wanderer</div><h1>What’s near you.</h1><p class="lede" id="wHead">${esc(headline())}</p></div>${seg}
     <div class="wmap"><div class="wcanvas" id="wMap"></div><div class="wm-over"><span class="wm-pillnote" id="wPill">Locating you…</span></div><button class="wm-recenter" data-act="recenter" aria-label="Center on me">${ic('locate')}</button></div>
+    <div data-mapstatus id="wMapStatus" style="padding-top:8px"></div>
     <div class="block" style="padding-top:6px"><div class="head"><h2>Closest spots</h2><span class="label">Curated</span></div><div id="wList">${listHTML()}</div>
-    <p class="small faint">These are Wanderings’ researched places, not every business around you. Your location stays on this phone and is never saved. Map data © OpenStreetMap contributors.</p></div>`;
+    <p class="small faint">These are Wanderings’ researched places, not every business around you. Your location stays on this phone and is never saved. </p></div>`;
 }
 
 async function mount() {
   const el = document.getElementById('wMap'); if (!el) return;
   const c = cityOf(curCityId());
-  W.map = mapService.create(el, { center: c.center, zoom: 14, onFallback: () => { W.fallbackMap = true; const p = $('#wPill'); if (p) p.textContent = 'Offline map'; } });
+  W.map = mapService.create(el, { center: c.center, zoom: 14,
+    onFallback: () => { W.fallbackMap = true; const p = $('#wPill'); if (p) p.textContent = 'Sketch map'; },
+    onMode: m => showStatus($('#wMapStatus'), m) });
   refresh();
   addCleanup(() => { if (W.stop) W.stop(); W.stop = null; mapService.destroy(W.map); W.map = null; });
   const first = await locationService.getOnce();
   if (!document.getElementById('wMap')) return;
   if (first.error) { W.mode = first.error === 'denied' ? 'denied' : 'unavailable'; refresh(); return; }
-  W.pos = first; W.mode = 'near'; refresh();
+  W.pos = first; W.mode = 'near'; mapService.setArea(W.map, first); refresh();
   W.stop = await locationService.watch(p => { W.pos = p; if (W.mode !== 'near' && W.mode !== 'far') W.mode = 'near'; if (W.map) mapService.setUserLocation(W.map, W.mode === 'near' ? p : null); }, () => {});
 }
 

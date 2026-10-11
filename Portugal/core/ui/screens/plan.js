@@ -6,6 +6,7 @@ import { tripDays, itemsOn, stayOn, planOf, addToDay, statusOf, isBooked, walkMi
 import { mapService } from '../../services/map-service.js';
 import { fareService } from '../../services/fare-service.js';
 import { currencyService } from '../../services/currency-service.js';
+import { showStatus } from './offline.js';
 
 const dayCity = d => { const s = stayOn(S.trip, d); return s ? s.city_id : ''; };
 
@@ -62,7 +63,7 @@ function mapView(day, items) {
   addMount(() => {
     const el = document.getElementById('planMap'); if (!el) return;
     const c = cityOf(city || S.C.edition.city_ids[0]);
-    planMap = mapService.create(el, { center: home || c.center, zoom: 14 });
+    planMap = mapService.create(el, { center: home || c.center, zoom: 14, onMode: m => showStatus(document.getElementById('planMapStatus'), m) });
     const markers = pts.map(o => ({ id: o.v.item_id, name: o.info.name, location: o.info.location, number: o.i + 1, hollow: !o.v.time, went: statusOf(S.trip, o.v.item_id) === 'went' }));
     const draw = () => mapService.setMarkers(planMap, markers, { selectedId: P().pin, route: true, routeStart: home, onTap: id => { P().pin = id; save(); draw(); pinCard(items, home); } });
     draw();
@@ -70,7 +71,7 @@ function mapView(day, items) {
     pinCard(items, home);
     addCleanup(() => { mapService.destroy(planMap); planMap = null; });
   });
-  return `<div class="block" style="padding-top:12px"><div class="wmap small"><div class="wcanvas" id="planMap"></div></div><div id="pinCard"></div>${list}<p class="small faint">Map data © OpenStreetMap contributors. Directions open in your maps app.</p></div>`;
+  return `<div class="block" style="padding-top:12px"><div class="wmap small"><div class="wcanvas" id="planMap"></div></div><div data-mapstatus id="planMapStatus" style="padding-top:8px"></div><div id="pinCard"></div>${list}<p class="small faint">Directions open in your maps app.</p></div>`;
 }
 function pinCard(items, home) {
   const el = document.getElementById('pinCard'); if (!el) return;

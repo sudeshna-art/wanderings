@@ -6,6 +6,8 @@ import { masthead, cityBar, styleChoice, staysEditor, arrivalFields, homeCurrenc
 import { currencyService } from '../../services/currency-service.js';
 import { fareService } from '../../services/fare-service.js';
 import { speechService } from '../../services/speech-service.js';
+import { languageSelect } from './phrases.js';
+import { offlineMapsBlock, fillOfflineMaps } from './offline.js';
 
 export const E = { rate: null };
 
@@ -94,6 +96,7 @@ export function renderEssentials() {
   let html = masthead() + `<div class="greet"><div class="eyebrow">Essentials</div><h1>The practical bits.</h1></div>
   <div class="block" id="tripBlock" tabindex="-1" style="padding-top:8px"><h2>You &amp; your trip</h2>
     <div class="fields"><label class="f">Your first name<input type="text" data-bind="traveler_name" value="${esc(S.trip.traveler_name)}" autocomplete="given-name" placeholder="Used in your greeting"></label></div>
+    ${languageSelect('eLang')}
     ${homeCurrencySelect()}
     ${styleChoice('estyle')}
     <h3 style="margin-top:10px">Where you’re staying</h3>
@@ -105,6 +108,7 @@ export function renderEssentials() {
     ${S.trip.departure.flight ? `<a class="btn line sm" style="align-self:flex-start" href="https://www.google.com/search?q=${encodeURIComponent('flight ' + S.trip.departure.flight)}" target="_blank" rel="noopener">Track departure flight ${esc(S.trip.departure.flight)} ↗</a>` : ''}
     <button class="text-btn" data-act="welcome" data-step="1" style="align-self:flex-start">Show the welcome steps again</button></div>
   <div class="block" id="connBlock" tabindex="-1"><h2>Getting between places</h2>${connections()}<p class="small faint">Times are approximate. Check live times when you book.</p></div>
+  ${offlineMapsBlock()}
   <div class="block" style="padding-top:28px"><span class="label">Now showing</span>${cityBar()}</div>
   ${currencyBlock(c)}
   <div class="block"><h2>Getting around ${esc(cityName(c.city_id))}</h2><ul class="plain">${ga.items.map(i => `<li><b>${esc(i.title)}</b>${esc(i.text)}${i.link ? `<br><a href="${esc(i.link.url)}" target="_blank" rel="noopener">${esc(i.link.label)} ↗</a>` : ''}</li>`).join('')}</ul>
@@ -121,5 +125,5 @@ export function renderEssentials() {
   <p class="small faint" style="padding-top:28px">Prices, hours and fares checked Oct 9, 2026 from official sites and travel sources. They change, so confirm when booking.</p>
   <p class="small faint" style="padding-top:10px">Wanderings by Whiskers &amp; Wanderings · ${esc(EDITION.name)} edition</p>`;
   document.querySelector('section[data-tab="essentials"]').innerHTML = html;
-  addMount(() => { loadRate(); showFare(); voiceBlock(); });
+  addMount(() => { loadRate(); showFare(); voiceBlock(); fillOfflineMaps(); });
 }

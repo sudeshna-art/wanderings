@@ -30,6 +30,7 @@ export function homePoint(cityId = curCityId()) {
   const s = stayHere(cityId); const h = s && hoodOf(cityId, s.neighborhood_id);
   return h && h.center ? { lat: h.center.lat, lng: h.center.lng, name: s.label || 'Where I’m staying', hood: h } : null;
 }
+export const myLang = () => (S.trip && S.trip.traveler_language) || 'en';
 export const isPlanner = () => S.trip.travel_style === 'planner';
 export const isWanderer = () => S.trip.travel_style === 'wanderer';
 export const hasStays = () => sortedStays(S.trip).length > 0;

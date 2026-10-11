@@ -3,6 +3,7 @@ import { EDITION } from '../../../edition.config.js';
 import { S } from '../state.js';
 import { esc } from '../dom.js';
 import { styleChoice, staysEditor, arrivalFields, homeCurrencySelect } from '../components.js';
+import { languageSelect } from './phrases.js';
 
 export const W = { step: 1 };
 const STEPS = 4;
@@ -13,6 +14,8 @@ export function renderWelcome() {
   let body = '';
   if (W.step === 1) body = `<div class="eyebrow">Welcome to Wanderings</div><h1>Let’s plan your trip!</h1><p class="lede">This is ${esc(EDITION.name)}, for Lisbon and the Algarve. A few quick questions. Everything stays on this phone, and you can change it anytime.</p>
     <label class="f" style="flex:none">What should we call you?<input type="text" data-bind="traveler_name" value="${esc(S.trip.traveler_name)}" autocomplete="given-name" placeholder="Your first name"></label>
+    ${languageSelect('wLang')}
+    <p class="small faint" style="margin-top:-8px">Phrase meanings and audio stories appear in your language.</p>
     ${homeCurrencySelect()}
     <p class="small faint" style="margin-top:-8px">Prices convert from euros into your currency.</p>`;
   if (W.step === 2) body = `<div class="eyebrow">Step 2 of ${STEPS}</div><h1>How do you like to travel?</h1><p class="lede">This changes how the Places tab works. Switch anytime in Essentials.</p>${styleChoice('wstyle')}`;

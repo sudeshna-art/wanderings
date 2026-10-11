@@ -5,6 +5,9 @@ import { masthead, cityBar, legend, bookRow, placeRow, art } from '../components
 import { stage, statusOf, isBooked, itemsOn, walkMinutes, km, sortedStays } from '../../models/schema.js';
 import { timelineView } from './plan.js';
 import { allPhotoIds } from './journal.js';
+import { view as phraseView } from './phrases.js';
+import { myLang } from '../state.js';
+import { mapPackService } from '../../services/mappack-service.js';
 
 let slideTimer = null, slideIdx = 0;
 
@@ -117,7 +120,7 @@ function planBlock(st) {
 function phraseNow() {
   const h = new Date().getHours(), ph = S.C.phrases;
   const m = ph.moments.find(x => h < x.until) || ph.moments[ph.moments.length - 1];
-  return [m.label, (ph.situations[m.situation] || [])[m.index] || ph.situations.Greetings[0]];
+  return [m.label, phraseView((ph.situations[m.situation] || [])[m.index] || ph.situations.Greetings[0])];
 }
 
 function ideas(cityId) {
@@ -171,6 +174,12 @@ export function renderToday() {
     html += `<div class="block"><div class="head"><h2>Wander now</h2><span class="label">True Wanderer</span></div><p class="serif" style="font-size:17px">See the curated spots closest to you on a live map, with what they cost and how to get there.</p>
       <button class="btn" data-act="pview" data-v="nearby" data-tab="places" style="align-self:flex-start">${ic('compass', 'style="width:18px;height:18px"')}What’s near me</button></div>`;
   }
+  if (st.k !== 'after' && (S.C.maps || {}).packs && S.C.maps.packs.length) {
+    html += `<div class="block" id="todayOffline" hidden><div style="border:1px solid var(--rule);padding:14px;display:flex;flex-direction:column;gap:8px"><div class="label">Before you lose signal</div>
+      <p class="small">Save the offline maps on Wi-Fi so Nearby and your plan map work on trails, beaches and anywhere without coverage.</p>
+      <button class="btn sm" data-act="go" data-tab="essentials" data-focus="#offlineBlock" style="align-self:flex-start">Save offline maps</button></div></div>`;
+    addMount(async () => { const have = await mapPackService.downloaded(); const el = document.getElementById('todayOffline'); if (el) el.hidden = S.C.maps.packs.every(p => have.includes(p.id)); });
+  }
   html += travelBlock();
 
   if (st.k !== 'after' && toBook.length) {
@@ -195,8 +204,8 @@ export function renderToday() {
       <div class="rows">${id.map(p => placeRow(p, true)).join('')}</div></div>`;
   }
   html += `<div class="block"><div class="panel"><div class="label">Phrase for ${esc(moment.toLowerCase())}</div>
-    <div style="display:flex;gap:12px;align-items:center;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:4px;min-width:0"><div class="it">${esc(ph[0])}</div><div class="say">${esc(ph[1])}</div><div class="en">${esc(ph[2])}</div></div>
-    <button class="hear" data-act="say" data-text="${esc(ph[0])}" aria-label="Hear it">${ic('speak')}</button></div>
+    <div style="display:flex;gap:12px;align-items:center;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:4px;min-width:0"><div class="it">${esc(ph.t)}</div>${myLang() === 'en' ? `<div class="say">${esc(ph.say)}</div>` : ''}<div class="en">${esc(ph.m)}</div></div>
+    <button class="hear" data-act="say" data-text="${esc(ph.t)}" aria-label="Hear it">${ic('speak')}</button></div>
     <button class="text-btn" data-act="go" data-tab="phrases" style="align-self:flex-start;min-height:32px">More phrases</button></div></div>`;
 
   if (st.k === 'after' || visited) {

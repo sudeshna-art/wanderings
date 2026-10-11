@@ -14,9 +14,9 @@ async function getJSON(name) {
 export const contentService = {
   async load() {
     if (cache) return cache;
-    const [edition, cities, places, phrases, essentials] = await Promise.all(
-      ['edition.json', 'cities.json', 'places.json', 'phrases.json', 'essentials.json'].map(getJSON));
-    cache = { edition, cities, places, phrases, essentials };
+    const [edition, cities, places, phrases, essentials, maps] = await Promise.all(
+      ['edition.json', 'cities.json', 'places.json', 'phrases.json', 'essentials.json', 'maps.json'].map(n => n === 'maps.json' ? getJSON(n).catch(() => ({ packs: [] })) : getJSON(n)));
+    cache = { edition, cities, places, phrases, essentials, maps };
     return cache;
   },
   async city(cityId) { const c = await this.load(); return c.cities.find(x => x.city_id === cityId) || null; },

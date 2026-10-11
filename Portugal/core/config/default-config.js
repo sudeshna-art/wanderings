@@ -29,6 +29,16 @@ export const CONFIG = {
     aedPegSource: 'UAE dirham official US dollar peg (3.6725 since 1997)',
     aedPegChecked: '2026-10-09'
   },
+  /* Traveler languages (approved Oct 10 2026): phrase meanings and audio stories are shown in the traveler's own language.
+     The phrase audio itself always stays in the destination's language. Labels are each language's own name. */
+  languages: [
+    { code: 'en', label: 'English', voice: 'en-US' },
+    { code: 'es', label: 'Español', voice: 'es-ES' },
+    { code: 'fr', label: 'Français', voice: 'fr-FR' },
+    { code: 'pt', label: 'Português', voice: 'pt-BR' },
+    { code: 'de', label: 'Deutsch', voice: 'de-DE' },
+    { code: 'it', label: 'Italiano', voice: 'it-IT' }
+  ],
   features: {
     true_wanderer: true,
     affiliate_links: false   // stays off until the owner approves a program and the disclosure wording

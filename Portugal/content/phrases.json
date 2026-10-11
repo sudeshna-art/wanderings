@@ -1,112 +1,973 @@
 {
-  "language": "pt-PT",
-  "language_name": "Portuguese",
-  "title": "Say it in Portuguese.",
-  "note": "European Portuguese. Pronunciation is a rough guide for English speakers.",
-  "gender_note": "Women say obrigada, men say obrigado.",
-  "situations": {
-    "Greetings": [
-      ["Olá", "oh-LAH", "Hello"],
-      ["Bom dia", "bohn DEE-ah", "Good morning (until lunch)"],
-      ["Boa tarde", "BOH-ah TARD", "Good afternoon"],
-      ["Boa noite", "BOH-ah NOYT", "Good evening, good night"],
-      ["Por favor", "poor fah-VOHR", "Please"],
-      ["Obrigada", "oh-bree-GAH-dah", "Thank you (a man says obrigado)"],
-      ["De nada", "deh NAH-dah", "You're welcome"],
-      ["Desculpe", "dush-KOOLP", "Excuse me, sorry"],
-      ["Fala inglês?", "FAH-lah een-GLAYSH", "Do you speak English?"],
-      ["Não percebo", "nowng per-SEH-boo", "I don't understand"],
-      ["Mais devagar, por favor", "mysh d'vah-GAR, poor fah-VOHR", "Slower, please"],
-      ["Até logo", "ah-TEH LOH-goo", "See you later"]
-    ],
-    "Restaurant": [
-      ["Uma mesa para duas pessoas, por favor", "OO-mah MAY-zah PAH-rah DOO-ash peh-SOH-ash", "A table for two, please"],
-      ["Temos uma reserva", "TEH-moosh OO-mah reh-ZEHR-vah", "We have a reservation"],
-      ["Podemos ficar na esplanada?", "poo-DEH-moosh fee-KAR nah shplah-NAH-dah", "Can we sit on the terrace?"],
-      ["O que recomenda?", "oo keh reh-koo-MEHN-dah", "What do you recommend?"],
-      ["Não queremos o couvert, obrigada", "nowng keh-REH-moosh oo koo-VEHR", "We don't want the bread and starters, thanks"],
-      ["Uma água sem gás", "OO-mah AH-gwah sayng gash", "Still water"],
-      ["Uma água com gás", "OO-mah AH-gwah kohng gash", "Sparkling water"],
-      ["Um copo de vinho branco", "oong KOH-poo deh VEE-nyoo BRAHN-koo", "A glass of white wine"],
-      ["Um copo de vinho tinto", "oong KOH-poo deh VEE-nyoo TEEN-too", "A glass of red wine"],
-      ["Sou alérgica a …", "soh ah-LEHR-zhee-kah ah", "I'm allergic to … (alérgico for a man)"],
-      ["Onde é a casa de banho?", "OHN-deh eh ah KAH-zah deh BAH-nyoo", "Where is the bathroom?"],
-      ["A conta, por favor", "ah KOHN-tah, poor fah-VOHR", "The bill, please"],
-      ["Estava tudo delicioso!", "shTAH-vah TOO-doo deh-lee-see-OH-zoo", "Everything was delicious!"]
-    ],
-    "Café and pastries": [
-      ["Uma bica, por favor", "OO-mah BEE-kah", "An espresso, please (Lisbon's word)"],
-      ["Um galão", "oong gah-LOWNG", "A milky coffee in a glass"],
-      ["Uma meia de leite", "OO-mah MAY-ah deh LAYT", "Coffee with milk in a cup"],
-      ["Um pastel de nata, por favor", "oong pahsh-TEHL deh NAH-tah", "A custard tart, please"],
-      ["Com canela", "kohng kah-NEH-lah", "With cinnamon"],
-      ["Um sumo de laranja natural", "oong SOO-moo deh lah-RAHN-zhah nah-too-RAHL", "A fresh orange juice"],
-      ["Para levar", "PAH-rah leh-VAR", "To take away"]
-    ],
-    "Shopping": [
-      ["Quanto custa?", "KWAN-too KOOSH-tah", "How much is it?"],
-      ["Estou só a ver, obrigada", "shtoh soh ah vehr", "Just looking, thanks"],
-      ["Posso experimentar?", "POH-soo shpeh-ree-mehn-TAR", "Can I try it on?"],
-      ["Tem um tamanho maior?", "tayng oong tah-MAH-nyoo my-OR", "Do you have a bigger size?"],
-      ["Tem um tamanho mais pequeno?", "tayng oong tah-MAH-nyoo mysh peh-KEH-noo", "Do you have a smaller size?"],
-      ["Tem noutra cor?", "tayng NOH-trah kohr", "Do you have it in another color?"],
-      ["É feito à mão?", "eh FAY-too ah mowng", "Is it handmade?"],
-      ["Pode embrulhar para oferta?", "POH-deh ehm-broo-LYAR PAH-rah oh-FEHR-tah", "Can you gift wrap it?"],
-      ["Posso pagar com cartão?", "POH-soo pah-GAR kohng kar-TOWNG", "Can I pay by card?"],
-      ["Fico com este", "FEE-koo kohng EHSHT", "I'll take this one"]
-    ],
-    "Hotel": [
-      ["Tenho uma reserva em nome de …", "TEH-nyoo OO-mah reh-ZEHR-vah ayng NOH-meh deh", "I have a reservation under …"],
-      ["A que horas é o pequeno-almoço?", "ah keh OH-rash eh oo peh-KEH-noo al-MOH-soo", "What time is breakfast?"],
-      ["Qual é a password do wi-fi?", "kwahl eh ah PASS-word doo wee-fee", "What's the Wi-Fi password?"],
-      ["Posso deixar as malas?", "POH-soo day-SHAR ash MAH-lash", "Can I leave my bags?"],
-      ["Pode chamar-me um táxi?", "POH-deh shah-MAR-meh oong TAHK-see", "Could you call me a taxi?"],
-      ["A que horas é o check-out?", "ah keh OH-rash eh oo check-out", "What time is check-out?"]
-    ],
-    "Taxi and transport": [
-      ["Para esta morada, por favor", "PAH-rah EHSH-tah moo-RAH-dah", "To this address, please"],
-      ["Quanto custa até …?", "KWAN-too KOOSH-tah ah-TEH", "How much to …?"],
-      ["Pode ligar o taxímetro?", "POH-deh lee-GAR oo tahk-SEE-meh-troo", "Could you turn on the meter?"],
-      ["Pare aqui, por favor", "PAH-reh ah-KEE", "Stop here, please"],
-      ["Pode dar-me um recibo?", "POH-deh DAR-meh oong reh-SEE-boo", "Can I have a receipt?"],
-      ["Fique com o troco", "FEE-keh kohng oo TROH-koo", "Keep the change"],
-      ["Um bilhete para Faro", "oong bee-LYEHT PAH-rah FAH-roo", "A ticket to Faro"],
-      ["De que linha parte?", "deh keh LEE-nyah PART", "Which platform does it leave from?"],
-      ["Onde é a paragem do autocarro?", "OHN-deh eh ah pah-RAH-zhayng doo ow-toh-KAH-roo", "Where is the bus stop?"]
-    ],
-    "Beach and boats": [
-      ["Onde se apanha o barco?", "OHN-deh seh ah-PAH-nyah oo BAR-koo", "Where do we catch the boat?"],
-      ["A que horas volta o barco?", "ah keh OH-rash VOL-tah oo BAR-koo", "What time does the boat come back?"],
-      ["Duas espreguiçadeiras e um chapéu de sol", "DOO-ash shpreh-gee-sah-DAY-rash ee oong shah-PEH-oo deh sol", "Two sunbeds and an umbrella"],
-      ["É seguro nadar aqui?", "eh seh-GOO-roo nah-DAR ah-KEE", "Is it safe to swim here?"],
-      ["A água está fria?", "ah AH-gwah shtah FREE-ah", "Is the water cold?"]
-    ],
-    "Museums and palaces": [
-      ["Tenho bilhete para as …", "TEH-nyoo bee-LYEHT PAH-rah ash", "I have a ticket for … o'clock"],
-      ["Duas entradas, por favor", "DOO-ash ehn-TRAH-dash", "Two tickets, please"],
-      ["A que horas fecha?", "ah keh OH-rash FAY-shah", "What time does it close?"],
-      ["Onde é a entrada?", "OHN-deh eh ah ehn-TRAH-dah", "Where is the entrance?"],
-      ["Posso tirar fotografias?", "POH-soo tee-RAR foo-too-grah-FEE-ash", "Can I take photos?"],
-      ["Onde é a saída?", "OHN-deh eh ah sah-EE-dah", "Where is the exit?"]
-    ],
-    "Help": [
-      ["Socorro!", "soo-KOH-roo", "Help!"],
-      ["Chame uma ambulância", "SHAH-meh OO-mah ahm-boo-LAHN-see-ah", "Call an ambulance"],
-      ["Chame a polícia", "SHAH-meh ah poo-LEE-see-ah", "Call the police"],
-      ["Não me sinto bem", "nowng meh SEEN-too bayng", "I don't feel well"],
-      ["Onde é a farmácia?", "OHN-deh eh ah far-MAH-see-ah", "Where is the pharmacy?"],
-      ["Perdi o passaporte", "per-DEE oo pah-sah-PORT", "I lost my passport"],
-      ["Estou perdida", "shtoh per-DEE-dah", "I'm lost (perdido for a man)"]
-    ]
-  },
-  "moments": [
-    { "until": 11, "label": "Breakfast", "situation": "Café and pastries", "index": 3 },
-    { "until": 15, "label": "Lunch", "situation": "Restaurant", "index": 11 },
-    { "until": 18, "label": "Shopping", "situation": "Shopping", "index": 0 },
-    { "until": 24, "label": "Dinner", "situation": "Restaurant", "index": 0 }
+ "language": "pt-PT",
+ "language_name": "Portuguese",
+ "title": "Say it in Portuguese.",
+ "note": "European Portuguese, as spoken in Portugal.",
+ "situations": {
+  "Greetings": [
+   {
+    "t": "Olá",
+    "say": "oh-LAH",
+    "m": {
+     "en": "Hello",
+     "es": "Hola",
+     "fr": "Bonjour, salut",
+     "pt": "Olá, oi",
+     "de": "Hallo",
+     "it": "Ciao, salve"
+    }
+   },
+   {
+    "t": "Bom dia",
+    "say": "bohn DEE-ah",
+    "m": {
+     "en": "Good morning (until lunch)",
+     "es": "Buenos días (hasta la hora de comer)",
+     "fr": "Bonjour (le matin, jusqu’au déjeuner)",
+     "pt": "Bom dia (até o almoço)",
+     "de": "Guten Morgen (bis zum Mittagessen)",
+     "it": "Buongiorno (fino a pranzo)"
+    }
+   },
+   {
+    "t": "Boa tarde",
+    "say": "BOH-ah TARD",
+    "m": {
+     "en": "Good afternoon",
+     "es": "Buenas tardes",
+     "fr": "Bon après-midi",
+     "pt": "Boa tarde",
+     "de": "Guten Tag (nachmittags)",
+     "it": "Buon pomeriggio"
+    }
+   },
+   {
+    "t": "Boa noite",
+    "say": "BOH-ah NOYT",
+    "m": {
+     "en": "Good evening, good night",
+     "es": "Buenas noches",
+     "fr": "Bonsoir, bonne nuit",
+     "pt": "Boa noite",
+     "de": "Guten Abend, gute Nacht",
+     "it": "Buonasera, buonanotte"
+    }
+   },
+   {
+    "t": "Por favor",
+    "say": "poor fah-VOHR",
+    "m": {
+     "en": "Please",
+     "es": "Por favor",
+     "fr": "S’il vous plaît",
+     "pt": "Por favor",
+     "de": "Bitte",
+     "it": "Per favore"
+    }
+   },
+   {
+    "t": "Obrigada",
+    "say": "oh-bree-GAH-dah",
+    "m": {
+     "en": "Thank you (a man says obrigado)",
+     "es": "Gracias (las mujeres dicen obrigada, los hombres obrigado)",
+     "fr": "Merci (une femme dit obrigada, un homme obrigado)",
+     "pt": "Obrigada (homens dizem obrigado)",
+     "de": "Danke (Frauen sagen obrigada, Männer obrigado)",
+     "it": "Grazie (le donne dicono obrigada, gli uomini obrigado)"
+    }
+   },
+   {
+    "t": "De nada",
+    "say": "deh NAH-dah",
+    "m": {
+     "en": "You're welcome",
+     "es": "De nada",
+     "fr": "De rien",
+     "pt": "De nada",
+     "de": "Gern geschehen",
+     "it": "Prego"
+    }
+   },
+   {
+    "t": "Desculpe",
+    "say": "dush-KOOLP",
+    "m": {
+     "en": "Excuse me, sorry",
+     "es": "Disculpe, perdón",
+     "fr": "Excusez-moi, pardon",
+     "pt": "Com licença, desculpe",
+     "de": "Entschuldigung",
+     "it": "Mi scusi"
+    }
+   },
+   {
+    "t": "Fala inglês?",
+    "say": "FAH-lah een-GLAYSH",
+    "m": {
+     "en": "Do you speak English?",
+     "es": "¿Habla español?",
+     "fr": "Parlez-vous français ?",
+     "pt": "Você fala inglês?",
+     "de": "Sprechen Sie Deutsch?",
+     "it": "Parla italiano?"
+    },
+    "t_by": {
+     "es": "Fala espanhol?",
+     "fr": "Fala francês?",
+     "de": "Fala alemão?",
+     "it": "Fala italiano?"
+    }
+   },
+   {
+    "t": "Não percebo",
+    "say": "nowng per-SEH-boo",
+    "m": {
+     "en": "I don't understand",
+     "es": "No entiendo",
+     "fr": "Je ne comprends pas",
+     "pt": "Não entendo",
+     "de": "Ich verstehe nicht",
+     "it": "Non capisco"
+    }
+   },
+   {
+    "t": "Mais devagar, por favor",
+    "say": "mysh d'vah-GAR, poor fah-VOHR",
+    "m": {
+     "en": "Slower, please",
+     "es": "Más despacio, por favor",
+     "fr": "Plus lentement, s’il vous plaît",
+     "pt": "Mais devagar, por favor",
+     "de": "Langsamer, bitte",
+     "it": "Più piano, per favore"
+    }
+   },
+   {
+    "t": "Até logo",
+    "say": "ah-TEH LOH-goo",
+    "m": {
+     "en": "See you later",
+     "es": "Hasta luego",
+     "fr": "À plus tard",
+     "pt": "Até logo",
+     "de": "Bis später",
+     "it": "A dopo"
+    }
+   }
   ],
-  "driver": {
-    "template": "Para {place}, por favor.",
-    "ask": ["Quanto custa, mais ou menos?", "KWAN-too KOOSH-tah, myz oh MEH-noosh", "About how much will it cost?"]
+  "Restaurant": [
+   {
+    "t": "Uma mesa para duas pessoas, por favor",
+    "say": "OO-mah MAY-zah PAH-rah DOO-ash peh-SOH-ash",
+    "m": {
+     "en": "A table for two, please",
+     "es": "Una mesa para dos, por favor",
+     "fr": "Une table pour deux, s’il vous plaît",
+     "pt": "Uma mesa para dois, por favor",
+     "de": "Einen Tisch für zwei, bitte",
+     "it": "Un tavolo per due, per favore"
+    }
+   },
+   {
+    "t": "Temos uma reserva",
+    "say": "TEH-moosh OO-mah reh-ZEHR-vah",
+    "m": {
+     "en": "We have a reservation",
+     "es": "Tenemos una reserva",
+     "fr": "Nous avons une réservation",
+     "pt": "Temos uma reserva",
+     "de": "Wir haben reserviert",
+     "it": "Abbiamo una prenotazione"
+    }
+   },
+   {
+    "t": "Podemos ficar na esplanada?",
+    "say": "poo-DEH-moosh fee-KAR nah shplah-NAH-dah",
+    "m": {
+     "en": "Can we sit on the terrace?",
+     "es": "¿Podemos sentarnos en la terraza?",
+     "fr": "Pouvons-nous nous asseoir en terrasse ?",
+     "pt": "Podemos sentar na área externa?",
+     "de": "Können wir auf der Terrasse sitzen?",
+     "it": "Possiamo sederci in terrazza?"
+    }
+   },
+   {
+    "t": "O que recomenda?",
+    "say": "oo keh reh-koo-MEHN-dah",
+    "m": {
+     "en": "What do you recommend?",
+     "es": "¿Qué nos recomienda?",
+     "fr": "Que nous conseillez-vous ?",
+     "pt": "O que você recomenda?",
+     "de": "Was empfehlen Sie?",
+     "it": "Cosa ci consiglia?"
+    }
+   },
+   {
+    "t": "Não queremos o couvert, obrigada",
+    "say": "nowng keh-REH-moosh oo koo-VEHR",
+    "m": {
+     "en": "We don't want the bread and starters, thanks",
+     "es": "No queremos el pan ni los entrantes, gracias",
+     "fr": "Nous ne voulons pas le pain et les amuse-bouches, merci",
+     "pt": "Não queremos o couvert, obrigada",
+     "de": "Wir möchten kein Brot und keine Vorspeisen, danke",
+     "it": "Non vogliamo pane e antipasti, grazie"
+    }
+   },
+   {
+    "t": "Uma água sem gás",
+    "say": "OO-mah AH-gwah sayng gash",
+    "m": {
+     "en": "Still water",
+     "es": "Un agua sin gas",
+     "fr": "Une eau plate",
+     "pt": "Uma água sem gás",
+     "de": "Ein stilles Wasser",
+     "it": "Un’acqua naturale"
+    }
+   },
+   {
+    "t": "Uma água com gás",
+    "say": "OO-mah AH-gwah kohng gash",
+    "m": {
+     "en": "Sparkling water",
+     "es": "Un agua con gas",
+     "fr": "Une eau gazeuse",
+     "pt": "Uma água com gás",
+     "de": "Ein Sprudelwasser",
+     "it": "Un’acqua frizzante"
+    }
+   },
+   {
+    "t": "Um copo de vinho branco",
+    "say": "oong KOH-poo deh VEE-nyoo BRAHN-koo",
+    "m": {
+     "en": "A glass of white wine",
+     "es": "Una copa de vino blanco",
+     "fr": "Un verre de vin blanc",
+     "pt": "Uma taça de vinho branco",
+     "de": "Ein Glas Weißwein",
+     "it": "Un bicchiere di vino bianco"
+    }
+   },
+   {
+    "t": "Um copo de vinho tinto",
+    "say": "oong KOH-poo deh VEE-nyoo TEEN-too",
+    "m": {
+     "en": "A glass of red wine",
+     "es": "Una copa de vino tinto",
+     "fr": "Un verre de vin rouge",
+     "pt": "Uma taça de vinho tinto",
+     "de": "Ein Glas Rotwein",
+     "it": "Un bicchiere di vino rosso"
+    }
+   },
+   {
+    "t": "Sou alérgica a …",
+    "say": "soh ah-LEHR-zhee-kah ah",
+    "m": {
+     "en": "I'm allergic to … (alérgico for a man)",
+     "es": "Soy alérgica a … (un hombre dice alérgico)",
+     "fr": "Je suis allergique à … (un homme dit alérgico)",
+     "pt": "Sou alérgica a … (homens dizem alérgico)",
+     "de": "Ich bin allergisch gegen … (Männer sagen alérgico)",
+     "it": "Sono allergica a … (gli uomini dicono alérgico)"
+    }
+   },
+   {
+    "t": "Onde é a casa de banho?",
+    "say": "OHN-deh eh ah KAH-zah deh BAH-nyoo",
+    "m": {
+     "en": "Where is the bathroom?",
+     "es": "¿Dónde está el baño?",
+     "fr": "Où sont les toilettes ?",
+     "pt": "Onde fica o banheiro?",
+     "de": "Wo ist die Toilette?",
+     "it": "Dov’è il bagno?"
+    }
+   },
+   {
+    "t": "A conta, por favor",
+    "say": "ah KOHN-tah, poor fah-VOHR",
+    "m": {
+     "en": "The bill, please",
+     "es": "La cuenta, por favor",
+     "fr": "L’addition, s’il vous plaît",
+     "pt": "A conta, por favor",
+     "de": "Die Rechnung, bitte",
+     "it": "Il conto, per favore"
+    }
+   },
+   {
+    "t": "Estava tudo delicioso!",
+    "say": "shTAH-vah TOO-doo deh-lee-see-OH-zoo",
+    "m": {
+     "en": "Everything was delicious!",
+     "es": "¡Estaba todo delicioso!",
+     "fr": "Tout était délicieux !",
+     "pt": "Estava tudo uma delícia!",
+     "de": "Alles war köstlich!",
+     "it": "Era tutto buonissimo!"
+    }
+   }
+  ],
+  "Café and pastries": [
+   {
+    "t": "Uma bica, por favor",
+    "say": "OO-mah BEE-kah",
+    "m": {
+     "en": "An espresso, please (Lisbon's word)",
+     "es": "Un café solo, por favor (así se dice en Lisboa)",
+     "fr": "Un expresso, s’il vous plaît (le mot de Lisbonne)",
+     "pt": "Um cafezinho, por favor (é como se diz em Lisboa)",
+     "de": "Einen Espresso, bitte (so sagt man in Lissabon)",
+     "it": "Un caffè, per favore (si dice così a Lisbona)"
+    }
+   },
+   {
+    "t": "Um galão",
+    "say": "oong gah-LOWNG",
+    "m": {
+     "en": "A milky coffee in a glass",
+     "es": "Un café con mucha leche, en vaso",
+     "fr": "Un café au lait servi dans un verre",
+     "pt": "Um café com bastante leite, no copo",
+     "de": "Ein Milchkaffee im Glas",
+     "it": "Un caffellatte nel bicchiere"
+    }
+   },
+   {
+    "t": "Uma meia de leite",
+    "say": "OO-mah MAY-ah deh LAYT",
+    "m": {
+     "en": "Coffee with milk in a cup",
+     "es": "Un café con leche en taza",
+     "fr": "Un café au lait en tasse",
+     "pt": "Um café com leite na xícara",
+     "de": "Kaffee mit Milch in der Tasse",
+     "it": "Un caffè con latte in tazza"
+    }
+   },
+   {
+    "t": "Um pastel de nata, por favor",
+    "say": "oong pahsh-TEHL deh NAH-tah",
+    "m": {
+     "en": "A custard tart, please",
+     "es": "Un pastel de nata (tartaleta de crema), por favor",
+     "fr": "Un pastel de nata (tartelette à la crème), s’il vous plaît",
+     "pt": "Um pastel de nata, por favor",
+     "de": "Ein Pastel de Nata (Puddingtörtchen), bitte",
+     "it": "Un pastel de nata (tortina alla crema), per favore"
+    }
+   },
+   {
+    "t": "Com canela",
+    "say": "kohng kah-NEH-lah",
+    "m": {
+     "en": "With cinnamon",
+     "es": "Con canela",
+     "fr": "Avec de la cannelle",
+     "pt": "Com canela",
+     "de": "Mit Zimt",
+     "it": "Con cannella"
+    }
+   },
+   {
+    "t": "Um sumo de laranja natural",
+    "say": "oong SOO-moo deh lah-RAHN-zhah nah-too-RAHL",
+    "m": {
+     "en": "A fresh orange juice",
+     "es": "Un zumo de naranja natural",
+     "fr": "Un jus d’orange pressé",
+     "pt": "Um suco de laranja natural",
+     "de": "Einen frisch gepressten Orangensaft",
+     "it": "Una spremuta d’arancia"
+    }
+   },
+   {
+    "t": "Para levar",
+    "say": "PAH-rah leh-VAR",
+    "m": {
+     "en": "To take away",
+     "es": "Para llevar",
+     "fr": "À emporter",
+     "pt": "Para viagem",
+     "de": "Zum Mitnehmen",
+     "it": "Da portare via"
+    }
+   }
+  ],
+  "Shopping": [
+   {
+    "t": "Quanto custa?",
+    "say": "KWAN-too KOOSH-tah",
+    "m": {
+     "en": "How much is it?",
+     "es": "¿Cuánto cuesta?",
+     "fr": "Combien ça coûte ?",
+     "pt": "Quanto custa?",
+     "de": "Wie viel kostet das?",
+     "it": "Quanto costa?"
+    }
+   },
+   {
+    "t": "Estou só a ver, obrigada",
+    "say": "shtoh soh ah vehr",
+    "m": {
+     "en": "Just looking, thanks",
+     "es": "Solo estoy mirando, gracias",
+     "fr": "Je regarde seulement, merci",
+     "pt": "Só estou olhando, obrigada",
+     "de": "Ich schaue nur, danke",
+     "it": "Sto solo guardando, grazie"
+    }
+   },
+   {
+    "t": "Posso experimentar?",
+    "say": "POH-soo shpeh-ree-mehn-TAR",
+    "m": {
+     "en": "Can I try it on?",
+     "es": "¿Me lo puedo probar?",
+     "fr": "Je peux l’essayer ?",
+     "pt": "Posso provar?",
+     "de": "Kann ich das anprobieren?",
+     "it": "Posso provarlo?"
+    }
+   },
+   {
+    "t": "Tem um tamanho maior?",
+    "say": "tayng oong tah-MAH-nyoo my-OR",
+    "m": {
+     "en": "Do you have a bigger size?",
+     "es": "¿Tiene una talla más grande?",
+     "fr": "Vous l’avez dans une taille au-dessus ?",
+     "pt": "Tem um tamanho maior?",
+     "de": "Haben Sie das eine Nummer größer?",
+     "it": "Ha una taglia più grande?"
+    }
+   },
+   {
+    "t": "Tem um tamanho mais pequeno?",
+    "say": "tayng oong tah-MAH-nyoo mysh peh-KEH-noo",
+    "m": {
+     "en": "Do you have a smaller size?",
+     "es": "¿Tiene una talla más pequeña?",
+     "fr": "Vous l’avez dans une taille en dessous ?",
+     "pt": "Tem um tamanho menor?",
+     "de": "Haben Sie das eine Nummer kleiner?",
+     "it": "Ha una taglia più piccola?"
+    }
+   },
+   {
+    "t": "Tem noutra cor?",
+    "say": "tayng NOH-trah kohr",
+    "m": {
+     "en": "Do you have it in another color?",
+     "es": "¿Lo tiene en otro color?",
+     "fr": "Vous l’avez dans une autre couleur ?",
+     "pt": "Tem em outra cor?",
+     "de": "Haben Sie das in einer anderen Farbe?",
+     "it": "Ce l’ha in un altro colore?"
+    }
+   },
+   {
+    "t": "É feito à mão?",
+    "say": "eh FAY-too ah mowng",
+    "m": {
+     "en": "Is it handmade?",
+     "es": "¿Está hecho a mano?",
+     "fr": "C’est fait main ?",
+     "pt": "É feito à mão?",
+     "de": "Ist das handgemacht?",
+     "it": "È fatto a mano?"
+    }
+   },
+   {
+    "t": "Pode embrulhar para oferta?",
+    "say": "POH-deh ehm-broo-LYAR PAH-rah oh-FEHR-tah",
+    "m": {
+     "en": "Can you gift wrap it?",
+     "es": "¿Me lo puede envolver para regalo?",
+     "fr": "Vous pouvez faire un paquet cadeau ?",
+     "pt": "Pode embrulhar para presente?",
+     "de": "Können Sie es als Geschenk einpacken?",
+     "it": "Può farmi una confezione regalo?"
+    }
+   },
+   {
+    "t": "Posso pagar com cartão?",
+    "say": "POH-soo pah-GAR kohng kar-TOWNG",
+    "m": {
+     "en": "Can I pay by card?",
+     "es": "¿Puedo pagar con tarjeta?",
+     "fr": "Je peux payer par carte ?",
+     "pt": "Posso pagar com cartão?",
+     "de": "Kann ich mit Karte zahlen?",
+     "it": "Posso pagare con la carta?"
+    }
+   },
+   {
+    "t": "Fico com este",
+    "say": "FEE-koo kohng EHSHT",
+    "m": {
+     "en": "I'll take this one",
+     "es": "Me quedo con este",
+     "fr": "Je prends celui-ci",
+     "pt": "Vou levar este",
+     "de": "Ich nehme das hier",
+     "it": "Prendo questo"
+    }
+   }
+  ],
+  "Hotel": [
+   {
+    "t": "Tenho uma reserva em nome de …",
+    "say": "TEH-nyoo OO-mah reh-ZEHR-vah ayng NOH-meh deh",
+    "m": {
+     "en": "I have a reservation under …",
+     "es": "Tengo una reserva a nombre de …",
+     "fr": "J’ai une réservation au nom de …",
+     "pt": "Tenho uma reserva em nome de …",
+     "de": "Ich habe eine Reservierung auf den Namen …",
+     "it": "Ho una prenotazione a nome di …"
+    }
+   },
+   {
+    "t": "A que horas é o pequeno-almoço?",
+    "say": "ah keh OH-rash eh oo peh-KEH-noo al-MOH-soo",
+    "m": {
+     "en": "What time is breakfast?",
+     "es": "¿A qué hora es el desayuno?",
+     "fr": "À quelle heure est le petit-déjeuner ?",
+     "pt": "Que horas é o café da manhã?",
+     "de": "Wann gibt es Frühstück?",
+     "it": "A che ora è la colazione?"
+    }
+   },
+   {
+    "t": "Qual é a password do wi-fi?",
+    "say": "kwahl eh ah PASS-word doo wee-fee",
+    "m": {
+     "en": "What's the Wi-Fi password?",
+     "es": "¿Cuál es la contraseña del wifi?",
+     "fr": "Quel est le mot de passe du wifi ?",
+     "pt": "Qual é a senha do wi-fi?",
+     "de": "Wie lautet das WLAN-Passwort?",
+     "it": "Qual è la password del wi-fi?"
+    }
+   },
+   {
+    "t": "Posso deixar as malas?",
+    "say": "POH-soo day-SHAR ash MAH-lash",
+    "m": {
+     "en": "Can I leave my bags?",
+     "es": "¿Puedo dejar las maletas?",
+     "fr": "Je peux laisser mes bagages ?",
+     "pt": "Posso deixar as malas?",
+     "de": "Kann ich mein Gepäck hierlassen?",
+     "it": "Posso lasciare le valigie?"
+    }
+   },
+   {
+    "t": "Pode chamar-me um táxi?",
+    "say": "POH-deh shah-MAR-meh oong TAHK-see",
+    "m": {
+     "en": "Could you call me a taxi?",
+     "es": "¿Me puede pedir un taxi?",
+     "fr": "Pouvez-vous m’appeler un taxi ?",
+     "pt": "Pode chamar um táxi para mim?",
+     "de": "Können Sie mir ein Taxi rufen?",
+     "it": "Mi può chiamare un taxi?"
+    }
+   },
+   {
+    "t": "A que horas é o check-out?",
+    "say": "ah keh OH-rash eh oo check-out",
+    "m": {
+     "en": "What time is check-out?",
+     "es": "¿A qué hora hay que dejar la habitación?",
+     "fr": "À quelle heure faut-il libérer la chambre ?",
+     "pt": "Que horas é o check-out?",
+     "de": "Wann ist der Check-out?",
+     "it": "A che ora è il check-out?"
+    }
+   }
+  ],
+  "Taxi and transport": [
+   {
+    "t": "Para esta morada, por favor",
+    "say": "PAH-rah EHSH-tah moo-RAH-dah",
+    "m": {
+     "en": "To this address, please",
+     "es": "A esta dirección, por favor",
+     "fr": "À cette adresse, s’il vous plaît",
+     "pt": "Para este endereço, por favor",
+     "de": "Zu dieser Adresse, bitte",
+     "it": "A questo indirizzo, per favore"
+    }
+   },
+   {
+    "t": "Quanto custa até …?",
+    "say": "KWAN-too KOOSH-tah ah-TEH",
+    "m": {
+     "en": "How much to …?",
+     "es": "¿Cuánto cuesta hasta …?",
+     "fr": "Combien pour aller à … ?",
+     "pt": "Quanto custa até …?",
+     "de": "Was kostet es bis …?",
+     "it": "Quanto costa fino a …?"
+    }
+   },
+   {
+    "t": "Pode ligar o taxímetro?",
+    "say": "POH-deh lee-GAR oo tahk-SEE-meh-troo",
+    "m": {
+     "en": "Could you turn on the meter?",
+     "es": "¿Puede poner el taxímetro?",
+     "fr": "Pouvez-vous mettre le compteur ?",
+     "pt": "Pode ligar o taxímetro?",
+     "de": "Können Sie das Taxameter einschalten?",
+     "it": "Può accendere il tassametro?"
+    }
+   },
+   {
+    "t": "Pare aqui, por favor",
+    "say": "PAH-reh ah-KEE",
+    "m": {
+     "en": "Stop here, please",
+     "es": "Pare aquí, por favor",
+     "fr": "Arrêtez-vous ici, s’il vous plaît",
+     "pt": "Pare aqui, por favor",
+     "de": "Halten Sie bitte hier",
+     "it": "Si fermi qui, per favore"
+    }
+   },
+   {
+    "t": "Pode dar-me um recibo?",
+    "say": "POH-deh DAR-meh oong reh-SEE-boo",
+    "m": {
+     "en": "Can I have a receipt?",
+     "es": "¿Me puede dar un recibo?",
+     "fr": "Vous pouvez me donner un reçu ?",
+     "pt": "Pode me dar um recibo?",
+     "de": "Kann ich eine Quittung bekommen?",
+     "it": "Mi può dare la ricevuta?"
+    }
+   },
+   {
+    "t": "Fique com o troco",
+    "say": "FEE-keh kohng oo TROH-koo",
+    "m": {
+     "en": "Keep the change",
+     "es": "Quédese con el cambio",
+     "fr": "Gardez la monnaie",
+     "pt": "Pode ficar com o troco",
+     "de": "Stimmt so",
+     "it": "Tenga il resto"
+    }
+   },
+   {
+    "t": "Um bilhete para Faro",
+    "say": "oong bee-LYEHT PAH-rah FAH-roo",
+    "m": {
+     "en": "A ticket to Faro",
+     "es": "Un billete para Faro",
+     "fr": "Un billet pour Faro",
+     "pt": "Uma passagem para Faro",
+     "de": "Eine Fahrkarte nach Faro",
+     "it": "Un biglietto per Faro"
+    }
+   },
+   {
+    "t": "De que linha parte?",
+    "say": "deh keh LEE-nyah PART",
+    "m": {
+     "en": "Which platform does it leave from?",
+     "es": "¿De qué andén sale?",
+     "fr": "De quel quai part-il ?",
+     "pt": "De qual plataforma sai?",
+     "de": "Von welchem Gleis fährt er ab?",
+     "it": "Da che binario parte?"
+    }
+   },
+   {
+    "t": "Onde é a paragem do autocarro?",
+    "say": "OHN-deh eh ah pah-RAH-zhayng doo ow-toh-KAH-roo",
+    "m": {
+     "en": "Where is the bus stop?",
+     "es": "¿Dónde está la parada del autobús?",
+     "fr": "Où est l’arrêt de bus ?",
+     "pt": "Onde fica o ponto de ônibus?",
+     "de": "Wo ist die Bushaltestelle?",
+     "it": "Dov’è la fermata dell’autobus?"
+    }
+   }
+  ],
+  "Beach and boats": [
+   {
+    "t": "Onde se apanha o barco?",
+    "say": "OHN-deh seh ah-PAH-nyah oo BAR-koo",
+    "m": {
+     "en": "Where do we catch the boat?",
+     "es": "¿Dónde se coge el barco?",
+     "fr": "Où prend-on le bateau ?",
+     "pt": "Onde a gente pega o barco?",
+     "de": "Wo fährt das Boot ab?",
+     "it": "Dove si prende la barca?"
+    }
+   },
+   {
+    "t": "A que horas volta o barco?",
+    "say": "ah keh OH-rash VOL-tah oo BAR-koo",
+    "m": {
+     "en": "What time does the boat come back?",
+     "es": "¿A qué hora vuelve el barco?",
+     "fr": "À quelle heure le bateau revient-il ?",
+     "pt": "Que horas o barco volta?",
+     "de": "Wann kommt das Boot zurück?",
+     "it": "A che ora torna la barca?"
+    }
+   },
+   {
+    "t": "Duas espreguiçadeiras e um chapéu de sol",
+    "say": "DOO-ash shpreh-gee-sah-DAY-rash ee oong shah-PEH-oo deh sol",
+    "m": {
+     "en": "Two sunbeds and an umbrella",
+     "es": "Dos tumbonas y una sombrilla",
+     "fr": "Deux transats et un parasol",
+     "pt": "Duas espreguiçadeiras e um guarda-sol",
+     "de": "Zwei Liegen und einen Sonnenschirm",
+     "it": "Due lettini e un ombrellone"
+    }
+   },
+   {
+    "t": "É seguro nadar aqui?",
+    "say": "eh seh-GOO-roo nah-DAR ah-KEE",
+    "m": {
+     "en": "Is it safe to swim here?",
+     "es": "¿Es seguro nadar aquí?",
+     "fr": "On peut se baigner ici sans danger ?",
+     "pt": "É seguro nadar aqui?",
+     "de": "Kann man hier sicher schwimmen?",
+     "it": "È sicuro fare il bagno qui?"
+    }
+   },
+   {
+    "t": "A água está fria?",
+    "say": "ah AH-gwah shtah FREE-ah",
+    "m": {
+     "en": "Is the water cold?",
+     "es": "¿Está fría el agua?",
+     "fr": "L’eau est froide ?",
+     "pt": "A água está fria?",
+     "de": "Ist das Wasser kalt?",
+     "it": "L’acqua è fredda?"
+    }
+   }
+  ],
+  "Museums and palaces": [
+   {
+    "t": "Tenho bilhete para as …",
+    "say": "TEH-nyoo bee-LYEHT PAH-rah ash",
+    "m": {
+     "en": "I have a ticket for … o'clock",
+     "es": "Tengo entrada para las …",
+     "fr": "J’ai un billet pour … heures",
+     "pt": "Tenho ingresso para as …",
+     "de": "Ich habe ein Ticket für … Uhr",
+     "it": "Ho un biglietto per le …"
+    }
+   },
+   {
+    "t": "Duas entradas, por favor",
+    "say": "DOO-ash ehn-TRAH-dash",
+    "m": {
+     "en": "Two tickets, please",
+     "es": "Dos entradas, por favor",
+     "fr": "Deux entrées, s’il vous plaît",
+     "pt": "Dois ingressos, por favor",
+     "de": "Zwei Eintrittskarten, bitte",
+     "it": "Due biglietti, per favore"
+    }
+   },
+   {
+    "t": "A que horas fecha?",
+    "say": "ah keh OH-rash FAY-shah",
+    "m": {
+     "en": "What time does it close?",
+     "es": "¿A qué hora cierra?",
+     "fr": "À quelle heure ça ferme ?",
+     "pt": "Que horas fecha?",
+     "de": "Wann schließt es?",
+     "it": "A che ora chiude?"
+    }
+   },
+   {
+    "t": "Onde é a entrada?",
+    "say": "OHN-deh eh ah ehn-TRAH-dah",
+    "m": {
+     "en": "Where is the entrance?",
+     "es": "¿Dónde está la entrada?",
+     "fr": "Où est l’entrée ?",
+     "pt": "Onde fica a entrada?",
+     "de": "Wo ist der Eingang?",
+     "it": "Dov’è l’ingresso?"
+    }
+   },
+   {
+    "t": "Posso tirar fotografias?",
+    "say": "POH-soo tee-RAR foo-too-grah-FEE-ash",
+    "m": {
+     "en": "Can I take photos?",
+     "es": "¿Puedo hacer fotos?",
+     "fr": "Je peux prendre des photos ?",
+     "pt": "Posso tirar fotos?",
+     "de": "Darf ich fotografieren?",
+     "it": "Posso fare foto?"
+    }
+   },
+   {
+    "t": "Onde é a saída?",
+    "say": "OHN-deh eh ah sah-EE-dah",
+    "m": {
+     "en": "Where is the exit?",
+     "es": "¿Dónde está la salida?",
+     "fr": "Où est la sortie ?",
+     "pt": "Onde fica a saída?",
+     "de": "Wo ist der Ausgang?",
+     "it": "Dov’è l’uscita?"
+    }
+   }
+  ],
+  "Help": [
+   {
+    "t": "Socorro!",
+    "say": "soo-KOH-roo",
+    "m": {
+     "en": "Help!",
+     "es": "¡Socorro!",
+     "fr": "Au secours !",
+     "pt": "Socorro!",
+     "de": "Hilfe!",
+     "it": "Aiuto!"
+    }
+   },
+   {
+    "t": "Chame uma ambulância",
+    "say": "SHAH-meh OO-mah ahm-boo-LAHN-see-ah",
+    "m": {
+     "en": "Call an ambulance",
+     "es": "Llame a una ambulancia",
+     "fr": "Appelez une ambulance",
+     "pt": "Chame uma ambulância",
+     "de": "Rufen Sie einen Krankenwagen",
+     "it": "Chiami un’ambulanza"
+    }
+   },
+   {
+    "t": "Chame a polícia",
+    "say": "SHAH-meh ah poo-LEE-see-ah",
+    "m": {
+     "en": "Call the police",
+     "es": "Llame a la policía",
+     "fr": "Appelez la police",
+     "pt": "Chame a polícia",
+     "de": "Rufen Sie die Polizei",
+     "it": "Chiami la polizia"
+    }
+   },
+   {
+    "t": "Não me sinto bem",
+    "say": "nowng meh SEEN-too bayng",
+    "m": {
+     "en": "I don't feel well",
+     "es": "No me encuentro bien",
+     "fr": "Je ne me sens pas bien",
+     "pt": "Não estou me sentindo bem",
+     "de": "Mir geht es nicht gut",
+     "it": "Non mi sento bene"
+    }
+   },
+   {
+    "t": "Onde é a farmácia?",
+    "say": "OHN-deh eh ah far-MAH-see-ah",
+    "m": {
+     "en": "Where is the pharmacy?",
+     "es": "¿Dónde está la farmacia?",
+     "fr": "Où est la pharmacie ?",
+     "pt": "Onde fica a farmácia?",
+     "de": "Wo ist die Apotheke?",
+     "it": "Dov’è la farmacia?"
+    }
+   },
+   {
+    "t": "Perdi o passaporte",
+    "say": "per-DEE oo pah-sah-PORT",
+    "m": {
+     "en": "I lost my passport",
+     "es": "He perdido el pasaporte",
+     "fr": "J’ai perdu mon passeport",
+     "pt": "Perdi meu passaporte",
+     "de": "Ich habe meinen Pass verloren",
+     "it": "Ho perso il passaporto"
+    }
+   },
+   {
+    "t": "Estou perdida",
+    "say": "shtoh per-DEE-dah",
+    "m": {
+     "en": "I'm lost (perdido for a man)",
+     "es": "Estoy perdida (un hombre dice perdido)",
+     "fr": "Je suis perdue (un homme dit perdido)",
+     "pt": "Estou perdida (homens dizem perdido)",
+     "de": "Ich habe mich verlaufen (Männer sagen perdido)",
+     "it": "Mi sono persa (gli uomini dicono perdido)"
+    }
+   }
+  ]
+ },
+ "moments": [
+  {
+   "until": 11,
+   "label": "Breakfast",
+   "situation": "Café and pastries",
+   "index": 3
+  },
+  {
+   "until": 15,
+   "label": "Lunch",
+   "situation": "Restaurant",
+   "index": 11
+  },
+  {
+   "until": 18,
+   "label": "Shopping",
+   "situation": "Shopping",
+   "index": 0
+  },
+  {
+   "until": 24,
+   "label": "Dinner",
+   "situation": "Restaurant",
+   "index": 0
   }
+ ],
+ "driver": {
+  "template": "Para {place}, por favor.",
+  "ask": {
+   "t": "Quanto custa, mais ou menos?",
+   "say": "KWAN-too KOOSH-tah, myz oh MEH-noosh",
+   "m": {
+    "en": "About how much will it cost?",
+    "es": "¿Cuánto costará, más o menos?",
+    "fr": "Ça coûtera combien, à peu près ?",
+    "pt": "Quanto vai custar, mais ou menos?",
+    "de": "Was wird das ungefähr kosten?",
+    "it": "Quanto costerà, più o meno?"
+   }
+  }
+ }
 }

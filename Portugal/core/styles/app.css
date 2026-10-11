@@ -286,3 +286,8 @@ nav.tabs button[aria-selected="true"]{color:var(--accent-deep);font-weight:600}
 .spot-audio{display:flex;align-items:center;gap:12px;padding:12px;background:var(--surface)}
 .spot-audio .hear{background:var(--bg)}
 @media (prefers-reduced-motion:no-preference){section[data-tab]{animation:fade .16s ease-out}@keyframes fade{from{opacity:.5}to{opacity:1}}}
+/* MapLibre markers (offline vector maps) */
+.wm-pin-wrap.ml{width:44px;height:44px;padding:0;border:0;background:none;cursor:pointer;display:block}
+.wm-you-wrap.ml{width:28px;height:28px;position:relative;pointer-events:none}
+.wmap .maplibregl-ctrl-attrib{font-size:10px;background:rgba(255,255,255,.88)}
+.wmap .maplibregl-ctrl-group{border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.12)}

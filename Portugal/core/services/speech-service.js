@@ -37,13 +37,21 @@ export const speechService = {
       return { ok: true, exact: p.exact };
     } catch (e) { return { ok: false, reason: 'failed' }; }
   },
-  /* Audio stops: plays a bundled recording when one exists, otherwise reads the script aloud. */
-  async playStop(audio, lang = 'en') {
+  /* Audio stops: plays a bundled recording when one exists, otherwise reads the script aloud.
+     Uses the traveler's language when a script and a voice exist for it; otherwise English. */
+  async playStop(audio, lang = 'en', voiceLang = 'en-US') {
     if (!audio) return { ok: false, reason: 'none' };
     if (audio.recording && typeof Audio === 'function') {
       try { this._a && this._a.pause(); this._a = new Audio(audio.recording); await this._a.play(); return { ok: true }; } catch (e) {}
     }
-    return this.speak(audio.script, lang, 0.95);
+    const script = lang !== 'en' && audio.scripts && audio.scripts[lang];
+    if (script) {
+      const r = await this.speak(script, voiceLang, 0.95);
+      if (r.ok || r.reason !== 'novoice') return r;
+      const en = await this.speak(audio.script, 'en-US', 0.95);
+      return Object.assign(en, { fellBack: true });
+    }
+    return this.speak(audio.script, 'en-US', 0.95);
   },
   async stop() { try { speechSynthesis.cancel(); } catch (e) {} try { this._a && this._a.pause(); } catch (e) {} return true; }
 };

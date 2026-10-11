@@ -17,6 +17,7 @@ export function newTrip(editionId) {
     trip_id: uid('t'),
     edition_id: editionId,
     traveler_name: '',
+    traveler_language: 'en',
     home_currency: '',
     stays: [],
     legs: [],
@@ -45,6 +46,7 @@ export function migrateTrip(t, editionId) {
   out.departure = Object.assign({}, base.departure, t.departure || {});
   ['stays', 'legs', 'saved', 'booked', 'plan', 'journal', 'custom', 'favs'].forEach(k => { if (!Array.isArray(out[k])) out[k] = []; });
   if (!TRAVEL_STYLES.includes(out.travel_style)) out.travel_style = 'flow';
+  if (!out.traveler_language) out.traveler_language = 'en';
   out.schema_version = SCHEMA_VERSION;
   return out;
 }
@@ -176,3 +178,13 @@ export function priceText(price) {
   const sym = { EUR: '€', USD: '$', AED: 'AED ' }[price.currency_code] || (price.currency_code + ' ');
   return (price.from ? 'from ' : '') + sym + (Number.isInteger(price.amount) ? price.amount : price.amount.toFixed(2));
 }
+
+/* ---------- phrases in the traveler's language ---------- */
+/* Accepts the current object format { t, say, m: {en, es, ...}, t_by } and the older [local, say, english] arrays. */
+export function phraseFor(entry, lang = 'en') {
+  if (Array.isArray(entry)) return { key: entry[0], t: entry[0], say: entry[1], m: entry[2] };
+  const t = (entry.t_by && entry.t_by[lang]) || entry.t;
+  return { key: entry.t, t, say: entry.say, m: (entry.m && (entry.m[lang] || entry.m.en)) || '' };
+}
+/* Same base language as the destination, e.g. a Portuguese speaker in Portugal. */
+export const speaksLocal = (lang, destLang) => !!lang && !!destLang && lang.split('-')[0] === destLang.split('-')[0];
