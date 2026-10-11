@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "edition_id": "florence",
+  "name": "Andiamo Firenze",
+  "tagline": "Florence",
+  "language": "it-IT",
+  "language_name": "Italian",
+  "city_ids": [
+    "florence"
+  ],
+  "modules": {
+    "phrases": true,
+    "currency": "auto",
+    "taxi_estimator": true,
+    "true_wanderer": true
+  },
+  "home_currencies": [
+    "USD",
+    "EUR",
+    "GBP",
+    "CAD",
+    "AUD",
+    "AED",
+    "INR",
+    "CHF",
+    "SGD",
+    "JPY"
+  ],
+  "arrival_options": [
+    {
+      "id": "FLR",
+      "label": "Florence airport (Peretola)",
+      "city_id": "florence"
+    },
+    {
+      "id": "PSA",
+      "label": "Pisa airport",
+      "city_id": "",
+      "tip": "From Pisa: the PisaMover shuttle to Pisa Centrale, then a regional train to Florence (about 1 hour)."
+    },
+    {
+      "id": "BLQ",
+      "label": "Bologna airport",
+      "city_id": "",
+      "tip": "From Bologna: the Marconi Express shuttle to Bologna Centrale, then a high-speed train to Florence (about 35 minutes)."
+    },
+    {
+      "id": "TRAIN",
+      "label": "Train to Santa Maria Novella",
+      "city_id": "florence",
+      "tip": "Santa Maria Novella station has a 24-hour taxi rank out front."
+    },
+    {
+      "id": "CAR",
+      "label": "Car or private driver",
+      "city_id": ""
+    },
+    {
+      "id": "OTHER",
+      "label": "Other",
+      "city_id": ""
+    }
+  ],
+  "leg_modes": [
+    {
+      "id": "driver",
+      "label": "Private driver or transfer"
+    },
+    {
+      "id": "taxi",
+      "label": "Taxi"
+    },
+    {
+      "id": "car",
+      "label": "Rental car"
+    },
+    {
+      "id": "train",
+      "label": "Train"
+    },
+    {
+      "id": "bus",
+      "label": "Bus"
+    },
+    {
+      "id": "flight",
+      "label": "Flight"
+    }
+  ],
+  "copy": {
+    "place": "Florence",
+    "place_list": "Florence",
+    "hashtags": "#Florence #Firenze #Italy #travel",
+    "file_prefix": "florence",
+    "greeting_place": "Firenze"
+  },
+  "checked": "2026-10-07"
+}
