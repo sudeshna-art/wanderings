@@ -314,3 +314,25 @@ nav.tabs button[aria-selected="true"]{color:var(--accent-deep);font-weight:600}
 .btn.sos{background:var(--coral-ink);color:#fff;min-height:56px;font-size:18px;align-self:stretch}
 .em-box{border-top:1px solid var(--rule);padding-top:14px;display:flex;flex-direction:column;gap:8px}
 .em-big{font-size:26px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+/* Ask: one search box for quick answers (Oct 11 2026) */
+#ask{z-index:31}   /* under the emergency card and driver card (#driver), under spot sheets */
+.mast{align-items:center}
+.mast .label{white-space:nowrap}
+.mast .stamp i{white-space:nowrap}
+@media (max-width:400px){.mast .stamp > svg{display:none}.mast .stamp .t{border-left:0;padding-left:0}.mast-ask{margin-right:8px}}
+.mast-ask{margin-left:auto;margin-right:10px;width:40px;height:40px;border-radius:50%;border:1px solid var(--rule);background:var(--bg);display:grid;place-items:center;color:var(--accent-deep);flex:none}
+.mast-ask svg{width:20px;height:20px}
+.askbar{display:flex;align-items:center;gap:10px;width:100%;min-height:48px;border:1px solid var(--rule);border-radius:999px;background:var(--surface);padding:0 16px;color:var(--muted);font-size:15px;text-align:left;margin:2px 0 12px}
+.askbar svg{width:20px;height:20px;stroke:var(--accent-deep);flex:none}
+.askhead{display:flex;gap:10px;align-items:center}
+.askfield{flex:1;display:flex;align-items:center;gap:8px;border:1.5px solid var(--accent);border-radius:999px;padding:0 14px;min-height:48px;background:var(--bg)}
+.askfield svg{width:20px;height:20px;stroke:var(--accent-deep);flex:none}
+.askfield input{border:0;padding:10px 0;min-height:44px;font-size:17px;background:transparent}
+.askfield input:focus{outline:none}
+.ans{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;align-items:start;padding:14px;border:1px solid var(--rule);border-radius:12px}
+.ans > svg{width:22px;height:22px;stroke:var(--accent-deep);margin-top:1px}
+.ans.warn{border-color:var(--coral)}.ans.warn > svg{stroke:var(--coral-ink)}
+.ans b{font-size:16px}
+.ansgroup{display:flex;flex-direction:column}
+.ansgroup > .label{padding:6px 0 2px}
+.ansrow{display:flex;flex-direction:column;gap:3px;padding:11px 0;border-top:1px solid var(--rule)}

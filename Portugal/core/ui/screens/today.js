@@ -103,14 +103,15 @@ function checkAlerts() {
 function whatNow(st) {
   if (st.k === 'after') return '';
   let h = meetBlock() + travelAlert() + bookingAlerts(st) + checkAlerts();
-  if ((S.C.maps || {}).packs && S.C.maps.packs.length) {
-    h += `<div class="alert" id="todayOffline" hidden>${ic('compass')}<div style="min-width:0;display:flex;flex-direction:column;gap:6px"><b>Before you lose signal</b><p class="small" style="margin:0">Save the offline maps on Wi-Fi so maps work on trails, beaches and anywhere without coverage.</p>
-      <button class="btn sm" data-act="go" data-tab="essentials" data-focus="#offlineBlock" style="align-self:flex-start">Save offline maps</button></div></div>`;
-    addMount(async () => { const have = await mapPackService.downloaded(); const el = document.getElementById('todayOffline'); if (el) el.hidden = S.C.maps.packs.every(p => have.includes(p.id)); });
-  }
   if (st.k === 'during' && !isWanderer()) h += `<button class="btn line" data-act="pview" data-v="nearby" data-tab="places" style="align-self:flex-start">${ic('compass', 'style="width:18px;height:18px"')}What’s near me</button>`;
+  const onlyMaps = !h;   /* then the whole block hides once every map is saved, so no empty heading is left */
+  if ((S.C.maps || {}).packs && S.C.maps.packs.length) {
+    h = `<div class="alert" id="todayOffline" hidden>${ic('compass')}<div style="min-width:0;display:flex;flex-direction:column;gap:6px"><b>Before you lose signal</b><p class="small" style="margin:0">Save the offline maps on Wi-Fi so maps work on trails, beaches and anywhere without coverage.</p>
+      <button class="btn sm" data-act="go" data-tab="essentials" data-focus="#offlineBlock" style="align-self:flex-start">Save offline maps</button></div></div>` + h;
+    addMount(async () => { const have = await mapPackService.downloaded(), all = S.C.maps.packs.every(p => have.includes(p.id)); const el = document.getElementById('todayOffline'); if (el) el.hidden = all; const nb = document.getElementById('nowBlock'); if (nb && onlyMaps) nb.hidden = all; });
+  }
   if (!h) return '';
-  return `<div class="block"><h2>${st.k === 'during' ? 'Now' : 'Coming up'}</h2>${h}</div>`;
+  return `<div class="block" id="nowBlock" ${onlyMaps ? 'hidden' : ''}><h2>${st.k === 'during' ? 'Now' : 'Coming up'}</h2>${h}</div>`;
 }
 
 function baseBlock(cityId, st) {
@@ -186,7 +187,7 @@ export function renderToday() {
   const wants = placesIn(cityId).filter(p => statusOf(S.trip, p.id) === 'want');
   const visited = S.trip.saved.filter(s => s.status === 'went').length;
 
-  let html = masthead() + `<div class="greet"><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(h1)}</h1><p class="lede">${esc(lede)}</p></div>${cityBar()}<div style="height:10px"></div>${coverHero(cityId)}`;
+  let html = masthead() + `<div class="greet"><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(h1)}</h1><p class="lede">${esc(lede)}</p></div><button class="askbar" data-act="ask">${ic('search')}<span>Ask anything: tipping, taxi, 20 euros…</span></button>${cityBar()}<div style="height:10px"></div>${coverHero(cityId)}`;
 
   if (!hasStays()) {
     html += `<div class="block" style="padding-top:18px"><div style="border:1px solid var(--rule);padding:14px;display:flex;flex-direction:column;gap:8px"><div class="label">Your trip</div><p class="small">${cityIds().length > 1 ? `Add where you’re staying in ${esc(copyOf('place_list', placeName()))}, with dates, and the app follows you from place to place.` : 'Add where you’re staying, with dates, for local tips, walking times and a one-tap ride home.'} Have booking emails? Import them instead.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-act="welcome" data-step="2">Add my stays</button><button class="btn line sm" data-act="imopen">Import bookings</button></div></div></div>`;

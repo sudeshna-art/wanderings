@@ -48,7 +48,8 @@ const ICON = {
   sos: '<path d="M12 3.5 19 6v5.5c0 4.2-3 7.6-7 9-4-1.4-7-4.8-7-9V6z"/><path d="M12 8.5v5M12 16.2v.1"/>',
   pin: '<path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><path d="M12 8.5v3l2 1.2"/>',
   upload: '<path d="M12 15.5V4.5M7.5 9 12 4.5 16.5 9"/><path d="M5 14.5v5h14v-5"/>',
-  share: '<path d="M12 14.5v-10M8 8.5l4-4 4 4"/><path d="M6 11.5H5v8h14v-8h-1"/>'
+  share: '<path d="M12 14.5v-10M8 8.5l4-4 4 4"/><path d="M6 11.5H5v8h14v-8h-1"/>',
+  search: '<circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/>'
 };
 export const ic = (k, extra = '') => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" ${extra}>${ICON[k] || ICON.places}</svg>`;
 export const modeIcon = m => ({ train: 'train', car: 'car', driver: 'car', taxi: 'taxi', bus: 'train', flight: 'arrow' }[m] || 'arrow');

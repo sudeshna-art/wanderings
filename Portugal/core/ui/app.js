@@ -21,6 +21,7 @@ import { renderWelcome, W, STEP_COUNT } from './screens/welcome.js';
 import { downloadPack, downloadAll, removePack, autoSaveMaps } from './screens/offline.js';
 import { openImport, importFind, importFile, importBack, importSave, openEditor, editorSave, editorDelete, changeKind } from './screens/bookings.js';
 import { showEmergency, sharePlan, meetForm, meetSave, meetShare } from './screens/safety.js';
+import { openAsk, closeAsk, askInput, askSet } from './screens/ask.js';
 
 const TABS = [['today', 'Today'], ['places', 'Places'], ['phrases', 'Phrases'], ['journal', 'Journal'], ['essentials', 'Essentials']];
 const RENDER = { today: renderToday, places: renderPlaces, phrases: renderPhrases, journal: renderJournal, essentials: renderEssentials };
@@ -177,7 +178,17 @@ const A = {
   meetform: el => meetForm(el.dataset.box, el.dataset.id),
   meetsave: el => { if (meetSave(el.dataset.id, wanderPos())) { closeSheet(); const b = $('#meetHereBox'); if (b) { b.hidden = true; b.innerHTML = ''; } } },
   meetshare: () => meetShare(),
-  meetclear: () => { S.trip.meetup = null; save(); rerender(); toast('Meeting point cleared'); }
+  meetclear: () => { S.trip.meetup = null; save(); rerender(); toast('Meeting point cleared'); },
+  /* Ask: one search box for quick answers (Oct 11 2026) */
+  ask: () => openAsk(),
+  askclose: () => closeAsk(),
+  askq: el => askSet(el.dataset.q),
+  askgo: el => { closeAsk(); go(el.dataset.tab, { focus: el.dataset.focus }); },
+  askemergency: () => showEmergency(),
+  askhome: () => showDriver('__home'),
+  askdriver: el => showDriver(el.dataset.id),
+  askspot: el => openSpot(el.dataset.id),
+  asknear: () => { closeAsk(); P().pview = 'nearby'; save(); go('places'); }
 };
 async function copy(text, quiet) { const ok = await shareService.copy(text); if (!quiet) toast(ok ? 'Copied' : 'Press and hold the text to copy it'); return ok; }
 function rerenderBehindSheet() { if (P().tab === 'places' && P().pview === 'nearby') refreshWanderer(); else rerender(); }
@@ -234,12 +245,14 @@ document.addEventListener('change', async e => {
   if (P().tab === 'essentials' && /^(stays|legs|home_currency|travel_style|arrival|departure)/.test(bp)) rerender();
 });
 document.addEventListener('input', e => {
+  if (e.target.id === 'askq') { askInput(e.target.value); return; }
   if (e.target.id === 'phq') { setQuery(e.target.value); const pos = e.target.selectionStart; render('phrases', true); const n = $('#phq'); n.focus(); try { n.setSelectionRange(pos, pos); } catch (_) {} }
   if (e.target.id === 'amtIn') { P().camt = e.target.value; save(); updateConv(); }
   if (e.target.id === 'jText') { J.draft = e.target.value; tripService.setDraft(e.target.value); }
 });
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { if (!$('#sheet').hidden) closeSheet(); if (!$('#viewer').hidden) $('#viewer').hidden = true; if (!$('#driver').hidden) $('#driver').hidden = true; }
+  if (e.key === 'Enter' && e.target.id === 'askq') { e.target.blur(); return; }
+  if (e.key === 'Escape') { if (!$('#sheet').hidden) { closeSheet(); return; } if (!$('#driver').hidden) { $('#driver').hidden = true; return; } if ($('#ask') && !$('#ask').hidden) { closeAsk(); return; } if (!$('#viewer').hidden) $('#viewer').hidden = true; if (!$('#driver').hidden) $('#driver').hidden = true; }
 });
 /* Photos are stored on the phone; fill <img data-photo> as they appear. */
 function hydratePhotos() { $$('img[data-photo]:not([src])').forEach(img => { img.setAttribute('src', ''); storageService.photoURL(img.dataset.photo).then(u => { if (u) img.src = u; }); }); }

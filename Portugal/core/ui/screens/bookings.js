@@ -105,7 +105,9 @@ export function changeKind(i) {
 /* A hotel booking becomes the stay for those dates; a flight fills arrival or departure. */
 function applyStay(b) {
   if (!b.date || !b.city_id) return false;
-  let s = S.trip.stays.find(x => x.city_id === b.city_id && (!x.start || (x.start <= (b.end_date || b.date) && (x.end || x.start) >= b.date)));
+  /* The same city's stay that overlaps these nights (a check-out day doesn't count), or an empty one. */
+  let s = S.trip.stays.find(x => x.city_id === b.city_id && x.start && x.start < (b.end_date || b.date) && (x.end || x.start) > b.date)
+    || S.trip.stays.find(x => x.city_id === b.city_id && !x.start);
   if (!s) { s = newStay(b.city_id); S.trip.stays.push(s); }
   Object.assign(s, { start: b.date, end: b.end_date || s.end, label: b.title && b.title !== 'Stay' ? b.title : s.label, address: b.where || s.address });
   if (b.neighborhood_id) s.neighborhood_id = b.neighborhood_id;
@@ -124,7 +126,11 @@ export function importSave() {
   let n = 0, stays = 0;
   IM.found.forEach((x, i) => {
     const r = readCard(i, x); if (!r.keep) return;
-    const b = r.b; delete b.found; upsertBooking(S.trip, b); n++;
+    const b = r.b; delete b.found;
+    /* The same email imported twice updates the booking instead of adding a copy. */
+    const twin = S.trip.bookings.find(x => x.kind === b.kind && x.date === b.date && ((b.ref && x.ref === b.ref && x.title === b.title) || (x.title === b.title && x.time === b.time)));
+    if (twin) b.id = twin.id;
+    upsertBooking(S.trip, b); n++;
     if (b.kind === 'stay' && r.asStay && applyStay(b)) stays++;
     if (b.kind === 'flight' && r.asFlight) applyFlight(b);
   });

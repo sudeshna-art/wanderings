@@ -12,6 +12,7 @@ export const illustrationFor = c => c && c.illustrated_map && art(c.illustrated_
 export function masthead() {
   const c = cityOf(curCityId());
   return `<div class="mast"><div style="display:flex;flex-direction:column;gap:5px"><div class="word">wanderings<span>.</span></div><div class="label">${esc(EDITION.name)} · Beta</div></div>
+  <button class="mast-ask" data-act="ask" aria-label="Ask anything">${ic('search')}</button>
   <div class="stamp">${art(c.mark)}<div class="t"><b>${esc(c.stamp)}</b><i>${esc(c.coords_label)}<span style="color:var(--coral)"> ●</span></i></div></div></div>`;
 }
 
