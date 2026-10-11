@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="core/vendor/leaflet/leaflet.css">
-<link rel="stylesheet" href="core/styles/app.css?v=202610111019">
+<link rel="stylesheet" href="core/styles/app.css?v=202610111036">
 </head>
 <body>
 <div class="app" id="app"><p class="loading">Loading Andiamo Firenze…</p>
@@ -36,9 +36,9 @@
 <input type="file" id="photoInput" class="offscreen" accept="image/*" multiple aria-hidden="true" tabindex="-1">
 <div class="toast" id="toast" role="status" hidden></div>
 <script src="core/vendor/leaflet/leaflet.js"></script>
-<script type="module" src="core/ui/app.js?v=202610111019"></script>
+<script type="module" src="core/ui/app.js?v=202610111036"></script>
 <script>
-/* offline support (version 202610111019) */
+/* offline support (version 202610111036) */
 if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
   window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
 }

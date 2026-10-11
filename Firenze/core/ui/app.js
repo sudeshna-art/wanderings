@@ -18,7 +18,7 @@ import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js';
 import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js';
 import { renderEssentials, showFare, updateConv, loadRate } from './screens/essentials.js';
 import { renderWelcome, W, STEP_COUNT } from './screens/welcome.js';
-import { downloadPack, downloadAll, removePack } from './screens/offline.js';
+import { downloadPack, downloadAll, removePack, autoSaveMaps } from './screens/offline.js';
 
 const TABS = [['today', 'Today'], ['places', 'Places'], ['phrases', 'Phrases'], ['journal', 'Journal'], ['essentials', 'Essentials']];
 const RENDER = { today: renderToday, places: renderPlaces, phrases: renderPhrases, journal: renderJournal, essentials: renderEssentials };
@@ -235,6 +235,8 @@ async function boot() {
   if (!S.trip.onboarded || force) { W.step = 1; renderWelcome(); }
   window.addEventListener('hashchange', () => { try { if (location.hash === '#welcome') { W.step = 1; renderWelcome(); } } catch (e) {} });
   speechService.onVoicesChanged(() => { if (P().tab === 'essentials') rerender(); });
+  setTimeout(autoSaveMaps, 2500);                                   // editions that save their offline map by themselves
+  window.addEventListener('online', () => autoSaveMaps());
   window.__wanderings = { S, go, render };   // for testing only
 }
 boot();

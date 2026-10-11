@@ -1,5 +1,5 @@
 /* Offline maps: save each area's map on the phone, and show which map is in use under every live map. */
-import { S, cityName } from '../state.js';
+import { S, P, cityName } from '../state.js';
 import { esc, ic, toast, $, $$ } from '../dom.js';
 import { mapPackService } from '../../services/mappack-service.js';
 
@@ -31,21 +31,30 @@ export async function fillOfflineMaps() {
   const all = $('#offAll'); if (all) all.hidden = packs.every(p => have.includes(p.id));
 }
 
-export async function downloadPack(id, after) {
+export async function downloadPack(id, after, auto = false) {
   if (busy[id] != null) return;
-  if (typeof navigator !== 'undefined' && navigator.onLine === false) { toast('Connect to Wi-Fi to save maps.'); return; }
+  if (typeof navigator !== 'undefined' && navigator.onLine === false) { if (!auto) toast('Connect to Wi-Fi to save maps.'); return; }
   busy[id] = 0; refreshRows();
   const r = await mapPackService.download(id, f => { busy[id] = f; refreshProgress(id); });
   delete busy[id];
   const p = S.C.maps.packs.find(x => x.id === id);
-  if (r.ok) toast(`${p.name} map saved for offline use`);
-  else toast(r.reason === 'space' ? 'Not enough space on this phone for this map.' : r.reason === 'missing' ? 'This map isn’t on the site yet.' : 'The download stopped. Check your connection and try again.');
+  if (r.ok) toast(auto ? `Offline map saved: ${p.name}. It works with no signal.` : `${p.name} map saved for offline use`);
+  else if (!auto) toast(r.reason === 'space' ? 'Not enough space on this phone for this map.' : r.reason === 'missing' ? 'This map isn’t on the site yet.' : 'The download stopped. Check your connection and try again.');
   await fillOfflineMaps(); after && after(r.ok);
 }
 export async function downloadAll(after) {
   const have = await mapPackService.downloaded();
   for (const p of S.C.maps.packs) if (!have.includes(p.id)) await downloadPack(p.id);
   after && after();
+}
+/* Editions with small map packs ("maps_auto": "all" in edition.json, e.g. Florence) save them in the background
+   whenever the app opens online, and again if the phone has cleared them. Skipped when the phone asks to save data. */
+export async function autoSaveMaps() {
+  if ((S.C.edition || {}).maps_auto !== 'all' || !(S.C.maps || {}).packs || !S.C.maps.packs.length) return;
+  try { if (navigator.onLine === false || (navigator.connection && navigator.connection.saveData)) return; } catch (e) {}
+  const have = await mapPackService.downloaded();
+  for (const p of S.C.maps.packs) if (!have.includes(p.id) && busy[p.id] == null) await downloadPack(p.id, null, true);
+  if (P().tab === 'today') { const el = document.getElementById('todayOffline'); if (el) el.hidden = true; }
 }
 export async function removePack(id) { await mapPackService.remove(id); toast('Map removed from this phone'); fillOfflineMaps(); }
 

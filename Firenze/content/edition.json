@@ -94,5 +94,6 @@
     "file_prefix": "florence",
     "greeting_place": "Firenze"
   },
-  "checked": "2026-10-07"
+  "checked": "2026-10-07",
+  "maps_auto": "all"
 }
