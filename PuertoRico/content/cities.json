@@ -1,0 +1,335 @@
+[
+ {
+  "city_id": "san-juan",
+  "name": "San Juan",
+  "local_name": "San Juan",
+  "stamp": "SAN JUAN",
+  "coords_label": "18.47° N · 66.11° W",
+  "country_code": "PR",
+  "currency_code": "USD",
+  "language": "es-PR",
+  "timezone": "America/Puerto_Rico",
+  "center": {
+   "lat": 18.452,
+   "lng": -66.07
+  },
+  "landmark_center": {
+   "lat": 18.4655,
+   "lng": -66.1166,
+   "name": "Old San Juan’s Plaza de Armas"
+  },
+  "hero": {
+   "art": "san-juan.svg",
+   "caption": "A garita on the city walls",
+   "alt": "Pen and ink sketch of a garita, a sentry box on the old city walls of San Juan, above the sea"
+  },
+  "mark": "san-juan-mark.svg",
+  "groups": [
+   {
+    "id": "old_san_juan",
+    "name": "Old San Juan"
+   },
+   {
+    "id": "santurce",
+    "name": "Santurce: art and food"
+   },
+   {
+    "id": "beaches",
+    "name": "Beaches"
+   },
+   {
+    "id": "east",
+    "name": "East of the city"
+   }
+  ],
+  "neighborhoods": [
+   {
+    "id": "old_san_juan",
+    "name": "Old San Juan (Viejo San Juan)",
+    "center": {
+     "lat": 18.4655,
+     "lng": -66.1166
+    },
+    "central": true,
+    "tip": "The walled old city: hilly, with blue cobblestones. Taxis wait by Plaza Colón and the cruise piers, and Uber picks up on the main streets.",
+    "aliases": [
+     "Viejo San Juan",
+     "Old San Juan",
+     "OSJ",
+     "La Perla",
+     "Plaza Colón",
+     "San Juan 00901"
+    ]
+   },
+   {
+    "id": "condado",
+    "name": "Condado",
+    "center": {
+     "lat": 18.4575,
+     "lng": -66.072
+    },
+    "central": false,
+    "tip": "A walkable strip of hotels, restaurants and the calm Condado lagoon. Fixed taxi fare to and from the airport; Uber is easy here.",
+    "aliases": [
+     "Condado",
+     "Ashford",
+     "Condado lagoon"
+    ]
+   },
+   {
+    "id": "ocean_park",
+    "name": "Ocean Park",
+    "center": {
+     "lat": 18.4555,
+     "lng": -66.055
+    },
+    "central": false,
+    "tip": "A quiet beach neighborhood between Condado and Isla Verde. Uber is the easy option; the airport taxi fare is fixed.",
+    "aliases": [
+     "Ocean Park",
+     "McLeary",
+     "Calle Loíza"
+    ]
+   },
+   {
+    "id": "isla_verde",
+    "name": "Isla Verde (Carolina)",
+    "center": {
+     "lat": 18.4435,
+     "lng": -66.018
+    },
+    "central": false,
+    "tip": "Beach hotels about 10 minutes from the airport, with a fixed taxi fare. Old San Juan is 20 to 30 minutes by car.",
+    "aliases": [
+     "Isla Verde",
+     "Carolina",
+     "Punta Las Marías",
+     "Avenida Isla Verde"
+    ]
+   },
+   {
+    "id": "santurce",
+    "name": "Santurce and Miramar",
+    "center": {
+     "lat": 18.449,
+     "lng": -66.068
+    },
+    "central": false,
+    "tip": "Murals, galleries and food, lively at night around La Placita. Take a ride home late rather than walking far.",
+    "aliases": [
+     "Santurce",
+     "Miramar",
+     "La Placita",
+     "Calle Cerra"
+    ]
+   },
+   {
+    "id": "metro",
+    "name": "Elsewhere in the metro area (Guaynabo, Bayamón, Río Piedras…)",
+    "center": null,
+    "central": false,
+    "tip": "Uber covers the whole metro area; fixed taxi fares only cover the tourist zones.",
+    "aliases": [
+     "Guaynabo",
+     "Bayamón",
+     "Río Piedras",
+     "Hato Rey",
+     "Cupey",
+     "Trujillo Alto"
+    ]
+   },
+   {
+    "id": "other",
+    "name": "Somewhere else, or not sure",
+    "center": null,
+    "central": false,
+    "tip": ""
+   }
+  ],
+  "airports": [
+   {
+    "id": "SJU",
+    "name": "San Juan airport (Luis Muñoz Marín, SJU)",
+    "short": "San Juan airport",
+    "local": "Aeropuerto Internacional Luis Muñoz Marín",
+    "location": {
+     "lat": 18.4394,
+     "lng": -66.0018
+    },
+    "tip": "Tourist taxis wait outside baggage claim. The dispatcher tells you the fixed fare before you get in. Uber picks up at its marked zone."
+   }
+  ],
+  "stations": [],
+  "getting_around": {
+   "items": [
+    {
+     "title": "Uber",
+     "text": "Uber is the island’s main ride app (Discover Puerto Rico), easy around San Juan and at the airport. Getting back from farther places is the hard part: ride apps can’t operate inside El Yunque, and drivers are scarce outside the metro area at night."
+    },
+    {
+     "title": "Tourist taxis",
+     "text": "White Taxi Turístico cabs wait at the airport, the cruise piers, hotels and big sights. Fares between the airport and the tourist zones are fixed; pay in cash, and agree the fare first for anything else."
+    },
+    {
+     "title": "Day trips need a ride both ways",
+     "text": "For El Yunque, Luquillo and the bio bay, book a tour with pickup or a driver for the day. Arrange the ride back before you go, especially over the holidays."
+    },
+    {
+     "title": "Walking",
+     "text": "Old San Juan is compact but hilly, with blue cobblestones that get slippery in rain. The beach neighborhoods are flat; avoid walking long stretches between neighborhoods, especially at night."
+    },
+    {
+     "title": "Driving",
+     "text": "A rental car is the easiest way to explore on your own, but city traffic and parking in Old San Juan are hard work. A tour or a driver avoids both."
+    }
+   ],
+   "links": [
+    {
+     "label": "Getting around (Discover Puerto Rico, official)",
+     "url": "https://www.discoverpuertorico.com/transportation"
+    },
+    {
+     "label": "Uber in Puerto Rico",
+     "url": "https://www.uber.com/global/en/r/united-states/puerto-rico/cities"
+    }
+   ],
+   "checked": "2026-10-12",
+   "source": "Discover Puerto Rico and the US Forest Service"
+  },
+  "taxis": {
+   "intro_bold": "Tourist taxis have fixed fares from the airport.",
+   "intro": "Look for the white Taxi Turístico cabs at the airport, cruise piers, hotels and big sights, or ask your hotel to call one. Fares are paid in cash; tolls and tips aren’t included.",
+   "numbers": [],
+   "apps": "Uber is the island’s main ride app and serves the airport. Lyft doesn’t operate here.",
+   "checked": "2026-10-12"
+  },
+  "taxi_tariff": {
+   "currency_code": "USD",
+   "table_title": "Fixed fares from the airport",
+   "zones_from": "Airport",
+   "zone_airport": "SJU",
+   "airport_fee": 3,
+   "zones": [
+    {
+     "id": "convention",
+     "name": "Convention Center and Isla Grande",
+     "bbox": [
+      -66.1,
+      18.446,
+      -66.086,
+      18.458
+     ],
+     "airport_fare": 17
+    },
+    {
+     "id": "osj",
+     "name": "Old San Juan, the piers and Puerta de Tierra",
+     "bbox": [
+      -66.13,
+      18.452,
+      -66.08,
+      18.475
+     ],
+     "airport_fare": 21
+    },
+    {
+     "id": "condado",
+     "name": "Condado, Miramar, Ocean Park and Santurce",
+     "bbox": [
+      -66.09,
+      18.43,
+      -66.045,
+      18.466
+     ],
+     "airport_fare": 17
+    },
+    {
+     "id": "isla_verde",
+     "name": "Isla Verde",
+     "bbox": [
+      -66.045,
+      18.43,
+      -65.985,
+      18.456
+     ],
+     "airport_fare": 12
+    }
+   ],
+   "supplements": [
+    {
+     "label": "Airport fee",
+     "amount": 3
+    },
+    {
+     "label": "Each bag",
+     "amount": 1
+    },
+    {
+     "label": "More than 5 riders",
+     "amount": 2
+    },
+    {
+     "label": "Late at night",
+     "amount": 1
+    }
+   ],
+   "road_factor": 1.35,
+   "fixed_label": "Fixed fare",
+   "hint": "Ask the driver for the rate before you set off, or check the price in the Uber app.",
+   "note": "Fixed tourist-zone fare from the airport, plus $1 a bag.",
+   "checked": "2026-10-12",
+   "source": "San Juan fixed-rate table on sanjuanpuertorico.com (updated Jan 5, 2026). The rates posted in each taxi decide"
+  },
+  "rides": {
+   "title": "Drivers and rides",
+   "intro": "Uber is easy around San Juan, but the rainforest, Luquillo and the bio bay need a ride arranged both ways. Book drivers and tours ahead, especially over the holidays.",
+   "items": [
+    {
+     "name": "Tourist taxis at the airport",
+     "what": "Dispatchers at baggage claim tell you the fare before you get in.",
+     "area": "San Juan airport, cruise piers, hotels",
+     "listed_by": "Discover Puerto Rico (official tourism site)",
+     "source_url": "https://www.discoverpuertorico.com/transportation/taxis",
+     "checked": "2026-10-12"
+    },
+    {
+     "name": "Uber and Uber Reserve",
+     "what": "The island’s main ride app. Uber Reserve books a ride ahead where it’s offered.",
+     "area": "San Juan metro area and the airport. Not allowed to operate inside El Yunque (Recreation.gov).",
+     "url": "https://www.uber.com/global/en/r/united-states/puerto-rico/cities",
+     "listed_by": "Discover Puerto Rico (official tourism site)",
+     "source_url": "https://www.discoverpuertorico.com/transportation",
+     "checked": "2026-10-12"
+    },
+    {
+     "name": "Luquillo Taxi & Tours",
+     "what": "Family-run taxi, transfer and tour company since 2011. Describes itself as licensed and insured.",
+     "area": "Old San Juan to Fajardo, the Ceiba ferry, Culebra and Vieques",
+     "phone": "(787) 513-7685",
+     "url": "http://luquillotaxi.com/",
+     "book_ahead": true,
+     "note": "For a full day, ask for the price in writing, the vehicle and number of seats, and the driver’s name.",
+     "listed_by": "Discover Puerto Rico (official tourism site)",
+     "source_url": "https://www.discoverpuertorico.com/profile/luquillo-taxitm-tours-puerto-rico/12290",
+     "checked": "2026-10-12"
+    }
+   ],
+   "note": "Listed because an official source names them, not because Wanderings has ridden with them. We found no published day rates, so ask for a quote. Hotels can also book licensed drivers they trust.",
+   "status": {
+    "badge": "Still being verified",
+    "title": "In progress",
+    "note": "We’re still building this list. Details may be incomplete or change, so confirm directly with the company before you book. More drivers coming soon."
+   }
+  },
+  "connections": [],
+  "emergency": {
+   "checked": "2026-10-12",
+   "source": "Puerto Rico 9-1-1 emergency system"
+  },
+  "greeting_name": "San Juan",
+  "brand": {
+   "tint": "#FAEDE4",
+   "note": "Clean theme: light tint behind the city mark (the warm pastel of Old San Juan’s facades). The mark itself is art/san-juan-mark.svg."
+  }
+ }
+]
