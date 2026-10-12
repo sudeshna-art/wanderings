@@ -1,10 +1,11 @@
 /* Places tab: Plan (Planner), Near me (everyone; the default for True Wanderer), Sights, Experiences, Day trips. Follows the current city. */
-import { S, P, save, checkedText, curCityId, cityOf, cityName, placesIn, isPlanner, isWanderer, placeById } from '../state.js';
-import { esc, toast, $$, $, CUSTOM_KINDS, KIND_NAME } from '../dom.js';
-import { masthead, cityBar, legend, placeRow, expRow } from '../components.js';
-import { statusOf } from '../../models/schema.js';
-import { renderPlan } from './plan.js';
-import { renderWanderer } from './wanderer.js';
+import { S, P, save, checkedText, curCityId, cityOf, cityName, placesIn, isPlanner, isWanderer, placeById } from '../state.js?v=202610121014';
+import { esc, toast, $$, $, CUSTOM_KINDS, KIND_NAME } from '../dom.js?v=202610121014';
+import { masthead, cityBar, legend, placeRow, expRow, placeCards } from '../components.js?v=202610121014';
+import { clean } from '../theme.js?v=202610121014';
+import { statusOf } from '../../models/schema.js?v=202610121014';
+import { renderPlan } from './plan.js?v=202610121014';
+import { renderWanderer } from './wanderer.js?v=202610121014';
 
 export function views() {
   return (isPlanner() ? [['plan', 'My plan']] : []).concat([['nearby', isWanderer() ? 'Nearby' : 'Near me'], ['sights', 'Sights'], ['experiences', 'Experiences'], ['trips', 'Day trips']]);
@@ -24,7 +25,7 @@ export function renderPlaces() {
     const isTrip = v === 'trips';
     const list = placesIn(cityId, [isTrip ? 'day_trip' : 'experience']);
     root.innerHTML = masthead() + `<div class="greet"><h1>${isTrip ? 'Beyond the city.' : 'Worth booking.'}</h1></div>${cityBar()}${seg}
-      <div class="block" style="padding-top:12px">${legend()}<div class="rows">${list.map(expRow).join('')}</div>
+      <div class="block" style="padding-top:12px">${clean() ? placeCards(list) : `${legend()}<div class="rows">${list.map(expRow).join('')}</div>`}
       <p class="small faint">Durations are typical; providers set their own prices and times, so check when booking. Checked ${esc(checkedText())}.</p></div>`;
     return;
   }
@@ -34,14 +35,15 @@ export function renderPlaces() {
   let html = masthead() + `<div class="greet"><h1>Where to wander.</h1></div>${cityBar()}${seg}
     <div class="chips" role="toolbar" aria-label="Filter">${[['all', 'All'], ['want', 'Want to go'], ['went', 'Visited']].map(([k, l]) => `<button class="chip" data-act="pfilter" data-v="${k}" aria-pressed="${f === k}">${l}</button>`).join('')}</div>`;
   const must = list.filter(p => p.must && !p.custom).filter(filt);
-  if (must.length) html += `<div class="block"><h2>Must-sees</h2><div class="rows">${must.map(p => placeRow(p)).join('')}</div></div>`;
+  const rows = l => clean() ? placeCards(l) : `<div class="rows">${l.map(p => placeRow(p)).join('')}</div>`;
+  if (must.length) html += `<div class="block"><h2>Must-sees</h2>${rows(must)}</div>`;
   (c.groups || []).forEach(g => {
     const gl = list.filter(p => p.group === g.id && !p.must && !p.custom).filter(filt);
-    if (gl.length) html += `<div class="block"><h2>${esc(g.name)}</h2><div class="rows">${gl.map(p => placeRow(p)).join('')}</div></div>`;
+    if (gl.length) html += `<div class="block"><h2>${esc(g.name)}</h2>${rows(gl)}</div>`;
   });
   const mine = list.filter(p => p.custom).filter(filt);
   if (f === 'all' || mine.length) {
-    html += `<div class="block"><h2>Your own places</h2>${mine.length ? `<div class="rows">${mine.map(p => placeRow(p)).join('')}</div>` : ''}
+    html += `<div class="block"><h2>Your own places</h2>${mine.length ? rows(mine) : ''}
       ${f === 'all' ? `<div class="fields" style="margin-top:4px"><label class="f">Place name<input type="text" id="cName" placeholder="e.g. a restaurant a friend recommended"></label>
       <label class="f">Type<select id="cCat">${CUSTOM_KINDS.map(k => `<option value="${k}">${esc(KIND_NAME[k])}</option>`).join('')}</select></label></div>
       <button class="btn line" data-act="addplace" style="align-self:flex-start">Add to ${esc(cityName(cityId))}</button>` : ''}</div>`;

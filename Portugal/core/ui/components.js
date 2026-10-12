@@ -1,9 +1,9 @@
 /* Shared pieces of UI used by several screens. */
-import { EDITION } from '../../edition.config.js';
-import { S, P, cityOf, cityName, curCityId, autoCityId, cityIds, placeById, isPlanner, today } from './state.js';
-import { esc, ic, ill, KIND_NAME, fmtDay } from './dom.js';
-import { statusOf, isBooked, planOf, BOOKING_LABEL, URGENCY_LABEL, priceText, priceShort, closedText, bookingKindLabel } from '../models/schema.js';
-import { linkService } from '../services/link-service.js';
+import { EDITION } from '../../edition.config.js?v=202610121014';
+import { S, P, cityOf, cityName, curCityId, autoCityId, cityIds, placeById, isPlanner, today } from './state.js?v=202610121014';
+import { esc, ic, ill, KIND_NAME, fmtDay } from './dom.js?v=202610121014';
+import { statusOf, isBooked, planOf, BOOKING_LABEL, URGENCY_LABEL, priceText, priceShort, closedText, bookingKindLabel } from '../models/schema.js?v=202610121014';
+import { linkService } from '../services/link-service.js?v=202610121014';
 
 export const art = file => (S.art && S.art[file]) || '';
 /* A city's own illustrated map (original line art drawn to a known area), for the offline sketch map. */
@@ -186,5 +186,57 @@ export function homeCurrencySelect(bind = 'home_currency') {
   const names = { EUR: 'Euro', USD: 'US dollar', GBP: 'British pound', AED: 'UAE dirham', CAD: 'Canadian dollar', AUD: 'Australian dollar', INR: 'Indian rupee', CHF: 'Swiss franc', SGD: 'Singapore dollar', JPY: 'Japanese yen' };
   return `<label class="f" style="flex:none">Your home currency<select data-bind="${bind}"><option value="">Choose…</option>${S.C.edition.home_currencies.map(c => `<option value="${c}" ${cur === c ? 'selected' : ''}>${esc(names[c] || c)} (${c})</option>`).join('')}</select></label>`;
 }
+
+/* ---------- clean theme pieces (Oct 12 2026). Used only when theme.js clean() is true. ---------- */
+/* A trip-check line. Closed-day lines name the plan's real date, worked out from the calendar
+   ("Accademia Gallery is closed Mondays. It’s in your plan for Mon, Oct 19."). */
+export function checkText(c) {
+  if (c.kind === 'closed') {
+    const p = placeById(c.item_id);
+    if (p && c.day) return `${p.name} is ${closedText(p).replace(/^Closed/, 'closed')}. It’s in your plan for ${fmtDay(c.day)}.`;
+  }
+  return c.text;
+}
+const host = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return ''; } };
+const CHEV = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>';
+export const chev = (cls = 'chev') => CHEV.replace('<svg ', `<svg class="${cls}" `);
+/* One soft badge for booking status plus urgency, always in words. */
+export function statusBadge(p, booked) {
+  if (booked) return '<span class="badge green">Booked ✓</span>';
+  if (p.booking_status === 'required') return `<span class="badge red">${p.urgency_level === 'book_soon' ? 'Must book · Book soon' : 'Must book'}</span>`;
+  if (p.booking_status === 'optional') return `<span class="badge amber">Booking optional${p.urgency_level === 'book_soon' ? ' · Book soon' : ''}</span>`;
+  return '<span class="badge green">No ticket needed</span>';
+}
+/* Price for the card: the short official price, "Free" when no ticket is needed, or "Check when booking". */
+export function cardPrice(p) {
+  const s = priceShort(p.price);
+  if (s) return esc(s);
+  if (p.price && p.price.text) return esc(p.price.text);
+  if (p.booking_status === 'none') return p.category === 'day_trip' ? '' : 'Free';
+  return '<span class="muted">Check when booking</span>';
+}
+/* The card's one link: the official booking site when booking applies, else Directions, else Save. */
+export function cardLink(p, booked) {
+  const st = statusOf(S.trip, p.id);
+  if (p.ticket_url && p.booking_status !== 'none' && !booked) return `<a class="pcard-go" href="${esc(p.ticket_url)}" target="_blank" rel="noopener">${esc(host(p.ticket_url) || 'Official tickets')} ↗</a>`;
+  if (p.location) return `<a class="pcard-go" href="${esc(linkService.directions(p.location, 'walking'))}" target="_blank" rel="noopener">Directions</a>`;
+  if (p.search_q) return `<a class="pcard-go" href="${esc(linkService.getyourguide(p.search_q))}" target="_blank" rel="noopener">Compare tours ↗</a>`;
+  return `<button class="pcard-go" data-act="want" data-id="${p.id}" aria-pressed="${st === 'want'}">${st === 'want' ? '✓ Saved' : 'Save'}</button>`;
+}
+/* Affiliate links stay off (features.affiliate_links). When a program is approved, a second, quieter link
+   with a visible disclosure goes here, never before the official link. */
+function affiliateLink(p) { return ''; }
+/* The four-part place card: title, one metadata line, one tip, one link. Tapping the card opens its detail sheet. */
+export function placeCard(p) {
+  const booked = isBooked(S.trip, p.id), st = statusOf(S.trip, p.id);
+  const tip = tipsOf(p)[0] || p.lead_time || (p.category === 'day_trip' ? p.how : '') || p.description || '';
+  const price = cardPrice(p), cl = closedText(p);
+  return `<div class="pcard" id="pl-${p.id}"><button class="pcard-tap" data-act="spot" data-id="${p.id}" aria-label="${esc(p.name)}, details">
+    <span class="pcard-top"><b>${esc(p.name)}</b>${chev()}</span>
+    <span class="pmeta">${price ? `<span>${price}</span>` : ''}${statusBadge(p, booked)}${st === 'went' ? '<span class="badge gray">Went ✓</span>' : st === 'want' ? '<span class="badge gray">Saved</span>' : ''}${cl ? `<span class="closed-day" style="margin:0">${esc(cl)}</span>` : ''}</span>
+    ${tip ? `<span class="tipbox">${esc(tip)}</span>` : ''}</button>
+    ${cardLink(p, booked)}${affiliateLink(p)}</div>`;
+}
+export const placeCards = list => `<div class="pcards">${list.map(placeCard).join('')}</div>`;
 
 export { today, placeById };

@@ -290,6 +290,10 @@
     "emergency": {
       "checked": "2026-10-09",
       "source": "European emergency number 112; SNS 24"
+    },
+    "brand": {
+      "tint": "#E7EEF8",
+      "note": "Clean theme: light azulejo blue behind the city mark (art/lisbon-mark.svg)."
     }
   },
   {
@@ -534,6 +538,10 @@
     "emergency": {
       "checked": "2026-10-09",
       "source": "European emergency number 112; SNS 24"
+    },
+    "brand": {
+      "tint": "#F4EEE2",
+      "note": "Clean theme: light cliff sandstone behind the city mark (art/algarve-mark.svg)."
     }
   }
 ]

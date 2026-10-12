@@ -1,6 +1,6 @@
 /* Trip checks: gentle warnings about the plan, worked out on this phone. Pure functions, no DOM.
    Each check is { level: 'warn' | 'info', day, text, item_id?, booking_id? }. */
-import { stayOn, closedOn, closedText, bookingKindLabel, sortedBookings, isBooked, tripDays } from './schema.js';
+import { stayOn, closedOn, closedText, bookingKindLabel, sortedBookings, isBooked, tripDays } from './schema.js?v=202610121014';
 
 const mins = t => { if (!t) return null; const [h, m] = t.split(':').map(Number); return h * 60 + (m || 0); };
 const hhmm = n => String(Math.floor(n / 60) % 24).padStart(2, '0') + ':' + String(n % 60).padStart(2, '0');
@@ -12,7 +12,7 @@ export function tripChecks(trip, ctx) {
   /* 1. Plan items on a day the place is closed */
   trip.plan.forEach(p => {
     const pl = ctx.placeById(p.item_id); if (!pl) return;
-    if (closedOn(pl, p.date)) out.push({ level: 'warn', day: p.date, item_id: p.item_id, text: `${pl.name} is planned on a day it’s closed (${closedText(pl).replace(/^Closed /, 'closed ')}).` });
+    if (closedOn(pl, p.date)) out.push({ level: 'warn', kind: 'closed', day: p.date, item_id: p.item_id, text: `${pl.name} is planned on a day it’s closed (${closedText(pl).replace(/^Closed /, 'closed ')}).` });
     /* 2. A place in a different city from where you are staying that day */
     const st = stayOn(trip, p.date);
     if (st && pl.city_id && st.city_id !== pl.city_id && pl.category !== 'day_trip') out.push({ level: 'warn', day: p.date, item_id: p.item_id, text: `${pl.name} is in ${ctx.cityName(pl.city_id)}, but you’re staying in ${ctx.cityName(st.city_id)} that day.` });

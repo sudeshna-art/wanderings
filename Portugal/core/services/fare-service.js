@@ -8,8 +8,8 @@
                 airport_meter_supplement, ... }                                       (Florence)
    The period is chosen from the city's own clock (its timezone), so a traveler at home sees the city's current rates.
    Later provider: a routing service, only if ever approved. */
-import { contentService } from './content-service.js';
-import { km } from '../models/schema.js';
+import { contentService } from './content-service.js?v=202610121014';
+import { km } from '../models/schema.js?v=202610121014';
 
 /* Day of week (0 = Sunday) and minutes past midnight in the city's timezone. */
 function cityClock(tz, at = new Date()) {

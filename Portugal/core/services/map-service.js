@@ -5,11 +5,11 @@
      3. Leaflet with OpenStreetMap tiles, while online, if the phone cannot draw vector maps.
      4. The illustrated map, offline with no saved pack.
    The provider draws only into the one element the UI hands it. Calls made before the map is ready are replayed. */
-import { leafletMap } from './providers/leaflet-map.js';
-import { illustratedMap } from './providers/illustrated-map.js';
-import { maplibreMap, webglOK } from './providers/maplibre-map.js';
-import { mapPackService } from './mappack-service.js';
-import { linkService } from './link-service.js';
+import { leafletMap } from './providers/leaflet-map.js?v=202610121014';
+import { illustratedMap } from './providers/illustrated-map.js?v=202610121014';
+import { maplibreMap, webglOK } from './providers/maplibre-map.js?v=202610121014';
+import { mapPackService } from './mappack-service.js?v=202610121014';
+import { linkService } from './link-service.js?v=202610121014';
 
 const PROV = { vector: maplibreMap, live: leafletMap, illustrated: illustratedMap };
 const online = () => typeof navigator === 'undefined' || navigator.onLine !== false;

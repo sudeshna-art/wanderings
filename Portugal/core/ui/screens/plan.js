@@ -1,15 +1,18 @@
 /* Planner mode: day strip across the whole trip, timeline or live map per day, add-to-a-day sheet.
    Oct 11 2026: bookings show on their day, closed days are flagged, and trip checks list clashes. */
-import { placeName } from '../state.js';
-import { S, P, save, cityName, cityOf, placesIn, itemInfo, homePoint, stayHere, today, addMount, addCleanup, placeById, isPlanner } from '../state.js';
-import { esc, ic, ill, fmtDay, shortDay, plural, modeIcon, toast, $, $$, KIND_NAME } from '../dom.js';
-import { illustrationFor, masthead, bookingLine } from '../components.js';
-import { tripDays, itemsOn, stayOn, planOf, addToDay, statusOf, isBooked, walkMinutes, km, closedOn, closedText, bookingsOn } from '../../models/schema.js';
-import { tripChecks } from '../../models/checks.js';
-import { mapService } from '../../services/map-service.js';
-import { fareService } from '../../services/fare-service.js';
-import { currencyService } from '../../services/currency-service.js';
-import { showStatus } from './offline.js';
+import { placeName } from '../state.js?v=202610121014';
+import { S, P, save, cityName, cityOf, placesIn, itemInfo, homePoint, stayHere, today, addMount, addCleanup, placeById, isPlanner } from '../state.js?v=202610121014';
+import { esc, ic, ill, fmtDay, shortDay, plural, modeIcon, toast, $, $$, KIND_NAME } from '../dom.js?v=202610121014';
+import { illustrationFor, masthead, bookingLine } from '../components.js?v=202610121014';
+import { tripDays, itemsOn, stayOn, planOf, addToDay, statusOf, isBooked, walkMinutes, km, closedOn, closedText, bookingsOn } from '../../models/schema.js?v=202610121014';
+import { tripChecks } from '../../models/checks.js?v=202610121014';
+import { clean } from '../theme.js?v=202610121014';
+import { checkText } from '../components.js?v=202610121014';
+import { openSpot } from './wanderer.js?v=202610121014';
+import { mapService } from '../../services/map-service.js?v=202610121014';
+import { fareService } from '../../services/fare-service.js?v=202610121014';
+import { currencyService } from '../../services/currency-service.js?v=202610121014';
+import { showStatus } from './offline.js?v=202610121014';
 
 const dayCity = d => { const s = stayOn(S.trip, d); return s ? s.city_id : ''; };
 
@@ -69,16 +72,16 @@ function mapView(day, items) {
   const city = dayCity(day), home = city ? homePoint(city) : null;
   const pts = items.map((v, i) => ({ v, i, info: itemInfo(v.item_id) })).filter(o => o.info.location);
   if (!P().pin || !pts.some(o => o.v.item_id === P().pin)) P().pin = pts.length ? pts[pts.length - 1].v.item_id : null;
-  const list = items.length ? `<div style="padding-top:18px">${items.map((v, i) => `<div style="display:grid;grid-template-columns:24px 56px minmax(0,1fr);gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--rule)"><span style="font-family:var(--mono);font-size:12px;color:var(--accent)">${i + 1}</span><span style="font-family:var(--mono);font-size:12px;color:var(--muted)">${v.time ? esc(v.time) : 'Anytime'}</span><span style="font-size:14px;font-weight:${v.item_id === P().pin ? 600 : 500}">${esc(itemInfo(v.item_id).name)}${itemInfo(v.item_id).location ? '' : ' <span class="small faint">(not on the map)</span>'}</span></div>`).join('')}</div>` : `<p class="serif" style="font-size:17px;padding-top:14px">No stops on this day yet. Switch to Timeline to add one.</p>`;
+  const list = items.length ? `<div style="padding-top:18px">${items.map((v, i) => `<div style="display:grid;grid-template-columns:24px 56px minmax(0,1fr);gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--rule)"><span style="font-family:var(--mono);font-size:12px;color:var(--accent)">${i + 1}</span><span style="font-family:var(--mono);font-size:12px;color:var(--muted)">${v.time ? esc(v.time) : 'Anytime'}</span><span data-pinrow="${v.item_id}" class="${clean() && v.item_id === P().pin ? 'pinsel' : ''}" style="font-size:14px;font-weight:${v.item_id === P().pin ? 600 : 500}">${esc(itemInfo(v.item_id).name)}${itemInfo(v.item_id).location ? '' : ' <span class="small faint">(not on the map)</span>'}</span></div>`).join('')}</div>` : `<p class="serif" style="font-size:17px;padding-top:14px">No stops on this day yet. Switch to Timeline to add one.</p>`;
   addMount(() => {
     const el = document.getElementById('planMap'); if (!el) return;
     const c = cityOf(city || S.C.edition.city_ids[0]);
     planMap = mapService.create(el, { center: home || c.center, zoom: 14, illustration: illustrationFor(c), onMode: m => showStatus(document.getElementById('planMapStatus'), m) });
     const markers = pts.map(o => ({ id: o.v.item_id, name: o.info.name, location: o.info.location, number: o.i + 1, hollow: !o.v.time, went: statusOf(S.trip, o.v.item_id) === 'went' }));
-    const draw = () => mapService.setMarkers(planMap, markers, { selectedId: P().pin, route: true, routeStart: home, onTap: id => { P().pin = id; save(); draw(); pinCard(items, home); } });
+    const draw = () => mapService.setMarkers(planMap, markers, { selectedId: P().pin, route: true, routeStart: home, onTap: id => { P().pin = id; save(); draw(); if (clean()) { markList(); openSpot(id); } else pinCard(items, home); } });
     draw();
     mapService.fitTo(planMap, markers.map(m => m.location).concat(home ? [home] : []));
-    pinCard(items, home);
+    if (!clean()) pinCard(items, home);
     addCleanup(() => { mapService.destroy(planMap); planMap = null; });
   });
   return `<div class="block" style="padding-top:12px"><div class="wmap small"><div class="wcanvas" id="planMap"></div></div><div data-mapstatus id="planMapStatus" style="padding-top:8px"></div><div id="pinCard"></div>${list}</div>`;
@@ -100,7 +103,7 @@ function trayBlock() {
   const ids = [...new Set(S.trip.saved.filter(s => s.status === 'want').map(s => s.place_id).concat(S.trip.booked))].filter(id => !scheduled.has(id) && placeById(id));
   const days = tripDays(S.trip);
   return `<div class="block"><div class="head"><h2>Saved, not on a day yet</h2><span class="label">${ids.length}</span></div>${ids.length ? `<div>${ids.map(id => { const nb = nearbyDay(id), info = itemInfo(id); return `<div class="prow" style="grid-template-columns:40px minmax(0,1fr) auto">${ill(info.kind, 40)}<div><div style="font-weight:600">${esc(info.name)}</div><div class="small muted">${esc(cityName(info.city_id))}${nb ? ` · near ${esc(nb.name)}, fits Day ${days.indexOf(nb.day) + 1}` : ''}</div></div><button class="btn line sm" data-act="addsheet" data-id="${id}">Add to a day</button></div>`; }).join('')}</div>` : '<p class="small muted">Tap “Want to go” on any place and it waits here until you give it a day.</p>'}
-    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn line sm" data-act="pview" data-v="sights">Browse sights</button><button class="btn line sm" data-act="pview" data-v="experiences">Experiences</button><button class="btn line sm" data-act="pview" data-v="trips">Day trips</button></div></div>`;
+    ${clean() ? '<button class="btn line sm" data-act="pview" data-v="sights" style="align-self:flex-start">Browse places</button>' : '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn line sm" data-act="pview" data-v="sights">Browse sights</button><button class="btn line sm" data-act="pview" data-v="experiences">Experiences</button><button class="btn line sm" data-act="pview" data-v="trips">Day trips</button></div>'}</div>`;
 }
 
 /* Clashes across the whole trip: closed days, wrong city, overlapping bookings, flights. */
@@ -108,6 +111,12 @@ function checksBlock() {
   const cs = tripChecks(S.trip, { placeById, cityName });
   if (!cs.length) return '';
   const warn = cs.filter(c => c.level === 'warn').length;
+  if (clean()) {   /* clean theme: counts both kinds, and closed-day lines name the real date */
+    const rem = cs.length - warn;
+    const sum = [warn ? plural(warn, 'thing') + ' to look at' : '', rem ? plural(rem, 'reminder') : ''].filter(Boolean).join(', ');
+    return `<details class="checks" ${warn ? 'open' : ''}><summary><b>Trip checks</b><span class="small muted"> · ${sum}</span></summary>
+    <ul class="plain">${cs.map(c => `<li class="small"><span class="lvl ${c.level === 'warn' ? 'required' : 'optional'}" style="margin:0 8px 0 0">${c.day ? esc(shortDay(c.day)) : 'Trip'}</span>${esc(checkText(c))}</li>`).join('')}</ul></details>`;
+  }
   return `<details class="checks" ${warn ? 'open' : ''}><summary><b>Trip checks</b><span class="small muted"> · ${warn ? plural(warn, 'thing') + ' to look at' : plural(cs.length, 'reminder')}</span></summary>
     <ul class="plain">${cs.map(c => `<li class="small"><span class="lvl ${c.level === 'warn' ? 'required' : 'optional'}" style="margin:0 6px 0 0;font-weight:600">${c.day ? esc(shortDay(c.day)) : ''}</span>${esc(c.text)}</li>`).join('')}</ul></details>`;
 }
@@ -192,3 +201,6 @@ export function openAddStop(day) {
     <div style="display:flex;gap:8px"><button class="btn sm" data-act="addstopsave" data-day="${day}">Add to this day</button><button class="btn line sm" data-act="addstopcancel">Cancel</button></div></div>`;
 }
 export { addToDay };
+
+/* clean theme: the tapped pin is highlighted in the stop list; its details open in the sheet (no repeated card) */
+function markList() { document.querySelectorAll('[data-pinrow]').forEach(el => el.classList.toggle('pinsel', el.dataset.pinrow === P().pin)); }

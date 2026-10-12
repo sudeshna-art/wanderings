@@ -1,27 +1,30 @@
 /* Wanderings app shell: boot, tabs, taps and form binding. All outside access goes through services. */
-import { CONFIG } from '../config/default-config.js';
-import { S, P, save, copyOf, myLang, curCityId, cityIds, cityName, placeById, isPlanner, isWanderer, runMounts, runCleanups, today } from './state.js';
-import { $, $$, esc, ic, toast } from './dom.js';
-import { staysEditor } from './components.js';
-import { contentService } from '../services/content-service.js';
-import { tripService } from '../services/trip-service.js';
-import { storageService } from '../services/storage-service.js';
-import { shareService } from '../services/share-service.js';
-import { speechService } from '../services/speech-service.js';
-import { currencyService } from '../services/currency-service.js';
-import { newStay, syncLegs, setStatus, statusOf, setBooked, addToDay, removeFromPlan, moveItem, planOf, tripDays, sortedStays } from '../models/schema.js';
-import { renderToday, showSlide, startSlides, stopSlides } from './screens/today.js';
-import { renderPlaces, defaultView, addCustomPlace } from './screens/places.js';
-import { openSched, openAddSheet, closeSheet, setSheetDay, sheetDay, openAddStop } from './screens/plan.js';
-import { openSpot, recenter, refreshWanderer, wanderPos } from './screens/wanderer.js';
-import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js';
-import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js';
-import { renderEssentials, showFare, updateConv, loadRate } from './screens/essentials.js';
-import { renderWelcome, W, STEP_COUNT } from './screens/welcome.js';
-import { downloadPack, downloadAll, removePack, autoSaveMaps } from './screens/offline.js';
-import { openImport, importFind, importFile, importBack, importSave, openEditor, editorSave, editorDelete, changeKind } from './screens/bookings.js';
-import { showEmergency, sharePlan, meetForm, meetSave, meetShare } from './screens/safety.js';
-import { openAsk, closeAsk, askInput, askSet } from './screens/ask.js';
+import { CONFIG } from '../config/default-config.js?v=202610121014';
+import { S, P, save, copyOf, myLang, curCityId, cityIds, cityName, placeById, isPlanner, isWanderer, runMounts, runCleanups, today } from './state.js?v=202610121014';
+import { $, $$, esc, ic, toast } from './dom.js?v=202610121014';
+import { staysEditor } from './components.js?v=202610121014';
+import { contentService } from '../services/content-service.js?v=202610121014';
+import { tripService } from '../services/trip-service.js?v=202610121014';
+import { storageService } from '../services/storage-service.js?v=202610121014';
+import { shareService } from '../services/share-service.js?v=202610121014';
+import { speechService } from '../services/speech-service.js?v=202610121014';
+import { currencyService } from '../services/currency-service.js?v=202610121014';
+import { newStay, syncLegs, setStatus, statusOf, setBooked, isBooked, addToDay, removeFromPlan, moveItem, planOf, tripDays, sortedStays } from '../models/schema.js?v=202610121014';
+import { renderToday, showSlide, startSlides, stopSlides } from './screens/today.js?v=202610121014';
+import { renderPlaces, defaultView, addCustomPlace } from './screens/places.js?v=202610121014';
+import { openSched, openAddSheet, closeSheet, setSheetDay, sheetDay, openAddStop } from './screens/plan.js?v=202610121014';
+import { openSpot, recenter, refreshWanderer, wanderPos } from './screens/wanderer.js?v=202610121014';
+import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js?v=202610121014';
+import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js?v=202610121014';
+import { renderEssentials, showFare, updateConv, loadRate } from './screens/essentials.js?v=202610121014';
+import { renderWelcome, W, STEP_COUNT } from './screens/welcome.js?v=202610121014';
+import { downloadPack, downloadAll, removePack, autoSaveMaps } from './screens/offline.js?v=202610121014';
+import { openImport, importFind, importFile, importBack, importSave, openEditor, editorSave, editorDelete, changeKind } from './screens/bookings.js?v=202610121014';
+import { showEmergency, sharePlan, meetForm, meetSave, meetShare } from './screens/safety.js?v=202610121014';
+import { openAsk, closeAsk, askInput, askSet } from './screens/ask.js?v=202610121014';
+import { applyTheme, clean } from './theme.js?v=202610121014';
+import { openCover } from './screens/today.js?v=202610121014';
+import { stayHere, curCity } from './state.js?v=202610121014';
 
 const TABS = [['today', 'Today'], ['places', 'Places'], ['phrases', 'Phrases'], ['journal', 'Journal'], ['essentials', 'Essentials']];
 const RENDER = { today: renderToday, places: renderPlaces, phrases: renderPhrases, journal: renderJournal, essentials: renderEssentials };
@@ -35,6 +38,7 @@ function renderTabs() {
 }
 function render(k = P().tab, keepScroll = false) {
   const y = window.scrollY;
+  if (clean()) { const c = curCity(); document.documentElement.style.setProperty('--city-tint', (c.brand && c.brand.tint) || ''); }
   runCleanups();
   if (k !== 'today') stopSlides();
   RENDER[k]();
@@ -124,8 +128,8 @@ const A = {
   stayadd: () => { const last = sortedStays(S.trip).slice(-1)[0]; const ns = newStay(last && last.city_id === cityIds()[0] ? (cityIds()[1] || cityIds()[0]) : cityIds()[0]); if (last && last.end) ns.start = last.end; S.trip.stays.push(ns); syncLegs(S.trip); save(); refreshStays(); },
   staydel: el => { S.trip.stays.splice(+el.dataset.i, 1); syncLegs(S.trip); save(); refreshStays(); },
   slideto: el => { showSlide(+el.dataset.i); startSlides(); },
-  slideshow: () => { P().coverMode = 'slides'; save(); toast('Slideshow on. The sketch opens the show.'); render('today', true); },
-  uncover: () => { P().cover = null; P().coverMode = 'sketch'; save(); $('#viewer').hidden = true; toast('Back to the sketch'); rerender(); },
+  slideshow: () => { P().coverMode = 'slides'; save(); toast('Slideshow on. The sketch opens the show.'); render('today', true); if (clean() && !$('#sheet').hidden) openCover(); },
+  uncover: () => { P().cover = null; P().coverMode = 'sketch'; save(); $('#viewer').hidden = true; toast('Back to the sketch'); rerender(); if (clean() && !$('#sheet').hidden) openCover(); },
   setcover: el => { P().cover = el.dataset.id; P().coverMode = 'photo'; save(); $('#viewer').hidden = true; toast('Set as your trip cover'); rerender(); },
   viewphoto: el => openViewer(el.dataset.id),
   closeviewer: () => { $('#viewer').hidden = true; },
@@ -188,7 +192,17 @@ const A = {
   askhome: () => showDriver('__home'),
   askdriver: el => showDriver(el.dataset.id),
   askspot: el => openSpot(el.dataset.id),
-  asknear: () => { closeAsk(); P().pview = 'nearby'; save(); go('places'); }
+  asknear: () => { closeAsk(); P().pview = 'nearby'; save(); go('places'); },
+  /* clean theme (Oct 12 2026) */
+  askpill: el => openAsk(el.dataset.q),
+  cover: () => openCover(),
+  addaddr: () => {   /* "Add your stay address": straight to the address field of the current stay */
+    $('#driver').hidden = true; closeAsk(); closeSheet();
+    const i = S.trip.stays.indexOf(stayHere());
+    go('essentials', { focus: i >= 0 ? `[data-bind="stays.${i}.address"]` : '#tripBlock' });
+  },
+  spotunwent: el => { setStatus(S.trip, el.dataset.id, null); save(); toast('Visit removed. Journal notes are kept.'); openSpot(el.dataset.id); rerenderBehindSheet(); },
+  spotbooked: el => { const id = el.dataset.id; setBooked(S.trip, id, !isBooked(S.trip, id)); save(); toast(isBooked(S.trip, id) ? 'Marked as booked' : 'Unmarked'); openSpot(id); rerenderBehindSheet(); }
 };
 async function copy(text, quiet) { const ok = await shareService.copy(text); if (!quiet) toast(ok ? 'Copied' : 'Press and hold the text to copy it'); return ok; }
 function rerenderBehindSheet() { if (P().tab === 'places' && P().pview === 'nearby') refreshWanderer(); else rerender(); }
@@ -267,6 +281,7 @@ async function boot() {
   J.pending = await tripService.getPending(); J.draft = await tripService.getDraft();
   S.art = {};
   await Promise.all(S.C.cities.flatMap(c => [c.hero.art, c.mark].concat(c.illustrated_map ? [c.illustrated_map.art] : [])).map(async f => { S.art[f] = await contentService.art(f); }));
+  applyTheme(curCity());
   root.querySelector('.loading')?.remove();
   TABS.forEach(([k]) => { if (!document.querySelector(`section[data-tab="${k}"]`)) root.insertAdjacentHTML('beforeend', `<section data-tab="${k}" hidden></section>`); });
   renderTabs();
