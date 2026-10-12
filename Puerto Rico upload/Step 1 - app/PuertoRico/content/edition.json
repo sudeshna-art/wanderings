@@ -1,0 +1,87 @@
+{
+ "schema_version": 1,
+ "edition_id": "puerto-rico",
+ "name": "Vámonos Puerto Rico",
+ "tagline": "San Juan and around",
+ "language": "es-PR",
+ "language_name": "Spanish",
+ "city_ids": [
+  "san-juan"
+ ],
+ "modules": {
+  "phrases": true,
+  "currency": "auto",
+  "taxi_estimator": true,
+  "true_wanderer": true
+ },
+ "home_currencies": [
+  "USD",
+  "EUR",
+  "GBP",
+  "CAD",
+  "AUD",
+  "AED",
+  "INR",
+  "CHF",
+  "SGD",
+  "JPY"
+ ],
+ "arrival_options": [
+  {
+   "id": "SJU",
+   "label": "San Juan airport (SJU)",
+   "city_id": "san-juan",
+   "tip": "Tourist taxis have fixed fares to the hotel zones; Uber picks up at its marked zone."
+  },
+  {
+   "id": "CRUISE",
+   "label": "Cruise ship, Old San Juan piers",
+   "city_id": "san-juan",
+   "tip": "Taxis wait at the piers; Old San Juan is a short walk from most of them."
+  },
+  {
+   "id": "CAR",
+   "label": "Car or private driver",
+   "city_id": ""
+  },
+  {
+   "id": "OTHER",
+   "label": "Other",
+   "city_id": ""
+  }
+ ],
+ "leg_modes": [
+  {
+   "id": "driver",
+   "label": "Private driver or transfer"
+  },
+  {
+   "id": "taxi",
+   "label": "Taxi"
+  },
+  {
+   "id": "car",
+   "label": "Rental car"
+  },
+  {
+   "id": "train",
+   "label": "Train"
+  },
+  {
+   "id": "bus",
+   "label": "Express coach"
+  },
+  {
+   "id": "flight",
+   "label": "Flight"
+  }
+ ],
+ "copy": {
+  "place": "Puerto Rico",
+  "place_list": "San Juan and around",
+  "hashtags": "#PuertoRico #SanJuan #Boricua #travel",
+  "file_prefix": "puerto-rico",
+  "greeting_place": "Puerto Rico"
+ },
+ "checked": "2026-10-12"
+}
