@@ -1,4 +1,4 @@
-/* Places tab: Plan (Planner), Nearby (True Wanderer), Sights, Experiences, Day trips. Follows the current city. */
+/* Places tab: Plan (Planner), Near me (everyone; the default for True Wanderer), Sights, Experiences, Day trips. Follows the current city. */
 import { S, P, save, checkedText, curCityId, cityOf, cityName, placesIn, isPlanner, isWanderer, placeById } from '../state.js';
 import { esc, toast, $$, $, CUSTOM_KINDS, KIND_NAME } from '../dom.js';
 import { masthead, cityBar, legend, placeRow, expRow } from '../components.js';
@@ -7,7 +7,7 @@ import { renderPlan } from './plan.js';
 import { renderWanderer } from './wanderer.js';
 
 export function views() {
-  return (isPlanner() ? [['plan', 'My plan']] : []).concat(isWanderer() ? [['nearby', 'Nearby']] : [], [['sights', 'Sights'], ['experiences', 'Experiences'], ['trips', 'Day trips']]);
+  return (isPlanner() ? [['plan', 'My plan']] : []).concat([['nearby', isWanderer() ? 'Nearby' : 'Near me'], ['sights', 'Sights'], ['experiences', 'Experiences'], ['trips', 'Day trips']]);
 }
 export function defaultView() { return isPlanner() ? 'plan' : isWanderer() ? 'nearby' : 'sights'; }
 
@@ -23,7 +23,7 @@ export function renderPlaces() {
   if (v === 'experiences' || v === 'trips') {
     const isTrip = v === 'trips';
     const list = placesIn(cityId, [isTrip ? 'day_trip' : 'experience']);
-    root.innerHTML = masthead() + `<div class="greet"><div class="eyebrow">${isTrip ? 'Day trips' : 'Experiences'} · ${esc(cityName(cityId))}</div><h1>${isTrip ? 'Beyond the city.' : 'Worth booking.'}</h1><p class="lede">${isTrip ? 'Easy escapes, and the ones that are better with a driver or a tour.' : 'Classes, tastings and time on the water. The links show current options, prices and reviews from many providers.'}</p></div>${cityBar()}${seg}
+    root.innerHTML = masthead() + `<div class="greet"><h1>${isTrip ? 'Beyond the city.' : 'Worth booking.'}</h1></div>${cityBar()}${seg}
       <div class="block" style="padding-top:12px">${legend()}<div class="rows">${list.map(expRow).join('')}</div>
       <p class="small faint">Durations are typical; providers set their own prices and times, so check when booking. Checked ${esc(checkedText())}.</p></div>`;
     return;
@@ -31,7 +31,7 @@ export function renderPlaces() {
   const f = P().pfilter;
   const filt = p => f === 'all' || (f === 'want' && statusOf(S.trip, p.id) === 'want') || (f === 'went' && statusOf(S.trip, p.id) === 'went');
   const list = placesIn(cityId, ['sight', 'food', 'shop', 'audio_stop']);
-  let html = masthead() + `<div class="greet"><div class="eyebrow">Places · ${esc(cityName(cityId))}</div><h1>Where to wander.</h1><p class="lede">Save what catches your eye. Tap “Went here” when you visit and it lands in your journal.</p></div>${cityBar()}${seg}
+  let html = masthead() + `<div class="greet"><h1>Where to wander.</h1></div>${cityBar()}${seg}
     <div class="chips" role="toolbar" aria-label="Filter">${[['all', 'All'], ['want', 'Want to go'], ['went', 'Visited']].map(([k, l]) => `<button class="chip" data-act="pfilter" data-v="${k}" aria-pressed="${f === k}">${l}</button>`).join('')}</div>`;
   const must = list.filter(p => p.must && !p.custom).filter(filt);
   if (must.length) html += `<div class="block"><h2>Must-sees</h2><div class="rows">${must.map(p => placeRow(p)).join('')}</div></div>`;

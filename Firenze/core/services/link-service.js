@@ -7,5 +7,6 @@ export const linkService = {
   appleMaps({ lat, lng, name }) { return 'https://maps.apple.com/?q=' + encodeURIComponent(name || 'Destination') + (lat != null ? '&ll=' + lat + ',' + lng : ''); },
   googleMaps({ lat, lng, name }) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(lat != null ? lat + ',' + lng : name); },
   directions({ lat, lng }, mode = 'walking') { return 'https://www.google.com/maps/dir/?api=1&destination=' + lat + ',' + lng + '&travelmode=' + mode; },
+  web(q) { return 'https://www.google.com/search?q=' + encodeURIComponent(q); },
   open(url) { try { window.open(url, '_blank', 'noopener'); return Promise.resolve(true); } catch (e) { return Promise.resolve(false); } }
 };

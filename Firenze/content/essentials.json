@@ -62,7 +62,7 @@
   },
   {
    "title": "Hotels",
-   "text": "About €1 to €2 per bag for a porter. €1 to €2 a night for housekeeping is kind, not expected. Florence adds a nightly tourist tax at the hotel, often not in the booking price."
+   "text": "About €1 to €2 per bag for a porter. €1 to €2 a night for housekeeping is kind, not expected. Firenze adds a nightly tourist tax at the hotel, often not in the booking price."
   },
   {
    "title": "Guided tours",
@@ -73,19 +73,37 @@
    "text": "No tipping."
   },
   {
-   "title": "Churches",
-   "text": "Shoulders and knees covered. A light scarf solves it."
-  },
-  {
    "title": "Restrooms",
    "text": "Public ones often cost a coin. Keep change handy."
+  },
+  {
+   "title": "Churches",
+   "text": "Shoulders and knees covered, for the Duomo, Santa Croce and Santa Maria Novella. It’s enforced at the door. A light scarf in your bag solves it."
+  },
+  {
+   "title": "Pickpockets",
+   "text": "Keep your bag zipped and in front in crowds: Santa Maria Novella station, the Duomo line, the Ponte Vecchio, the San Lorenzo market and busy city buses. Phone in a front pocket, not on the café table."
+  },
+  {
+   "title": "Street scams",
+   "text": "If someone ties a “free” bracelet on your wrist, hands you a rose, or asks you to sign a petition, say “No, grazie” and keep walking. Buy museum tickets only on the official sites, not from people outside."
+  },
+  {
+   "title": "Getting home at night",
+   "text": "Take a taxi home: call one or book it in the itTaxi or appTaxi app (numbers in Taxis), or walk to a rank; the station rank runs 24 hours. Women riding between 21:00 and 4:00 get 10% off (Taxi Rosa); ask when you call. The center is lively and generally comfortable late; Cascine park is best avoided after dark."
+  },
+  {
+   "title": "Paying",
+   "text": "If a card machine offers to charge you in dollars, choose euros. The dollar option usually costs more."
   }
  ],
  "know_how_note": "General customs, not rules.",
  "emergency": [
   {
    "number": "112",
-   "label": "Police, ambulance, fire. English spoken."
+   "label": "Police, ambulance, fire. English spoken. The old numbers 113, 118 and 115 also still connect to 112.",
+   "source": "Regione Toscana, regione.toscana.it",
+   "checked": "2026-10-11"
   }
  ],
  "embassies": [
@@ -94,7 +112,7 @@
    "url": "https://it.usembassy.gov/embassy-consulates/florence/"
   }
  ],
- "emergency_note": "Pharmacies have a green cross sign.",
+ "emergency_note": "Pharmacies have a green cross sign. One pharmacy in each area stays open at night on a rota; the address is posted on every pharmacy door. To report a theft for insurance, go to a police station (Questura or Carabinieri) with your passport.",
  "voice_help": [
   {
    "title": "iPhone",
@@ -110,7 +128,7 @@
   [
    "coffee",
    "Travel note",
-   "Florentines drink coffee standing at the bar. A table usually costs more, so do as the locals do."
+   "In Firenze, locals drink coffee standing at the bar. A table usually costs more, so do as the locals do."
   ],
   [
    "camera",
@@ -133,5 +151,5 @@
    "Shoulders and knees covered for churches. A light scarf in your bag solves it."
   ]
  ],
- "checked": "2026-10-07"
+ "checked": "2026-10-11"
 }

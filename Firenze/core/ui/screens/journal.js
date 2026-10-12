@@ -48,10 +48,14 @@ function shareWBlock() {
 }
 
 export function renderJournal() {
-  const opts = `<option value="">No place</option>` + cityIds().map(cid => `<optgroup label="${esc(cityName(cid))}">${allPlaces().filter(p => p.city_id === cid && p.category !== 'experience').map(p => `<option value="${p.id}">${esc(p.name)}</option>`).join('')}</optgroup>`).join('');
+  /* Places the traveler saved, visited or planned come first; the rest sit under each city. */
+  const mine = new Set(S.trip.saved.map(s => s.place_id).concat(S.trip.plan.map(v => v.item_id)));
+  const pool = allPlaces().filter(p => p.category !== 'experience'), opt = p => `<option value="${p.id}">${esc(p.name)}</option>`;
+  const first = pool.filter(p => mine.has(p.id));
+  const opts = `<option value="">No place</option>` + (first.length ? `<optgroup label="Your places">${first.map(opt).join('')}</optgroup>` : '') + cityIds().map(cid => { const rest = pool.filter(p => p.city_id === cid && !mine.has(p.id)); return rest.length ? `<optgroup label="${first.length ? 'Other places · ' : ''}${esc(cityName(cid))}">${rest.map(opt).join('')}</optgroup>` : ''; }).join('');
   const list = S.trip.journal.slice().reverse(), photos = allPhotoIds(), igSel = P().igSel.filter(id => photos.includes(id));
-  let html = masthead() + `<div class="greet"><div class="eyebrow">Journal</div><h1>What happened today.</h1><p class="lede">Tap in the box, then tap the microphone on your keyboard to talk instead of type.</p></div>
-  <label class="f" style="flex:none"><span class="offscreen">Journal entry</span><textarea id="jText" placeholder="Where were you, what did you eat, what made you stop?">${esc(J.draft)}</textarea></label>
+  let html = masthead() + `<div class="greet"><h1>What happened today.</h1></div>
+  <label class="f" style="flex:none"><span class="offscreen">Journal entry</span><textarea id="jText" placeholder="Where were you, what did you eat, what made you stop? Tap the keyboard mic to talk.">${esc(J.draft)}</textarea></label>
   <div class="fields" style="margin-top:10px"><label class="f">Place<select id="jPlace">${opts}</select></label>
   <label class="f">Rating<select id="jStars"><option value="0">No rating</option><option value="5">Loved it</option><option value="4">Really good</option><option value="3">Fine</option><option value="2">Skip it</option></select></label></div>
   <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px">
@@ -69,8 +73,7 @@ export function renderJournal() {
     <p class="small muted">Built from your visits and notes. Pick photos, tap Share to Instagram and choose Instagram. We copy the caption for you, so just paste it in.</p>
     <div class="summary">${esc(summaryText())}</div>
     ${photos.length ? `<div class="label" id="igSelLabel" style="margin-top:4px">Choose photos · ${igSel.length} selected</div><div class="ph-row">${photos.map(id => `<button class="ph-thumb sm" data-act="igpick" data-id="${id}" aria-pressed="${igSel.includes(id)}" aria-label="Select photo"><img data-photo="${id}" alt=""></button>`).join('')}</div>` : '<p class="small muted">Add photos to your journal entries and they’ll appear here to share.</p>'}
-    <div style="display:flex;gap:8px;flex-wrap:wrap">${photos.length ? '<button class="btn" data-act="igshare">Share to Instagram</button>' : ''}<button class="btn ${photos.length ? 'line' : ''}" data-act="copysum">Copy caption</button><button class="btn line" data-act="copyall">Copy everything</button></div>
-    <p class="small faint"><span class="ph-flag">Later</span> Building the summary from your photos’ time and location is planned, not built yet.</p></div>`;
+    <div style="display:flex;gap:8px;flex-wrap:wrap">${photos.length ? '<button class="btn" data-act="igshare">Share to Instagram</button>' : ''}<button class="btn ${photos.length ? 'line' : ''}" data-act="copysum">Copy caption</button><button class="btn line" data-act="copyall">Copy everything</button></div></div>`;
   html += shareWBlock();
   document.querySelector('section[data-tab="journal"]').innerHTML = html;
 }

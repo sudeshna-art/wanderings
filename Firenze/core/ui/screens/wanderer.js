@@ -1,8 +1,9 @@
-/* True Wanderer: live map with "You are here" and nearby curated spots. Location is asked for only here. */
+/* Near me (True Wanderer): live map with "You are here" and nearby curated spots. Location is asked for only here.
+   Oct 11 2026: open to every travel style as "Near me", with "Meet back here" for friends who split up. */
 import { EDITION } from '../../../edition.config.js';
-import { S, P, save, curCityId, cityOf, cityName, placeById, addMount, addCleanup } from '../state.js';
+import { S, P, save, curCityId, cityOf, cityName, placeById, addMount, addCleanup, isWanderer } from '../state.js';
 import { esc, ic, ill, KIND_NAME, metres, $, toast } from '../dom.js';
-import { masthead, illustrationFor, statusLine, ticketButtons, searchButtons, pricePlaceholder } from '../components.js';
+import { masthead, illustrationFor, statusLine, ticketButtons, searchButtons, pricePlaceholder, closedLine, tipsOf } from '../components.js';
 import { statusOf, isBooked, walkMinutes, km, priceText } from '../../models/schema.js';
 import { mapService } from '../../services/map-service.js';
 import { locationService } from '../../services/location-service.js';
@@ -13,7 +14,7 @@ import { showStatus } from './offline.js';
 
 const RADIUS = 3000;           // metres counted as "near you"
 const W = { map: null, stop: null, pos: null, list: [], mode: 'locating', fallbackMap: false, centered: false };
-export const wanderPos = () => W.pos;
+export const wanderPos = () => (W.mode === 'near' ? W.pos : null);
 
 const CATS = ['sight', 'food', 'shop', 'day_trip', 'audio_stop'];
 /* Near the traveler: places-service decides what is nearby (Google Places later, same shapes). */
@@ -46,6 +47,7 @@ async function refresh() {
   const hl = $('#wHead'); if (hl) hl.textContent = headline();
   const pill = $('#wPill'); if (pill) pill.textContent = W.mode === 'near' ? 'You are here' : W.mode === 'locating' ? 'Locating you…' : cityName(c.city_id);
   const lb = $('#wList'); if (lb) lb.innerHTML = listHTML();
+  const mh = $('#meetHere'); if (mh) mh.hidden = W.mode !== 'near';
   if (W.map) {
     const markers = W.list.slice(0, 25).map(p => ({ id: p.id, name: p.name, location: p.location, went: statusOf(S.trip, p.id) === 'went' }));
     mapService.setMarkers(W.map, markers, { onTap: openSpot });
@@ -57,9 +59,10 @@ async function refresh() {
 export function renderWanderer(seg) {
   W.mode = 'locating'; W.centered = false; W.fallbackMap = false;
   addMount(mount);
-  return masthead() + `<div class="greet"><div class="eyebrow">Nearby · True Wanderer</div><h1>What’s near you.</h1><p class="lede" id="wHead">${esc(headline())}</p></div>${seg}
+  return masthead() + `<div class="greet"><h1>What’s near you.</h1><p class="lede" id="wHead">${esc(headline())}</p></div>${seg}
     <div class="wmap"><div class="wcanvas" id="wMap"></div><div class="wm-over"><span class="wm-pillnote" id="wPill">Locating you…</span></div><button class="wm-recenter" data-act="recenter" aria-label="Center on me">${ic('locate')}</button></div>
     <div data-mapstatus id="wMapStatus" style="padding-top:8px"></div>
+    <div id="meetHere" hidden style="padding-top:6px"><button class="btn line sm" data-act="meetform" data-box="meetHereBox">${ic('pin', 'style="width:16px;height:16px"')}Splitting up? Meet back here</button><div id="meetHereBox" hidden></div></div>
     <div class="block" style="padding-top:6px"><div class="head"><h2>Closest spots</h2><span class="label">Curated</span></div><div id="wList">${listHTML()}</div>
     <p class="small faint">These are Wanderings’ researched places, not every business around you. Your location stays on this phone and is never saved. </p></div>`;
 }
@@ -95,17 +98,18 @@ export async function openSpot(id) {
   const links = p.location ? mapService.openInMapsLink({ lat: p.location.lat, lng: p.location.lng, name: p.name }) : null;
   const sh = $('#sheet');
   sh.innerHTML = `<div class="grab"></div>
-    <div style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:14px;align-items:center">${ill(p.kind, 56)}<div><div class="eyebrow" style="font-size:10px">${esc(KIND_NAME[p.kind] || '')} · ${esc(p.area || cityName(p.city_id))}</div><div style="font-size:21px;font-weight:700;letter-spacing:-.015em;line-height:1.2">${esc(p.name)}</div></div></div>
+    <div style="display:grid;grid-template-columns:56px minmax(0,1fr);gap:14px;align-items:center">${ill(p.kind, 56)}<div><div class="eyebrow" style="font-size:10px">${esc(KIND_NAME[p.kind] || '')} · ${esc(p.area || cityName(p.city_id))}</div><div style="font-size:21px;font-weight:700;letter-spacing:-.015em;line-height:1.2">${esc(p.name)}</div>${closedLine(p)}</div></div>
     <p class="small" style="font-size:14.5px">${esc(p.description)}</p>
     ${p.audio ? `<div class="spot-audio"><button class="hear" data-act="audio" data-id="${p.id}" aria-label="Play the audio stop">${ic('speak')}</button><div><b style="font-size:14px">Audio stop</b><div class="small muted">A short story about this place, read aloud.</div></div></div>` : ''}
     <div>${booked ? '<div class="went">✓ Tickets booked</div>' : statusLine(p)}${priceText(p.price) ? `<div class="price" style="margin-top:6px">${esc(priceText(p.price))}</div>` : pricePlaceholder(p)}</div>
-    ${p.tips && p.tips.length ? `<ul class="tips">${p.tips.slice(0, 3).map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
+    ${tipsOf(p).length ? `<ul class="tips">${tipsOf(p).slice(0, 3).map(t => `<li>${esc(t)}</li>`).join('')}</ul>` : ''}
     ${(p.ticket_url || p.search_q) ? `<div class="acts" style="margin-top:0">${p.ticket_url ? ticketButtons(p) : searchButtons(p.search_q)}</div>` : ''}
     <div class="kv" style="border-top:1px solid var(--rule);padding-top:12px">
       <span>Walking</span><span>${walk != null ? (walk > 120 ? 'Too far to walk' : `about ${walk} min · ${metres(dist)}`) : 'Turn on location'}</span>
       <span>Taxi from here</span><span id="spotFare">${here ? '…' : 'Turn on location'}</span></div>
     <p class="small faint" style="margin-top:-6px">Estimates. The taxi meter decides.</p>
     ${links ? `<div style="display:flex;gap:8px;flex-wrap:wrap"><a class="btn sm" href="${esc(links.walk)}" target="_blank" rel="noopener">Get directions ↗</a><a class="btn line sm" href="${esc(links.apple)}" target="_blank" rel="noopener">Apple Maps ↗</a></div>` : ''}
+    ${p.location ? `<div><button class="text-btn" data-act="meetform" data-box="spotMeet" data-id="${p.id}" style="min-height:36px">${ic('pin', 'style="width:16px;height:16px"')}Meet back here</button><div id="spotMeet" hidden></div></div>` : ''}
     <div style="display:flex;gap:8px;flex-wrap:wrap;border-top:1px solid var(--rule);padding-top:12px">
       ${st !== 'went' ? `<button class="btn line sm" data-act="want" data-id="${p.id}" aria-pressed="${st === 'want'}">${st === 'want' ? 'On your list' : 'Want to go'}</button><button class="btn sm" data-act="spotwent" data-id="${p.id}">Went here</button>` : '<span class="went" style="align-self:center">✓ Went here</span>'}
       <button class="btn line sm" data-act="sheetclose" style="margin-left:auto">Close</button></div>`;

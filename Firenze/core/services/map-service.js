@@ -29,10 +29,10 @@ function fallback(h) {
   if (h.destroyed) return;
   if (h.impl) { try { PROV[h.kind].destroy(h.impl); } catch (e) {} h.el.innerHTML = ''; }
   if (online() && leafletMap.ready()) {
-    const impl = leafletMap.create(h.el, { center: h.center, zoom: h.zoom, onTilesFailed: () => { leafletMap.destroy(impl); h.el.innerHTML = ''; use(h, 'illustrated', illustratedMap.create(h.el, { center: h.center, art: h.illustration }), { offline: true }); } });
+    const impl = leafletMap.create(h.el, { center: h.center, zoom: h.zoom, onTilesFailed: () => { leafletMap.destroy(impl); h.el.innerHTML = ''; use(h, 'illustrated', illustratedMap.create(h.el, { center: h.center }), { offline: true }); } });
     use(h, 'live', impl, { pack: h.pack, downloaded: false });
   } else {
-    use(h, 'illustrated', illustratedMap.create(h.el, { center: h.center, art: h.illustration }), { offline: true, pack: h.pack, downloaded: false });
+    use(h, 'illustrated', illustratedMap.create(h.el, { center: h.center }), { offline: true, pack: h.pack, downloaded: false });
   }
 }
 async function init(h) {
@@ -67,8 +67,8 @@ async function switchPack(h, c) {
 
 export const mapService = {
   /* onMode({ mode: 'vector'|'live'|'illustrated', pack, downloaded, offline }) tells the UI which map is showing. */
-  create(containerEl, { center, zoom = 14, onFallback, onMode, illustration } = {}) {
-    const h = { el: containerEl, center, zoom, illustration, kind: null, impl: null, state: {}, onMode: m => { onMode && onMode(m); if (m.mode === 'illustrated' && onFallback) onFallback(); } };
+  create(containerEl, { center, zoom = 14, onFallback, onMode } = {}) {
+    const h = { el: containerEl, center, zoom, kind: null, impl: null, state: {}, onMode: m => { onMode && onMode(m); if (m.mode === 'illustrated' && onFallback) onFallback(); } };
     init(h);
     return h;
   },

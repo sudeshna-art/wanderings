@@ -1,4 +1,5 @@
-/* Essentials: you and your trip, getting between places, currency, getting around, taxis, audio, know-how, emergencies. */
+/* Essentials: emergency card, you and your trip, bookings, getting between places, currency, getting around,
+   taxis, audio, know-how, emergencies. */
 import { EDITION } from '../../../edition.config.js';
 import { S, P, save, curCityId, cityOf, cityName, cityIds, spot, spotOptions, homePoint, addMount } from '../state.js';
 import { esc, ic, fmtNum, parseNum, fmtISO, $, modeIcon } from '../dom.js';
@@ -8,6 +9,7 @@ import { fareService } from '../../services/fare-service.js';
 import { speechService } from '../../services/speech-service.js';
 import { languageSelect } from './phrases.js';
 import { offlineMapsBlock, fillOfflineMaps } from './offline.js';
+import { bookingsBlock } from './bookings.js';
 
 export const E = { rate: null };
 
@@ -108,28 +110,29 @@ export async function showFare() {
 }
 
 async function voiceBlock() {
-  const ph = S.C.phrases, v = await speechService.voiceInfo(ph.language), ess = S.C.essentials;
+  const ph = S.C.phrases, v = await speechService.voiceInfo(ph.language);
   const el = $('#voiceInfo'); if (!el) return;
   el.innerHTML = v ? (v.exact ? `Using the ${esc(ph.language_name)} voice “${esc(v.name)}” on this phone.` : `Using “${esc(v.name)}” (${esc(v.lang)}). ${esc(ph.voice_region_note || 'It is a voice from another region, so a local voice is better:')}`) : `<b>This phone has no ${esc(ph.language_name)} voice installed</b>, so phrases can’t play yet.`;
 }
 
 export function renderEssentials() {
   const c = cityOf(curCityId()), ess = S.C.essentials, ga = c.getting_around;
-  let html = masthead() + `<div class="greet"><div class="eyebrow">Essentials</div><h1>The practical bits.</h1></div>
-  <div class="block" id="tripBlock" tabindex="-1" style="padding-top:8px"><h2>You &amp; your trip</h2>
+  let html = masthead() + `<div class="greet"><h1>The practical bits.</h1></div>
+  <button class="btn line" data-act="emergency" style="align-self:flex-start">${ic('sos', 'style="width:18px;height:18px"')}Emergency card · works offline</button>
+  <div class="block" id="tripBlock" tabindex="-1" style="padding-top:22px"><h2>You &amp; your trip</h2>
     <div class="fields"><label class="f">Your first name<input type="text" data-bind="traveler_name" value="${esc(S.trip.traveler_name)}" autocomplete="given-name" placeholder="Used in your greeting"></label></div>
     ${languageSelect('eLang')}
     ${homeCurrencySelect()}
     ${styleChoice('estyle')}
     <h3 style="margin-top:10px">Where you’re staying</h3>
-    ${staysEditor()}
+    ${staysEditor({ info: cityIds().length < 2 })}
     <h3 style="margin-top:10px">Arriving and leaving</h3>
     ${arrivalFields()}
-    <div class="fields"><label class="f">Booking references (optional)<input type="text" data-bind="refs" value="${esc(S.trip.refs)}" placeholder="Airline, train or hotel codes"></label></div>
-    <p class="small faint">Saved only on this phone. Booking references are never included in your shared trip summary.</p>
     ${S.trip.departure.flight ? `<a class="btn line sm" style="align-self:flex-start" href="https://www.google.com/search?q=${encodeURIComponent('flight ' + S.trip.departure.flight)}" target="_blank" rel="noopener">Track departure flight ${esc(S.trip.departure.flight)} ↗</a>` : ''}
+    ${S.trip.refs ? `<div class="fields"><label class="f">Booking notes<input type="text" data-bind="refs" value="${esc(S.trip.refs)}"></label></div><p class="small faint">From before bookings had their own list. You can move these into Your bookings below.</p>` : ''}
     <button class="text-btn" data-act="welcome" data-step="1" style="align-self:flex-start">Show the welcome steps again</button></div>
-  ${cityIds().length > 1 ? `<div class="block" id="connBlock" tabindex="-1"><h2>Getting between places</h2>${connections()}<p class="small faint">Times are approximate. Check live times when you book.</p></div>` : ''}
+  ${bookingsBlock()}
+  ${cityIds().length > 1 ? `<div class="block" id="connBlock" tabindex="-1"><h2>Getting between places</h2>${connections()}<p class="small faint">Times are approximate. Check live times on the official sites when you book.</p></div>` : ''}
   ${offlineMapsBlock()}
   ${cityIds().length > 1 ? `<div class="block" style="padding-top:28px"><span class="label">Now showing</span>${cityBar()}</div>` : ''}
   ${currencyBlock(c)}
@@ -141,9 +144,10 @@ export function renderEssentials() {
     <ul class="plain">${ess.voice_help.map(v => `<li><b>${esc(v.title)}</b>${esc(v.text)}</li>`).join('')}</ul><p class="small muted">Then close and reopen this app.</p>
     <button class="btn line" data-act="say" data-text="${esc(ess.voice_test)}" style="align-self:flex-start">${ic('speak', 'style="width:18px;height:18px"')}Test: “${esc(ess.voice_test)}”</button></div>
   <div class="block"><h2>Local know-how</h2><ul class="plain">${ess.know_how.map(k => `<li><b>${esc(k.title)}</b>${esc(k.text)}</li>`).join('')}</ul><p class="small faint">${esc(ess.know_how_note)}</p></div>
-  <div class="block"><h2>Emergencies</h2><div>${ess.emergency.map(e => `<div class="numrow"><div><div class="n">${esc(e.number)}</div><div class="small muted">${esc(e.label)}</div></div><button class="text-btn" data-act="copy" data-text="${esc(e.number)}">Copy</button></div>`).join('')}</div>
+  <div class="block"><h2>Emergencies</h2><div>${ess.emergency.map(e => `<div class="numrow"><div><div class="n">${esc(e.number)}</div><div class="small muted">${esc(e.label)}</div></div><a class="text-btn" href="tel:${esc(String(e.number).replace(/[^\d+]/g, ''))}">Call</a></div>`).join('')}</div>
     <ul class="plain">${ess.embassies.map(e => `<li><a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.label)} ↗</a></li>`).join('')}</ul>
-    <p class="small muted">${esc(ess.emergency_note)}</p></div>
+    <p class="small muted">${esc(ess.emergency_note)}</p>
+    <button class="btn line sm" data-act="emergency" style="align-self:flex-start">${ic('sos', 'style="width:16px;height:16px"')}Open the emergency card</button></div>
   <p class="small faint" style="padding-top:28px">Prices, hours and fares checked ${esc(fmtISO(ess.checked, { month: 'short', day: 'numeric', year: 'numeric' }))} from official sites and travel sources. They change, so confirm when booking.</p>
   <p class="small faint" style="padding-top:10px">Wanderings by Whiskers &amp; Wanderings · ${esc(EDITION.name)} edition</p>`;
   document.querySelector('section[data-tab="essentials"]').innerHTML = html;

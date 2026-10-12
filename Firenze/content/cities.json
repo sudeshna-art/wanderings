@@ -1,7 +1,7 @@
 [
  {
   "city_id": "florence",
-  "name": "Florence",
+  "name": "Firenze",
   "local_name": "Firenze",
   "stamp": "FIRENZE",
   "coords_label": "43.77° N · 11.25° E",
@@ -60,7 +60,13 @@
      "lng": 11.255
     },
     "central": true,
-    "tip": "You’re in the middle of it. Most sights are a short walk. Nearest main taxi rank: Piazza della Repubblica."
+    "tip": "You’re in the middle of it. Most sights are a short walk. Nearest main taxi rank: Piazza della Repubblica.",
+    "aliases": [
+     "Duomo",
+     "Signoria",
+     "Repubblica",
+     "centro storico"
+    ]
    },
    {
     "id": "smn",
@@ -70,7 +76,12 @@
      "lng": 11.251
     },
     "central": true,
-    "tip": "Next to the main train station, which has a 24-hour taxi rank. The T2 tram to the airport leaves from Unità, nearby."
+    "tip": "Next to the main train station, which has a 24-hour taxi rank. The T2 tram to the airport leaves from Unità, nearby.",
+    "aliases": [
+     "Santa Maria Novella",
+     "San Lorenzo",
+     "Stazione"
+    ]
    },
    {
     "id": "croce",
@@ -80,7 +91,11 @@
      "lng": 11.2622
     },
     "central": true,
-    "tip": "The lively east side of the center, with leather workshops and evening bars. For a taxi, call or walk to Piazza della Repubblica."
+    "tip": "The lively east side of the center, with leather workshops and evening bars. For a taxi, call or walk to Piazza della Repubblica.",
+    "aliases": [
+     "Santa Croce",
+     "Sant'Ambrogio"
+    ]
    },
    {
     "id": "marco",
@@ -90,7 +105,11 @@
      "lng": 11.259
     },
     "central": true,
-    "tip": "A few minutes from the Accademia (David). There’s a main taxi rank at Piazza San Marco."
+    "tip": "A few minutes from the Accademia (David). There’s a main taxi rank at Piazza San Marco.",
+    "aliases": [
+     "San Marco",
+     "Accademia"
+    ]
    },
    {
     "id": "oltrarno",
@@ -100,7 +119,13 @@
      "lng": 11.245
     },
     "central": true,
-    "tip": "Across the river on the artisans’ side, close to Pitti and Boboli. Call 4242 or 4390 for a taxi."
+    "tip": "Across the river on the artisans’ side, close to Pitti and Boboli. For a taxi, call one (numbers in Taxis).",
+    "aliases": [
+     "Oltrarno",
+     "Santo Spirito",
+     "San Frediano",
+     "Pitti"
+    ]
    },
    {
     "id": "niccolo",
@@ -110,7 +135,11 @@
      "lng": 11.262
     },
     "central": true,
-    "tip": "Below Piazzale Michelangelo and San Miniato. Lovely for sunset walks, uphill in places."
+    "tip": "Below Piazzale Michelangelo and San Miniato. Lovely for sunset walks, uphill in places.",
+    "aliases": [
+     "San Niccolò",
+     "Piazzale Michelangelo"
+    ]
    },
    {
     "id": "fiesole",
@@ -120,7 +149,10 @@
      "lng": 11.293
     },
     "central": false,
-    "tip": "A hill town above the city. Bus 7 runs down to the center. At night, call a taxi ahead; they rarely wait up there."
+    "tip": "A hill town above the city. Bus 7 runs down to the center. At night, call a taxi ahead; they rarely wait up there.",
+    "aliases": [
+     "Fiesole"
+    ]
    },
    {
     "id": "other",
@@ -133,8 +165,8 @@
   "airports": [
    {
     "id": "FLR",
-    "name": "Florence airport (Peretola)",
-    "short": "Florence airport",
+    "name": "Firenze airport (Peretola)",
+    "short": "Firenze airport",
     "local": "Aeroporto di Firenze (Peretola)",
     "location": {
      "lat": 43.81,
@@ -152,7 +184,7 @@
      "lat": 43.7765,
      "lng": 11.2481
     },
-    "tip": "Florence’s main station, with a 24-hour taxi rank out front. Trains to Pisa, Lucca, Siena, Bologna and beyond."
+    "tip": "Firenze’s main station, with a 24-hour taxi rank out front. Trains to Pisa, Lucca, Siena, Bologna and beyond."
    }
   ],
   "getting_around": {
@@ -162,29 +194,41 @@
      "text": "The historic center is compact and mostly flat. Most sights are 5 to 20 minutes apart on foot. Much of it is closed to ordinary traffic, so walking is often quicker than a taxi."
     },
     {
-     "title": "Taxis",
-     "text": "No street hailing. Go to a taxi rank or call. More in Taxis, below."
-    },
-    {
      "title": "Tram to the airport",
      "text": "The T2 tram runs between the airport and Unità, near Santa Maria Novella station."
     },
     {
      "title": "Trains out of town",
      "text": "Day trips to Pisa, Lucca, Siena and Bologna leave from Santa Maria Novella station."
+    },
+    {
+     "title": "From Pisa airport",
+     "text": "PisaMover shuttle to Pisa Centrale (about 5 minutes), then a regional train to Firenze Santa Maria Novella (50 to 75 minutes). About €16 for both, checked Oct 11, 2026 (estimate). A taxi from Pisa airport costs €170 or more."
+    },
+    {
+     "title": "From Bologna airport",
+     "text": "Marconi Express shuttle to Bologna Centrale (about 7 minutes, €11), then a high-speed train to Firenze (about 35 minutes, roughly €25 to €40; cheaper booked early). Checked Oct 11, 2026 (estimate)."
     }
    ],
    "links": [
     {
      "label": "Trenitalia trains (official)",
      "url": "https://www.trenitalia.com/"
+    },
+    {
+     "label": "Pisa airport and PisaMover (official)",
+     "url": "https://www.pisa-airport.com/en/"
+    },
+    {
+     "label": "Marconi Express (official)",
+     "url": "https://www.marconiexpress.it/en/"
     }
    ],
-   "checked": "2026-10-07",
+   "checked": "2026-10-11",
    "source": "City of Florence and Trenitalia"
   },
   "taxis": {
-   "intro_bold": "No street hailing in Florence.",
+   "intro_bold": "No street hailing in Firenze.",
    "intro": "Go to a taxi rank or call. Main ranks: Santa Maria Novella station (24 hours), Piazza della Repubblica, Piazza San Marco.",
    "numbers": [
     {
@@ -250,7 +294,7 @@
       "holiday": 30,
       "night": 32
      },
-     "note": "Official flat fare between the airport and central Florence. Bags are €1.20 each."
+     "note": "Official flat fare between the airport and central Firenze. Bags are €1.20 each."
     }
    ],
    "airport_meter_supplement": 3.1,

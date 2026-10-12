@@ -2,7 +2,7 @@
  "language": "it-IT",
  "language_name": "Italian",
  "title": "Say it in Italian.",
- "note": "Everyday Italian for Florence.",
+ "note": "Everyday Italian for Firenze.",
  "local_note": "You already speak Italian. These are the everyday phrases for the trip, so they’re here when you need them.",
  "voice_region_note": "It is an Italian voice from another region, which is fine for these phrases.",
  "greetings": [
@@ -14,6 +14,18 @@
    "until": 24,
    "t": "Buonasera"
   }
+ ],
+ "top": [
+  "Buongiorno",
+  "Per favore",
+  "Grazie",
+  "Mi scusi",
+  "Parla inglese?",
+  "Il conto, per favore",
+  "Quanto costa?",
+  "Dov’è il bagno?",
+  "Un caffè, per favore",
+  "Lo prendo al banco"
  ],
  "situations": {
   "Greetings": [
@@ -51,6 +63,18 @@
      "pt": "Por favor",
      "de": "Bitte",
      "it": "Per favore"
+    }
+   },
+   {
+    "t": "Grazie",
+    "say": "GRAHT-see-eh",
+    "m": {
+     "en": "Thank you",
+     "es": "Gracias",
+     "fr": "Merci",
+     "pt": "Obrigado, obrigada",
+     "de": "Danke",
+     "it": "Grazie"
     }
    },
    {

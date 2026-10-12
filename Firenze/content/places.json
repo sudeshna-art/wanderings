@@ -21,25 +21,26 @@
   "price": {
    "amount": 29,
    "from": false,
-   "text": "€29 booked · €25 at the door",
+   "text": "€29 booked ahead · €16 if you enter from 16:00",
    "currency_code": "EUR",
-   "checked": "2026-10-07",
+   "checked": "2026-10-11",
    "source": "uffizi.it"
   },
   "lead_time": "Timed entry: book now",
-  "description": "Florence’s great Renaissance collection: Botticelli, Leonardo, Caravaggio. Book a timed slot.",
+  "description": "Firenze’s great Renaissance collection: Botticelli, Leonardo, Caravaggio. Book a timed slot.",
   "tips": [
-   "From 16:00 it’s €20 booked. The 8:15 slot is the calmest; avoid 10:30 to 13:00.",
+   "The 8:15 slot is the calmest; avoid 10:30 to 13:00.",
    "With a booking, use Door 1. Door 2 is the walk-up line. Arrive 15 minutes early.",
-   "Deal: the PassePartout, €40 for 5 days, covers the Uffizi, Pitti and Boboli."
+   "Deal: the PassePartout, €40 for 5 days, covers the Uffizi, Pitti and Boboli.",
+   "Open Tuesday to Sunday, 8:15 to 18:30; ticket office closes 17:30. Closed Mondays, January 1 and December 25."
   ],
   "audio": {
-   "script": "The Uffizi was built in the fifteen sixties as offices, uffizi in Italian, for the Medici government. The family filled the top floor with art, and in 1737 Anna Maria Luisa, the last of the Medici, left the whole collection to Florence on one condition: it must never leave the city. Look for Botticelli’s Birth of Venus and Primavera, and for the view of the Arno from the corridor windows.",
+   "script": "The Uffizi was built in the fifteen sixties as offices, uffizi in Italian, for the Medici government. The family filled the top floor with art, and in 1737 Anna Maria Luisa, the last of the Medici, left the whole collection to Firenze on one condition: it must never leave the city. Look for Botticelli’s Birth of Venus and Primavera, and for the view of the Arno from the corridor windows.",
    "scripts": {
-    "es": "Los Uffizi se construyeron en la década de 1560 como oficinas, uffizi en italiano, para el gobierno de los Medici. La familia llenó el último piso de arte, y en 1737 Ana María Luisa, la última de los Medici, dejó toda la colección a Florencia con una condición: que nunca saliera de la ciudad. Busca El nacimiento de Venus y La primavera de Botticelli, y la vista del Arno desde las ventanas del corredor.",
-    "fr": "Les Offices ont été construits dans les années 1560 comme bureaux, uffizi en italien, pour le gouvernement des Médicis. La famille a rempli le dernier étage d’œuvres d’art, et en 1737 Anne-Marie-Louise, la dernière des Médicis, a légué toute la collection à Florence à une condition : qu’elle ne quitte jamais la ville. Cherchez La Naissance de Vénus et Le Printemps de Botticelli, et la vue sur l’Arno depuis les fenêtres du couloir.",
-    "pt": "A Galeria Uffizi foi construída nos anos 1560 como escritórios, uffizi em italiano, para o governo dos Médici. A família encheu o último andar de arte, e em 1737 Ana Maria Luísa, a última dos Médici, deixou toda a coleção para Florença com uma condição: ela nunca poderia sair da cidade. Procure O Nascimento de Vênus e A Primavera, de Botticelli, e a vista do rio Arno pelas janelas do corredor.",
-    "de": "Die Uffizien wurden in den 1560er-Jahren als Amtsgebäude, auf Italienisch uffizi, für die Regierung der Medici gebaut. Die Familie füllte das oberste Stockwerk mit Kunst, und 1737 vermachte Anna Maria Luisa, die letzte Medici, die ganze Sammlung der Stadt Florenz unter einer Bedingung: Sie darf die Stadt niemals verlassen. Achten Sie auf Botticellis Geburt der Venus und den Frühling, und auf den Blick auf den Arno aus den Fenstern des Korridors.",
+    "es": "Los Uffizi se construyeron en la década de 1560 como oficinas, uffizi en italiano, para el gobierno de los Medici. La familia llenó el último piso de arte, y en 1737 Ana María Luisa, la última de los Medici, dejó toda la colección a Firenze con una condición: que nunca saliera de la ciudad. Busca El nacimiento de Venus y La primavera de Botticelli, y la vista del Arno desde las ventanas del corredor.",
+    "fr": "Les Offices ont été construits dans les années 1560 comme bureaux, uffizi en italien, pour le gouvernement des Médicis. La famille a rempli le dernier étage d’œuvres d’art, et en 1737 Anne-Marie-Louise, la dernière des Médicis, a légué toute la collection à Firenze à une condition : qu’elle ne quitte jamais la ville. Cherchez La Naissance de Vénus et Le Printemps de Botticelli, et la vue sur l’Arno depuis les fenêtres du couloir.",
+    "pt": "A Galeria Uffizi foi construída nos anos 1560 como escritórios, uffizi em italiano, para o governo dos Médici. A família encheu o último andar de arte, e em 1737 Ana Maria Luísa, a última dos Médici, deixou toda a coleção para Firenze com uma condição: ela nunca poderia sair da cidade. Procure O Nascimento de Vênus e A Primavera, de Botticelli, e a vista do rio Arno pelas janelas do corredor.",
+    "de": "Die Uffizien wurden in den 1560er-Jahren als Amtsgebäude, auf Italienisch uffizi, für die Regierung der Medici gebaut. Die Familie füllte das oberste Stockwerk mit Kunst, und 1737 vermachte Anna Maria Luisa, die letzte Medici, die ganze Sammlung der Stadt Firenze unter einer Bedingung: Sie darf die Stadt niemals verlassen. Achten Sie auf Botticellis Geburt der Venus und den Frühling, und auf den Blick auf den Arno aus den Fenstern des Korridors.",
     "it": "Gli Uffizi furono costruiti negli anni Sessanta del Cinquecento come uffici per il governo dei Medici. La famiglia riempì l’ultimo piano di opere d’arte, e nel 1737 Anna Maria Luisa, l’ultima dei Medici, lasciò l’intera collezione a Firenze a una condizione: che non lasciasse mai la città. Cerca la Nascita di Venere e la Primavera di Botticelli, e la vista sull’Arno dalle finestre del corridoio."
    },
    "recording": null
@@ -47,7 +48,15 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [
+   1
+  ],
+  "closed_note": "Closed Mondays",
+  "closed_source": {
+   "text": "uffizi.it (official)",
+   "checked": "2026-10-11"
+  }
  },
  {
   "id": "florence-boboli",
@@ -81,7 +90,8 @@
   "tips": [
    "The gardens rarely need a booking.",
    "Palazzo Pitti and Boboli together: €25 booked, €22 at the door.",
-   "Included in the PassePartout if you buy it for the Uffizi."
+   "Included in the PassePartout if you buy it for the Uffizi.",
+   "Opens 8:15. Closes 18:30 until the clocks change on October 25, then 17:30. Last entry an hour before closing."
   ],
   "audio": {
    "script": "The Boboli Gardens climb the hill behind Palazzo Pitti, which the Medici bought in 1550 as their family home. They turned the slope into a stage for court life, with an amphitheatre, grottoes, fountains and long avenues of cypress. Look for the Buontalenti Grotto near the entrance, encrusted with shells and stalactites, and save some energy for the view over the rooftops from the top of the garden.",
@@ -97,7 +107,13 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": "Closed the first and last Monday of each month",
+  "closed_source": {
+   "text": "uffizi.it (official)",
+   "checked": "2026-10-11"
+  }
  },
  {
   "id": "florence-smn",
@@ -146,7 +162,13 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": {
+   "text": "smnovella.com store page",
+   "checked": "2026-10-11"
+  }
  },
  {
   "id": "florence-accademia",
@@ -180,7 +202,8 @@
   "tips": [
    "Pick the earliest morning slot. Without a booking the line can be long.",
    "Open Tuesday to Sunday, 8:15 to 18:50. Closed Mondays.",
-   "Deal: €26 covers the Accademia plus the Bargello sculpture museum within 48 hours."
+   "Deal: €26 covers the Accademia plus the Bargello sculpture museum within 48 hours.",
+   "Last entry 18:20."
   ],
   "audio": {
    "script": "Michelangelo carved David from a single block of marble that other sculptors had started and abandoned. He was twenty-six when he began, in 1501. The statue, more than five meters tall, was unveiled in 1504 outside the Palazzo Vecchio, as a symbol of the small republic standing up to stronger enemies. It moved indoors to the Accademia in 1873, and a copy now stands in its original place on Piazza della Signoria.",
@@ -196,7 +219,15 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [
+   1
+  ],
+  "closed_note": "Closed Mondays",
+  "closed_source": {
+   "text": "Official hours, confirmed on artvisitguide.com",
+   "checked": "2026-10-11"
+  }
  },
  {
   "id": "florence-duomo",
@@ -230,15 +261,17 @@
   "tips": [
    "The pass covers the dome, bell tower, museum, Baptistery and crypt for 3 days. Only the dome needs a time.",
    "The cathedral itself is free; there’s just a security line.",
-   "Cover shoulders and knees. It’s enforced."
+   "Cover shoulders and knees. It’s enforced.",
+   "Cathedral: Monday to Saturday 10:15 to 15:45, closed Sundays. Dome climb: weekdays 8:15 to 18:45, Saturday 8:15 to 16:30, Sunday 12:45 to 16:30.",
+   "Bell tower 8:15 to 18:45 and Baptistery 8:30 to 19:30, every day. The museum closes the first Tuesday of each month."
   ],
   "audio": {
-   "script": "For years Florence’s cathedral, Santa Maria del Fiore, waited with a vast open space above the altar, because no one knew how to cover it. In 1420 Filippo Brunelleschi began a dome built without a wooden frame to hold it up, laying the bricks in a herringbone pattern so each ring supported itself. It was finished in 1436 and is still the largest brick dome in the world. Climb the 463 steps and you walk between its two shells.",
+   "script": "For years Firenze’s cathedral, Santa Maria del Fiore, waited with a vast open space above the altar, because no one knew how to cover it. In 1420 Filippo Brunelleschi began a dome built without a wooden frame to hold it up, laying the bricks in a herringbone pattern so each ring supported itself. It was finished in 1436 and is still the largest brick dome in the world. Climb the 463 steps and you walk between its two shells.",
    "scripts": {
-    "es": "Durante años, la catedral de Florencia, Santa María del Fiore, esperó con un enorme hueco abierto sobre el altar, porque nadie sabía cómo cubrirlo. En 1420 Filippo Brunelleschi empezó una cúpula construida sin una cimbra de madera que la sostuviera, colocando los ladrillos en espiga para que cada anillo se sostuviera solo. Se terminó en 1436 y sigue siendo la cúpula de ladrillo más grande del mundo. Si subes los 463 escalones, caminas entre sus dos cáscaras.",
-    "fr": "Pendant des années, la cathédrale de Florence, Santa Maria del Fiore, est restée avec un immense vide au-dessus de l’autel, car personne ne savait comment le couvrir. En 1420, Filippo Brunelleschi commença une coupole bâtie sans cintre en bois pour la soutenir, en posant les briques en arête de poisson pour que chaque anneau tienne seul. Achevée en 1436, elle reste la plus grande coupole en briques du monde. En montant les 463 marches, vous passez entre ses deux coques.",
-    "pt": "Durante anos, a catedral de Florença, Santa Maria del Fiore, esperou com um enorme vão aberto sobre o altar, porque ninguém sabia como cobri-lo. Em 1420, Filippo Brunelleschi começou uma cúpula construída sem uma armação de madeira para sustentá-la, assentando os tijolos em espinha de peixe para que cada anel se sustentasse sozinho. Ela foi concluída em 1436 e continua sendo a maior cúpula de tijolos do mundo. Subindo os 463 degraus, você caminha entre as suas duas cascas.",
-    "de": "Jahrelang wartete der Dom von Florenz, Santa Maria del Fiore, mit einer riesigen offenen Fläche über dem Altar, denn niemand wusste, wie man sie überdecken sollte. 1420 begann Filippo Brunelleschi eine Kuppel ohne stützendes Holzgerüst und setzte die Ziegel im Fischgrätmuster, sodass sich jeder Ring selbst trug. Sie wurde 1436 vollendet und ist bis heute die größte Ziegelkuppel der Welt. Wer die 463 Stufen hinaufsteigt, geht zwischen ihren beiden Schalen hindurch.",
+    "es": "Durante años, la catedral de Firenze, Santa María del Fiore, esperó con un enorme hueco abierto sobre el altar, porque nadie sabía cómo cubrirlo. En 1420 Filippo Brunelleschi empezó una cúpula construida sin una cimbra de madera que la sostuviera, colocando los ladrillos en espiga para que cada anillo se sostuviera solo. Se terminó en 1436 y sigue siendo la cúpula de ladrillo más grande del mundo. Si subes los 463 escalones, caminas entre sus dos cáscaras.",
+    "fr": "Pendant des années, la cathédrale de Firenze, Santa Maria del Fiore, est restée avec un immense vide au-dessus de l’autel, car personne ne savait comment le couvrir. En 1420, Filippo Brunelleschi commença une coupole bâtie sans cintre en bois pour la soutenir, en posant les briques en arête de poisson pour que chaque anneau tienne seul. Achevée en 1436, elle reste la plus grande coupole en briques du monde. En montant les 463 marches, vous passez entre ses deux coques.",
+    "pt": "Durante anos, a catedral de Firenze, Santa Maria del Fiore, esperou com um enorme vão aberto sobre o altar, porque ninguém sabia como cobri-lo. Em 1420, Filippo Brunelleschi começou uma cúpula construída sem uma armação de madeira para sustentá-la, assentando os tijolos em espinha de peixe para que cada anel se sustentasse sozinho. Ela foi concluída em 1436 e continua sendo a maior cúpula de tijolos do mundo. Subindo os 463 degraus, você caminha entre as suas duas cascas.",
+    "de": "Jahrelang wartete der Dom von Firenze, Santa Maria del Fiore, mit einer riesigen offenen Fläche über dem Altar, denn niemand wusste, wie man sie überdecken sollte. 1420 begann Filippo Brunelleschi eine Kuppel ohne stützendes Holzgerüst und setzte die Ziegel im Fischgrätmuster, sodass sich jeder Ring selbst trug. Sie wurde 1436 vollendet und ist bis heute die größte Ziegelkuppel der Welt. Wer die 463 Stufen hinaufsteigt, geht zwischen ihren beiden Schalen hindurch.",
     "it": "Per anni la cattedrale di Firenze, Santa Maria del Fiore, rimase con un enorme vuoto sopra l’altare, perché nessuno sapeva come coprirlo. Nel 1420 Filippo Brunelleschi iniziò una cupola costruita senza centina di legno, posando i mattoni a spina di pesce perché ogni anello si reggesse da solo. Fu completata nel 1436 ed è ancora la più grande cupola in muratura di mattoni del mondo. Salendo i 463 gradini si cammina tra le sue due calotte."
    },
    "recording": null
@@ -246,7 +279,13 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": "Cathedral closed Sundays; the dome climb is open Sunday afternoons",
+  "closed_source": {
+   "text": "duomo.firenze.it (official)",
+   "checked": "2026-10-11"
+  }
  },
  {
   "id": "florence-signoria",
@@ -279,12 +318,12 @@
   "description": "The city’s civic square, with open-air sculpture in the Loggia dei Lanzi.",
   "tips": [],
   "audio": {
-   "script": "This square has been the political heart of Florence for seven centuries. The tower of the Palazzo Vecchio watches over it, and the open arches of the Loggia dei Lanzi shelter statues in the open air, among them Cellini’s bronze Perseus holding the head of Medusa. A round plaque in the paving near the fountain marks where the preacher Girolamo Savonarola was executed in 1498.",
+   "script": "This square has been the political heart of Firenze for seven centuries. The tower of the Palazzo Vecchio watches over it, and the open arches of the Loggia dei Lanzi shelter statues in the open air, among them Cellini’s bronze Perseus holding the head of Medusa. A round plaque in the paving near the fountain marks where the preacher Girolamo Savonarola was executed in 1498.",
    "scripts": {
-    "es": "Esta plaza es el corazón político de Florencia desde hace siete siglos. La torre del Palazzo Vecchio la vigila, y los arcos abiertos de la Loggia dei Lanzi protegen estatuas al aire libre, entre ellas el Perseo de bronce de Cellini con la cabeza de Medusa. Una placa redonda en el suelo, cerca de la fuente, marca el lugar donde fue ejecutado el predicador Girolamo Savonarola en 1498.",
-    "fr": "Cette place est le cœur politique de Florence depuis sept siècles. La tour du Palazzo Vecchio veille sur elle, et les arcades ouvertes de la Loggia dei Lanzi abritent des statues en plein air, dont le Persée en bronze de Cellini tenant la tête de Méduse. Une plaque ronde dans le pavé, près de la fontaine, marque l’endroit où le prédicateur Jérôme Savonarole fut exécuté en 1498.",
-    "pt": "Esta praça é o coração político de Florença há sete séculos. A torre do Palazzo Vecchio vigia a praça, e os arcos abertos da Loggia dei Lanzi abrigam estátuas ao ar livre, entre elas o Perseu de bronze de Cellini, segurando a cabeça da Medusa. Uma placa redonda no chão, perto da fonte, marca o lugar onde o pregador Girolamo Savonarola foi executado em 1498.",
-    "de": "Dieser Platz ist seit sieben Jahrhunderten das politische Herz von Florenz. Der Turm des Palazzo Vecchio wacht über ihn, und die offenen Bögen der Loggia dei Lanzi beherbergen Statuen unter freiem Himmel, darunter Cellinis bronzenen Perseus mit dem Haupt der Medusa. Eine runde Platte im Pflaster nahe dem Brunnen markiert die Stelle, an der der Prediger Girolamo Savonarola 1498 hingerichtet wurde.",
+    "es": "Esta plaza es el corazón político de Firenze desde hace siete siglos. La torre del Palazzo Vecchio la vigila, y los arcos abiertos de la Loggia dei Lanzi protegen estatuas al aire libre, entre ellas el Perseo de bronce de Cellini con la cabeza de Medusa. Una placa redonda en el suelo, cerca de la fuente, marca el lugar donde fue ejecutado el predicador Girolamo Savonarola en 1498.",
+    "fr": "Cette place est le cœur politique de Firenze depuis sept siècles. La tour du Palazzo Vecchio veille sur elle, et les arcades ouvertes de la Loggia dei Lanzi abritent des statues en plein air, dont le Persée en bronze de Cellini tenant la tête de Méduse. Une plaque ronde dans le pavé, près de la fontaine, marque l’endroit où le prédicateur Jérôme Savonarole fut exécuté en 1498.",
+    "pt": "Esta praça é o coração político de Firenze há sete séculos. A torre do Palazzo Vecchio vigia a praça, e os arcos abertos da Loggia dei Lanzi abrigam estátuas ao ar livre, entre elas o Perseu de bronze de Cellini, segurando a cabeça da Medusa. Uma placa redonda no chão, perto da fonte, marca o lugar onde o pregador Girolamo Savonarola foi executado em 1498.",
+    "de": "Dieser Platz ist seit sieben Jahrhunderten das politische Herz von Firenze. Der Turm des Palazzo Vecchio wacht über ihn, und die offenen Bögen der Loggia dei Lanzi beherbergen Statuen unter freiem Himmel, darunter Cellinis bronzenen Perseus mit dem Haupt der Medusa. Eine runde Platte im Pflaster nahe dem Brunnen markiert die Stelle, an der der Prediger Girolamo Savonarola 1498 hingerichtet wurde.",
     "it": "Questa piazza è il cuore politico di Firenze da sette secoli. La torre di Palazzo Vecchio la sorveglia, e gli archi aperti della Loggia dei Lanzi ospitano statue all’aperto, tra cui il Perseo in bronzo di Cellini con la testa di Medusa. Una lapide rotonda nel selciato, vicino alla fontana, segna il punto dove il predicatore Girolamo Savonarola fu giustiziato nel 1498."
    },
    "recording": null
@@ -292,7 +331,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-vecchio",
@@ -327,12 +369,12 @@
    "Tickets from the city museums’ official box office."
   ],
   "audio": {
-   "script": "Palazzo Vecchio, the old palace, was begun around 1299 as the seat of the city’s government, and it is still Florence’s town hall today. Upstairs, the vast Hall of the Five Hundred was built for the assembly of the republic and later painted with battle scenes by Giorgio Vasari for the Medici dukes. The tower rises ninety-four meters above the square.",
+   "script": "Palazzo Vecchio, the old palace, was begun around 1299 as the seat of the city’s government, and it is still Firenze’s town hall today. Upstairs, the vast Hall of the Five Hundred was built for the assembly of the republic and later painted with battle scenes by Giorgio Vasari for the Medici dukes. The tower rises ninety-four meters above the square.",
    "scripts": {
-    "es": "El Palazzo Vecchio, el palacio viejo, se empezó hacia 1299 como sede del gobierno de la ciudad, y hoy sigue siendo el ayuntamiento de Florencia. Arriba, el enorme Salón de los Quinientos se construyó para la asamblea de la república y después Giorgio Vasari lo pintó con escenas de batallas para los duques Medici. La torre se alza noventa y cuatro metros sobre la plaza.",
-    "fr": "Le Palazzo Vecchio, le vieux palais, fut commencé vers 1299 pour accueillir le gouvernement de la ville, et c’est encore aujourd’hui l’hôtel de ville de Florence. À l’étage, l’immense salle des Cinq-Cents fut construite pour l’assemblée de la république, puis peinte de scènes de bataille par Giorgio Vasari pour les ducs Médicis. La tour s’élève à quatre-vingt-quatorze mètres au-dessus de la place.",
-    "pt": "O Palazzo Vecchio, o palácio velho, foi iniciado por volta de 1299 como sede do governo da cidade, e até hoje é a prefeitura de Florença. No andar de cima, o enorme Salão dos Quinhentos foi construído para a assembleia da república e depois pintado com cenas de batalha por Giorgio Vasari para os duques Médici. A torre se ergue noventa e quatro metros acima da praça.",
-    "de": "Der Palazzo Vecchio, der alte Palast, wurde um 1299 als Sitz der Stadtregierung begonnen und ist bis heute das Rathaus von Florenz. Oben wurde der riesige Saal der Fünfhundert für die Versammlung der Republik gebaut und später von Giorgio Vasari für die Medici-Herzöge mit Schlachtenszenen ausgemalt. Der Turm ragt vierundneunzig Meter über den Platz.",
+    "es": "El Palazzo Vecchio, el palacio viejo, se empezó hacia 1299 como sede del gobierno de la ciudad, y hoy sigue siendo el ayuntamiento de Firenze. Arriba, el enorme Salón de los Quinientos se construyó para la asamblea de la república y después Giorgio Vasari lo pintó con escenas de batallas para los duques Medici. La torre se alza noventa y cuatro metros sobre la plaza.",
+    "fr": "Le Palazzo Vecchio, le vieux palais, fut commencé vers 1299 pour accueillir le gouvernement de la ville, et c’est encore aujourd’hui l’hôtel de ville de Firenze. À l’étage, l’immense salle des Cinq-Cents fut construite pour l’assemblée de la république, puis peinte de scènes de bataille par Giorgio Vasari pour les ducs Médicis. La tour s’élève à quatre-vingt-quatorze mètres au-dessus de la place.",
+    "pt": "O Palazzo Vecchio, o palácio velho, foi iniciado por volta de 1299 como sede do governo da cidade, e até hoje é a prefeitura de Firenze. No andar de cima, o enorme Salão dos Quinhentos foi construído para a assembleia da república e depois pintado com cenas de batalha por Giorgio Vasari para os duques Médici. A torre se ergue noventa e quatro metros acima da praça.",
+    "de": "Der Palazzo Vecchio, der alte Palast, wurde um 1299 als Sitz der Stadtregierung begonnen und ist bis heute das Rathaus von Firenze. Oben wurde der riesige Saal der Fünfhundert für die Versammlung der Republik gebaut und später von Giorgio Vasari für die Medici-Herzöge mit Schlachtenszenen ausgemalt. Der Turm ragt vierundneunzig Meter über den Platz.",
     "it": "Palazzo Vecchio fu iniziato intorno al 1299 come sede del governo cittadino, ed è ancora oggi il municipio di Firenze. Al piano superiore, il grande Salone dei Cinquecento fu costruito per l’assemblea della repubblica e poi affrescato con scene di battaglia da Giorgio Vasari per i duchi Medici. La torre si alza novantaquattro metri sopra la piazza."
    },
    "recording": null
@@ -340,7 +382,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-ponte",
@@ -373,12 +418,12 @@
   "description": "The medieval bridge lined with jewelers’ shops.",
   "tips": [],
   "audio": {
-   "script": "The Ponte Vecchio, the old bridge, has crossed the Arno here since 1345. Butchers once worked in its shops, until in 1593 Grand Duke Ferdinando the First replaced them with goldsmiths and jewelers, who are still here today. Above the shops runs the Vasari Corridor, built so the Medici could walk from their offices to their palace without meeting the crowds. In 1944 it was the only bridge in Florence the retreating German army did not destroy.",
+   "script": "The Ponte Vecchio, the old bridge, has crossed the Arno here since 1345. Butchers once worked in its shops, until in 1593 Grand Duke Ferdinando the First replaced them with goldsmiths and jewelers, who are still here today. Above the shops runs the Vasari Corridor, built so the Medici could walk from their offices to their palace without meeting the crowds. In 1944 it was the only bridge in Firenze the retreating German army did not destroy.",
    "scripts": {
-    "es": "El Ponte Vecchio, el puente viejo, cruza aquí el Arno desde 1345. Antes había carnicerías en sus tiendas, hasta que en 1593 el gran duque Fernando primero las sustituyó por orfebres y joyeros, que siguen aquí hoy. Sobre las tiendas pasa el corredor Vasariano, construido para que los Medici pudieran ir de sus oficinas a su palacio sin cruzarse con la gente. En 1944 fue el único puente de Florencia que el ejército alemán en retirada no destruyó.",
-    "fr": "Le Ponte Vecchio, le vieux pont, franchit ici l’Arno depuis 1345. Autrefois, ses boutiques abritaient des bouchers, jusqu’à ce qu’en 1593 le grand-duc Ferdinand Ier les remplace par des orfèvres et des bijoutiers, qui y sont toujours. Au-dessus des boutiques court le corridor de Vasari, construit pour que les Médicis aillent de leurs bureaux à leur palais sans croiser la foule. En 1944, ce fut le seul pont de Florence que l’armée allemande en retraite ne détruisit pas.",
-    "pt": "A Ponte Vecchio, a ponte velha, atravessa o Arno neste ponto desde 1345. Antes, suas lojas eram açougues, até que em 1593 o grão-duque Fernando primeiro os substituiu por ourives e joalheiros, que estão aqui até hoje. Acima das lojas passa o Corredor Vasariano, construído para que os Médici fossem dos seus escritórios ao seu palácio sem encontrar a multidão. Em 1944, foi a única ponte de Florença que o exército alemão em retirada não destruiu.",
-    "de": "Der Ponte Vecchio, die alte Brücke, überquert hier seit 1345 den Arno. Früher arbeiteten in den Läden Metzger, bis Großherzog Ferdinando der Erste sie 1593 durch Goldschmiede und Juweliere ersetzte, die bis heute hier sind. Über den Läden verläuft der Vasari-Korridor, damit die Medici von ihren Amtsräumen zu ihrem Palast gehen konnten, ohne der Menge zu begegnen. 1944 war er die einzige Brücke in Florenz, die die abziehende deutsche Armee nicht zerstörte.",
+    "es": "El Ponte Vecchio, el puente viejo, cruza aquí el Arno desde 1345. Antes había carnicerías en sus tiendas, hasta que en 1593 el gran duque Fernando primero las sustituyó por orfebres y joyeros, que siguen aquí hoy. Sobre las tiendas pasa el corredor Vasariano, construido para que los Medici pudieran ir de sus oficinas a su palacio sin cruzarse con la gente. En 1944 fue el único puente de Firenze que el ejército alemán en retirada no destruyó.",
+    "fr": "Le Ponte Vecchio, le vieux pont, franchit ici l’Arno depuis 1345. Autrefois, ses boutiques abritaient des bouchers, jusqu’à ce qu’en 1593 le grand-duc Ferdinand Ier les remplace par des orfèvres et des bijoutiers, qui y sont toujours. Au-dessus des boutiques court le corridor de Vasari, construit pour que les Médicis aillent de leurs bureaux à leur palais sans croiser la foule. En 1944, ce fut le seul pont de Firenze que l’armée allemande en retraite ne détruisit pas.",
+    "pt": "A Ponte Vecchio, a ponte velha, atravessa o Arno neste ponto desde 1345. Antes, suas lojas eram açougues, até que em 1593 o grão-duque Fernando primeiro os substituiu por ourives e joalheiros, que estão aqui até hoje. Acima das lojas passa o Corredor Vasariano, construído para que os Médici fossem dos seus escritórios ao seu palácio sem encontrar a multidão. Em 1944, foi a única ponte de Firenze que o exército alemão em retirada não destruiu.",
+    "de": "Der Ponte Vecchio, die alte Brücke, überquert hier seit 1345 den Arno. Früher arbeiteten in den Läden Metzger, bis Großherzog Ferdinando der Erste sie 1593 durch Goldschmiede und Juweliere ersetzte, die bis heute hier sind. Über den Läden verläuft der Vasari-Korridor, damit die Medici von ihren Amtsräumen zu ihrem Palast gehen konnten, ohne der Menge zu begegnen. 1944 war er die einzige Brücke in Firenze, die die abziehende deutsche Armee nicht zerstörte.",
     "it": "Il Ponte Vecchio attraversa l’Arno in questo punto dal 1345. Un tempo le sue botteghe erano macellerie, finché nel 1593 il granduca Ferdinando primo le sostituì con orafi e gioiellieri, che sono ancora qui. Sopra le botteghe corre il Corridoio Vasariano, costruito perché i Medici potessero andare dagli uffici al loro palazzo senza incontrare la folla. Nel 1944 fu l’unico ponte di Firenze che l’esercito tedesco in ritirata non distrusse."
    },
    "recording": null
@@ -386,7 +431,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-pitti",
@@ -417,12 +465,22 @@
   },
   "lead_time": "",
   "description": "The Medici palace. Combined ticket with Boboli.",
-  "tips": [],
+  "tips": [
+   "Open Tuesday to Sunday, 8:15 to 18:30. Closed Mondays."
+  ],
   "audio": null,
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [
+   1
+  ],
+  "closed_note": "Closed Mondays",
+  "closed_source": {
+   "text": "uffizi.it (official)",
+   "checked": "2026-10-11"
+  }
  },
  {
   "id": "florence-bardini",
@@ -458,7 +516,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-spirito",
@@ -494,7 +555,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-maggio",
@@ -530,7 +594,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-miniato",
@@ -563,12 +630,12 @@
   "description": "A hilltop church with one of the best views of the dome.",
   "tips": [],
   "audio": {
-   "script": "San Miniato al Monte has looked down on Florence for almost a thousand years; building began in 1018. It is named after Minias, said to be the city’s first Christian martyr. Its green and white marble front is one of the finest Romanesque facades in Tuscany. Monks still live here, and in the late afternoon you may hear them singing Gregorian chant.",
+   "script": "San Miniato al Monte has looked down on Firenze for almost a thousand years; building began in 1018. It is named after Minias, said to be the city’s first Christian martyr. Its green and white marble front is one of the finest Romanesque facades in Tuscany. Monks still live here, and in the late afternoon you may hear them singing Gregorian chant.",
    "scripts": {
-    "es": "San Miniato al Monte domina Florencia desde hace casi mil años; las obras empezaron en 1018. Lleva el nombre de Minias, considerado el primer mártir cristiano de la ciudad. Su fachada de mármol verde y blanco es una de las más bellas del románico toscano. Aquí todavía viven monjes, y a última hora de la tarde puede que los oigas cantar canto gregoriano.",
-    "fr": "San Miniato al Monte domine Florence depuis près de mille ans ; sa construction commença en 1018. L’église porte le nom de Minias, que l’on dit être le premier martyr chrétien de la ville. Sa façade de marbre vert et blanc est l’une des plus belles façades romanes de Toscane. Des moines y vivent toujours, et en fin d’après-midi vous les entendrez peut-être chanter le chant grégorien.",
-    "pt": "San Miniato al Monte observa Florença do alto há quase mil anos; a construção começou em 1018. O nome vem de Minias, considerado o primeiro mártir cristão da cidade. A fachada de mármore verde e branco é uma das mais belas fachadas românicas da Toscana. Monges ainda vivem aqui, e no fim da tarde talvez você os ouça cantando canto gregoriano.",
-    "de": "San Miniato al Monte blickt seit fast tausend Jahren auf Florenz hinab; der Bau begann 1018. Die Kirche ist nach Minias benannt, der als erster christlicher Märtyrer der Stadt gilt. Ihre Fassade aus grünem und weißem Marmor ist eine der schönsten romanischen Fassaden der Toskana. Noch heute leben hier Mönche, und am späten Nachmittag hören Sie sie vielleicht gregorianische Choräle singen.",
+    "es": "San Miniato al Monte domina Firenze desde hace casi mil años; las obras empezaron en 1018. Lleva el nombre de Minias, considerado el primer mártir cristiano de la ciudad. Su fachada de mármol verde y blanco es una de las más bellas del románico toscano. Aquí todavía viven monjes, y a última hora de la tarde puede que los oigas cantar canto gregoriano.",
+    "fr": "San Miniato al Monte domine Firenze depuis près de mille ans ; sa construction commença en 1018. L’église porte le nom de Minias, que l’on dit être le premier martyr chrétien de la ville. Sa façade de marbre vert et blanc est l’une des plus belles façades romanes de Toscane. Des moines y vivent toujours, et en fin d’après-midi vous les entendrez peut-être chanter le chant grégorien.",
+    "pt": "San Miniato al Monte observa Firenze do alto há quase mil anos; a construção começou em 1018. O nome vem de Minias, considerado o primeiro mártir cristão da cidade. A fachada de mármore verde e branco é uma das mais belas fachadas românicas da Toscana. Monges ainda vivem aqui, e no fim da tarde talvez você os ouça cantando canto gregoriano.",
+    "de": "San Miniato al Monte blickt seit fast tausend Jahren auf Firenze hinab; der Bau begann 1018. Die Kirche ist nach Minias benannt, der als erster christlicher Märtyrer der Stadt gilt. Ihre Fassade aus grünem und weißem Marmor ist eine der schönsten romanischen Fassaden der Toskana. Noch heute leben hier Mönche, und am späten Nachmittag hören Sie sie vielleicht gregorianische Choräle singen.",
     "it": "San Miniato al Monte guarda Firenze dall’alto da quasi mille anni: la costruzione iniziò nel 1018. Prende il nome da Miniato, ritenuto il primo martire cristiano della città. La facciata in marmo verde e bianco è una delle più belle facciate romaniche della Toscana. Qui vivono ancora dei monaci, e nel tardo pomeriggio può capitare di sentirli cantare il canto gregoriano."
    },
    "recording": null
@@ -576,7 +643,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-smnchurch",
@@ -607,12 +677,20 @@
   },
   "lead_time": "",
   "description": "Gothic church with a striking marble façade, steps from the pharmacy.",
-  "tips": [],
+  "tips": [
+   "Open every day; Sunday afternoons only (13:00 to 17:00). Early closing on October 12 (15:15) and October 15 (14:30)."
+  ],
   "audio": null,
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": {
+   "text": "smn.it (official)",
+   "checked": "2026-10-11"
+  }
  },
  {
   "id": "florence-mercato",
@@ -643,12 +721,20 @@
   },
   "lead_time": "",
   "description": "Food market downstairs, food hall upstairs.",
-  "tips": [],
+  "tips": [
+   "The upstairs food hall is open every day, 9:00 to 23:00. The stalls downstairs keep shorter, morning hours."
+  ],
   "audio": null,
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": {
+   "text": "mercatocentrale.it (official)",
+   "checked": "2026-10-11"
+  }
  },
  {
   "id": "florence-sanlorenzo",
@@ -684,7 +770,10 @@
   "search_q": null,
   "duration": null,
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-pasta",
@@ -693,7 +782,7 @@
   "category": "experience",
   "kind": "food",
   "group": "smn",
-  "area": "Central Florence",
+  "area": "Central Firenze",
   "must": false,
   "popular": false,
   "location": null,
@@ -718,7 +807,10 @@
   "search_q": "pasta making class Florence",
   "duration": "2.5 to 4 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-market",
@@ -727,7 +819,7 @@
   "category": "experience",
   "kind": "market",
   "group": "smn",
-  "area": "Central Florence",
+  "area": "Central Firenze",
   "must": false,
   "popular": false,
   "location": null,
@@ -746,13 +838,16 @@
    "kind": "typical"
   },
   "lead_time": "Book 2 to 4 weeks ahead or more in October.",
-  "description": "Shop a Florentine food market with a chef, then cook a Tuscan meal together.",
+  "description": "Shop a local food market with a chef, then cook a Tuscan meal together.",
   "tips": [],
   "audio": null,
   "search_q": "market tour cooking class Florence",
   "duration": "About 4 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-gelato",
@@ -761,7 +856,7 @@
   "category": "experience",
   "kind": "cafe",
   "group": "smn",
-  "area": "Central Florence",
+  "area": "Central Firenze",
   "must": false,
   "popular": false,
   "location": null,
@@ -786,7 +881,10 @@
   "search_q": "gelato making class Florence",
   "duration": "1.5 to 3 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-perfume",
@@ -795,7 +893,7 @@
   "category": "experience",
   "kind": "shop",
   "group": "smn",
-  "area": "Central Florence",
+  "area": "Central Firenze",
   "must": false,
   "popular": false,
   "location": null,
@@ -820,7 +918,10 @@
   "search_q": "perfume making workshop Florence",
   "duration": "About 1.5 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-leather",
@@ -829,7 +930,7 @@
   "category": "experience",
   "kind": "shop",
   "group": "smn",
-  "area": "Central Florence",
+  "area": "Central Firenze",
   "must": false,
   "popular": false,
   "location": null,
@@ -854,7 +955,10 @@
   "search_q": "leather workshop make your own Florence",
   "duration": "1 to 6 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-chianti",
@@ -863,7 +967,7 @@
   "category": "experience",
   "kind": "wine",
   "group": "smn",
-  "area": "Leaves from Florence",
+  "area": "Leaves from Firenze",
   "must": false,
   "popular": false,
   "location": null,
@@ -888,7 +992,10 @@
   "search_q": "Chianti wine tour from Florence",
   "duration": "Half day 4 to 6 hours, full day up to 11 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-photo",
@@ -897,7 +1004,7 @@
   "category": "experience",
   "kind": "landmark",
   "group": "smn",
-  "area": "Central Florence",
+  "area": "Central Firenze",
   "must": false,
   "popular": false,
   "location": null,
@@ -922,7 +1029,10 @@
   "search_q": "photography tour Florence",
   "duration": "2 to 3 hours",
   "how": null,
-  "stay": null
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-siena",
@@ -931,7 +1041,7 @@
   "category": "day_trip",
   "kind": "landmark",
   "group": "trips",
-  "area": "South of Florence",
+  "area": "South of Firenze",
   "must": false,
   "popular": false,
   "location": {
@@ -958,7 +1068,10 @@
   "search_q": "Siena day trip from Florence",
   "duration": null,
   "how": "Regional bus about 1 h 15 min (about €8), every 30 minutes; or train 1 h 20 to 1 h 40 (about €10)",
-  "stay": "4 to 6 hours"
+  "stay": "4 to 6 hours",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-sangimignano",
@@ -967,7 +1080,7 @@
   "category": "day_trip",
   "kind": "landmark",
   "group": "trips",
-  "area": "Southwest of Florence",
+  "area": "Southwest of Firenze",
   "must": false,
   "popular": false,
   "location": {
@@ -994,7 +1107,10 @@
   "search_q": "San Gimignano Siena day tour from Florence",
   "duration": null,
   "how": "Train to Poggibonsi (under 1 hour), then bus 130 (20 to 25 minutes)",
-  "stay": "3 to 4 hours"
+  "stay": "3 to 4 hours",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-pisa",
@@ -1003,7 +1119,7 @@
   "category": "day_trip",
   "kind": "landmark",
   "group": "trips",
-  "area": "West of Florence",
+  "area": "West of Firenze",
   "must": false,
   "popular": false,
   "location": {
@@ -1030,7 +1146,10 @@
   "search_q": "Pisa Leaning Tower tickets",
   "duration": null,
   "how": "Regional train 50 to 65 minutes (about €9)",
-  "stay": "3 to 4 hours"
+  "stay": "3 to 4 hours",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-lucca",
@@ -1039,7 +1158,7 @@
   "category": "day_trip",
   "kind": "garden",
   "group": "trips",
-  "area": "West of Florence",
+  "area": "West of Firenze",
   "must": false,
   "popular": false,
   "location": {
@@ -1066,7 +1185,10 @@
   "search_q": "Lucca day trip from Florence",
   "duration": null,
   "how": "Regional train 1 h 10 to 1 h 30 (about €8)",
-  "stay": "Half a day or more"
+  "stay": "Half a day or more",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-bologna",
@@ -1075,7 +1197,7 @@
   "category": "day_trip",
   "kind": "food",
   "group": "trips",
-  "area": "North of Florence",
+  "area": "North of Firenze",
   "must": false,
   "popular": false,
   "location": {
@@ -1096,13 +1218,16 @@
    "source": null
   },
   "lead_time": "Booking the high-speed train early is much cheaper.",
-  "description": "Italy’s food capital, all porticoes and pasta. Fast and easy from Florence.",
+  "description": "Italy’s food capital, all porticoes and pasta. Fast and easy from Firenze.",
   "tips": [],
   "audio": null,
   "search_q": "Bologna food tour",
   "duration": null,
   "how": "High-speed train about 35 minutes (from about €12)",
-  "stay": "Half a day or more"
+  "stay": "Half a day or more",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  },
  {
   "id": "florence-cinqueterre",
@@ -1138,6 +1263,9 @@
   "search_q": "Cinque Terre day trip from Florence",
   "duration": null,
   "how": "About 2 h 30 min each way by train via La Spezia, usually one change",
-  "stay": "A very long day (13 to 15 hours door to door)"
+  "stay": "A very long day (13 to 15 hours door to door)",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null
  }
 ]
