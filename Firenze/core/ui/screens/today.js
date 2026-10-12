@@ -1,17 +1,20 @@
 /* Today: answers "what now?" for the current city. Simplified Oct 11 2026: the time-sensitive things first
    (meeting point, travel, bookings, clashes), then what to book, ideas, your base and a phrase. */
-import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js';
-import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js';
-import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js';
-import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js';
-import { tripChecks } from '../../models/checks.js';
-import { timelineView } from './plan.js';
-import { allPhotoIds } from './journal.js';
-import { view as phraseView } from './phrases.js';
-import { meetBlock } from './safety.js';
-import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js';
-import { speaksLocal } from '../../models/schema.js';
-import { mapPackService } from '../../services/mappack-service.js';
+import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202610120955';
+import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202610120955';
+import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202610120955';
+import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202610120955';
+import { tripChecks } from '../../models/checks.js?v=202610120955';
+import { timelineView } from './plan.js?v=202610120955';
+import { allPhotoIds } from './journal.js?v=202610120955';
+import { view as phraseView } from './phrases.js?v=202610120955';
+import { meetBlock } from './safety.js?v=202610120955';
+import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js?v=202610120955';
+import { speaksLocal } from '../../models/schema.js?v=202610120955';
+import { mapPackService } from '../../services/mappack-service.js?v=202610120955';
+import { clean } from '../theme.js?v=202610120955';
+import { placeCards, checkText } from '../components.js?v=202610120955';
+import { closedText } from '../../models/schema.js?v=202610120955';
 
 let slideTimer = null, slideIdx = 0;
 
@@ -98,7 +101,7 @@ function checkAlerts() {
   const t = today(), tm = nextDay(t);
   const cs = tripChecks(S.trip, { placeById, cityName }).filter(c => c.level === 'warn' && (c.day === t || c.day === tm));
   if (!cs.length) return '';
-  return `<div class="alert warn">${ic('sos')}<div style="min-width:0;display:flex;flex-direction:column;gap:4px"><b>Worth a look</b>${cs.slice(0, 3).map(c => `<p class="small" style="margin:0">${esc(c.text)}</p>`).join('')}</div></div>`;
+  return `<div class="alert warn">${ic('sos')}<div style="min-width:0;display:flex;flex-direction:column;gap:4px"><b>Worth a look</b>${cs.slice(0, 3).map(c => `<p class="small" style="margin:0">${esc(clean() ? checkText(c) : c.text)}</p>`).join('')}</div></div>`;
 }
 function whatNow(st) {
   if (st.k === 'after') return '';
@@ -167,6 +170,7 @@ function ideas(cityId) {
 }
 
 export function renderToday() {
+  if (clean()) return renderTodayClean();
   const st = stage(S.trip), cityId = curCityId(), c = cityOf(cityId), name = S.trip.traveler_name;
   let eyebrow, h1, lede;
   if (st.k === 'before') {
@@ -235,4 +239,94 @@ export function renderToday() {
   }
   document.querySelector('section[data-tab="today"]').innerHTML = html;
   addMount(startSlides);
+}
+
+/* ---------- clean theme (Oct 12 2026): compact header, search with suggestions, the sketch as a small tile,
+   the same "what now?" order, cards for what to book, and the stay address in large type. ---------- */
+const pillName = n => n.replace(/\s+(Gallery|Gardens|Garden|Museum|Monastery|Tower|Castle|Palace|Cathedral)$/i, '');
+function askPills(cityId) {
+  const must = placesIn(cityId, ['sight']).find(p => p.must && !p.custom);
+  return ['Taxis', 'Tipping'].concat(must ? [pillName(must.name)] : []);
+}
+function coverTile(cityId) {
+  const c = cityOf(cityId), photos = allPhotoIds();
+  const photo = P().coverMode === 'photo' && P().cover && photos.includes(P().cover) ? P().cover : (P().coverMode === 'slides' && photos.length ? photos[0] : null);
+  return `<button class="cover-tile" data-act="cover" aria-label="Trip cover: the sketch or your photos">${photo ? `<img data-photo="${photo}" alt="">` : art(c.mark)}</button>`;
+}
+export function openCover() {
+  const sh = document.getElementById('sheet'), cityId = curCityId();
+  sh.innerHTML = `<div class="grab"></div><div class="cover-sheet" style="display:flex;flex-direction:column;gap:10px"><div class="sh-title">${esc(cityName(cityId))}</div>${coverHero(cityId)}
+    <p class="small muted">${allPhotoIds().length ? 'Your cover can be the sketch, one of your photos or a slideshow. Set a photo as the cover from your Journal.' : 'Add photos to your journal and you can make one your trip cover.'}</p>
+    <button class="btn line sm" data-act="sheetclose" style="align-self:flex-start">Close</button></div>`;
+  document.getElementById('scrim').hidden = false; sh.hidden = false;
+  startSlides();
+}
+function baseBlockClean(cityId, st) {
+  const sy = stayHere(cityId), c = cityOf(cityId);
+  const sos = `<button class="btn line sm" data-act="emergency">${ic('sos', 'style="width:16px;height:16px"')}Emergency card</button>`;
+  if (!sy || (!sy.neighborhood_id && !sy.address)) {
+    return `<div class="block"><h2>Your base</h2><p class="small muted">Add where you’re staying for local tips, walking times and a one-tap ride home.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-act="welcome" data-step="2">${ic('plus', 'style="width:16px;height:16px"')}Add where you’re staying</button>${sos}</div></div>`;
+  }
+  const h = hoodOf(cityId, sy.neighborhood_id), home = homePoint(cityId);
+  /* walking time only from a known starting point: the traveler's saved stay */
+  let walk = '';
+  if (home && h && h.central && !c.region) { const m = walkMinutes(home, c.landmark_center); walk = m <= 5 ? `A few minutes’ walk to ${c.landmark_center.name}.` : m <= 45 ? `About ${m} minutes’ walk to ${c.landmark_center.name}.` : ''; }
+  let arrive = '';
+  const firstStay = sortedStays(S.trip)[0];
+  if (st.k === 'before' && firstStay && firstStay.city_id === cityId && (S.trip.arrival.via || S.trip.arrival.flight)) {
+    const via = S.trip.arrival.via, opt = S.C.edition.arrival_options.find(o => o.id === via), ap = (c.airports || []).find(a => a.id === via);
+    arrive = `<div style="display:flex;flex-direction:column;gap:6px;padding-top:8px"><div class="label">Arriving${firstStay.start ? ' ' + esc(fmtISO(firstStay.start)) : ''}${opt ? ' · ' + esc(opt.label) : ''}</div>${ap || (opt && opt.tip) ? `<div class="tipbox">${esc(ap ? ap.tip : opt.tip)}</div>` : ''}
+      ${S.trip.arrival.flight ? `<a class="text-btn" href="https://www.google.com/search?q=${encodeURIComponent('flight ' + S.trip.arrival.flight)}" target="_blank" rel="noopener">Track flight ${esc(S.trip.arrival.flight)} ↗</a>` : ''}</div>`;
+  }
+  return `<div class="block"><div class="head"><h2>Your base</h2><button class="text-btn" data-act="go" data-tab="essentials" data-focus="#tripBlock" style="min-height:32px">Edit</button></div>
+    <div><h3>${esc(sy.label || 'Where you’re staying')}</h3><div class="small muted">${esc(h ? h.name : '')}${sy.start ? ' · ' + esc(fmtISO(sy.start)) + (sy.end ? ' to ' + esc(fmtISO(sy.end)) : '') : ''}</div></div>
+    ${sy.address ? `<div class="addr-big">${esc(sy.address)}</div>` : `<button class="btn line sm" data-act="addaddr" style="align-self:flex-start">${ic('plus', 'style="width:16px;height:16px"')}Add your stay address</button>`}
+    ${walk ? `<p class="small muted">${esc(walk)}</p>` : ''}${h && h.tip ? `<div class="tipbox">${esc(h.tip)}</div>` : ''}
+    <div style="display:flex;gap:8px;flex-wrap:wrap;padding-top:4px"><button class="btn sm" data-act="homedriver">${ic('home', 'style="width:16px;height:16px"')}Take me home</button>${home ? `<button class="btn line sm" data-act="go" data-tab="essentials" data-focus="#fareBlock">Taxi fare</button>` : ''}${sos}</div>${arrive}</div>`;
+}
+function renderTodayClean() {
+  const st = stage(S.trip), cityId = curCityId(), name = S.trip.traveler_name;
+  let eyebrow, h1;
+  if (st.k === 'before') { eyebrow = st.days == null ? `${placeName()} · add your stays` : (st.days === 0 ? 'Your trip starts today' : `Trip starts in ${plural(st.days, 'day')}`); h1 = `${cityTitle(cityId)} awaits${name ? ', ' + name : ''}!`; }
+  else if (st.k === 'during') { eyebrow = `Day ${st.day} of ${st.total} · ${cityName(cityId)}`; h1 = `${greeting()}${name ? ', ' + name : ''}!`; }
+  else { eyebrow = 'Trip complete'; h1 = `${copyOf('greeting_place', placeName())}, remembered!`; }
+  const toBook = placesIn(cityId).filter(p => p.booking_status === 'required' && (p.must || p.urgency_level === 'book_soon') && p.category !== 'experience' && p.category !== 'day_trip')
+    .sort((a, b) => (a.urgency_level === 'book_soon' ? 0 : 1) - (b.urgency_level === 'book_soon' ? 0 : 1));
+  const unbooked = toBook.filter(p => !isBooked(S.trip, p.id));
+  const visited = S.trip.saved.filter(s => s.status === 'went').length;
+  const [moment, ph] = phraseNow();
+
+  let html = masthead({ noAsk: true }) + `<div class="greet"><div class="greet-row"><div><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(h1)}</h1></div>${coverTile(cityId)}</div></div>
+    <button class="askbar" data-act="ask">${ic('search')}<span>Search trip &amp; guide…</span></button>
+    <div class="askpills">${askPills(cityId).map(q => `<button data-act="askpill" data-q="${esc(q === 'Taxis' ? 'taxi' : q)}">${esc(q)}</button>`).join('')}</div>${cityBar()}`;
+  if (!hasStays()) {
+    html += `<div class="block" style="padding-top:20px"><div class="soft"><b>Your trip</b><p class="small">${cityIds().length > 1 ? `Add where you’re staying in ${esc(copyOf('place_list', placeName()))}, with dates, and the app follows you from place to place.` : 'Add where you’re staying, with dates, for local tips, walking times and a one-tap ride home.'}</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-act="welcome" data-step="2">Add my stays</button><button class="btn line sm" data-act="imopen">Import bookings</button></div></div></div>`;
+  }
+  if (showInstallTip()) {
+    const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+    html += `<div class="block" style="padding-top:20px"><div class="soft"><b>Install Wanderings</b><p class="small">${ios ? 'Tap <b>Share</b> at the bottom of Safari, then <b>Add to Home Screen</b>. It opens like an app and works offline.' : 'Open your browser menu and tap <b>Install app</b> or <b>Add to Home screen</b>. It opens like an app and works offline.'}</p>
+      <button class="text-btn" data-act="dismissinstall" style="align-self:flex-start;min-height:36px">Got it</button></div></div>`;
+  }
+  html += whatNow(st);
+  if (st.k !== 'after' && toBook.length) {
+    if (st.k === 'before') {
+      html += unbooked.length ? `<div class="block"><div class="head"><h2>Book before you go</h2><span class="small muted">${toBook.length - unbooked.length} of ${toBook.length} done</span></div>
+        <p class="small muted">Checked ${esc(checkedText())}.</p>${placeCards(unbooked)}</div>`
+        : `<div class="block"><h2>All booked</h2><p class="small muted">Everything that needs a ticket is sorted. Nice work.</p></div>`;
+    } else if (unbooked.length) {
+      html += `<div class="block"><div class="head"><h2>Still to book</h2><span class="small muted">${toBook.length - unbooked.length} of ${toBook.length} done</span></div><p>${unbooked.map(p => esc(p.name)).join(', ')}.</p><button class="text-btn" data-act="pview" data-v="sights" data-tab="places" style="align-self:flex-start">See tickets</button></div>`;
+    }
+  }
+  html += planBlock(st);
+  html += baseBlockClean(cityId, st);
+  html += `<div class="block"><div class="panel"><div class="label">Phrase for ${esc(moment.toLowerCase())}</div>
+    <div style="display:flex;gap:12px;align-items:center;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:3px;min-width:0"><div class="it">${esc(ph.t)}</div>${myLang() === 'en' ? `<div class="say">${esc(ph.say)}</div>` : ''}${speaksLocal(myLang(), S.C.phrases.language) ? '' : `<div class="en">${esc(ph.m)}</div>`}</div>
+    <button class="hear" data-act="say" data-text="${esc(ph.t)}" aria-label="Hear it">${ic('speak')}</button></div>
+    <button class="text-btn" data-act="go" data-tab="phrases" style="align-self:flex-start;min-height:32px">More phrases</button></div></div>`;
+  if (st.k === 'after' || visited) {
+    html += `<div class="block"><div class="head"><h2>${st.k === 'after' ? 'Your trip' : 'So far'}</h2><button class="text-btn" data-act="go" data-tab="journal" style="min-height:32px">Journal</button></div>
+      <p>${plural(visited, 'place')} visited, ${S.trip.journal.length} journal entr${S.trip.journal.length === 1 ? 'y' : 'ies'}.</p>
+      ${st.k === 'after' ? `<button class="btn" data-act="go" data-tab="journal" data-focus="#summary">See your trip summary</button>` : ''}</div>`;
+  }
+  document.querySelector('section[data-tab="today"]').innerHTML = html;
 }

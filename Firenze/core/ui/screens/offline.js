@@ -1,7 +1,8 @@
 /* Offline maps: save each area's map on the phone, and show which map is in use under every live map. */
-import { S, P, cityName } from '../state.js';
-import { esc, ic, toast, $, $$ } from '../dom.js';
-import { mapPackService } from '../../services/mappack-service.js';
+import { S, P, cityName } from '../state.js?v=202610120955';
+import { esc, ic, toast, $, $$ } from '../dom.js?v=202610120955';
+import { mapPackService } from '../../services/mappack-service.js?v=202610120955';
+import { clean } from '../theme.js?v=202610120955';
 
 const mb = b => (b / 1048576).toFixed(b < 10485760 ? 1 : 0) + ' MB';
 const busy = {};   // pack id -> fraction while downloading
@@ -12,10 +13,10 @@ export function offlineMapsBlock() {
   if (!info.packs.length) return '';
   const total = info.packs.reduce((a, p) => a + p.bytes, 0);
   return `<div class="block" id="offlineBlock" tabindex="-1"><div class="head"><h2>Offline maps</h2><span class="label" id="offCount"></span></div>
-    <p class="small">Save the map for each area on Wi-Fi before you go. Nearby and the Plan map then work with no signal, including walking paths and trails. Your location comes from the phone’s GPS, which needs no internet.</p>
+    <p class="small">${clean() ? 'Save on Wi-Fi before you go. Maps and your location then work with no signal.' : 'Save the map for each area on Wi-Fi before you go. Nearby and the Plan map then work with no signal, including walking paths and trails. Your location comes from the phone’s GPS, which needs no internet.'}</p>
     <div id="offList">${info.packs.map(p => packRow(p, false)).join('')}</div>
     <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-act="mapdlall" id="offAll">Save all areas · ${mb(total)}</button></div>
-    <p class="small faint">${esc(info.note || '')} Map data © OpenStreetMap contributors, packaged by Protomaps, ${esc(info.built ? 'built ' + info.built : '')}. Ticket sites, reviews and live exchange rates still need a connection.</p></div>`;
+    ${clean() ? `<p class="small faint">${info.note ? esc(info.note) + ' ' : ''}Map data © OpenStreetMap contributors · Protomaps.</p>` : `<p class="small faint">${esc(info.note || '')} Map data © OpenStreetMap contributors, packaged by Protomaps, ${esc(info.built ? 'built ' + info.built : '')}. Ticket sites, reviews and live exchange rates still need a connection.</p>`}</div>`;
 }
 function packRow(p, saved) {
   const f = busy[p.id];

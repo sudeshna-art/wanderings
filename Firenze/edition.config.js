@@ -3,6 +3,8 @@ export const EDITION = {
   id: 'florence',
   folder: 'florence',
   name: 'Andiamo Firenze',
+  /* Clean theme (approved Oct 12 2026): native system fonts, white ground, place cards and detail sheets. */
+  theme: 'clean',
   country_label: 'ITALY',
   language: 'it-IT',
   /* The photo store keeps the first Florence app's name, so photos saved there show up here with no copying. */

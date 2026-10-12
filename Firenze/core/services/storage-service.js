@@ -1,7 +1,7 @@
 /* storage-service: key/value and photo storage on this phone.
    Local provider: localStorage (+ IndexedDB for photos). Native apps later: Capacitor Preferences / Filesystem.
    Storage names are per edition so editions sharing one web address never collide. */
-import { EDITION } from '../../edition.config.js';
+import { EDITION } from '../../edition.config.js?v=202610120955';
 
 const PREFIX = EDITION.storage.prefix;          // e.g. 'wanderings-portugal'
 const PHOTO_DB = EDITION.storage.photos;        // e.g. 'wanderings-portugal-photos'

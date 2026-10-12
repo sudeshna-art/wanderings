@@ -1,12 +1,13 @@
 /* Phrases by situation, shown with meanings in the traveler's own language.
    Tap to hear with the best local voice (never an English fallback). Top 10, favorites, search, driver card.
    Oct 11 2026: opens on your starred phrases, or the edition's Top 10 ("top" in phrases.json) until you star some. */
-import { S, P, curCityId, cityName, spot, spotOptions, stayHere, myLang } from '../state.js';
-import { esc, ic, toast, $ } from '../dom.js';
-import { masthead } from '../components.js';
-import { speechService } from '../../services/speech-service.js';
-import { CONFIG } from '../../config/default-config.js';
-import { phraseFor, speaksLocal } from '../../models/schema.js';
+import { S, P, curCityId, cityName, spot, spotOptions, stayHere, myLang } from '../state.js?v=202610120955';
+import { esc, ic, toast, $ } from '../dom.js?v=202610120955';
+import { masthead } from '../components.js?v=202610120955';
+import { speechService } from '../../services/speech-service.js?v=202610120955';
+import { CONFIG } from '../../config/default-config.js?v=202610120955';
+import { clean } from '../theme.js?v=202610120955';
+import { phraseFor, speaksLocal } from '../../models/schema.js?v=202610120955';
 
 let pq = '';
 export const setQuery = q => { pq = q; };
@@ -52,7 +53,7 @@ export function renderPhrases() {
   else rows = P_[cur] || [];
   const local = speaksLocal(lang, ph.language);
   let html = masthead() + `<div class="greet"><h1>${esc(ph.title)}</h1></div>
-  <div class="fields" style="align-items:flex-end;margin:-6px 0 6px">${languageSelect('phLang')}</div>
+  ${clean() ? `<details class="langlabel"><summary>Meanings in <b>${esc((CONFIG.languages.find(l => l.code === lang) || CONFIG.languages[0]).label)}</b> · Change</summary><div style="padding:4px 0 8px">${languageSelect('phLang')}</div></details>` : `<div class="fields" style="align-items:flex-end;margin:-6px 0 6px">${languageSelect('phLang')}</div>`}
   <p class="small muted" style="margin:0 0 10px">${local ? esc(ph.local_note || `You already speak ${ph.language_name}. These are the everyday phrases for the trip, and the audio can still help.`) : esc(ph.note)}${lang !== 'en' && !local ? ' Tap the speaker to hear how each phrase sounds.' : ''}</p>
   <div class="chips" role="toolbar" aria-label="Situations">${tabs.map(t => `<button class="chip" data-act="ptab" data-v="${esc(t)}" aria-pressed="${!q && t === cur}">${t === FAV ? `★ Mine${S.trip.favs.length ? ' · ' + S.trip.favs.length : ''}` : esc(t)}</button>`).join('')}</div>
   <input type="search" id="phq" placeholder="Search phrases" value="${esc(pq)}" aria-label="Search phrases" style="margin-top:8px">`;

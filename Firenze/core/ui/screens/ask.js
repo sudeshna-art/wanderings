@@ -1,16 +1,17 @@
 /* Ask: one search box for quick answers (Oct 11 2026). Works offline: answers come from this edition's guide
    and the traveler's own trip. Money, taxi, help, home, phrases, bookings and opening days get answer cards;
    everything else is listed by best match. */
-import { S, P, curCityId, cityOf, cityName, placeById, spot, homePoint, stayHere, myLang, today, itemInfo } from '../state.js';
-import { esc, ic, ill, toast, $, fmtDay, fmtNum, KIND_NAME } from '../dom.js';
-import { bookingLine } from '../components.js';
-import { buildIndex, ask } from '../../models/finder.js';
-import { closedText, closedOn, sortedBookings, itemsOn, weekdayOf, tripDays, localISO } from '../../models/schema.js';
-import { phraseRow } from './phrases.js';
-import { meetBlock } from './safety.js';
-import { currencyService } from '../../services/currency-service.js';
-import { fareService } from '../../services/fare-service.js';
-import { linkService } from '../../services/link-service.js';
+import { S, P, curCityId, cityOf, cityName, placeById, spot, homePoint, stayHere, myLang, today, itemInfo } from '../state.js?v=202610120955';
+import { esc, ic, ill, toast, $, fmtDay, fmtNum, KIND_NAME } from '../dom.js?v=202610120955';
+import { bookingLine } from '../components.js?v=202610120955';
+import { buildIndex, ask } from '../../models/finder.js?v=202610120955';
+import { closedText, closedOn, sortedBookings, itemsOn, weekdayOf, tripDays, localISO } from '../../models/schema.js?v=202610120955';
+import { phraseRow } from './phrases.js?v=202610120955';
+import { meetBlock } from './safety.js?v=202610120955';
+import { currencyService } from '../../services/currency-service.js?v=202610120955';
+import { fareService } from '../../services/fare-service.js?v=202610120955';
+import { linkService } from '../../services/link-service.js?v=202610120955';
+import { clean } from '../theme.js?v=202610120955';
 
 const A = { docs: null, timer: null, q: '' };
 const DAY_NAME = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -30,7 +31,7 @@ function suggestions() {
 export function openAsk(q = '') {
   A.docs = buildIndex({ C: S.C, trip: S.trip, lang: myLang() });
   const el = layer();
-  el.innerHTML = `<div class="inner" style="gap:14px"><div class="askhead"><label class="askfield">${ic('search')}<span class="offscreen">Ask anything</span><input type="search" id="askq" enterkeyhint="search" autocomplete="off" placeholder="Ask anything" value="${esc(q)}"></label><button class="btn line sm" data-act="askclose">Close</button></div>
+  el.innerHTML = `<div class="inner" style="gap:14px"><div class="askhead"><label class="askfield">${ic('search')}<span class="offscreen">Ask anything</span><input type="search" id="askq" enterkeyhint="search" autocomplete="off" placeholder="${clean() ? 'Search trip &amp; guide…' : 'Ask anything'}" value="${esc(q)}"></label>${clean() ? '<button class="layer-done" data-act="askclose">Done</button>' : '<button class="btn line sm" data-act="askclose">Close</button>'}</div>
     <div id="askOut"></div></div>`;
   el.hidden = false;
   const inp = $('#askq'); setTimeout(() => { inp.focus(); }, 60);

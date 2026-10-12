@@ -1,15 +1,16 @@
 /* Essentials: emergency card, you and your trip, bookings, getting between places, currency, getting around,
    taxis, audio, know-how, emergencies. */
-import { EDITION } from '../../../edition.config.js';
-import { S, P, save, curCityId, cityOf, cityName, cityIds, spot, spotOptions, homePoint, addMount } from '../state.js';
-import { esc, ic, fmtNum, parseNum, fmtISO, $, modeIcon } from '../dom.js';
-import { masthead, cityBar, styleChoice, staysEditor, arrivalFields, homeCurrencySelect } from '../components.js';
-import { currencyService } from '../../services/currency-service.js';
-import { fareService } from '../../services/fare-service.js';
-import { speechService } from '../../services/speech-service.js';
-import { languageSelect } from './phrases.js';
-import { offlineMapsBlock, fillOfflineMaps } from './offline.js';
-import { bookingsBlock } from './bookings.js';
+import { EDITION } from '../../../edition.config.js?v=202610120955';
+import { S, P, save, curCityId, cityOf, cityName, cityIds, spot, spotOptions, homePoint, addMount } from '../state.js?v=202610120955';
+import { esc, ic, fmtNum, parseNum, fmtISO, $, modeIcon } from '../dom.js?v=202610120955';
+import { masthead, cityBar, styleChoice, staysEditor, arrivalFields, homeCurrencySelect } from '../components.js?v=202610120955';
+import { currencyService } from '../../services/currency-service.js?v=202610120955';
+import { fareService } from '../../services/fare-service.js?v=202610120955';
+import { speechService } from '../../services/speech-service.js?v=202610120955';
+import { languageSelect } from './phrases.js?v=202610120955';
+import { offlineMapsBlock, fillOfflineMaps } from './offline.js?v=202610120955';
+import { bookingsBlock } from './bookings.js?v=202610120955';
+import { clean } from '../theme.js?v=202610120955';
 
 export const E = { rate: null };
 
@@ -26,7 +27,7 @@ function connections() {
 
 function currencyBlock(c) {
   const home = S.trip.home_currency, local = c.currency_code;
-  if (!home) return `<div class="block" id="convBlock"><h2>Currency</h2><p class="small muted">Pick your home currency above and the converter appears here.</p></div>`;
+  if (!home) return clean() ? `<div class="block" id="convBlock"><h2>Currency</h2>${homeCurrencySelect()}</div>` : `<div class="block" id="convBlock"><h2>Currency</h2><p class="small muted">Pick your home currency above and the converter appears here.</p></div>`;
   if (home === local) return `<div class="block" id="convBlock"><h2>Currency</h2><p class="small muted">Your home currency is the ${esc(currencyService.name(local).toLowerCase())}, the same as here, so there’s nothing to convert.</p></div>`;
   const toHome = P().cdir !== 'home2local';
   const sh = currencyService.symbol(home), sl = currencyService.symbol(local);
@@ -121,16 +122,16 @@ export function renderEssentials() {
   <button class="btn line" data-act="emergency" style="align-self:flex-start">${ic('sos', 'style="width:18px;height:18px"')}Emergency card · works offline</button>
   <div class="block" id="tripBlock" tabindex="-1" style="padding-top:22px"><h2>You &amp; your trip</h2>
     <div class="fields"><label class="f">Your first name<input type="text" data-bind="traveler_name" value="${esc(S.trip.traveler_name)}" autocomplete="given-name" placeholder="Used in your greeting"></label></div>
-    ${languageSelect('eLang')}
+    ${clean() ? '' : languageSelect('eLang')}
     ${homeCurrencySelect()}
-    ${styleChoice('estyle')}
+    ${clean() ? '' : styleChoice('estyle')}
     <h3 style="margin-top:10px">Where you’re staying</h3>
     ${staysEditor({ info: cityIds().length < 2 })}
     <h3 style="margin-top:10px">Arriving and leaving</h3>
     ${arrivalFields()}
     ${S.trip.departure.flight ? `<a class="btn line sm" style="align-self:flex-start" href="https://www.google.com/search?q=${encodeURIComponent('flight ' + S.trip.departure.flight)}" target="_blank" rel="noopener">Track departure flight ${esc(S.trip.departure.flight)} ↗</a>` : ''}
     ${S.trip.refs ? `<div class="fields"><label class="f">Booking notes<input type="text" data-bind="refs" value="${esc(S.trip.refs)}"></label></div><p class="small faint">From before bookings had their own list. You can move these into Your bookings below.</p>` : ''}
-    <button class="text-btn" data-act="welcome" data-step="1" style="align-self:flex-start">Show the welcome steps again</button></div>
+    ${clean() ? '' : '<button class="text-btn" data-act="welcome" data-step="1" style="align-self:flex-start">Show the welcome steps again</button>'}</div>
   ${bookingsBlock()}
   ${cityIds().length > 1 ? `<div class="block" id="connBlock" tabindex="-1"><h2>Getting between places</h2>${connections()}<p class="small faint">Times are approximate. Check live times on the official sites when you book.</p></div>` : ''}
   ${offlineMapsBlock()}
@@ -148,6 +149,7 @@ export function renderEssentials() {
     <ul class="plain">${ess.embassies.map(e => `<li><a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.label)} ↗</a></li>`).join('')}</ul>
     <p class="small muted">${esc(ess.emergency_note)}</p>
     <button class="btn line sm" data-act="emergency" style="align-self:flex-start">${ic('sos', 'style="width:16px;height:16px"')}Open the emergency card</button></div>
+  ${clean() ? `<div class="block" id="settingsBlock"><h2>Settings</h2><div class="setgroup">${languageSelect('eLang')}${styleChoice('estyle')}<button class="text-btn" data-act="welcome" data-step="1" style="align-self:flex-start">Show the welcome steps again</button></div></div>` : ''}
   <p class="small faint" style="padding-top:28px">Prices, hours and fares checked ${esc(fmtISO(ess.checked, { month: 'short', day: 'numeric', year: 'numeric' }))} from official sites and travel sources. They change, so confirm when booking.</p>
   <p class="small faint" style="padding-top:10px">Wanderings by Whiskers &amp; Wanderings · ${esc(EDITION.name)} edition</p>`;
   document.querySelector('section[data-tab="essentials"]').innerHTML = html;

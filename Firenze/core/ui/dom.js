@@ -22,6 +22,7 @@ export const metres = m => m < 950 ? `${Math.max(50, Math.round(m / 50) * 50)} m
 
 /* ---------- fine-line icon set ---------- */
 const ICON = {
+  plus: '<path d="M12 5v14M5 12h14"/>',   /* clean theme (Oct 12 2026) */
   today: '<circle cx="12" cy="12" r="4"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/>',
   places: '<path d="M12 21s-6-5.3-6-10a6 6 0 0 1 12 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2"/>',
   phrases: '<path d="M4.5 5.5h15v10h-9l-4.5 3.5v-3.5h-1.5z"/><path d="M8.5 10.5h.01M12 10.5h.01M15.5 10.5h.01"/>',

@@ -1,10 +1,10 @@
 /* Welcome steps (simplified Oct 11 2026 to three): you, where you're staying, how you like to travel.
    Arrival details now come from bookings or Essentials. Everything stays on this phone. */
-import { EDITION } from '../../../edition.config.js';
-import { S, copyOf, placeName } from '../state.js';
-import { esc, ic } from '../dom.js';
-import { styleChoice, staysEditor, homeCurrencySelect } from '../components.js';
-import { languageSelect } from './phrases.js';
+import { EDITION } from '../../../edition.config.js?v=202610120955';
+import { S, copyOf, placeName } from '../state.js?v=202610120955';
+import { esc, ic } from '../dom.js?v=202610120955';
+import { styleChoice, staysEditor, homeCurrencySelect } from '../components.js?v=202610120955';
+import { languageSelect } from './phrases.js?v=202610120955';
 
 export const W = { step: 1 };
 const STEPS = 3;

@@ -1,11 +1,12 @@
 /* Journal: dictation-friendly entries, photos, trip summary for Instagram, Share with Wanderings, backup. */
-import { S, P, save, allPlaces, placeById, cityName, curCityId, cityIds, copyOf, placeName } from '../state.js';
-import { esc, ic, fmtDate, fmtISO, toast, $ } from '../dom.js';
-import { masthead } from '../components.js';
-import { stage, statusOf, setStatus, tripRange } from '../../models/schema.js';
-import { tripService } from '../../services/trip-service.js';
-import { storageService } from '../../services/storage-service.js';
-import { shareService } from '../../services/share-service.js';
+import { S, P, save, allPlaces, placeById, cityName, curCityId, cityIds, copyOf, placeName } from '../state.js?v=202610120955';
+import { esc, ic, fmtDate, fmtISO, toast, $ } from '../dom.js?v=202610120955';
+import { masthead } from '../components.js?v=202610120955';
+import { stage, statusOf, setStatus, tripRange } from '../../models/schema.js?v=202610120955';
+import { tripService } from '../../services/trip-service.js?v=202610120955';
+import { storageService } from '../../services/storage-service.js?v=202610120955';
+import { shareService } from '../../services/share-service.js?v=202610120955';
+import { clean } from '../theme.js?v=202610120955';
 
 export const J = { pending: [], draft: '' };
 export const allPhotoIds = () => S.trip.journal.slice().reverse().flatMap(e => e.photos || []);
@@ -70,7 +71,7 @@ export function renderJournal() {
     <div style="display:flex;gap:16px;align-items:center"><label class="text-btn pick-photos" for="photoInput" data-phtarget="${e.id}" style="min-height:36px">${ic('camera', 'style="width:16px;height:16px"')}Add photos</label><button class="text-btn" data-act="delj" data-id="${e.id}" style="min-height:36px;color:var(--muted);font-weight:500">Delete</button></div></div>`).join('')
     : `<p class="serif" style="font-size:18px;border-top:1px solid var(--rule);padding-top:16px">Nothing yet. Your first memory goes here, or tap “Went here” on any place.</p>`}</div></div>`;
   html += `<div class="block" id="summary"><div class="head"><h2>Trip summary</h2><span class="label">For Instagram</span></div>
-    <p class="small muted">Built from your visits and notes. Pick photos, tap Share to Instagram and choose Instagram. We copy the caption for you, so just paste it in.</p>
+    ${clean() ? '<details class="tucked"><summary>How sharing works</summary><p class="small muted">Built from your visits and notes. Pick photos, tap Share to Instagram and choose Instagram. We copy the caption for you, so just paste it in.</p></details>' : '<p class="small muted">Built from your visits and notes. Pick photos, tap Share to Instagram and choose Instagram. We copy the caption for you, so just paste it in.</p>'}
     <div class="summary">${esc(summaryText())}</div>
     ${photos.length ? `<div class="label" id="igSelLabel" style="margin-top:4px">Choose photos · ${igSel.length} selected</div><div class="ph-row">${photos.map(id => `<button class="ph-thumb sm" data-act="igpick" data-id="${id}" aria-pressed="${igSel.includes(id)}" aria-label="Select photo"><img data-photo="${id}" alt=""></button>`).join('')}</div>` : '<p class="small muted">Add photos to your journal entries and they’ll appear here to share.</p>'}
     <div style="display:flex;gap:8px;flex-wrap:wrap">${photos.length ? '<button class="btn" data-act="igshare">Share to Instagram</button>' : ''}<button class="btn ${photos.length ? 'line' : ''}" data-act="copysum">Copy caption</button><button class="btn line" data-act="copyall">Copy everything</button></div></div>`;

@@ -1,16 +1,19 @@
 /* Near me (True Wanderer): live map with "You are here" and nearby curated spots. Location is asked for only here.
    Oct 11 2026: open to every travel style as "Near me", with "Meet back here" for friends who split up. */
-import { EDITION } from '../../../edition.config.js';
-import { S, P, save, curCityId, cityOf, cityName, placeById, addMount, addCleanup, isWanderer } from '../state.js';
-import { esc, ic, ill, KIND_NAME, metres, $, toast } from '../dom.js';
-import { masthead, illustrationFor, statusLine, ticketButtons, searchButtons, pricePlaceholder, closedLine, tipsOf } from '../components.js';
-import { statusOf, isBooked, walkMinutes, km, priceText } from '../../models/schema.js';
-import { mapService } from '../../services/map-service.js';
-import { locationService } from '../../services/location-service.js';
-import { placesService } from '../../services/places-service.js';
-import { fareService } from '../../services/fare-service.js';
-import { currencyService } from '../../services/currency-service.js';
-import { showStatus } from './offline.js';
+import { EDITION } from '../../../edition.config.js?v=202610120955';
+import { S, P, save, curCityId, cityOf, cityName, placeById, addMount, addCleanup, isWanderer, homePoint, stayHere } from '../state.js?v=202610120955';
+import { clean } from '../theme.js?v=202610120955';
+import { statusBadge, cardPrice, chev } from '../components.js?v=202610120955';
+import { closedText } from '../../models/schema.js?v=202610120955';
+import { esc, ic, ill, KIND_NAME, metres, $, toast } from '../dom.js?v=202610120955';
+import { masthead, illustrationFor, statusLine, ticketButtons, searchButtons, pricePlaceholder, closedLine, tipsOf } from '../components.js?v=202610120955';
+import { statusOf, isBooked, walkMinutes, km, priceText, priceShort } from '../../models/schema.js?v=202610120955';
+import { mapService } from '../../services/map-service.js?v=202610120955';
+import { locationService } from '../../services/location-service.js?v=202610120955';
+import { placesService } from '../../services/places-service.js?v=202610120955';
+import { fareService } from '../../services/fare-service.js?v=202610120955';
+import { currencyService } from '../../services/currency-service.js?v=202610120955';
+import { showStatus } from './offline.js?v=202610120955';
 
 const RADIUS = 3000;           // metres counted as "near you"
 const W = { map: null, stop: null, pos: null, list: [], mode: 'locating', fallbackMap: false, centered: false };
@@ -91,6 +94,7 @@ export function recenter() {
 /* ---------- spot modal: everything about one place, in one sheet ---------- */
 export async function openSpot(id) {
   const p = placeById(id); if (!p) return;
+  if (clean()) return openSpotClean(p);
   const st = statusOf(S.trip, id), booked = isBooked(S.trip, id);
   const here = W.mode === 'near' ? W.pos : null;
   const walk = here && p.location ? walkMinutes(here, p.location) : null;
@@ -120,3 +124,61 @@ export async function openSpot(id) {
   }
 }
 export const refreshWanderer = refresh;
+
+/* ---------- clean theme detail sheet (Oct 12 2026): Airbnb-style grouped sections and a sticky main action.
+   Walking and taxi estimates appear only from a known start: live GPS, else the traveler's saved stay. ---------- */
+const HOURS = /\b(open|opens|closes|closed|closing|last entry)\b/i;
+const hostOf = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return ''; } };
+async function openSpotClean(p) {
+  const id = p.id, st = statusOf(S.trip, id), booked = isBooked(S.trip, id);
+  const gps = W.mode === 'near' ? W.pos : null, home = !gps ? homePoint(p.city_id) : null;
+  const origin = gps || home;
+  const fromLabel = gps ? 'From where you are' : home ? `From your stay${home.hood ? ' in ' + home.hood.name.replace(/\s*\(.*\)$/, '') : ''}` : '';
+  const walk = origin && p.location ? walkMinutes(origin, p.location) : null;
+  const links = p.location ? mapService.openInMapsLink({ lat: p.location.lat, lng: p.location.lng, name: p.name }) : null;
+  const tips = tipsOf(p), hours = tips.filter(t => HOURS.test(t)), know = tips.filter(t => !HOURS.test(t));
+  const cl = closedText(p), price = priceText(p.price);
+  const priceNote = p.price && p.price.checked && p.price.source ? `${p.price.source}, checked ${new Date(p.price.checked + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}` : '';
+  const ticketed = p.ticket_url && p.booking_status !== 'none';
+  let main;
+  if (ticketed && !booked) main = `<a class="btn" href="${esc(p.ticket_url)}" target="_blank" rel="noopener">Book on ${esc(hostOf(p.ticket_url) || 'the official site')} ↗</a>`;
+  else if (links) main = `<a class="btn" href="${esc(links.walk)}" target="_blank" rel="noopener">Directions ↗</a>`;
+  else if (p.search_q) main = `<a class="btn" href="${esc(('https://www.getyourguide.com/s/?q=' + encodeURIComponent(p.search_q)))}" target="_blank" rel="noopener">Find a tour ↗</a>`;
+  else main = `<button class="btn" data-act="want" data-id="${id}">${st === 'want' ? '✓ On your list' : 'Want to go'}</button>`;
+  const row = (icon, title, sub, extra = '') => `<div class="sh-row">${ic(icon)}<span style="display:flex;flex-direction:column;min-width:0"><span>${title}</span>${sub ? `<span class="small muted">${sub}</span>` : ''}</span>${extra}</div>`;
+  const sh = $('#sheet');
+  sh.innerHTML = `<div class="grab" role="button" aria-label="Drag to expand or close"></div>
+    <div style="display:flex;flex-direction:column;gap:8px;padding-bottom:18px">
+      <div class="eyebrow">${esc(KIND_NAME[p.kind] || '')}${p.area ? ' · ' + esc(p.area) : ''}</div>
+      <div class="sh-title">${esc(p.name)}</div>
+      <div class="pmeta">${cardPrice(p) ? `<span>${cardPrice(p)}</span>` : ''}${statusBadge(p, booked)}${cl ? `<span class="closed-day" style="margin:0">${esc(cl)}</span>` : ''}</div>
+      ${(p.price && p.price.text && p.price.amount != null) || priceNote ? `<p class="small muted">${p.price.text && p.price.amount != null ? esc(p.price.text) + (priceNote ? '. ' : '') : ''}${priceNote ? 'Source: ' + esc(priceNote) : ''}</p>` : ''}
+    </div>
+    <div class="seg-pill" role="group" aria-label="Your list" style="margin-top:0;margin-bottom:6px">
+      <button data-act="want" data-id="${id}" aria-pressed="${st === 'want'}">${st === 'want' ? '✓ Want to go' : 'Want to go'}</button>
+      <button data-act="${st === 'went' ? 'spotunwent' : 'spotwent'}" data-id="${id}" aria-pressed="${st === 'went'}">${st === 'went' ? '✓ Went here' : 'Went here'}</button></div>
+    <div class="sh-sec" style="border-top:0">
+      ${p.description ? `<p>${esc(p.description)}</p>` : ''}
+      ${p.audio ? `<div class="spot-audio"><button class="hear" data-act="audio" data-id="${id}" aria-label="Play the audio story">${ic('speak')}</button><div><b>Audio story</b><div class="small muted">A short story about this place, read aloud.</div></div></div>` : ''}
+    </div>
+    ${p.location ? `<div class="sh-sec"><div class="sh-cap">Getting there</div>
+      ${origin ? row('walk', walk > 120 ? 'Too far to walk' : `About ${walk} min walk`, esc(fromLabel)) + row('taxi', `<span id="spotFare">Taxi …</span>`, 'Estimate from the city tariff. The meter decides.')
+        : `<p class="small muted">Add where you’re staying, or open Near me with location on, to see walking times and taxi estimates.</p>`}
+      ${links ? `<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><a class="btn line sm" href="${esc(links.apple)}" target="_blank" rel="noopener">Apple Maps</a><a class="btn line sm" href="${esc(links.google || links.walk)}" target="_blank" rel="noopener">Google Maps</a></div>` : ''}</div>` : ''}
+    ${cl || hours.length ? `<div class="sh-sec"><div class="sh-cap">Open and closed</div>${hours.map(t => `<p class="small">${esc(t)}</p>`).join('')}${cl && !hours.some(t => t.toLowerCase().includes(cl.toLowerCase())) ? `<p class="small" style="color:var(--coral-ink)">${esc(cl)}.</p>` : ''}${p.closed_source ? `<p class="small muted">${esc(p.closed_source.text)}, checked ${esc(new Date(p.closed_source.checked + 'T00:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }))}</p>` : ''}</div>` : ''}
+    ${know.length || p.lead_time || p.how || p.duration ? `<div class="sh-sec"><div class="sh-cap">Good to know</div>
+      ${p.how ? `<div class="tipbox"><b>Getting there:</b> ${esc(p.how)}${p.stay ? '. Plan for ' + esc(p.stay.toLowerCase()) + '.' : ''}</div>` : ''}${p.duration ? `<div class="tipbox"><b>How long:</b> ${esc(p.duration)}</div>` : ''}
+      ${p.lead_time ? `<div class="tipbox">${esc(p.lead_time)}</div>` : ''}${know.slice(0, 4).map(t => `<div class="tipbox">${esc(t)}</div>`).join('')}
+      ${p.search_q ? `<div style="display:flex;gap:8px;flex-wrap:wrap">${searchButtons(p.search_q)}</div>` : ''}</div>` : ''}
+    <div class="sh-sec" style="gap:0">
+      <button class="sh-row" data-act="addsheet" data-id="${id}">${ic('plan')}<span>Add to a day</span>${chev()}</button>
+      ${p.booking_status !== 'none' ? `<button class="sh-row" data-act="spotbooked" data-id="${id}">${ic('ticket')}<span>${booked ? 'Booked ✓ (tap to undo)' : 'I booked this'}</span>${chev()}</button>` : ''}
+      ${p.location ? `<button class="sh-row" data-act="meetform" data-box="spotMeet" data-id="${id}">${ic('pin')}<span>Meet back here</span>${chev()}</button><div id="spotMeet" hidden></div>` : ''}
+    </div>
+    <div class="sheet-foot">${main}</div>`;
+  $('#scrim').hidden = false; sh.hidden = false;
+  if (origin && p.location) {
+    const r = await fareService.estimate(origin, p.location, p.city_id);
+    const f = $('#spotFare'); if (f) f.textContent = r.err ? 'Taxi estimate not available' : `Taxi about ${currencyService.symbol(r.currency_code)}${r.lo}${r.hi !== r.lo ? ' to ' + currencyService.symbol(r.currency_code) + r.hi : ''}`;
+  }
+}

@@ -329,6 +329,10 @@
    "checked": "2026-10-07",
    "source": "European emergency number 112"
   },
-  "greeting_name": "Firenze"
+  "greeting_name": "Firenze",
+  "brand": {
+   "tint": "#EAF2F3",
+   "note": "Clean theme: light tint behind the city mark. The mark itself is art/florence-mark.svg."
+  }
  }
 ]
