@@ -1,7 +1,7 @@
 [
   {
     "city_id": "lisbon",
-    "name": "Lisbon",
+    "name": "Lisboa",
     "local_name": "Lisboa",
     "stamp": "LISBOA",
     "coords_label": "38.72° N · 9.14° W",
@@ -47,7 +47,7 @@
       },
       {
         "id": "east",
-        "name": "East Lisbon and Parque das Nações"
+        "name": "East Lisboa and Parque das Nações"
       },
       {
         "id": "sintra",
@@ -143,7 +143,7 @@
           "lng": -9.4207
         },
         "central": false,
-        "tip": "A seaside town west of Lisbon, connected by train from Cais do Sodré."
+        "tip": "A seaside town west of Lisboa, connected by train from Cais do Sodré."
       },
       {
         "id": "sintra",
@@ -153,7 +153,7 @@
           "lng": -9.388
         },
         "central": false,
-        "tip": "Palaces in the hills. Trains run to Lisbon from Sintra station."
+        "tip": "Palaces in the hills. Trains run to Lisboa from Sintra station."
       },
       {
         "id": "other",
@@ -166,8 +166,8 @@
     "airports": [
       {
         "id": "LIS",
-        "name": "Lisbon airport (Humberto Delgado)",
-        "short": "Lisbon airport",
+        "name": "Lisboa airport (Humberto Delgado)",
+        "short": "Lisboa airport",
         "local": "Aeroporto de Lisboa",
         "location": {
           "lat": 38.7742,
@@ -212,7 +212,7 @@
       "items": [
         {
           "title": "Taxis",
-          "text": "Licensed taxis are metered. In Lisbon you can hail one with its roof light on, find one at a rank, or call. Ride-hailing apps such as Uber and Bolt also operate."
+          "text": "Licensed taxis are metered. In Lisboa you can hail one with its roof light on, find one at a rank, or call. Ride-hailing apps such as Uber and Bolt also operate."
         },
         {
           "title": "Metro and trams",
@@ -220,7 +220,7 @@
         },
         {
           "title": "Hills",
-          "text": "Lisbon is steep, and the limestone pavements get slippery. Flat shoes with grip help. The Glória and Bica funiculars and the Santa Justa lift save some climbs."
+          "text": "Lisboa is steep, and the limestone pavements get slippery. Flat shoes with grip help. The Glória and Bica funiculars and the Santa Justa lift save some climbs."
         },
         {
           "title": "Trains out of town",
@@ -262,7 +262,7 @@
           {
             "mode": "train",
             "title": "Train",
-            "text": "CP trains run from Lisbon Oriente to Faro: about 3 hours on the Alfa Pendular, about 3.5 hours on the Intercidades. Fares usually from about €29. For Lagos, change at Tunes.",
+            "text": "CP trains run from Lisboa Oriente to Faro: about 3 hours on the Alfa Pendular, about 3.5 hours on the Intercidades. Fares usually from about €29. For Lagos, change at Tunes.",
             "link": {
               "label": "Times and tickets on cp.pt",
               "url": "https://www.cp.pt/"
@@ -273,7 +273,7 @@
           {
             "mode": "bus",
             "title": "Express coach",
-            "text": "Express coaches link Lisbon with the main Algarve towns.",
+            "text": "Express coaches link Lisboa with the main Algarve towns.",
             "link": {
               "label": "Rede Expressos (official)",
               "url": "https://rede-expressos.pt/"
@@ -506,7 +506,7 @@
           {
             "mode": "train",
             "title": "Train",
-            "text": "CP trains run from Faro to Lisbon Oriente: about 3 hours on the Alfa Pendular, about 3.5 hours on the Intercidades. Fares usually from about €29. From Lagos, change at Tunes.",
+            "text": "CP trains run from Faro to Lisboa Oriente: about 3 hours on the Alfa Pendular, about 3.5 hours on the Intercidades. Fares usually from about €29. From Lagos, change at Tunes.",
             "link": {
               "label": "Times and tickets on cp.pt",
               "url": "https://www.cp.pt/"
@@ -517,7 +517,7 @@
           {
             "mode": "bus",
             "title": "Express coach",
-            "text": "Express coaches link the main Algarve towns with Lisbon.",
+            "text": "Express coaches link the main Algarve towns with Lisboa.",
             "link": {
               "label": "Rede Expressos (official)",
               "url": "https://rede-expressos.pt/"

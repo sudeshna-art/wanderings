@@ -2,7 +2,7 @@
   "schema_version": 1,
   "edition_id": "portugal",
   "name": "Vamos Portugal",
-  "tagline": "Lisbon and the Algarve",
+  "tagline": "Lisboa and the Algarve",
   "language": "pt-PT",
   "language_name": "Portuguese",
   "city_ids": [
@@ -30,7 +30,7 @@
   "arrival_options": [
     {
       "id": "LIS",
-      "label": "Lisbon airport (LIS)",
+      "label": "Lisboa airport (LIS)",
       "city_id": "lisbon"
     },
     {
@@ -83,9 +83,9 @@
   "checked": "2026-10-09",
   "copy": {
     "place": "Portugal",
-    "place_list": "Lisbon and the Algarve",
-    "follow": "The app follows you from Lisbon to the Algarve.",
-    "hashtags": "#Portugal #Lisbon #Algarve #travel",
+    "place_list": "Lisboa and the Algarve",
+    "follow": "The app follows you from Lisboa to the Algarve.",
+    "hashtags": "#Portugal #Lisboa #Algarve #travel",
     "file_prefix": "portugal"
   }
 }

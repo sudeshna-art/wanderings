@@ -2,7 +2,7 @@
  "packs": [
   {
    "id": "lisbon",
-   "name": "Lisbon",
+   "name": "Lisboa",
    "city_id": "lisbon",
    "bbox": [
     -9.25,
@@ -10,7 +10,7 @@
     -9.05,
     38.8
    ],
-   "covers": "Central Lisbon, Belém, Alfama, Parque das Nações and the airport",
+   "covers": "Central Lisboa, Belém, Alfama, Parque das Nações and the airport",
    "file": "maps/lisbon.pmtiles",
    "bytes": 13468316,
    "maxzoom": 15
@@ -78,5 +78,5 @@
  ],
  "built": "2026-10-10",
  "source": "OpenStreetMap contributors, Protomaps daily build 20261010",
- "note": "Day trips beyond these areas (Óbidos, Arrábida, Seville) are not in the offline maps."
+ "note": "Day trips beyond these areas (Óbidos, Arrábida, Sevilla) are not in the offline maps."
 }

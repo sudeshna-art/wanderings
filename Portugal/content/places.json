@@ -85,20 +85,20 @@
    "source": null
   },
   "lead_time": "Book a few days ahead",
-  "description": "The little fortress on the Tagus that once guarded the way into Lisbon. Freshly restored.",
+  "description": "The little fortress on the Tagus that once guarded the way into Lisboa. Freshly restored.",
   "tips": [
    "Reopened in May 2026 after a year of restoration, with timed slots and about 900 visitors a day.",
    "Open 9:30 to 17:30, last entry 17:00. Closed Mondays.",
    "In person, tickets are sold at the Jerónimos ticket office."
   ],
   "audio": {
-   "script": "The Belém Tower was built in the early fifteen hundreds to defend the mouth of the river Tagus. Ships setting out on voyages of discovery passed right here. Look for the carved rhinoceros head on the outside wall, inspired by a real rhino sent to Lisbon as a royal gift.",
+   "script": "The Belém Tower was built in the early fifteen hundreds to defend the mouth of the river Tagus. Ships setting out on voyages of discovery passed right here. Look for the carved rhinoceros head on the outside wall, inspired by a real rhino sent to Lisboa as a royal gift.",
    "scripts": {
     "es": "La Torre de Belém se construyó a principios del siglo dieciséis para defender la desembocadura del río Tajo. Los barcos que partían a los viajes de descubrimiento pasaban justo por aquí. Busca la cabeza de rinoceronte tallada en el muro exterior, inspirada en un rinoceronte de verdad enviado a Lisboa como regalo real.",
-    "fr": "La tour de Belém a été construite au début du seizième siècle pour défendre l’embouchure du Tage. Les navires partant pour les grandes découvertes passaient juste ici. Cherchez la tête de rhinocéros sculptée sur le mur extérieur, inspirée d’un vrai rhinocéros envoyé à Lisbonne comme cadeau royal.",
+    "fr": "La tour de Belém a été construite au début du seizième siècle pour défendre l’embouchure du Tage. Les navires partant pour les grandes découvertes passaient juste ici. Cherchez la tête de rhinocéros sculptée sur le mur extérieur, inspirée d’un vrai rhinocéros envoyé à Lisboa comme cadeau royal.",
     "pt": "A Torre de Belém foi construída no início do século dezesseis para defender a foz do rio Tejo. Os navios que partiam para as viagens dos descobrimentos passavam bem aqui. Procure a cabeça de rinoceronte esculpida na parede externa, inspirada num rinoceronte de verdade enviado a Lisboa como presente real.",
-    "de": "Der Turm von Belém wurde Anfang des sechzehnten Jahrhunderts gebaut, um die Mündung des Tejo zu verteidigen. Die Schiffe, die zu den Entdeckungsfahrten aufbrachen, fuhren genau hier vorbei. Suchen Sie den in die Außenmauer gemeißelten Nashornkopf. Vorbild war ein echtes Nashorn, das als königliches Geschenk nach Lissabon kam.",
-    "it": "La Torre di Belém fu costruita all’inizio del Cinquecento per difendere la foce del fiume Tago. Le navi in partenza per i viaggi di scoperta passavano proprio da qui. Cerca la testa di rinoceronte scolpita sul muro esterno, ispirata a un vero rinoceronte mandato a Lisbona come dono reale."
+    "de": "Der Turm von Belém wurde Anfang des sechzehnten Jahrhunderts gebaut, um die Mündung des Tejo zu verteidigen. Die Schiffe, die zu den Entdeckungsfahrten aufbrachen, fuhren genau hier vorbei. Suchen Sie den in die Außenmauer gemeißelten Nashornkopf. Vorbild war ein echtes Nashorn, das als königliches Geschenk nach Lisboa kam.",
+    "it": "La Torre di Belém fu costruita all’inizio del Cinquecento per difendere la foce del fiume Tago. Le navi in partenza per i viaggi di scoperta passavano proprio da qui. Cerca la testa di rinoceronte scolpita sul muro esterno, ispirata a un vero rinoceronte mandato a Lisboa come dono reale."
    },
    "recording": null
   },
@@ -231,19 +231,19 @@
    "source": null
   },
   "lead_time": "",
-  "description": "Castle walls on one of Lisbon's highest hills, with views over the river and red rooftops.",
+  "description": "Castle walls on one of Lisboa's highest hills, with views over the river and red rooftops.",
   "tips": [
    "Late afternoon light over the river is the best time.",
    "Buying online skips the ticket line."
   ],
   "audio": {
-   "script": "São Jorge Castle sits on one of the hills where Lisbon began. Its walls date mostly from the Moorish period and the centuries after, when Portugal's kings lived here. From the ramparts you can see the river Tagus, the Baixa grid rebuilt after the 1755 earthquake, and the bridge to the south bank.",
+   "script": "São Jorge Castle sits on one of the hills where Lisboa began. Its walls date mostly from the Moorish period and the centuries after, when Portugal's kings lived here. From the ramparts you can see the river Tagus, the Baixa grid rebuilt after the 1755 earthquake, and the bridge to the south bank.",
    "scripts": {
     "es": "El Castillo de San Jorge se alza sobre una de las colinas donde nació Lisboa. Sus murallas son en su mayoría de la época morisca y de los siglos siguientes, cuando aquí vivían los reyes de Portugal. Desde las almenas se ven el río Tajo, la cuadrícula de la Baixa reconstruida tras el terremoto de 1755 y el puente hacia la orilla sur.",
-    "fr": "Le château Saint-Georges domine l’une des collines où Lisbonne est née. Ses murailles datent surtout de l’époque maure et des siècles suivants, quand les rois du Portugal vivaient ici. Depuis les remparts, on voit le Tage, le quadrillage de la Baixa reconstruit après le tremblement de terre de 1755 et le pont vers la rive sud.",
+    "fr": "Le château Saint-Georges domine l’une des collines où Lisboa est née. Ses murailles datent surtout de l’époque maure et des siècles suivants, quand les rois du Portugal vivaient ici. Depuis les remparts, on voit le Tage, le quadrillage de la Baixa reconstruit après le tremblement de terre de 1755 et le pont vers la rive sud.",
     "pt": "O Castelo de São Jorge fica numa das colinas onde Lisboa começou. Suas muralhas são, na maior parte, do período mouro e dos séculos seguintes, quando os reis de Portugal moravam aqui. Das muralhas dá para ver o rio Tejo, o traçado da Baixa reconstruído depois do terremoto de 1755 e a ponte para a margem sul.",
-    "de": "Die Burg São Jorge steht auf einem der Hügel, auf denen Lissabon entstand. Ihre Mauern stammen größtenteils aus maurischer Zeit und den folgenden Jahrhunderten, als hier Portugals Könige lebten. Von den Wehrgängen sehen Sie den Tejo, das Straßenraster der Baixa, das nach dem Erdbeben von 1755 neu gebaut wurde, und die Brücke zum Südufer.",
-    "it": "Il Castello di São Jorge sorge su uno dei colli dove nacque Lisbona. Le mura risalgono per lo più al periodo moresco e ai secoli successivi, quando qui vivevano i re del Portogallo. Dai bastioni si vedono il Tago, la griglia della Baixa ricostruita dopo il terremoto del 1755 e il ponte verso la riva sud."
+    "de": "Die Burg São Jorge steht auf einem der Hügel, auf denen Lisboa entstand. Ihre Mauern stammen größtenteils aus maurischer Zeit und den folgenden Jahrhunderten, als hier Portugals Könige lebten. Von den Wehrgängen sehen Sie den Tejo, das Straßenraster der Baixa, das nach dem Erdbeben von 1755 neu gebaut wurde, und die Brücke zum Südufer.",
+    "it": "Il Castello di São Jorge sorge su uno dei colli dove nacque Lisboa. Le mura risalgono per lo più al periodo moresco e ai secoli successivi, quando qui vivevano i re del Portogallo. Dai bastioni si vedono il Tago, la griglia della Baixa ricostruita dopo il terremoto del 1755 e il ponte verso la riva sud."
    },
    "recording": null
   },
@@ -283,19 +283,19 @@
    "source": null
   },
   "lead_time": "",
-  "description": "Lisbon's oldest neighborhood: stairways, laundry lines, tiny squares and fado drifting from doorways.",
+  "description": "Lisboa's oldest neighborhood: stairways, laundry lines, tiny squares and fado drifting from doorways.",
   "tips": [
    "Get a little lost; the lanes always lead down to the river.",
    "Evenings are for fado. Book a fado house for dinner."
   ],
   "audio": {
-   "script": "Alfama is Lisbon's oldest district. Much of it survived the great earthquake of 1755, so the street plan is still a tangle of stairways and alleys. Listen in the evenings: this is the home of fado, songs of longing sung to the Portuguese guitar.",
+   "script": "Alfama is Lisboa's oldest district. Much of it survived the great earthquake of 1755, so the street plan is still a tangle of stairways and alleys. Listen in the evenings: this is the home of fado, songs of longing sung to the Portuguese guitar.",
    "scripts": {
     "es": "Alfama es el barrio más antiguo de Lisboa. Gran parte sobrevivió al gran terremoto de 1755, así que sus calles siguen siendo un laberinto de escaleras y callejones. Escucha por la noche: aquí nació el fado, canciones de añoranza acompañadas por la guitarra portuguesa.",
-    "fr": "L’Alfama est le plus vieux quartier de Lisbonne. Une grande partie a survécu au grand tremblement de terre de 1755, si bien que ses rues restent un enchevêtrement d’escaliers et de ruelles. Tendez l’oreille le soir : c’est le berceau du fado, des chants de nostalgie accompagnés par la guitare portugaise.",
+    "fr": "L’Alfama est le plus vieux quartier de Lisboa. Une grande partie a survécu au grand tremblement de terre de 1755, si bien que ses rues restent un enchevêtrement d’escaliers et de ruelles. Tendez l’oreille le soir : c’est le berceau du fado, des chants de nostalgie accompagnés par la guitare portugaise.",
     "pt": "Alfama é o bairro mais antigo de Lisboa. Boa parte dele sobreviveu ao grande terremoto de 1755, por isso as ruas ainda são um emaranhado de escadarias e becos. Preste atenção à noite: aqui é a casa do fado, canções de saudade cantadas ao som da guitarra portuguesa.",
-    "de": "Die Alfama ist Lissabons ältestes Viertel. Vieles hat das große Erdbeben von 1755 überstanden, deshalb ist der Grundriss bis heute ein Gewirr aus Treppen und Gassen. Hören Sie abends hin: Hier ist der Fado zu Hause, Lieder der Sehnsucht, begleitet von der portugiesischen Gitarre.",
-    "it": "L’Alfama è il quartiere più antico di Lisbona. Gran parte sopravvisse al grande terremoto del 1755, così le strade sono ancora un intrico di scalinate e vicoli. Ascolta la sera: qui è nato il fado, canti di nostalgia accompagnati dalla chitarra portoghese."
+    "de": "Die Alfama ist Lisboas ältestes Viertel. Vieles hat das große Erdbeben von 1755 überstanden, deshalb ist der Grundriss bis heute ein Gewirr aus Treppen und Gassen. Hören Sie abends hin: Hier ist der Fado zu Hause, Lieder der Sehnsucht, begleitet von der portugiesischen Gitarre.",
+    "it": "L’Alfama è il quartiere più antico di Lisboa. Gran parte sopravvisse al grande terremoto del 1755, così le strade sono ancora un intrico di scalinate e vicoli. Ascolta la sera: qui è nato il fado, canti di nostalgia accompagnati dalla chitarra portoghese."
    },
    "recording": null
   },
@@ -413,7 +413,7 @@
    "source": null
   },
   "lead_time": "",
-  "description": "Lisbon's flea market for tiles, vintage finds and odds and ends. Tuesdays and Saturdays.",
+  "description": "Lisboa's flea market for tiles, vintage finds and odds and ends. Tuesdays and Saturdays.",
   "tips": [
    "Go in the morning. Check tiles carefully and bargain politely.",
    "Many sellers pack up by about 2pm."
@@ -703,7 +703,7 @@
    "source": null
   },
   "lead_time": "",
-  "description": "A big food hall with stalls from well-known Lisbon chefs and bakeries, next to the old produce market.",
+  "description": "A big food hall with stalls from well-known Lisboa chefs and bakeries, next to the old produce market.",
   "tips": [
    "Busy at lunch and dinner. Mid-afternoon is calmer."
   ],
@@ -873,7 +873,7 @@
    "source": null
   },
   "lead_time": "",
-  "description": "Five centuries of Portuguese tiles in a former convent, including a long panorama of Lisbon before the earthquake.",
+  "description": "Five centuries of Portuguese tiles in a former convent, including a long panorama of Lisboa before the earthquake.",
   "tips": [
    "Renovation works were under way in 2026. Check that it is open before you go."
   ],
@@ -914,7 +914,7 @@
    "source": "Parques de Sintra, opening times and prices page"
   },
   "lead_time": "Book a few days ahead",
-  "description": "The candy-colored hilltop palace in Sintra's forests. The most famous day out from Lisbon.",
+  "description": "The candy-colored hilltop palace in Sintra's forests. The most famous day out from Lisboa.",
   "tips": [
    "Online tickets need a date reservation.",
    "Palace 9:30 to 18:30, park 9:00 to 19:00.",
@@ -1076,7 +1076,7 @@
   "category": "experience",
   "kind": "food",
   "group": "baixa",
-  "area": "Central Lisbon",
+  "area": "Central Lisboa",
   "must": false,
   "popular": false,
   "location": null,
@@ -1094,7 +1094,7 @@
    "source": null
   },
   "lead_time": "Small groups: book a few days ahead.",
-  "description": "Learn the flaky pastry and custard behind Lisbon's favorite tart, then eat your own, warm.",
+  "description": "Learn the flaky pastry and custard behind Lisboa's favorite tart, then eat your own, warm.",
   "tips": [],
   "audio": null,
   "search_q": "pastel de nata baking class Lisbon",
@@ -1112,7 +1112,7 @@
   "category": "experience",
   "kind": "shop",
   "group": "baixa",
-  "area": "Central Lisbon",
+  "area": "Central Lisboa",
   "must": false,
   "popular": false,
   "location": null,
@@ -1184,7 +1184,7 @@
   "category": "experience",
   "kind": "food",
   "group": "baixa",
-  "area": "Central Lisbon",
+  "area": "Central Lisboa",
   "must": false,
   "popular": false,
   "location": null,
@@ -1256,7 +1256,7 @@
   "category": "experience",
   "kind": "wine",
   "group": "baixa",
-  "area": "Central Lisbon",
+  "area": "Central Lisboa",
   "must": false,
   "popular": false,
   "location": null,
@@ -1292,7 +1292,7 @@
   "category": "day_trip",
   "kind": "palace",
   "group": "sintra",
-  "area": "West of Lisbon",
+  "area": "West of Lisboa",
   "must": false,
   "popular": false,
   "location": {
@@ -1414,7 +1414,7 @@
   "category": "day_trip",
   "kind": "landmark",
   "group": "sintra",
-  "area": "North of Lisbon",
+  "area": "North of Lisboa",
   "must": false,
   "popular": false,
   "location": {
@@ -2700,7 +2700,7 @@
  {
   "id": "algarve-trip-seville",
   "city_id": "algarve",
-  "name": "Seville, Spain",
+  "name": "Sevilla, Spain",
   "category": "day_trip",
   "kind": "landmark",
   "group": "east",
