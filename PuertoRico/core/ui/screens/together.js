@@ -2,11 +2,11 @@
    each plan, who's around each day, arrivals on Today, and sharing the group plan as a link.
    No accounts or server: the plan travels inside the link (compressed), and the latest shared version wins.
    When accounts and sync arrive (architecture section 10), sync replaces the link. */
-import { EDITION } from '../../../edition.config.js?v=202610121603';
-import { S, save, today, cityOf, cityIds, placeById } from '../state.js?v=202610121603';
-import { esc, ic, toast, $, fmtDay } from '../dom.js?v=202610121603';
-import { everyone, hereOn, isGroup, newPerson, whoOf, whoText, planDays, newStay, syncLegs, localISO } from '../../models/schema.js?v=202610121603';
-import { shareService } from '../../services/share-service.js?v=202610121603';
+import { EDITION } from '../../../edition.config.js?v=202610121715';
+import { S, save, today, cityOf, cityIds, placeById } from '../state.js?v=202610121715';
+import { esc, ic, toast, $, fmtDay } from '../dom.js?v=202610121715';
+import { everyone, hereOn, isGroup, newPerson, whoOf, whoText, planDays, newStay, syncLegs, localISO } from '../../models/schema.js?v=202610121715';
+import { shareService } from '../../services/share-service.js?v=202610121715';
 
 const city = () => cityOf(cityIds()[0]);
 const nm = p => p.me ? 'You' : p.name;

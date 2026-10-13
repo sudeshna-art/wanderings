@@ -2,7 +2,7 @@
    on this phone and suggests bookings. Nothing is sent anywhere. Pure functions, no DOM.
    Pasted text is read with simple patterns, so results are suggestions: the traveler confirms or fixes each one.
    ctx: { year, timezone, places: [{ city_id, neighborhood_id?, words: [..] }], airports: { LIS: 'lisbon', ... } } */
-import { newBooking } from './schema.js?v=202610121603';
+import { newBooking } from './schema.js?v=202610121715';
 
 /* ---------- dates and times ---------- */
 const MONTHS = {

@@ -1,8 +1,8 @@
 /* Offline maps: save each area's map on the phone, and show which map is in use under every live map. */
-import { S, P, cityName } from '../state.js?v=202610121603';
-import { esc, ic, toast, $, $$ } from '../dom.js?v=202610121603';
-import { mapPackService } from '../../services/mappack-service.js?v=202610121603';
-import { clean } from '../theme.js?v=202610121603';
+import { S, P, cityName } from '../state.js?v=202610121715';
+import { esc, ic, toast, $, $$ } from '../dom.js?v=202610121715';
+import { mapPackService } from '../../services/mappack-service.js?v=202610121715';
+import { clean } from '../theme.js?v=202610121715';
 
 const mb = b => (b / 1048576).toFixed(b < 10485760 ? 1 : 0) + ' MB';
 const busy = {};   // pack id -> fraction while downloading

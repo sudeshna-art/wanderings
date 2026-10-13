@@ -1,9 +1,9 @@
 /* Shared pieces of UI used by several screens. */
-import { EDITION } from '../../edition.config.js?v=202610121603';
-import { S, P, cityOf, cityName, curCityId, autoCityId, cityIds, placeById, isPlanner, today } from './state.js?v=202610121603';
-import { esc, ic, ill, KIND_NAME, fmtDay } from './dom.js?v=202610121603';
-import { statusOf, isBooked, planOf, BOOKING_LABEL, URGENCY_LABEL, priceText, priceShort, closedText, bookingKindLabel, goodForKids, hasKids, easyWalk, foodFlags, WALK_WARN, kidAges } from '../models/schema.js?v=202610121603';
-import { linkService } from '../services/link-service.js?v=202610121603';
+import { EDITION } from '../../edition.config.js?v=202610121715';
+import { S, P, cityOf, cityName, curCityId, autoCityId, cityIds, placeById, isPlanner, today } from './state.js?v=202610121715';
+import { esc, ic, ill, KIND_NAME, fmtDay } from './dom.js?v=202610121715';
+import { statusOf, isBooked, planOf, BOOKING_LABEL, URGENCY_LABEL, priceText, priceShort, closedText, bookingKindLabel, goodForKids, hasKids, easyWalk, foodFlags, WALK_WARN, kidAges } from '../models/schema.js?v=202610121715';
+import { linkService } from '../services/link-service.js?v=202610121715';
 
 export const art = file => (S.art && S.art[file]) || '';
 /* A city's own illustrated map (original line art drawn to a known area), for the offline sketch map. */
@@ -132,14 +132,19 @@ export function bookingLine(b, role = 'start', opts = {}) {
 }
 
 /* ---------- travel style choice ---------- */
-export function styleChoice(name) {
+export function styleChoice(name, o = {}) {
   const v = S.trip.travel_style;
-  const opt = (val, title, text) => `<label class="opt"><input type="radio" name="${name}" data-bind="travel_style" value="${val}" ${v === val ? 'checked' : ''}><span><b>${title}</b><br><span class="small muted">${text}</span></span></label>`;
+  const opt = (val, title, text) => `<label class="opt${o.large ? ' big' : ''}"><input type="radio" name="${name}" data-bind="travel_style" value="${val}" ${v === val ? 'checked' : ''}><span><b>${title}</b><br><span class="small muted">${text}</span></span></label>`;
   return `<fieldset style="border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;min-width:0"><legend style="font-size:12px;color:var(--muted);margin-bottom:6px;padding:0">How do you like to travel?</legend>
     ${opt('flow', 'Go with the flow', 'A list of ideas and must-sees. Decide as you go.')}
     ${opt('planner', 'Planner', 'Put places on a day and time, with a day-by-day view. Everything can move.')}
     ${opt('wanderer', 'True Wanderer', 'No plan at all. The app opens on a live map of what’s worth seeing near you.')}
-    </fieldset><p class="small faint" style="margin:0">Everyone gets the “Near me” map in Places.</p>`;
+    </fieldset><p class="small faint" style="margin:0">Everyone gets the “Near me” map in Places${o.large ? '. Switch anytime at the top of Places' : ''}.</p>`;
+}
+/* One-tap travel-style switch at the top of the second tab (Oct 12 2026). Essentials keeps the full setting. */
+export function modeSwitch() {
+  const v = S.trip.travel_style;
+  return `<div class="modesw" role="group" aria-label="How you travel">${[['flow', 'Flow'], ['planner', 'Planner'], ['wanderer', 'Wanderer']].map(([k, l]) => `<button data-act="setstyle" data-v="${k}" aria-pressed="${v === k}">${l}</button>`).join('')}</div>`;
 }
 
 /* ---------- stays editor (welcome steps and Essentials) ---------- */

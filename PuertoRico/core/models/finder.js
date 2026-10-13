@@ -2,7 +2,7 @@
    Pure functions: builds a small index from the edition's content and the traveler's own trip, works out
    what kind of question it is (money, taxi, help, home, a phrase, a booking, opening days), and ranks matches.
    No network, no storage, no DOM. The UI turns the results into answer cards. */
-import { phraseFor, sortedBookings, bookingKindLabel, closedText } from './schema.js?v=202610121603';
+import { phraseFor, sortedBookings, bookingKindLabel, closedText } from './schema.js?v=202610121715';
 
 const strip = s => String(s || '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
 const STOP = new Set('a an the i me my we our you your is are am be do does did can could how what whats where wheres when which who to in on at of for from with and or it its this that there here please much many any some get go going want need tell show find about into near nearest best good'.split(' '));

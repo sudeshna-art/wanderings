@@ -1,1 +1,71 @@
-{"packs":[{"id":"san-juan","name":"San Juan","city_id":"san-juan","bbox":[-66.2,18.33,-65.9,18.48],"covers":"Old San Juan, Condado, Ocean Park, Isla Verde, the airport, Piñones and the metro area (Guaynabo, Bayamón, Carolina)","file":"maps/san-juan.pmtiles","bytes":15998482,"maxzoom":15,"optional":false},{"id":"northeast","name":"El Yunque and the east coast","city_id":"san-juan","bbox":[-65.92,18.17,-65.58,18.42],"covers":"El Yunque, Luquillo, Fajardo and the bio bay, and the Ceiba ferry","file":"maps/northeast.pmtiles","bytes":6699067,"maxzoom":15,"optional":false},{"id":"islands","name":"Culebra and Vieques","city_id":"san-juan","bbox":[-65.6,18.06,-65.2,18.36],"covers":"Culebra, Vieques and the ferry routes","file":"maps/islands.pmtiles","bytes":1455460,"maxzoom":15,"optional":true},{"id":"island","name":"All of Puerto Rico (overview)","city_id":"san-juan","bbox":[-67.3,17.88,-65.55,18.55],"covers":"The whole main island with main roads and towns, at lower detail","file":"maps/island.pmtiles","bytes":4575679,"maxzoom":12,"optional":true}],"built":"2026-10-12","source":"OpenStreetMap contributors, Protomaps daily build 20261012","note":"The San Juan and east coast maps have full street detail. The island overview shows main roads and towns."}
+{
+ "packs": [
+  {
+   "id": "san-juan",
+   "name": "San Juan",
+   "city_id": "san-juan",
+   "bbox": [
+    -66.2,
+    18.33,
+    -65.9,
+    18.48
+   ],
+   "covers": "Old San Juan, Condado, Ocean Park, Isla Verde, the airport, Piñones and the metro area (Guaynabo, Bayamón, Carolina)",
+   "file": "maps/san-juan.pmtiles",
+   "bytes": 15998482,
+   "maxzoom": 15,
+   "optional": false
+  },
+  {
+   "id": "northeast",
+   "name": "El Yunque and the east coast",
+   "city_id": "san-juan",
+   "bbox": [
+    -65.92,
+    18.17,
+    -65.58,
+    18.42
+   ],
+   "covers": "El Yunque, Luquillo, Fajardo and the bio bay, and the Ceiba ferry",
+   "file": "maps/northeast.pmtiles",
+   "bytes": 6699067,
+   "maxzoom": 15,
+   "optional": false
+  },
+  {
+   "id": "islands",
+   "name": "Culebra and Vieques",
+   "city_id": "san-juan",
+   "bbox": [
+    -65.6,
+    18.06,
+    -65.2,
+    18.36
+   ],
+   "covers": "Culebra, Vieques and the ferry routes",
+   "file": "maps/islands.pmtiles",
+   "bytes": 1455460,
+   "maxzoom": 15,
+   "optional": true
+  },
+  {
+   "id": "island",
+   "name": "All of Puerto Rico (overview)",
+   "city_id": "san-juan",
+   "bbox": [
+    -67.3,
+    17.88,
+    -65.55,
+    18.55
+   ],
+   "covers": "The whole main island with main roads and towns, at lower detail",
+   "file": "maps/island.pmtiles",
+   "bytes": 4575679,
+   "maxzoom": 12,
+   "optional": true
+  }
+ ],
+ "built": "2026-10-12",
+ "source": "OpenStreetMap contributors, Protomaps daily build",
+ "note": "The San Juan and east coast maps have full street detail. The island overview shows main roads and towns."
+}

@@ -342,3 +342,11 @@ nav.tabs button[aria-selected="true"]{color:var(--accent-deep);font-weight:600}
 .ride:first-child{border-top:0;padding-top:0}
 .chips.wrap{flex-wrap:wrap;overflow:visible;margin:0;padding-inline:0}
 .people-day{margin-top:6px;padding:8px 12px;border-radius:10px;background:var(--surface,#F5F5F7);line-height:1.5}
+/* travel-style switch and large choices (Oct 12 2026) */
+.opt.big{padding:16px;border-radius:14px}
+.opt.big b{font-size:17px}
+.modesw{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--rule);border-radius:999px;padding:3px;margin:2px 0 10px}
+.modesw button{min-height:36px;border:0;border-radius:999px;background:none;color:var(--muted);font-size:14px;font-weight:500}
+.modesw button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent-deep);font-weight:600}
+.opt{display:grid}
+.opt>span,.opt>span *{white-space:normal;min-width:0}

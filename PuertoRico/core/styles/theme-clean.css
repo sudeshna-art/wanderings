@@ -291,3 +291,11 @@ html[data-look="clean"] .ride{gap:8px;padding-top:14px;border-top:1px solid var(
 html[data-look="clean"] #groupEd .chips,html[data-look="clean"] #groupBlock .chips{flex-wrap:wrap}
 html[data-look="clean"] .chips.wrap{flex-wrap:wrap;overflow:visible;margin:0;padding-inline:0}
 html[data-look="clean"] .people-day{margin-top:6px;padding:8px 12px;border-radius:10px;background:var(--surface,#F5F5F7);line-height:1.5}
+/* travel-style switch and large choices (Oct 12 2026) */
+html[data-look="clean"] .opt.big{padding:16px;border-radius:14px}
+html[data-look="clean"] .opt.big b{font-size:var(--fs-headline)}
+html[data-look="clean"] .modesw{border:0;background:#F2F2F7;border-radius:10px;padding:2px;margin:2px 0 12px}
+html[data-look="clean"] .modesw button{min-height:34px;border-radius:8px;color:#3A3A3C;font-size:var(--fs-sub);font-weight:600}
+html[data-look="clean"] .modesw button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+html[data-look="clean"] .opt{display:grid}
+html[data-look="clean"] .opt>span,html[data-look="clean"] .opt>span *{white-space:normal;min-width:0}

@@ -1,22 +1,22 @@
 /* Today: answers "what now?" for the current city. Simplified Oct 11 2026: the time-sensitive things first
    (meeting point, travel, bookings, clashes), then what to book, ideas, your base and a phrase. */
-import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202610121603';
-import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202610121603';
-import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202610121603';
-import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202610121603';
-import { tripChecks } from '../../models/checks.js?v=202610121603';
-import { timelineView } from './plan.js?v=202610121603';
-import { allPhotoIds } from './journal.js?v=202610121603';
-import { view as phraseView } from './phrases.js?v=202610121603';
-import { meetBlock } from './safety.js?v=202610121603';
-import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js?v=202610121603';
-import { speaksLocal } from '../../models/schema.js?v=202610121603';
-import { mapPackService } from '../../services/mappack-service.js?v=202610121603';
-import { clean } from '../theme.js?v=202610121603';
-import { placeCards, checkText } from '../components.js?v=202610121603';
-import { closedText } from '../../models/schema.js?v=202610121603';
-import { occasionAlert } from './group.js?v=202610121603';
-import { arrivalsAlert } from './together.js?v=202610121603';
+import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202610121715';
+import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202610121715';
+import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202610121715';
+import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202610121715';
+import { tripChecks } from '../../models/checks.js?v=202610121715';
+import { timelineView } from './plan.js?v=202610121715';
+import { allPhotoIds } from './journal.js?v=202610121715';
+import { view as phraseView } from './phrases.js?v=202610121715';
+import { meetBlock } from './safety.js?v=202610121715';
+import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js?v=202610121715';
+import { speaksLocal } from '../../models/schema.js?v=202610121715';
+import { mapPackService } from '../../services/mappack-service.js?v=202610121715';
+import { clean } from '../theme.js?v=202610121715';
+import { placeCards, checkText } from '../components.js?v=202610121715';
+import { closedText } from '../../models/schema.js?v=202610121715';
+import { occasionAlert } from './group.js?v=202610121715';
+import { arrivalsAlert } from './together.js?v=202610121715';
 
 let slideTimer = null, slideIdx = 0;
 

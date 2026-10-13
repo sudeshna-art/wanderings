@@ -1,12 +1,12 @@
 /* Journal: dictation-friendly entries, photos, trip summary for Instagram, Share with Wanderings, backup. */
-import { S, P, save, allPlaces, placeById, cityName, curCityId, cityIds, copyOf, placeName } from '../state.js?v=202610121603';
-import { esc, ic, fmtDate, fmtISO, toast, $ } from '../dom.js?v=202610121603';
-import { masthead } from '../components.js?v=202610121603';
-import { stage, statusOf, setStatus, tripRange } from '../../models/schema.js?v=202610121603';
-import { tripService } from '../../services/trip-service.js?v=202610121603';
-import { storageService } from '../../services/storage-service.js?v=202610121603';
-import { shareService } from '../../services/share-service.js?v=202610121603';
-import { clean } from '../theme.js?v=202610121603';
+import { S, P, save, allPlaces, placeById, cityName, curCityId, cityIds, copyOf, placeName } from '../state.js?v=202610121715';
+import { esc, ic, fmtDate, fmtISO, toast, $ } from '../dom.js?v=202610121715';
+import { masthead } from '../components.js?v=202610121715';
+import { stage, statusOf, setStatus, tripRange } from '../../models/schema.js?v=202610121715';
+import { tripService } from '../../services/trip-service.js?v=202610121715';
+import { storageService } from '../../services/storage-service.js?v=202610121715';
+import { shareService } from '../../services/share-service.js?v=202610121715';
+import { clean } from '../theme.js?v=202610121715';
 
 export const J = { pending: [], draft: '' };
 export const allPhotoIds = () => S.trip.journal.slice().reverse().flatMap(e => e.photos || []);

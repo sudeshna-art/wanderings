@@ -1,7 +1,7 @@
 /* Upgrade data saved by the first Wanderings app (the single-file Andiamo Firenze beta, "v0") into today's trip shape.
    Pure function: no storage, no DOM. trip-service calls it once, only when this edition has no saved trip yet
    and the edition config names a legacy key. Nothing is deleted from the old app, so it keeps working. */
-import { newTrip, newStay, SCHEMA_VERSION } from './schema.js?v=202610121603';
+import { newTrip, newStay, SCHEMA_VERSION } from './schema.js?v=202610121715';
 
 const KIND = { restaurant: 'food', cafe: 'cafe', landmark: 'landmark', market: 'market', museum: 'museum', shop: 'shop', garden: 'garden', view: 'view' };
 

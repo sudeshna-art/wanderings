@@ -10,8 +10,8 @@
               Fixed fares from the airport to tourist zones (San Juan, Oct 12 2026). Other trips get a hint, no number.
    The period is chosen from the city's own clock (its timezone), so a traveler at home sees the city's current rates.
    Later provider: a routing service, only if ever approved. */
-import { contentService } from './content-service.js?v=202610121603';
-import { km } from '../models/schema.js?v=202610121603';
+import { contentService } from './content-service.js?v=202610121715';
+import { km } from '../models/schema.js?v=202610121715';
 
 /* Day of week (0 = Sunday) and minutes past midnight in the city's timezone. */
 function cityClock(tz, at = new Date()) {

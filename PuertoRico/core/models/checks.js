@@ -1,6 +1,6 @@
 /* Trip checks: gentle warnings about the plan, worked out on this phone. Pure functions, no DOM.
    Each check is { level: 'warn' | 'info', day, text, item_id?, booking_id? }. */
-import { stayOn, closedOn, closedText, bookingKindLabel, sortedBookings, isBooked, tripDays, everyone, hereOn, isGroup, whoOf } from './schema.js?v=202610121603';
+import { stayOn, closedOn, closedText, bookingKindLabel, sortedBookings, isBooked, tripDays, everyone, hereOn, isGroup, whoOf } from './schema.js?v=202610121715';
 
 const mins = t => { if (!t) return null; const [h, m] = t.split(':').map(Number); return h * 60 + (m || 0); };
 const hhmm = n => String(Math.floor(n / 60) % 24).padStart(2, '0') + ':' + String(n % 60).padStart(2, '0');

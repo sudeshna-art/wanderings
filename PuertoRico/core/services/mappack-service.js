@@ -3,8 +3,8 @@
    A pack is downloaded once on Wi-Fi and kept on the phone (IndexedDB), so the live map works with no signal.
    Without a download, the same file is read in small pieces from the edition's own site while online.
    Native apps later: the same files saved with Capacitor Filesystem. */
-import { contentService } from './content-service.js?v=202610121603';
-import { EDITION } from '../../edition.config.js?v=202610121603';
+import { contentService } from './content-service.js?v=202610121715';
+import { EDITION } from '../../edition.config.js?v=202610121715';
 
 const DB = EDITION.storage.prefix + '-maps';
 let _db = null;
