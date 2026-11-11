@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "edition_id": "portugal",
+  "name": "Vamos Portugal",
+  "tagline": "Lisboa and the Algarve",
+  "language": "pt-PT",
+  "language_name": "Portuguese",
+  "city_ids": [
+    "lisbon",
+    "algarve"
+  ],
+  "modules": {
+    "phrases": true,
+    "currency": "auto",
+    "taxi_estimator": true,
+    "true_wanderer": true
+  },
+  "home_currencies": [
+    "AED",
+    "USD",
+    "GBP",
+    "EUR",
+    "CAD",
+    "AUD",
+    "INR",
+    "CHF",
+    "SGD",
+    "JPY"
+  ],
+  "arrival_options": [
+    {
+      "id": "LIS",
+      "label": "Lisboa airport (LIS)",
+      "city_id": "lisbon"
+    },
+    {
+      "id": "FAO",
+      "label": "Faro airport (FAO)",
+      "city_id": "algarve"
+    },
+    {
+      "id": "TRAIN",
+      "label": "Train",
+      "city_id": ""
+    },
+    {
+      "id": "CAR",
+      "label": "Car or private driver",
+      "city_id": ""
+    },
+    {
+      "id": "OTHER",
+      "label": "Other",
+      "city_id": ""
+    }
+  ],
+  "leg_modes": [
+    {
+      "id": "driver",
+      "label": "Private driver or transfer"
+    },
+    {
+      "id": "taxi",
+      "label": "Taxi"
+    },
+    {
+      "id": "car",
+      "label": "Rental car"
+    },
+    {
+      "id": "train",
+      "label": "Train"
+    },
+    {
+      "id": "bus",
+      "label": "Express coach"
+    },
+    {
+      "id": "flight",
+      "label": "Flight"
+    }
+  ],
+  "checked": "2026-10-09",
+  "copy": {
+    "place": "Portugal",
+    "place_list": "Lisboa and the Algarve",
+    "follow": "The app follows you from Lisboa to the Algarve.",
+    "hashtags": "#Portugal #Lisboa #Algarve #travel",
+    "file_prefix": "portugal"
+  }
+}

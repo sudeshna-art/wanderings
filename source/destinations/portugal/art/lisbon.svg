@@ -1,0 +1,27 @@
+<svg viewBox="0 0 390 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pen and ink sketch of the Belém Tower on the Tagus">
+<circle class="wash" cx="318" cy="70" r="26"/>
+<rect class="wash" x="156" y="64" width="80" height="104"/>
+<g class="ink">
+<path stroke-width="1.2" d="M150 170 V62 M242 170 V62"/>
+<path stroke-width=".5" d="M153 168 V66 M239 168 V66"/>
+<path stroke-width="1" d="M146 62 H246 M146 56 H246 M146 56 V62 M246 56 V62"/>
+<path stroke-width=".9" d="M152 56 V50 a4 4 0 0 1 8 0 V56 M166 56 V50 a4 4 0 0 1 8 0 V56 M180 56 V50 a4 4 0 0 1 8 0 V56 M194 56 V50 a4 4 0 0 1 8 0 V56 M208 56 V50 a4 4 0 0 1 8 0 V56 M222 56 V50 a4 4 0 0 1 8 0 V56 M236 56 V50 a4 4 0 0 1 8 0 V56"/>
+<path stroke-width="1" d="M144 62 V44 H156 V62 M144 44 a6 7 0 0 1 12 0 M150 37 V33 M236 62 V44 H248 V62 M236 44 a6 7 0 0 1 12 0 M242 37 V33"/>
+<path stroke-width="1" d="M150 104 H242 M146 128 H246 M146 128 V122 H246 V128"/>
+<path stroke-width=".8" d="M158 122 V112 a5 6 0 0 1 10 0 V122 M174 122 V112 a5 6 0 0 1 10 0 V122 M190 122 V112 a5 6 0 0 1 10 0 V122 M206 122 V112 a5 6 0 0 1 10 0 V122 M222 122 V112 a5 6 0 0 1 10 0 V122"/>
+<path stroke-width=".6" d="M154 122 H238 M163 128 V134 M179 128 V134 M195 128 V134 M211 128 V134 M227 128 V134"/>
+<path stroke-width=".8" d="M190 92 V80 a6 6 0 0 1 12 0 V92 Z M196 80 V92 M170 150 V142 a4 4 0 0 1 8 0 V150 M214 150 V142 a4 4 0 0 1 8 0 V150"/>
+<path stroke-width=".6" d="M188 76 c2 -6 14 -6 16 0 M193 70 a3 3 0 1 1 6 0 a3 3 0 1 1 -6 0"/>
+<path stroke-width="1.2" d="M70 240 L82 178 H310 L322 240"/>
+<path stroke-width=".9" d="M82 178 H310 M80 172 H312 M80 172 V178 M312 172 V178"/>
+<path stroke-width=".8" d="M86 172 V166 a3 3 0 0 1 6 0 V172 M100 172 V166 a3 3 0 0 1 6 0 V172 M114 172 V166 a3 3 0 0 1 6 0 V172 M128 172 V166 a3 3 0 0 1 6 0 V172 M256 172 V166 a3 3 0 0 1 6 0 V172 M270 172 V166 a3 3 0 0 1 6 0 V172 M284 172 V166 a3 3 0 0 1 6 0 V172 M298 172 V166 a3 3 0 0 1 6 0 V172"/>
+<path stroke-width="1" d="M74 178 V158 H90 V178 M74 158 a8 9 0 0 1 16 0 M82 149 V144 M302 178 V158 H318 V178 M302 158 a8 9 0 0 1 16 0 M310 149 V144"/>
+<path stroke-width=".6" d="M78 166 h8 M306 166 h8"/>
+<path stroke-width=".7" d="M110 210 V200 a6 6 0 0 1 12 0 V210 M140 210 V200 a6 6 0 0 1 12 0 V210 M240 210 V200 a6 6 0 0 1 12 0 V210 M270 210 V200 a6 6 0 0 1 12 0 V210"/>
+<path stroke-width=".45" d="M90 194 H302 M86 222 H306"/>
+<path stroke-width=".4" d="M100 184 L96 236 M290 184 L294 236"/>
+<path stroke-width=".9" d="M0 246 Q40 241 80 246 T160 246 T240 246 T320 246 T390 246"/>
+<path stroke-width=".6" d="M14 258 Q50 254 86 258 T158 258 M196 258 Q232 254 268 258 T340 258 M40 270 Q80 266 120 270 T200 270 M232 272 Q272 268 312 272 T380 272 M90 282 Q130 279 170 282 M250 284 Q290 281 330 284"/>
+<path stroke-width=".7" d="M346 222 l8 -18 l4 18 Z M344 222 H364 M352 222 q-1 6 -10 6 h22"/>
+<path stroke-width=".5" d="M26 96 q6 -4 12 0 q6 -4 12 0 M52 110 q4 -3 8 0 q4 -3 8 0"/>
+</g></svg>

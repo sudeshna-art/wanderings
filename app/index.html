@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" data-look="clean">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wanderings</title>
+<meta name="description" content="Wanderings by Whiskers &amp; Wanderings: your travel companion for Firenze, Portugal, Puerto Rico.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Wanderings">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="stylesheet" href="core/vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="core/styles/app.css?v=202611111322">
+<link rel="stylesheet" href="core/styles/theme-clean.css?v=202611111322">
+<style>
+.pick{position:fixed;inset:0;z-index:1000;background:#fff;overflow:auto;padding:max(28px,env(safe-area-inset-top)) 20px 32px;box-sizing:border-box}
+.pick .in{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+.pick .word{font-weight:700;font-size:17px}.pick .word span{color:var(--accent,#00677A)}
+.pick h1{font-size:28px;line-height:1.15;margin:18px 0 0}
+.pick p{margin:0;color:var(--muted,#5b6168);font-size:15px;line-height:1.45}
+.pick .list{display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.pick a.d{display:flex;align-items:center;gap:14px;padding:16px;border:1px solid var(--rule,#e3e5e8);border-radius:16px;text-decoration:none;color:inherit;min-height:64px}
+.pick a.d:active{background:#f4f6f7}
+.pick a.d img{width:40px;height:34px;flex:none}
+.pick a.d b{display:block;font-size:17px}
+.pick a.d small{display:block;color:var(--muted,#5b6168);font-size:13.5px;margin-top:2px}
+.pick a.d .now{margin-left:auto;font-size:12px;font-weight:600;color:var(--accent,#00677A);white-space:nowrap}
+.pick .pick-note{font-size:13px;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="app" id="app"><p class="loading">Loading Wanderings…</p>
+  <section data-tab="today" hidden></section>
+  <section data-tab="places" hidden></section>
+  <section data-tab="phrases" hidden></section>
+  <section data-tab="journal" hidden></section>
+  <section data-tab="essentials" hidden></section>
+</div>
+<nav class="tabs" aria-label="Sections"><div class="in" id="tabbar" role="tablist"></div></nav>
+<div class="driver" id="driver" hidden></div>
+<div class="driver" id="welcome" hidden></div>
+<div class="driver" id="viewer" hidden></div>
+<div class="scrim" id="scrim" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" hidden></div>
+<input type="file" id="photoInput" class="offscreen" accept="image/*" multiple aria-hidden="true" tabindex="-1">
+<div class="toast" id="toast" role="status" hidden></div>
+<div class="pick" id="picker" hidden></div>
+<script src="core/vendor/leaflet/leaflet.js"></script>
+<script type="module">
+import { DESTINATIONS, chosenId, remember } from './destinations.js?v=202611111322';
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+const q = new URLSearchParams(location.search), id = chosenId();
+if (q.has('pick') || !id) {
+  const el = document.getElementById('picker');
+  el.innerHTML = `<div class="in"><div class="word">wanderings<span>.</span></div>
+    <h1>Where are you going?</h1>
+    <p>Pick a destination. Each one keeps its own plans, places and journal on this phone, so switching never mixes them up.</p>
+    <div class="list">${DESTINATIONS.map(d => `<a class="d" href="./?d=${encodeURIComponent(d.id)}" data-id="${esc(d.id)}"><img src="destinations/${esc(d.dir)}/art/${esc(d.mark)}" alt=""><span><b>${esc(d.title)}</b><small>${esc(d.sub)}</small></span>${d.id === id ? '<span class="now">Current</span>' : ''}</a>`).join('')}</div>
+    <p class="pick-note">You can switch anytime: tap the destination name at the top of the app.</p></div>`;
+  el.addEventListener('click', e => { const a = e.target.closest('a.d'); if (a) remember(a.dataset.id); });
+  document.getElementById('app').querySelector('.loading').hidden = true;
+  el.hidden = false;
+} else {
+  remember(id);
+  if (q.get('d') !== id) history.replaceState(null, '', './?d=' + encodeURIComponent(id) + location.hash);
+  import('./core/ui/app.js?v=202611111322');
+}
+</script>
+<script>
+/* offline support (version 202611111322) */
+if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+  window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
+}
+</script>
+</body>
+</html>

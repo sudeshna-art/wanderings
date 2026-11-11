@@ -1,0 +1,155 @@
+{
+ "reference_rates": {
+  "base": "EUR",
+  "rates": {
+   "USD": 1.1206,
+   "GBP": 0.84763,
+   "CAD": 1.5942,
+   "AUD": 1.6052,
+   "INR": 108.3965,
+   "CHF": 0.9313,
+   "SGD": 1.4348,
+   "JPY": 177.34
+  },
+  "checked": "2026-10-09",
+  "source": "European Central Bank via frankfurter.dev"
+ },
+ "typical_prices": [
+  {
+   "label": "Espresso",
+   "amount": 1.5,
+   "kind": "typical"
+  },
+  {
+   "label": "Gelato",
+   "amount": 4,
+   "kind": "typical"
+  },
+  {
+   "label": "Pizza",
+   "amount": 12,
+   "kind": "typical"
+  },
+  {
+   "label": "Accademia",
+   "amount": 20,
+   "kind": "official"
+  },
+  {
+   "label": "Uffizi",
+   "amount": 29,
+   "kind": "official"
+  },
+  {
+   "label": "Airport taxi",
+   "amount": 28,
+   "kind": "official"
+  }
+ ],
+ "typical_note": "Food prices are typical examples. Ticket and taxi prices are official, checked Oct 7, 2026.",
+ "know_how": [
+  {
+   "title": "Restaurants",
+   "text": "Coperto is a per-person cover charge, not a tip. If the bill says “servizio incluso,” don’t add more. Otherwise round up, leave €1 to €2 each, or up to about 10% for great service. Card machines often have no tip option, so carry coins."
+  },
+  {
+   "title": "Cafés",
+   "text": "Pay at the register, then show your receipt at the bar. Standing is cheaper than sitting. Small change on the counter is a nice, optional thank-you."
+  },
+  {
+   "title": "Taxis",
+   "text": "Round up to the next euro, a little more if the driver helps with bags."
+  },
+  {
+   "title": "Hotels",
+   "text": "About €1 to €2 per bag for a porter. €1 to €2 a night for housekeeping is kind, not expected. Firenze adds a nightly tourist tax at the hotel, often not in the booking price."
+  },
+  {
+   "title": "Guided tours",
+   "text": "€5 to €10 per person is a common thank-you for a good group tour."
+  },
+  {
+   "title": "Gelato, shops, markets",
+   "text": "No tipping."
+  },
+  {
+   "title": "Restrooms",
+   "text": "Public ones often cost a coin. Keep change handy."
+  },
+  {
+   "title": "Churches",
+   "text": "Shoulders and knees covered, for the Duomo, Santa Croce and Santa Maria Novella. It’s enforced at the door. A light scarf in your bag solves it."
+  },
+  {
+   "title": "Pickpockets",
+   "text": "Keep your bag zipped and in front in crowds: Santa Maria Novella station, the Duomo line, the Ponte Vecchio, the San Lorenzo market and busy city buses. Phone in a front pocket, not on the café table."
+  },
+  {
+   "title": "Street scams",
+   "text": "If someone ties a “free” bracelet on your wrist, hands you a rose, or asks you to sign a petition, say “No, grazie” and keep walking. Buy museum tickets only on the official sites, not from people outside."
+  },
+  {
+   "title": "Getting home at night",
+   "text": "Take a taxi home: call one or book it in the itTaxi or appTaxi app (numbers in Taxis), or walk to a rank; the station rank runs 24 hours. Women riding between 21:00 and 4:00 get 10% off (Taxi Rosa); ask when you call. The center is lively and generally comfortable late; Cascine park is best avoided after dark."
+  },
+  {
+   "title": "Paying",
+   "text": "If a card machine offers to charge you in dollars, choose euros. The dollar option usually costs more."
+  }
+ ],
+ "know_how_note": "General customs, not rules.",
+ "emergency": [
+  {
+   "number": "112",
+   "label": "Police, ambulance, fire. English spoken. The old numbers 113, 118 and 115 also still connect to 112.",
+   "source": "Regione Toscana, regione.toscana.it",
+   "checked": "2026-10-11"
+  }
+ ],
+ "embassies": [
+  {
+   "label": "US Consulate General, Florence (official contact page)",
+   "url": "https://it.usembassy.gov/embassy-consulates/florence/"
+  }
+ ],
+ "emergency_note": "Pharmacies have a green cross sign. One pharmacy in each area stays open at night on a rota; the address is posted on every pharmacy door. To report a theft for insurance, go to a police station (Questura or Carabinieri) with your passport.",
+ "voice_help": [
+  {
+   "title": "iPhone",
+   "text": "Settings, Accessibility, Spoken Content, Voices, Italian. Pick a voice and download its Enhanced or Premium version."
+  },
+  {
+   "title": "Android",
+   "text": "Settings, search for Text-to-speech, preferred engine settings, install voice data, Italian. Menu names vary by phone."
+  }
+ ],
+ "voice_test": "Buongiorno! Il conto, per favore.",
+ "travel_notes": [
+  [
+   "coffee",
+   "Travel note",
+   "In Firenze, locals drink coffee standing at the bar. A table usually costs more, so do as the locals do."
+  ],
+  [
+   "camera",
+   "Look up",
+   "The row of windows above the Ponte Vecchio shops is the Vasari Corridor, built so the Medici could cross the river unseen."
+  ],
+  [
+   "coffee",
+   "Travel note",
+   "Pay at the register first, then hand your receipt to the barista."
+  ],
+  [
+   "camera",
+   "Look up",
+   "From the Bardini Garden the dome looks close enough to touch, with a fraction of the crowds at Piazzale Michelangelo."
+  ],
+  [
+   "coffee",
+   "Travel note",
+   "Shoulders and knees covered for churches. A light scarf in your bag solves it."
+  ]
+ ],
+ "checked": "2026-10-11"
+}

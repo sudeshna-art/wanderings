@@ -1,0 +1,8 @@
+{
+  "_note": "One app, many destinations (Nov 2026). Order is the picker order. id = the edition id (keeps each destination's saved trip separate). dir = folder under source/destinations. maps = where the offline map files live, relative to the app (the existing GitHub Pages folders, so the large files are not copied twice).",
+  "destinations": [
+    { "id": "florence", "dir": "firenze", "title": "Firenze", "sub": "Florence, Italy", "mark": "florence-mark.svg", "maps": "../Firenze/" },
+    { "id": "portugal", "dir": "portugal", "title": "Portugal", "sub": "Lisboa and the Algarve", "mark": "lisbon-mark.svg", "maps": "../Portugal/" },
+    { "id": "puerto-rico", "dir": "puerto-rico", "title": "Puerto Rico", "sub": "San Juan and around", "mark": "san-juan-mark.svg", "maps": "../PuertoRico/" }
+  ]
+}
