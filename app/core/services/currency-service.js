@@ -2,9 +2,9 @@
    Rates: frankfurter.dev (free, no key, European Central Bank reference rates).
    AED is not an ECB reference currency, so it is derived from the official US dollar peg.
    Every answer is { rate, as_of, source, is_estimate, note }. */
-import { CONFIG } from '../config/default-config.js?v=202611111731';
-import { storageService } from './storage-service.js?v=202611111731';
-import { contentService } from './content-service.js?v=202611111731';
+import { CONFIG } from '../config/default-config.js?v=202611111744';
+import { storageService } from './storage-service.js?v=202611111744';
+import { contentService } from './content-service.js?v=202611111744';
 
 const C = CONFIG.currency;
 
