@@ -22,7 +22,9 @@ if OUT.exists():
     shutil.rmtree(OUT)
 OUT.mkdir(parents=True)
 
-spec = json.loads((SRC / 'shell' / 'destinations.json').read_text())['destinations']
+shell = json.loads((SRC / 'shell' / 'destinations.json').read_text())
+spec = shell['destinations']
+REQUEST = shell.get('request_url', '')
 dests = []
 for d in spec:
     ed = json.loads((SRC / 'destinations' / d['dir'] / 'content' / 'edition.json').read_text())
@@ -43,6 +45,7 @@ export function chosenId() {{
   try {{ s = localStorage.getItem(KEY); }} catch (e) {{}}
   return DESTINATIONS.some(d => d.id === q) ? q : (DESTINATIONS.some(d => d.id === s) ? s : null);
 }}
+export const REQUEST_URL = {json.dumps(REQUEST)};
 export function remember(id) {{ try {{ localStorage.setItem(KEY, id); }} catch (e) {{}} }}
 ''')
 
@@ -94,6 +97,10 @@ index = f'''<!doctype html>
 .pick a.d b{{display:block;font-size:17px}}
 .pick a.d small{{display:block;color:var(--muted,#5b6168);font-size:13.5px;margin-top:2px}}
 .pick a.d .now{{margin-left:auto;font-size:12px;font-weight:600;color:var(--accent,#00677A);white-space:nowrap}}
+
+.pick .req{{display:flex;flex-direction:column;gap:8px;padding:16px;border-radius:16px;background:#f4f6f7;margin-top:6px}}
+.pick .req b{{font-size:16px}}
+.pick .req .btn{{align-self:flex-start;text-decoration:none}}
 .pick .pick-note{{font-size:13px;margin-top:6px}}
 </style>
 </head>
@@ -116,7 +123,7 @@ index = f'''<!doctype html>
 <div class="pick" id="picker" hidden></div>
 <script src="core/vendor/leaflet/leaflet.js"></script>
 <script type="module">
-import {{ DESTINATIONS, chosenId, remember }} from './destinations.js?v={version}';
+import {{ DESTINATIONS, chosenId, remember, REQUEST_URL }} from './destinations.js?v={version}';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({{ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }})[c]);
 const q = new URLSearchParams(location.search), id = chosenId();
 if (q.has('pick') || !id) {{
@@ -125,6 +132,8 @@ if (q.has('pick') || !id) {{
     <h1>Where are you going?</h1>
     <p>Pick a destination. Each one keeps its own plans, places and journal on this phone, so switching never mixes them up.</p>
     <div class="list">${{DESTINATIONS.map(d => `<a class="d" href="./?d=${{encodeURIComponent(d.id)}}" data-id="${{esc(d.id)}}"><img src="destinations/${{esc(d.dir)}}/art/${{esc(d.mark)}}" alt=""><span><b>${{esc(d.title)}}</b><small>${{esc(d.sub)}}</small></span>${{d.id === id ? '<span class="now">Current</span>' : ''}}</a>`).join('')}}</div>
+    <div class="req"><b>Don’t see your destination yet?</b><p>Wanderings is growing one place at a time. Tell us where you’re headed and we’ll do our best to build it next.</p>
+    ${{REQUEST_URL ? `<a class="btn line" href="${{esc(REQUEST_URL)}}" target="_blank" rel="noopener">Request a destination</a>` : '<p class="pick-note">Requests open soon.</p>'}}</div>
     <p class="pick-note">You can switch anytime: tap the destination name at the top of the app.</p></div>`;
   el.addEventListener('click', e => {{ const a = e.target.closest('a.d'); if (a) remember(a.dataset.id); }});
   document.getElementById('app').querySelector('.loading').hidden = true;

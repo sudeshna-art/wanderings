@@ -15,8 +15,8 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="core/vendor/leaflet/leaflet.css">
-<link rel="stylesheet" href="core/styles/app.css?v=202611111322">
-<link rel="stylesheet" href="core/styles/theme-clean.css?v=202611111322">
+<link rel="stylesheet" href="core/styles/app.css?v=202611111731">
+<link rel="stylesheet" href="core/styles/theme-clean.css?v=202611111731">
 <style>
 .pick{position:fixed;inset:0;z-index:1000;background:#fff;overflow:auto;padding:max(28px,env(safe-area-inset-top)) 20px 32px;box-sizing:border-box}
 .pick .in{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
@@ -30,6 +30,10 @@
 .pick a.d b{display:block;font-size:17px}
 .pick a.d small{display:block;color:var(--muted,#5b6168);font-size:13.5px;margin-top:2px}
 .pick a.d .now{margin-left:auto;font-size:12px;font-weight:600;color:var(--accent,#00677A);white-space:nowrap}
+
+.pick .req{display:flex;flex-direction:column;gap:8px;padding:16px;border-radius:16px;background:#f4f6f7;margin-top:6px}
+.pick .req b{font-size:16px}
+.pick .req .btn{align-self:flex-start;text-decoration:none}
 .pick .pick-note{font-size:13px;margin-top:6px}
 </style>
 </head>
@@ -52,7 +56,7 @@
 <div class="pick" id="picker" hidden></div>
 <script src="core/vendor/leaflet/leaflet.js"></script>
 <script type="module">
-import { DESTINATIONS, chosenId, remember } from './destinations.js?v=202611111322';
+import { DESTINATIONS, chosenId, remember, REQUEST_URL } from './destinations.js?v=202611111731';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const q = new URLSearchParams(location.search), id = chosenId();
 if (q.has('pick') || !id) {
@@ -61,6 +65,8 @@ if (q.has('pick') || !id) {
     <h1>Where are you going?</h1>
     <p>Pick a destination. Each one keeps its own plans, places and journal on this phone, so switching never mixes them up.</p>
     <div class="list">${DESTINATIONS.map(d => `<a class="d" href="./?d=${encodeURIComponent(d.id)}" data-id="${esc(d.id)}"><img src="destinations/${esc(d.dir)}/art/${esc(d.mark)}" alt=""><span><b>${esc(d.title)}</b><small>${esc(d.sub)}</small></span>${d.id === id ? '<span class="now">Current</span>' : ''}</a>`).join('')}</div>
+    <div class="req"><b>Don’t see your destination yet?</b><p>Wanderings is growing one place at a time. Tell us where you’re headed and we’ll do our best to build it next.</p>
+    ${REQUEST_URL ? `<a class="btn line" href="${esc(REQUEST_URL)}" target="_blank" rel="noopener">Request a destination</a>` : '<p class="pick-note">Requests open soon.</p>'}</div>
     <p class="pick-note">You can switch anytime: tap the destination name at the top of the app.</p></div>`;
   el.addEventListener('click', e => { const a = e.target.closest('a.d'); if (a) remember(a.dataset.id); });
   document.getElementById('app').querySelector('.loading').hidden = true;
@@ -68,11 +74,11 @@ if (q.has('pick') || !id) {
 } else {
   remember(id);
   if (q.get('d') !== id) history.replaceState(null, '', './?d=' + encodeURIComponent(id) + location.hash);
-  import('./core/ui/app.js?v=202611111322');
+  import('./core/ui/app.js?v=202611111731');
 }
 </script>
 <script>
-/* offline support (version 202611111322) */
+/* offline support (version 202611111731) */
 if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
   window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
 }
