@@ -1,11 +1,11 @@
 /* Places tab: Plan (Planner), Near me (everyone; the default for True Wanderer), Sights, Experiences, Day trips. Follows the current city. */
-import { S, P, save, checkedText, curCityId, cityOf, cityName, placesIn, isPlanner, isWanderer, placeById } from '../state.js?v=202611111731';
-import { esc, toast, $$, $, CUSTOM_KINDS, KIND_NAME } from '../dom.js?v=202611111731';
-import { masthead, cityBar, legend, placeRow, expRow, placeCards, modeSwitch } from '../components.js?v=202611111731';
-import { clean } from '../theme.js?v=202611111731';
-import { isGroup, statusOf, hasKids, easyWalk, goodForKids, kidAges } from '../../models/schema.js?v=202611111731';
-import { renderPlan } from './plan.js?v=202611111731';
-import { renderWanderer } from './wanderer.js?v=202611111731';
+import { S, P, save, checkedText, curCityId, cityOf, cityName, placesIn, isPlanner, isWanderer, placeById } from '../state.js?v=202611111744';
+import { esc, toast, $$, $, CUSTOM_KINDS, KIND_NAME } from '../dom.js?v=202611111744';
+import { masthead, cityBar, legend, placeRow, expRow, placeCards, modeSwitch } from '../components.js?v=202611111744';
+import { clean } from '../theme.js?v=202611111744';
+import { isGroup, statusOf, hasKids, easyWalk, goodForKids, kidAges } from '../../models/schema.js?v=202611111744';
+import { renderPlan } from './plan.js?v=202611111744';
+import { renderWanderer } from './wanderer.js?v=202611111744';
 
 export function views() {
   return (isPlanner() || isGroup(S.trip) ? [['plan', isGroup(S.trip) ? 'Group plan' : 'My plan']] : []).concat([['nearby', isWanderer() ? 'Nearby' : 'Near me'], ['sights', 'Sights'], ['experiences', 'Experiences'], ['trips', 'Day trips']]);

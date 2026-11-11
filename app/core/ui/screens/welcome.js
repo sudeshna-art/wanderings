@@ -1,15 +1,15 @@
 /* Welcome steps (simplified Oct 11 2026; Oct 12 2026 adds an optional "your group" step): you, where you're staying,
    who's coming (kids, easy walking, food notes, occasions), how you like to travel.
    Arrival details now come from bookings or Essentials. Everything stays on this phone. */
-import { EDITION } from '../../../edition.config.js?v=202611111731';
-import { S, copyOf, placeName } from '../state.js?v=202611111731';
-import { esc, ic } from '../dom.js?v=202611111731';
-import { styleChoice, staysEditor, homeCurrencySelect } from '../components.js?v=202611111731';
-import { languageSelect } from './phrases.js?v=202611111731';
-import { groupEditor, occasionsEditor } from './group.js?v=202611111731';
-import { peopleEditor } from './together.js?v=202611111731';
-import { currencyService } from '../../services/currency-service.js?v=202611111731';
-import { cityOf, cityIds } from '../state.js?v=202611111731';
+import { EDITION } from '../../../edition.config.js?v=202611111744';
+import { S, copyOf, placeName } from '../state.js?v=202611111744';
+import { esc, ic } from '../dom.js?v=202611111744';
+import { styleChoice, staysEditor, homeCurrencySelect } from '../components.js?v=202611111744';
+import { languageSelect } from './phrases.js?v=202611111744';
+import { groupEditor, occasionsEditor } from './group.js?v=202611111744';
+import { peopleEditor } from './together.js?v=202611111744';
+import { currencyService } from '../../services/currency-service.js?v=202611111744';
+import { cityOf, cityIds } from '../state.js?v=202611111744';
 
 /* "Prices convert from euros into your currency" in the destination's own money. */
 function curNote() {

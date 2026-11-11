@@ -26,6 +26,6 @@
       "maps": "../PuertoRico/"
     }
   ],
-  "request_url": "",
+  "request_url": "https://forms.gle/38WPAquzjRQspBRg9",
   "_note_request": "request_url: the 'Request a destination' form (Google Form for now). Empty = the card shows without a button."
 }
