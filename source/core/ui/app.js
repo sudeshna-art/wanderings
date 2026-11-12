@@ -17,7 +17,7 @@ import { renderToday, showSlide, startSlides, stopSlides } from './screens/today
 import { renderPlaces, defaultView, addCustomPlace } from './screens/places.js';
 import { openSched, openAddSheet, closeSheet, setSheetDay, sheetDay, openAddStop, pickSheetWho, pickSchedWho, sheetWhoSel, schedWhoSel } from './screens/plan.js';
 import { addPerson, removePerson, refreshPeople, shareGroup, checkJoin, cancelJoin, applyJoin } from './screens/together.js';
-import { liveStart, sendLink as liveSendLink, signInPassword as livePw, toggleMode as liveMode, startTrip as liveStartTrip, invite as liveInvite, leave as liveLeave, signOutLive, pickMe as livePick, isLive } from './screens/live.js';
+import { liveStart, joinWithCode as liveJoin, sendLink as liveSendLink, signInPassword as livePw, toggleMode as liveMode, startTrip as liveStartTrip, invite as liveInvite, leave as liveLeave, signOutLive, pickMe as livePick, isLive } from './screens/live.js';
 import { openSpot, recenter, refreshWanderer, wanderPos } from './screens/wanderer.js';
 import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js';
 import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js';
@@ -132,6 +132,7 @@ const A = {
   booked: el => { setBooked(S.trip, el.dataset.id, el.checked); save(); toast(el.checked ? 'Marked as booked' : 'Unmarked'); setTimeout(rerender, 350); },
   sched: el => openSched(el.dataset.id),
   livesend: () => liveSendLink(),
+  livejoin: () => liveJoin(),
   livepw: el => livePw(el.dataset.create === '1'),
   livemode: () => liveMode(),
   livestart: () => liveStartTrip(),
@@ -333,6 +334,7 @@ document.addEventListener('input', e => {
 });
 document.addEventListener('keydown', e => {
   if (e.key === 'Enter' && e.target.id === 'askq') { e.target.blur(); return; }
+  if (e.key === 'Enter' && e.target.id === 'liveCode') { e.preventDefault(); liveJoin(); return; }
   if (e.key === 'Enter' && e.target.dataset && e.target.dataset.stayq != null) { e.preventDefault(); staySearchRun(+e.target.dataset.stayq); return; }
   if (e.key === 'Escape') { if (!$('#sheet').hidden) { closeSheet(); return; } if (!$('#driver').hidden) { $('#driver').hidden = true; return; } if ($('#ask') && !$('#ask').hidden) { closeAsk(); return; } if (!$('#viewer').hidden) $('#viewer').hidden = true; if (!$('#driver').hidden) $('#driver').hidden = true; }
 });
@@ -355,7 +357,7 @@ async function boot() {
   renderTabs();
   go(shownTabs().some(([k]) => k === P().tab) ? P().tab : 'today');
   let force = false; try { force = location.hash === '#welcome'; } catch (e) {}
-  const invited = location.hash.startsWith('#live=');
+  let invited = location.hash.startsWith('#live='); try { invited = invited || !!localStorage.getItem('wanderings-live-invite'); } catch (e) {}
   liveStart(() => rerender());   /* live shared trips (Nov 2026) */
   if (invited) { S.trip.onboarded = true; save(); go('essentials', { focus: '#liveBlock' }); }
   if (await checkJoin()) {}   /* a shared group plan link: choose who you are (Oct 12 2026) */

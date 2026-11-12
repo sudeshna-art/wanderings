@@ -10,9 +10,9 @@ const EMAIL_KEY = 'wanderings-signin-email';
 async function load() {
   if (ready) return ready;
   ready = (async () => {
-    try { cfg = (await import('../../firebase-config.js?v=202611121151')).FIREBASE; } catch (e) { cfg = null; }
+    try { cfg = (await import('../../firebase-config.js?v=202611121251')).FIREBASE; } catch (e) { cfg = null; }
     if (!cfg || !cfg.apiKey) return false;
-    FB = await import('../vendor/firebase/firebase.js?v=202611121151');
+    FB = await import('../vendor/firebase/firebase.js?v=202611121251');
     app = FB.initializeApp(cfg);
     auth = FB.getAuth(app);
     try { await FB.setPersistence(auth, FB.indexedDBLocalPersistence); } catch (e) { try { await FB.setPersistence(auth, FB.browserLocalPersistence); } catch (e2) {} }
@@ -24,6 +24,8 @@ async function load() {
   return ready;
 }
 const rand = n => { const a = new Uint8Array(n); crypto.getRandomValues(a); return Array.from(a, b => 'abcdefghjkmnpqrstuvwxyz23456789'[b % 31]).join(''); };
+/* A typed trip code: drop the destination prefix (e.g. PR-), spaces and dashes; letters only from our alphabet. */
+export const normCode = s => { const c = String(s || '').toLowerCase().replace(/[^a-z0-9]/g, ''); return c.length === 12 ? c.slice(2) : c; };   /* 10-character code, with or without its two-letter destination prefix; codes never use 0, 1, i, l or o */
 const friendly = e => {
   const c = (e && e.code) || '';
   if (/network|unavailable/.test(c)) return 'No connection right now. Try again when you have signal.';
@@ -70,6 +72,14 @@ export const syncService = {
       return { ok: true };
     } catch (e) { return { error: friendly(e) }; }
   },
+  /* Join with a code (Nov 12 2026): no email or password. Firebase gives this phone an anonymous id.
+     The phone is the login; if the app is removed, the trip code brings the person back. */
+  async signInAnon() {
+    if (!(await load())) return { error: 'Sharing isn’t set up yet.' };
+    try { if (auth.authStateReady) await auth.authStateReady(); } catch (e) {}   /* never make a second id for a phone that has one */
+    if (auth.currentUser || user) return { ok: true };
+    try { await FB.signInAnonymously(auth); return { ok: true }; } catch (e) { return { error: friendly(e) }; }
+  },
   async signOut() { this.stop(); if (await load()) await FB.signOut(auth); },
 
   /* Start a shared trip for this destination; the creator becomes its first member. */
@@ -84,17 +94,19 @@ export const syncService = {
   },
   async makeInvite(tid, byName, edition) {
     if (!(await load()) || !user) return { error: 'Sign in first.' };
-    const code = rand(24);
+    const code = rand(10);
     try { await FB.setDoc(FB.doc(db, 'invites', code), { trip: tid, edition, by_name: byName || '', by_uid: user.uid, created_at: FB.serverTimestamp() }); return { code }; }
     catch (e) { return { error: friendly(e) }; }
   },
   async openInvite(code) {
     if (!(await load()) || !user) return { error: 'Sign in first.' };
+    code = normCode(code);
     try { const s = await FB.getDoc(FB.doc(db, 'invites', code)); return s.exists() ? Object.assign({ code }, s.data()) : { error: 'This invite doesn’t work anymore. Ask for a new one.' }; }
     catch (e) { return { error: friendly(e) }; }
   },
   async join(tid, code, name, personId) {
     if (!(await load()) || !user) return { error: 'Sign in first.' };
+    code = normCode(code);   /* the rules look the invite up by its clean id */
     try { await FB.setDoc(FB.doc(db, 'trips', tid, 'members', user.uid), { uid: user.uid, name: name || '', person_id: personId || '', code, joined_at: FB.serverTimestamp() }); return { ok: true }; }
     catch (e) { return { error: friendly(e) }; }
   },

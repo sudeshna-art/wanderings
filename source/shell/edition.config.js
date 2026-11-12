@@ -10,6 +10,7 @@ const own = (await import(`./destinations/${d.dir}/edition.config.js`)).EDITION;
 export const EDITION = {
   ...own,
   multi: true,
+  tripCode: d.code || '',
   dir: d.dir,
   contentPath: base + 'content/',
   artPath: base + 'art/',

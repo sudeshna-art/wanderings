@@ -1,12 +1,12 @@
 /* Plan together, live (Nov 2026): sign in once, start or join a shared trip, and see everyone's changes.
    Uses syncService for everything outside the phone and models/sync.js for what is shared. */
-import { EDITION } from '../../../edition.config.js?v=202611121151';
-import { S, save, placeById } from '../state.js?v=202611121151';
-import { esc, ic, toast, $ } from '../dom.js?v=202611121151';
-import { syncService } from '../../services/sync-service.js?v=202611121151';
-import { tripService } from '../../services/trip-service.js?v=202611121151';
-import { shareService } from '../../services/share-service.js?v=202611121151';
-import { diffForPush, applyRemote, changeLine, entryId } from '../../models/sync.js?v=202611121151';
+import { EDITION } from '../../../edition.config.js?v=202611121251';
+import { S, save, placeById } from '../state.js?v=202611121251';
+import { esc, ic, toast, $ } from '../dom.js?v=202611121251';
+import { syncService, normCode } from '../../services/sync-service.js?v=202611121251';
+import { tripService } from '../../services/trip-service.js?v=202611121251';
+import { shareService } from '../../services/share-service.js?v=202611121251';
+import { diffForPush, applyRemote, changeLine, entryId } from '../../models/sync.js?v=202611121251';
 
 const INVITE_KEY = 'wanderings-live-invite';
 export const LV = { on: false, user: null, mode: 'link', msg: '', busy: false, picking: null, members: 0 };
@@ -33,6 +33,7 @@ export async function liveStart(rerender) {
     try { history.replaceState(null, '', baseUrl()); } catch (e) {}
     if (r && r.error) { LV.msg = r.error; toast(r.error); }
   }
+  if (pendingCode() && !syncService.user()) { const r = await syncService.signInAnon(); if (r.error) LV.msg = r.error; }
   syncService.onAuth(async u => {
     LV.user = u;
     if (u) { await joinPending(); if (live()) listen(); }
@@ -138,10 +139,23 @@ export async function signInPassword(create) {
   const r = await syncService.signInPassword(email, pw, create);
   LV.busy = false; LV.msg = r.error || ''; refresh();
 }
+export const showCode = c => (EDITION.tripCode ? EDITION.tripCode + '-' : '') + c.toUpperCase().replace(/(.{5})(?=.)/g, '$1-');
+export async function joinWithCode() {
+  const raw = (($('#liveCode') || {}).value || '').trim();
+  const pre = (raw.toUpperCase().match(/^([A-Z]{2})-/) || [])[1];
+  if (normCode(raw).length !== 10) { LV.msg = 'Type the whole code, like ' + (EDITION.tripCode || 'PR') + '-XXXXX-XXXXX.'; refresh(); return; }
+  if (pre && EDITION.tripCode && pre !== EDITION.tripCode) { LV.msg = 'That code is for another destination. Tap the destination name at the top, switch, then enter the code there.'; refresh(); return; }
+  try { localStorage.setItem(INVITE_KEY, raw); } catch (e) {}
+  LV.busy = true; LV.msg = ''; refresh();
+  if (!LV.user) { const a = await syncService.signInAnon(); if (a.error) { LV.busy = false; LV.msg = a.error; refresh(); return; } LV.user = syncService.user(); }
+  await joinPending();
+  LV.busy = false; refresh();
+}
 export function toggleMode() { LV.mode = LV.mode === 'link' ? 'password' : 'link'; LV.msg = ''; refresh(); }
 export async function startTrip() {
-  if (!S.trip.traveler_name) { toast('Add your name first (top of Essentials)'); return; }
+  if (!S.trip.traveler_name) { toast('Add your name first (Essentials, Settings, or the welcome steps)'); return; }
   LV.busy = true; refresh();
+  if (!LV.user) { const a = await syncService.signInAnon(); if (a.error) { LV.busy = false; LV.msg = a.error; refresh(); return; } LV.user = syncService.user(); }
   const r = await syncService.createTrip({ edition: EDITION.id, name: EDITION.name, by_name: S.trip.traveler_name, person_id: S.trip.me_id });
   LV.busy = false;
   if (r.error) { LV.msg = r.error; refresh(); return; }
@@ -151,14 +165,17 @@ export async function startTrip() {
 }
 export async function invite() {
   const lv = live(); if (!lv) return;
-  LV.busy = true; refresh();
-  const r = await syncService.makeInvite(lv.tid, S.trip.traveler_name || '', EDITION.id);
-  LV.busy = false; refresh();
-  if (r.error) { toast(r.error); return; }
-  const url = baseUrl() + '#live=' + r.code;
-  const text = `Join our ${EDITION.name} trip on Wanderings. Open this on your phone, sign in with your email, and our plans stay in sync:`;
-  const s = await shareService.shareText(text + '\n' + url, EDITION.name + ' trip');
-  if (s !== 'shared' && s !== 'cancelled') { const ok = await shareService.copy(text + '\n' + url); toast(ok ? 'Invite copied. Paste it in your family chat.' : 'Sharing isn’t available here'); }
+  if (!lv.code) {
+    LV.busy = true; refresh();
+    const r = await syncService.makeInvite(lv.tid, S.trip.traveler_name || '', EDITION.id);
+    LV.busy = false;
+    if (r.error) { refresh(); toast(r.error); return; }
+    lv.code = r.code; tripService.save(S.trip); refresh();
+  }
+  const url = location.origin + location.pathname;
+  const text = `Join our ${EDITION.name} trip on Wanderings!\n1. Get the app: open ${url} and add it to your home screen (Safari: Share, then Add to Home Screen).\n2. Open it from your home screen and enter this trip code: ${showCode(lv.code)}\nNo email or password needed.`;
+  const s = await shareService.shareText(text, EDITION.name + ' trip');
+  if (s !== 'shared' && s !== 'cancelled') { const ok = await shareService.copy(text); toast(ok ? 'Invite copied. Paste it in your family chat.' : 'Sharing isn’t available here'); }
 }
 export function leave(el) {
   if (!el.dataset.armed) { el.dataset.armed = '1'; el.textContent = 'Tap again to stop sharing on this phone'; return; }
@@ -172,24 +189,20 @@ export function liveBlock() {
   if (!LV.on) return '<div id="liveBlock" hidden></div>';   /* filled in once sign-in is ready */
   const lv = live(), msg = LV.msg ? `<p class="small" style="margin:0">${esc(LV.msg)}</p>` : '';
   let body;
-  if (!LV.user) {
-    body = `<p class="small muted" style="margin:0">Everyone’s plans and changes show up on everyone’s phone. Sign in once with your email.${pendingCode() ? ' <b>Sign in to join the trip you were invited to.</b>' : ''}</p>
-      <label class="f" style="flex:none">Your email<input type="email" id="liveEmail" autocomplete="email" inputmode="email" placeholder="you@example.com"></label>
-      ${LV.mode === 'password' ? `<label class="f" style="flex:none">Password<input type="password" id="livePw" autocomplete="current-password" placeholder="At least 6 characters"></label>
-        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-act="livepw" data-create="0" ${LV.busy ? 'disabled' : ''}>Sign in</button><button class="btn line sm" data-act="livepw" data-create="1" ${LV.busy ? 'disabled' : ''}>Create account</button></div>
-        <button class="text-btn" data-act="livemode" style="align-self:flex-start;min-height:32px">Email me a link instead</button>`
-      : `<button class="btn sm" data-act="livesend" style="align-self:flex-start" ${LV.busy ? 'disabled' : ''}>${LV.busy ? 'Sending…' : 'Email me a sign-in link'}</button>
-        <button class="text-btn" data-act="livemode" style="align-self:flex-start;min-height:32px">Use a password instead</button>`}${msg}`;
-  } else if (!lv) {
-    body = `<p class="small muted" style="margin:0">Signed in as ${esc(LV.user.email)}. Start a shared trip for ${esc(EDITION.name)}, then invite your group. Or open an invite someone sent you.</p>
-      <button class="btn sm" data-act="livestart" style="align-self:flex-start" ${LV.busy ? 'disabled' : ''}>${ic('people', 'style="width:16px;height:16px"')}Start a shared trip</button>${msg}
-      <button class="text-btn" data-act="livesignout" style="align-self:flex-start;min-height:32px">Sign out</button>`;
+  if (!lv) {
+    const anon = LV.user && !LV.user.email;
+    body = `<p class="small muted" style="margin:0">Share your plan with family or friends. Everyone sees changes as they happen. No email or password needed.</p>
+      <button class="btn sm" data-act="livestart" style="align-self:flex-start" ${LV.busy ? 'disabled' : ''}>${ic('people', 'style="width:16px;height:16px"')}Start a shared trip</button>
+      <label class="f" style="flex:none;margin-top:4px">Have a trip code?<div style="display:flex;gap:8px"><input id="liveCode" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="${esc(EDITION.tripCode || 'PR')}-XXXXX-XXXXX" style="flex:1;min-width:0"><button class="btn line sm" data-act="livejoin" ${LV.busy ? 'disabled' : ''}>Join</button></div></label>${msg}
+      ${LV.user && !anon ? `<p class="small muted" style="margin:0">Signed in as ${esc(LV.user.email)}. <button class="text-btn" data-act="livesignout" style="min-height:28px">Sign out</button></p>` : LV.mode === 'password' ? `<label class="f" style="flex:none">Email<input type="email" id="liveEmail" autocomplete="email"></label><label class="f" style="flex:none">Password<input type="password" id="livePw" autocomplete="current-password"></label>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn line sm" data-act="livepw" data-create="0" ${LV.busy ? 'disabled' : ''}>Sign in</button><button class="text-btn" data-act="livemode" style="min-height:32px">Cancel</button></div>` : `<button class="text-btn" data-act="livemode" style="align-self:flex-start;min-height:28px;font-size:13px">Have an email account? Sign in</button>`}`;
   } else {
     const log = (lv.log || []).slice(0, 5);
     body = `<p class="small" style="margin:0">${ic('people', 'style="width:14px;height:14px;vertical-align:-2px;margin-right:4px"')}Shared live${lv.from && lv.from !== S.trip.traveler_name ? ` with ${esc(lv.from)}’s trip` : ''}. Plans, people and shared bookings stay in sync. Mark anything “Only me” to keep it private.</p>
-      <button class="btn sm" data-act="liveinvite" style="align-self:flex-start" ${LV.busy ? 'disabled' : ''}>${ic('share', 'style="width:16px;height:16px"')}Invite someone</button>
+      ${lv.code ? `<div class="label">Trip code</div><div style="font-size:22px;font-weight:700;letter-spacing:.06em;user-select:all">${esc(showCode(lv.code))}</div>` : ''}
+      <button class="btn sm" data-act="liveinvite" style="align-self:flex-start" ${LV.busy ? 'disabled' : ''}>${ic('share', 'style="width:16px;height:16px"')}${lv.code ? 'Share the invite' : 'Invite your group'}</button>
       ${log.length ? `<div class="label">What changed</div><ul class="small" style="margin:0;padding-left:18px">${log.map(l => `<li>${esc(l.text)}</li>`).join('')}</ul>` : ''}${msg}
-      <div style="display:flex;gap:12px;flex-wrap:wrap"><button class="text-btn" data-act="liveleave" style="min-height:32px">Stop sharing on this phone</button><button class="text-btn" data-act="livesignout" style="min-height:32px">Sign out</button></div>`;
+      <button class="text-btn" data-act="liveleave" style="align-self:flex-start;min-height:32px">Stop sharing on this phone</button>`;
   }
   return `<div class="soft" id="liveBlock" style="display:flex;flex-direction:column;gap:8px;margin:6px 0 10px"><b>Plan together, live</b>${body}</div>`;
 }

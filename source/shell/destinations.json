@@ -7,7 +7,8 @@
       "title": "Firenze",
       "sub": "Florence, Italy",
       "mark": "florence-mark.svg",
-      "maps": "../Firenze/"
+      "maps": "../Firenze/",
+      "code": "FI"
     },
     {
       "id": "portugal",
@@ -15,7 +16,8 @@
       "title": "Portugal",
       "sub": "Lisboa and the Algarve",
       "mark": "lisbon-mark.svg",
-      "maps": "../Portugal/"
+      "maps": "../Portugal/",
+      "code": "PT"
     },
     {
       "id": "puerto-rico",
@@ -23,9 +25,11 @@
       "title": "Puerto Rico",
       "sub": "San Juan and around",
       "mark": "san-juan-mark.svg",
-      "maps": "../PuertoRico/"
+      "maps": "../PuertoRico/",
+      "code": "PR"
     }
   ],
   "request_url": "https://forms.gle/38WPAquzjRQspBRg9",
-  "_note_request": "request_url: the 'Request a destination' form (Google Form for now). Empty = the card shows without a button."
+  "_note_request": "request_url: the 'Request a destination' form (Google Form for now). Empty = the card shows without a button.",
+  "_note_code": "code: the two-letter prefix on trip codes (PR-XXXXX-XXXXX), so a code opens the right destination."
 }
