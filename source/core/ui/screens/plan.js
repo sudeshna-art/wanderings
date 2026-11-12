@@ -166,6 +166,7 @@ export function openSched(id) {
     <div class="fields"><label class="f">Day<input type="date" id="sd-${id}" value="${esc(cur.date || mn)}" ${mn ? `min="${mn}"` : ''} ${mx ? `max="${mx}"` : ''}></label><label class="f">Time (optional)<input type="time" id="st-${id}" value="${esc(cur.time || '')}"></label></div>
     ${p && closedText(p) ? `<p class="small" style="color:var(--coral-ink);margin:0">${esc(closedText(p))}.</p>` : ''}
     <div data-whobox="${id}">${whoChips(schedWho, 'schedwho', cur.date)}</div>
+    ${S.trip.live ? `<label class="check" style="min-height:32px"><input type="checkbox" id="sp-${id}" ${cur.private ? 'checked' : ''}><span class="small">Only me (don’t share with the group)</span></label>` : ''}
     <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-act="savesched" data-id="${id}">Save</button>${cur.date && isPlanner() ? `<button class="btn line sm" data-act="move" data-id="${id}" data-dir="-1">Move earlier</button><button class="btn line sm" data-act="move" data-id="${id}" data-dir="1">Move later</button>` : ''}${cur.date ? `<button class="btn line sm" data-act="unsched" data-id="${id}">Remove from plan</button>` : ''}<button class="btn line sm" data-act="cancelsched" data-id="${id}">Cancel</button></div></div>`;
 }
 
@@ -199,6 +200,7 @@ export function openAddSheet(id) {
       ${near ? `<p class="serif" style="font-size:15px;margin-top:-4px">Day ${all.indexOf(near.day) + 1} already has ${esc(near.name)}, just nearby.</p>` : ''}
       <div class="fields" style="align-items:flex-end"><label class="f">Time (optional)<input type="time" id="sheetTime" value="${esc((cur || {}).time || '')}"></label></div>
       <div id="sheetWho">${whoChips(sheetWho, 'sheetwho', sheetSel)}</div>
+      ${S.trip.live ? `<label class="check" style="min-height:32px"><input type="checkbox" id="sheetPriv"><span class="small">Only me (don’t share with the group)</span></label>` : ''}
       <div style="display:flex;gap:8px"><button class="btn" data-act="sheetadd" data-id="${id}" id="sheetAddBtn" style="flex:1">Add to ${esc(sheetSel ? shortDay(sheetSel) : 'day')}</button><button class="btn line" data-act="sheetclose" style="flex:1">Later</button></div>`;
   }
   $('#scrim').hidden = false; sh.hidden = false;

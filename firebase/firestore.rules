@@ -1,0 +1,42 @@
+rules_version = '2';
+// Wanderings: shared trips (Nov 2026).
+// Only people who have joined a trip can read or change it. Joining needs an invite code from a member.
+service cloud.firestore {
+  match /databases/{db}/documents {
+    function signedIn() { return request.auth != null; }
+    function member(tid) { return signedIn() && exists(/databases/$(db)/documents/trips/$(tid)/members/$(request.auth.uid)); }
+
+    // Invite codes: long random ids. Anyone signed in can open one they were given, but nobody can list them.
+    match /invites/{code} {
+      allow get: if signedIn();
+      allow create: if member(request.resource.data.trip) && request.resource.data.by_uid == request.auth.uid;
+      allow delete: if signedIn() && resource.data.by_uid == request.auth.uid;
+      allow list, update: if false;
+    }
+
+    match /trips/{tid} {
+      allow get: if member(tid);
+      allow create: if signedIn() && request.resource.data.created_by == request.auth.uid;
+      allow update: if member(tid) && request.resource.data.created_by == resource.data.created_by;
+      allow list, delete: if false;
+
+      // Members: you can only add yourself, and only as the trip's creator or with a valid invite for this trip.
+      match /members/{uid} {
+        allow read: if member(tid);
+        allow create: if signedIn() && uid == request.auth.uid && (
+          get(/databases/$(db)/documents/trips/$(tid)).data.created_by == request.auth.uid ||
+          get(/databases/$(db)/documents/invites/$(request.resource.data.code)).data.trip == tid);
+        allow update: if signedIn() && uid == request.auth.uid && request.resource.data.get('code', '') == resource.data.get('code', '');
+        allow delete: if signedIn() && uid == request.auth.uid;
+      }
+
+      // Shared plan items, bookings and people. Every change is signed by its author.
+      match /entries/{eid} {
+        allow read: if member(tid);
+        allow create, update: if member(tid) && request.resource.data.by_uid == request.auth.uid
+          && request.resource.data.kind in ['plan', 'booking', 'person', 'saved'];
+        allow delete: if member(tid);
+      }
+    }
+  }
+}

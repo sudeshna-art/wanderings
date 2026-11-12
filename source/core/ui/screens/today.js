@@ -17,6 +17,7 @@ import { placeCards, checkText } from '../components.js';
 import { closedText, closedOn } from '../../models/schema.js';
 import { occasionAlert } from './group.js';
 import { arrivalsAlert } from './together.js';
+import { liveUpdates } from './live.js';
 
 let slideTimer = null, slideIdx = 0;
 
@@ -340,6 +341,7 @@ function renderTodayClean() {
     html += `<div class="block" style="padding-top:20px"><div class="soft"><b>Install Wanderings</b><p class="small">${ios ? 'Tap <b>Share</b> at the bottom of Safari, then <b>Add to Home Screen</b>. It opens like an app and works offline.' : 'Open your browser menu and tap <b>Install app</b> or <b>Add to Home screen</b>. It opens like an app and works offline.'}</p>
       <button class="text-btn" data-act="dismissinstall" style="align-self:flex-start;min-height:36px">Got it</button></div></div>`;
   }
+  html += liveUpdates() ? `<div class="block" style="padding-top:12px">${liveUpdates()}</div>` : '';
   html += whatNow(st);
   html += tomorrowBlock(cityId, st);
   if (st.k !== 'after' && toBook.length) {

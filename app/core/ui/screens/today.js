@@ -1,22 +1,23 @@
 /* Today: answers "what now?" for the current city. Simplified Oct 11 2026: the time-sensitive things first
    (meeting point, travel, bookings, clashes), then what to book, ideas, your base and a phrase. */
-import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202611112153';
-import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202611112153';
-import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202611112153';
-import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202611112153';
-import { tripChecks } from '../../models/checks.js?v=202611112153';
-import { timelineView } from './plan.js?v=202611112153';
-import { allPhotoIds } from './journal.js?v=202611112153';
-import { view as phraseView } from './phrases.js?v=202611112153';
-import { meetBlock } from './safety.js?v=202611112153';
-import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js?v=202611112153';
-import { speaksLocal } from '../../models/schema.js?v=202611112153';
-import { mapPackService } from '../../services/mappack-service.js?v=202611112153';
-import { clean } from '../theme.js?v=202611112153';
-import { placeCards, checkText } from '../components.js?v=202611112153';
-import { closedText, closedOn } from '../../models/schema.js?v=202611112153';
-import { occasionAlert } from './group.js?v=202611112153';
-import { arrivalsAlert } from './together.js?v=202611112153';
+import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202611121151';
+import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202611121151';
+import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202611121151';
+import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202611121151';
+import { tripChecks } from '../../models/checks.js?v=202611121151';
+import { timelineView } from './plan.js?v=202611121151';
+import { allPhotoIds } from './journal.js?v=202611121151';
+import { view as phraseView } from './phrases.js?v=202611121151';
+import { meetBlock } from './safety.js?v=202611121151';
+import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js?v=202611121151';
+import { speaksLocal } from '../../models/schema.js?v=202611121151';
+import { mapPackService } from '../../services/mappack-service.js?v=202611121151';
+import { clean } from '../theme.js?v=202611121151';
+import { placeCards, checkText } from '../components.js?v=202611121151';
+import { closedText, closedOn } from '../../models/schema.js?v=202611121151';
+import { occasionAlert } from './group.js?v=202611121151';
+import { arrivalsAlert } from './together.js?v=202611121151';
+import { liveUpdates } from './live.js?v=202611121151';
 
 let slideTimer = null, slideIdx = 0;
 
@@ -340,6 +341,7 @@ function renderTodayClean() {
     html += `<div class="block" style="padding-top:20px"><div class="soft"><b>Install Wanderings</b><p class="small">${ios ? 'Tap <b>Share</b> at the bottom of Safari, then <b>Add to Home Screen</b>. It opens like an app and works offline.' : 'Open your browser menu and tap <b>Install app</b> or <b>Add to Home screen</b>. It opens like an app and works offline.'}</p>
       <button class="text-btn" data-act="dismissinstall" style="align-self:flex-start;min-height:36px">Got it</button></div></div>`;
   }
+  html += liveUpdates() ? `<div class="block" style="padding-top:12px">${liveUpdates()}</div>` : '';
   html += whatNow(st);
   html += tomorrowBlock(cityId, st);
   if (st.k !== 'after' && toBook.length) {

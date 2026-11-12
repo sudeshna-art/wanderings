@@ -17,6 +17,7 @@ import { renderToday, showSlide, startSlides, stopSlides } from './screens/today
 import { renderPlaces, defaultView, addCustomPlace } from './screens/places.js';
 import { openSched, openAddSheet, closeSheet, setSheetDay, sheetDay, openAddStop, pickSheetWho, pickSchedWho, sheetWhoSel, schedWhoSel } from './screens/plan.js';
 import { addPerson, removePerson, refreshPeople, shareGroup, checkJoin, cancelJoin, applyJoin } from './screens/together.js';
+import { liveStart, sendLink as liveSendLink, signInPassword as livePw, toggleMode as liveMode, startTrip as liveStartTrip, invite as liveInvite, leave as liveLeave, signOutLive, pickMe as livePick, isLive } from './screens/live.js';
 import { openSpot, recenter, refreshWanderer, wanderPos } from './screens/wanderer.js';
 import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js';
 import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js';
@@ -130,13 +131,21 @@ const A = {
   recenter: () => recenter(),
   booked: el => { setBooked(S.trip, el.dataset.id, el.checked); save(); toast(el.checked ? 'Marked as booked' : 'Unmarked'); setTimeout(rerender, 350); },
   sched: el => openSched(el.dataset.id),
-  savesched: el => { const id = el.dataset.id, dt = $('#sd-' + id).value, tm = $('#st-' + id).value; if (!dt) { toast('Pick a day first'); return; } addToDay(S.trip, id, dt, tm, schedWhoSel()); save(); toast('Saved to your plan'); rerender(); },
+  livesend: () => liveSendLink(),
+  livepw: el => livePw(el.dataset.create === '1'),
+  livemode: () => liveMode(),
+  livestart: () => liveStartTrip(),
+  liveinvite: () => liveInvite(),
+  liveleave: el => liveLeave(el),
+  livesignout: () => signOutLive(),
+  livepick: el => livePick(el.dataset.id),
+  savesched: el => { const id = el.dataset.id, dt = $('#sd-' + id).value, tm = $('#st-' + id).value; if (!dt) { toast('Pick a day first'); return; } addToDay(S.trip, id, dt, tm, schedWhoSel()); { const it = S.trip.plan.find(x => x.item_id === id), pv = $('#sp-' + id); if (it && pv) it.private = pv.checked || undefined; } save(); toast('Saved to your plan'); rerender(); },
   cancelsched: el => { const b = document.querySelector(`[data-schedform="${el.dataset.id}"]`); if (b) { b.hidden = true; b.innerHTML = ''; } },
   unsched: el => { removeFromPlan(S.trip, el.dataset.id); save(); toast('Removed from plan'); rerender(); },
   move: el => { moveItem(S.trip, el.dataset.id, +el.dataset.dir); save(); rerender(); setTimeout(() => openSched(el.dataset.id), 0); },
   addsheet: el => openAddSheet(el.dataset.id),
   pickday: el => setSheetDay(el.dataset.v),
-  sheetadd: el => { const d = sheetDay(); if (!d) { toast('Pick a day'); return; } addToDay(S.trip, el.dataset.id, d, ($('#sheetTime') || {}).value || '', sheetWhoSel()); P().pday = d; save(); closeSheet(); toast('Added to your plan'); rerender(); },
+  sheetadd: el => { const d = sheetDay(); if (!d) { toast('Pick a day'); return; } addToDay(S.trip, el.dataset.id, d, ($('#sheetTime') || {}).value || '', sheetWhoSel()); { const it = S.trip.plan.find(x => x.item_id === el.dataset.id), pv = $('#sheetPriv'); if (it && pv) it.private = pv.checked || undefined; } P().pday = d; save(); closeSheet(); toast('Added to your plan'); rerender(); },
   sheetclose: () => { closeSheet(); },
   sheetstays: () => { closeSheet(); go('essentials', { focus: '#tripBlock' }); },
   addstop: el => openAddStop(el.dataset.day),
@@ -346,6 +355,9 @@ async function boot() {
   renderTabs();
   go(shownTabs().some(([k]) => k === P().tab) ? P().tab : 'today');
   let force = false; try { force = location.hash === '#welcome'; } catch (e) {}
+  const invited = location.hash.startsWith('#live=');
+  liveStart(() => rerender());   /* live shared trips (Nov 2026) */
+  if (invited) { S.trip.onboarded = true; save(); go('essentials', { focus: '#liveBlock' }); }
   if (await checkJoin()) {}   /* a shared group plan link: choose who you are (Oct 12 2026) */
   else if (!S.trip.onboarded || force) { W.step = 1; renderWelcome(); }
   window.addEventListener('hashchange', () => { try { if (location.hash === '#welcome') { W.step = 1; renderWelcome(); } else if (location.hash.startsWith('#join=')) checkJoin(); } catch (e) {} });

@@ -4,7 +4,7 @@ import { currentCityId, stayForCity, sortedStays, localISO } from '../models/sch
 
 export const S = { trip: null, C: null, mounts: [], cleanups: [] };
 
-export const save = () => tripService.save(S.trip);
+export const save = () => { const r = tripService.save(S.trip); if (S.afterSave) S.afterSave(); return r; };   /* afterSave: live sharing (Nov 2026) */
 export const P = () => S.trip.prefs;
 
 export const cityIds = () => S.C.edition.city_ids;
