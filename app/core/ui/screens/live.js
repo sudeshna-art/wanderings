@@ -1,12 +1,12 @@
 /* Plan together, live (Nov 2026): sign in once, start or join a shared trip, and see everyone's changes.
    Uses syncService for everything outside the phone and models/sync.js for what is shared. */
-import { EDITION } from '../../../edition.config.js?v=202611121251';
-import { S, save, placeById } from '../state.js?v=202611121251';
-import { esc, ic, toast, $ } from '../dom.js?v=202611121251';
-import { syncService, normCode } from '../../services/sync-service.js?v=202611121251';
-import { tripService } from '../../services/trip-service.js?v=202611121251';
-import { shareService } from '../../services/share-service.js?v=202611121251';
-import { diffForPush, applyRemote, changeLine, entryId } from '../../models/sync.js?v=202611121251';
+import { EDITION } from '../../../edition.config.js?v=202611121258';
+import { S, save, placeById } from '../state.js?v=202611121258';
+import { esc, ic, toast, $ } from '../dom.js?v=202611121258';
+import { syncService, normCode } from '../../services/sync-service.js?v=202611121258';
+import { tripService } from '../../services/trip-service.js?v=202611121258';
+import { shareService } from '../../services/share-service.js?v=202611121258';
+import { diffForPush, applyRemote, changeLine, entryId } from '../../models/sync.js?v=202611121258';
 
 const INVITE_KEY = 'wanderings-live-invite';
 export const LV = { on: false, user: null, mode: 'link', msg: '', busy: false, picking: null, members: 0 };
@@ -85,8 +85,11 @@ function listen() {
 async function joinPending() {
   const code = pendingCode(); if (!code) return;
   const inv = await syncService.openInvite(code);
-  if (inv.error) { LV.msg = inv.error; clearPending(); return; }
-  if (inv.edition !== EDITION.id) { LV.msg = 'That invite is for another destination. Switch destination, then open the invite again.'; return; }
+  if (inv.error) { LV.msg = /doesn’t work/.test(inv.error) ? 'That trip code didn’t work. Check the spelling, or ask for it again.' : inv.error; clearPending(); return; }
+  if (inv.edition !== EDITION.id) {   /* the code belongs to another destination: open that one and join there */
+    try { localStorage.setItem('wanderings-destination', inv.edition); } catch (e) {}
+    location.replace(location.pathname + '?d=' + encodeURIComponent(inv.edition)); return;
+  }
   clearPending();
   if (live() && live().tid === inv.trip) return;
   const r = await syncService.join(inv.trip, code, S.trip.traveler_name || '', S.trip.me_id);
@@ -139,17 +142,37 @@ export async function signInPassword(create) {
   const r = await syncService.signInPassword(email, pw, create);
   LV.busy = false; LV.msg = r.error || ''; refresh();
 }
-export const showCode = c => (EDITION.tripCode ? EDITION.tripCode + '-' : '') + c.toUpperCase().replace(/(.{5})(?=.)/g, '$1-');
+export const showCode = lv => lv.shown || String(lv.code || '').toUpperCase();
 export async function joinWithCode() {
   const raw = (($('#liveCode') || {}).value || '').trim();
-  const pre = (raw.toUpperCase().match(/^([A-Z]{2})-/) || [])[1];
-  if (normCode(raw).length !== 10) { LV.msg = 'Type the whole code, like ' + (EDITION.tripCode || 'PR') + '-XXXXX-XXXXX.'; refresh(); return; }
-  if (pre && EDITION.tripCode && pre !== EDITION.tripCode) { LV.msg = 'That code is for another destination. Tap the destination name at the top, switch, then enter the code there.'; refresh(); return; }
+  if (normCode(raw).length < 6) { LV.msg = 'Type the trip code you were sent.'; refresh(); return; }
   try { localStorage.setItem(INVITE_KEY, raw); } catch (e) {}
   LV.busy = true; LV.msg = ''; refresh();
   if (!LV.user) { const a = await syncService.signInAnon(); if (a.error) { LV.busy = false; LV.msg = a.error; refresh(); return; } LV.user = syncService.user(); }
   await joinPending();
   LV.busy = false; refresh();
+}
+/* Choose your own code (e.g. Sukla-2026), and close it once everyone has joined. */
+export async function customCode() {
+  const lv = live(); if (!lv) return;
+  const want = (($('#liveCustom') || {}).value || '').trim();
+  if (normCode(want).length < 6) { LV.msg = 'Make the code at least 6 letters or numbers, like Sukla-2026.'; refresh(); return; }
+  LV.busy = true; LV.msg = ''; refresh();
+  const r = await syncService.makeInvite(lv.tid, S.trip.traveler_name || '', EDITION.id, '', want);
+  LV.busy = false;
+  if (r.error) { LV.msg = r.error; refresh(); return; }
+  if (lv.code && lv.code !== r.code) syncService.closeInvite(lv.code);   /* the old code stops working */
+  lv.code = r.code; lv.shown = r.shown; lv.closed = false; LV.editing = false; tripService.save(S.trip); refresh();
+  toast('Your trip code is ' + r.shown);
+}
+export function editCode() { LV.editing = !LV.editing; LV.msg = ''; refresh(); }
+export async function closeCode(el) {
+  const lv = live(); if (!lv || !lv.code) return;
+  if (!el.dataset.armed) { el.dataset.armed = '1'; el.textContent = 'Tap again: nobody new can join with this code'; return; }
+  const r = await syncService.closeInvite(lv.code);
+  if (r.error) { toast(r.error); return; }
+  lv.closed = true; delete lv.code; delete lv.shown; tripService.save(S.trip); refresh();
+  toast('Code closed. Everyone already in stays in.');
 }
 export function toggleMode() { LV.mode = LV.mode === 'link' ? 'password' : 'link'; LV.msg = ''; refresh(); }
 export async function startTrip() {
@@ -167,13 +190,13 @@ export async function invite() {
   const lv = live(); if (!lv) return;
   if (!lv.code) {
     LV.busy = true; refresh();
-    const r = await syncService.makeInvite(lv.tid, S.trip.traveler_name || '', EDITION.id);
+    const r = await syncService.makeInvite(lv.tid, S.trip.traveler_name || '', EDITION.id, EDITION.tripCode);
     LV.busy = false;
     if (r.error) { refresh(); toast(r.error); return; }
-    lv.code = r.code; tripService.save(S.trip); refresh();
+    lv.code = r.code; lv.shown = r.shown; lv.closed = false; tripService.save(S.trip); refresh();
   }
   const url = location.origin + location.pathname;
-  const text = `Join our ${EDITION.name} trip on Wanderings!\n1. Get the app: open ${url} and add it to your home screen (Safari: Share, then Add to Home Screen).\n2. Open it from your home screen and enter this trip code: ${showCode(lv.code)}\nNo email or password needed.`;
+  const text = `Join our ${EDITION.name} trip on Wanderings!\n1. Get the app: open ${url} and add it to your home screen (Safari: Share, then Add to Home Screen).\n2. Open it from your home screen and enter this trip code: ${showCode(lv)}\nNo email or password needed.`;
   const s = await shareService.shareText(text, EDITION.name + ' trip');
   if (s !== 'shared' && s !== 'cancelled') { const ok = await shareService.copy(text); toast(ok ? 'Invite copied. Paste it in your family chat.' : 'Sharing isn’t available here'); }
 }
@@ -193,14 +216,18 @@ export function liveBlock() {
     const anon = LV.user && !LV.user.email;
     body = `<p class="small muted" style="margin:0">Share your plan with family or friends. Everyone sees changes as they happen. No email or password needed.</p>
       <button class="btn sm" data-act="livestart" style="align-self:flex-start" ${LV.busy ? 'disabled' : ''}>${ic('people', 'style="width:16px;height:16px"')}Start a shared trip</button>
-      <label class="f" style="flex:none;margin-top:4px">Have a trip code?<div style="display:flex;gap:8px"><input id="liveCode" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="${esc(EDITION.tripCode || 'PR')}-XXXXX-XXXXX" style="flex:1;min-width:0"><button class="btn line sm" data-act="livejoin" ${LV.busy ? 'disabled' : ''}>Join</button></div></label>${msg}
+      <label class="f" style="flex:none;margin-top:4px">Have a trip code?<div style="display:flex;gap:8px"><input id="liveCode" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. Sukla-2026" style="flex:1;min-width:0"><button class="btn line sm" data-act="livejoin" ${LV.busy ? 'disabled' : ''}>Join</button></div></label>${msg}
       ${LV.user && !anon ? `<p class="small muted" style="margin:0">Signed in as ${esc(LV.user.email)}. <button class="text-btn" data-act="livesignout" style="min-height:28px">Sign out</button></p>` : LV.mode === 'password' ? `<label class="f" style="flex:none">Email<input type="email" id="liveEmail" autocomplete="email"></label><label class="f" style="flex:none">Password<input type="password" id="livePw" autocomplete="current-password"></label>
         <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn line sm" data-act="livepw" data-create="0" ${LV.busy ? 'disabled' : ''}>Sign in</button><button class="text-btn" data-act="livemode" style="min-height:32px">Cancel</button></div>` : `<button class="text-btn" data-act="livemode" style="align-self:flex-start;min-height:28px;font-size:13px">Have an email account? Sign in</button>`}`;
   } else {
     const log = (lv.log || []).slice(0, 5);
     body = `<p class="small" style="margin:0">${ic('people', 'style="width:14px;height:14px;vertical-align:-2px;margin-right:4px"')}Shared live${lv.from && lv.from !== S.trip.traveler_name ? ` with ${esc(lv.from)}’s trip` : ''}. Plans, people and shared bookings stay in sync. Mark anything “Only me” to keep it private.</p>
-      ${lv.code ? `<div class="label">Trip code</div><div style="font-size:22px;font-weight:700;letter-spacing:.06em;user-select:all">${esc(showCode(lv.code))}</div>` : ''}
-      <button class="btn sm" data-act="liveinvite" style="align-self:flex-start" ${LV.busy ? 'disabled' : ''}>${ic('share', 'style="width:16px;height:16px"')}${lv.code ? 'Share the invite' : 'Invite your group'}</button>
+      ${lv.code ? `<div class="label">Trip code</div><div style="font-size:22px;font-weight:700;letter-spacing:.04em;user-select:all">${esc(showCode(lv))}</div>` : lv.closed ? '<p class="small muted" style="margin:0">The trip code is closed, so nobody new can join. Need to add someone? Make a new code.</p>' : ''}
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="btn sm" data-act="liveinvite" ${LV.busy ? 'disabled' : ''}>${ic('share', 'style="width:16px;height:16px"')}${lv.code ? 'Share the invite' : lv.closed ? 'Make a new code' : 'Invite your group'}</button>
+        <button class="text-btn" data-act="liveeditcode" style="min-height:32px">${LV.editing ? 'Cancel' : 'Choose your own code'}</button></div>
+      ${LV.editing ? `<label class="f" style="flex:none">Your code<div style="display:flex;gap:8px"><input id="liveCustom" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. Sukla-2026" style="flex:1;min-width:0"><button class="btn line sm" data-act="livecustom" ${LV.busy ? 'disabled' : ''}>Use it</button></div></label>
+        <p class="small muted" style="margin:0">Easy to remember is also easier to guess. Once everyone has joined, close the code.</p>` : ''}
+      ${lv.code ? `<button class="text-btn" data-act="liveclosecode" style="align-self:flex-start;min-height:32px">Everyone’s in? Close the code</button>` : ''}
       ${log.length ? `<div class="label">What changed</div><ul class="small" style="margin:0;padding-left:18px">${log.map(l => `<li>${esc(l.text)}</li>`).join('')}</ul>` : ''}${msg}
       <button class="text-btn" data-act="liveleave" style="align-self:flex-start;min-height:32px">Stop sharing on this phone</button>`;
   }

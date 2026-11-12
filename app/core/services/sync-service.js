@@ -10,9 +10,9 @@ const EMAIL_KEY = 'wanderings-signin-email';
 async function load() {
   if (ready) return ready;
   ready = (async () => {
-    try { cfg = (await import('../../firebase-config.js?v=202611121251')).FIREBASE; } catch (e) { cfg = null; }
+    try { cfg = (await import('../../firebase-config.js?v=202611121258')).FIREBASE; } catch (e) { cfg = null; }
     if (!cfg || !cfg.apiKey) return false;
-    FB = await import('../vendor/firebase/firebase.js?v=202611121251');
+    FB = await import('../vendor/firebase/firebase.js?v=202611121258');
     app = FB.initializeApp(cfg);
     auth = FB.getAuth(app);
     try { await FB.setPersistence(auth, FB.indexedDBLocalPersistence); } catch (e) { try { await FB.setPersistence(auth, FB.browserLocalPersistence); } catch (e2) {} }
@@ -25,7 +25,7 @@ async function load() {
 }
 const rand = n => { const a = new Uint8Array(n); crypto.getRandomValues(a); return Array.from(a, b => 'abcdefghjkmnpqrstuvwxyz23456789'[b % 31]).join(''); };
 /* A typed trip code: drop the destination prefix (e.g. PR-), spaces and dashes; letters only from our alphabet. */
-export const normCode = s => { const c = String(s || '').toLowerCase().replace(/[^a-z0-9]/g, ''); return c.length === 12 ? c.slice(2) : c; };   /* 10-character code, with or without its two-letter destination prefix; codes never use 0, 1, i, l or o */
+export const normCode = s => String(s || '').toLowerCase().replace(/[^a-z0-9]/g, '');   /* the invite's id: letters and digits only, any capitals, dashes or spaces ignored */
 const friendly = e => {
   const c = (e && e.code) || '';
   if (/network|unavailable/.test(c)) return 'No connection right now. Try again when you have signal.';
@@ -92,11 +92,21 @@ export const syncService = {
       return { tid };
     } catch (e) { return { error: friendly(e) }; }
   },
-  async makeInvite(tid, byName, edition) {
+  /* An invite code: random (prefix + 10 characters) or one the organizer chooses, like Sukla-2026.
+     A code already used by any trip can't be taken (the rules only allow creating new codes). */
+  async makeInvite(tid, byName, edition, prefix, custom) {
     if (!(await load()) || !user) return { error: 'Sign in first.' };
-    const code = rand(10);
-    try { await FB.setDoc(FB.doc(db, 'invites', code), { trip: tid, edition, by_name: byName || '', by_uid: user.uid, created_at: FB.serverTimestamp() }); return { code }; }
-    catch (e) { return { error: friendly(e) }; }
+    const shown = custom ? custom.trim() : (prefix ? prefix + '-' : '') + rand(10).toUpperCase().replace(/(.{5})(?=.)/g, '$1-');
+    const code = normCode(shown);
+    if (code.length < 6) return { error: 'Make the code at least 6 letters or numbers.' };
+    try {
+      await FB.setDoc(FB.doc(db, 'invites', code), { trip: tid, edition, shown, by_name: byName || '', by_uid: user.uid, created_at: FB.serverTimestamp() });
+      return { code, shown };
+    } catch (e) { return { error: custom && /permission/.test((e && e.code) || '') ? 'That code is already taken. Try adding something, like a number.' : friendly(e) }; }
+  },
+  async closeInvite(code) {
+    if (!(await load()) || !user) return { error: 'Sign in first.' };
+    try { await FB.deleteDoc(FB.doc(db, 'invites', normCode(code))); return { ok: true }; } catch (e) { return { error: friendly(e) }; }
   },
   async openInvite(code) {
     if (!(await load()) || !user) return { error: 'Sign in first.' };

@@ -15,8 +15,8 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="core/vendor/leaflet/leaflet.css">
-<link rel="stylesheet" href="core/styles/app.css?v=202611121251">
-<link rel="stylesheet" href="core/styles/theme-clean.css?v=202611121251">
+<link rel="stylesheet" href="core/styles/app.css?v=202611121258">
+<link rel="stylesheet" href="core/styles/theme-clean.css?v=202611121258">
 <style>
 .pick{position:fixed;inset:0;z-index:1000;background:#fff;overflow:auto;padding:max(28px,env(safe-area-inset-top)) 20px 32px;box-sizing:border-box}
 .pick .in{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
@@ -56,7 +56,7 @@
 <div class="pick" id="picker" hidden></div>
 <script src="core/vendor/leaflet/leaflet.js"></script>
 <script type="module">
-import { DESTINATIONS, chosenId, remember, REQUEST_URL } from './destinations.js?v=202611121251';
+import { DESTINATIONS, chosenId, remember, REQUEST_URL } from './destinations.js?v=202611121258';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const q = new URLSearchParams(location.search), id = chosenId();
 if (q.has('pick') || !id) {
@@ -66,7 +66,7 @@ if (q.has('pick') || !id) {
     <p>Pick a destination. Each one keeps its own plans, places and journal on this phone, so switching never mixes them up.</p>
     <div class="list">${DESTINATIONS.map(d => `<a class="d" href="./?d=${encodeURIComponent(d.id)}" data-id="${esc(d.id)}"><img src="destinations/${esc(d.dir)}/art/${esc(d.mark)}" alt=""><span><b>${esc(d.title)}</b><small>${esc(d.sub)}</small></span>${d.id === id ? '<span class="now">Current</span>' : ''}</a>`).join('')}</div>
     <form class="req" id="codeForm"><b>Have a trip code?</b><p>Someone invited you to their trip. Type the code they sent.</p>
-      <div style="display:flex;gap:8px"><input id="codeIn" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="PR-XXXXX-XXXXX" style="flex:1;min-width:0;font:inherit;padding:10px 12px;border:1px solid var(--rule,#e3e5e8);border-radius:10px"><button class="btn" type="submit">Join</button></div>
+      <div style="display:flex;gap:8px"><input id="codeIn" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. Sukla-2026" style="flex:1;min-width:0;font:inherit;padding:10px 12px;border:1px solid var(--rule,#e3e5e8);border-radius:10px"><button class="btn" type="submit">Join</button></div>
       <p class="pick-note" id="codeMsg" hidden></p></form>
     <div class="req"><b>Don’t see your destination yet?</b><p>Wanderings is growing one place at a time. Tell us where you’re headed and we’ll do our best to build it next.</p>
     ${REQUEST_URL ? `<a class="btn line" href="${esc(REQUEST_URL)}" target="_blank" rel="noopener">Request a destination</a>` : '<p class="pick-note">Requests open soon.</p>'}</div>
@@ -74,10 +74,10 @@ if (q.has('pick') || !id) {
   el.addEventListener('click', e => { const a = e.target.closest('a.d'); if (a) remember(a.dataset.id); });
   document.getElementById('codeForm').addEventListener('submit', e => {
     e.preventDefault();
-    const raw = document.getElementById('codeIn').value.trim(), m = raw.toUpperCase().match(/^([A-Z]{2})[- ]*/);
-    const d = m && DESTINATIONS.find(x => x.code === m[1]);
+    const raw = document.getElementById('codeIn').value.trim(), m = raw.toUpperCase().match(/^([A-Z]{2})-/);
+    const d = (m && DESTINATIONS.find(x => x.code === m[1])) || DESTINATIONS.find(x => x.id === id) || DESTINATIONS[0];   /* the app switches to the trip's destination if needed */
     const msg = document.getElementById('codeMsg');
-    if (!d) { msg.hidden = false; msg.textContent = 'That code doesn’t look right. It starts with two letters, like PR-.'; return; }
+    if (raw.replace(/[^A-Za-z0-9]/g, '').length < 6) { msg.hidden = false; msg.textContent = 'Type the trip code you were sent, like Sukla-2026.'; return; }
     try { localStorage.setItem('wanderings-live-invite', raw); } catch (err) {}
     remember(d.id); location.href = './?d=' + encodeURIComponent(d.id);
   });
@@ -86,11 +86,11 @@ if (q.has('pick') || !id) {
 } else {
   remember(id);
   if (q.get('d') !== id) history.replaceState(null, '', './?d=' + encodeURIComponent(id) + location.hash);
-  import('./core/ui/app.js?v=202611121251');
+  import('./core/ui/app.js?v=202611121258');
 }
 </script>
 <script>
-/* offline support (version 202611121251) */
+/* offline support (version 202611121258) */
 if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
   window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
 }
