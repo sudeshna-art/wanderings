@@ -1,20 +1,20 @@
 /* Planner mode: day strip across the whole trip, timeline or live map per day, add-to-a-day sheet.
    Oct 11 2026: bookings show on their day, closed days are flagged, and trip checks list clashes. */
-import { placeName } from '../state.js?v=202611121731';
-import { S, P, save, cityName, cityOf, placesIn, itemInfo, homePoint, stayHere, today, addMount, addCleanup, placeById, isPlanner } from '../state.js?v=202611121731';
-import { esc, ic, ill, fmtDay, shortDay, plural, modeIcon, toast, $, $$, KIND_NAME } from '../dom.js?v=202611121731';
-import { illustrationFor, masthead, bookingLine } from '../components.js?v=202611121731';
-import { planDays as tripDays, itemsOn, stayOn, planOf, addToDay, statusOf, isBooked, walkMinutes, km, closedOn, closedText, bookingsOn } from '../../models/schema.js?v=202611121731';
-import { tripChecks } from '../../models/checks.js?v=202611121731';
-import { clean } from '../theme.js?v=202611121731';
-import { checkText } from '../components.js?v=202611121731';
-import { openSpot } from './wanderer.js?v=202611121731';
-import { mapService } from '../../services/map-service.js?v=202611121731';
-import { fareService } from '../../services/fare-service.js?v=202611121731';
-import { currencyService } from '../../services/currency-service.js?v=202611121731';
-import { showStatus } from './offline.js?v=202611121731';
-import { whoChips, whoLine, dayPeople, shareButton, groupNote, toggleWho } from './together.js?v=202611121731';
-import { isGroup } from '../../models/schema.js?v=202611121731';
+import { placeName } from '../state.js?v=202611121748';
+import { S, P, save, cityName, cityOf, placesIn, itemInfo, homePoint, stayHere, today, addMount, addCleanup, placeById, isPlanner } from '../state.js?v=202611121748';
+import { esc, ic, ill, fmtDay, shortDay, plural, modeIcon, toast, $, $$, KIND_NAME } from '../dom.js?v=202611121748';
+import { illustrationFor, masthead, bookingLine } from '../components.js?v=202611121748';
+import { planDays as tripDays, itemsOn, stayOn, planOf, addToDay, statusOf, isBooked, walkMinutes, km, closedOn, closedText, bookingsOn } from '../../models/schema.js?v=202611121748';
+import { tripChecks } from '../../models/checks.js?v=202611121748';
+import { clean } from '../theme.js?v=202611121748';
+import { checkText } from '../components.js?v=202611121748';
+import { openSpot } from './wanderer.js?v=202611121748';
+import { mapService } from '../../services/map-service.js?v=202611121748';
+import { fareService } from '../../services/fare-service.js?v=202611121748';
+import { currencyService } from '../../services/currency-service.js?v=202611121748';
+import { showStatus } from './offline.js?v=202611121748';
+import { whoChips, whoLine, dayPeople, shareButton, groupNote, toggleWho } from './together.js?v=202611121748';
+import { isGroup } from '../../models/schema.js?v=202611121748';
 
 const dayCity = d => { const s = stayOn(S.trip, d); return s ? s.city_id : ''; };
 
