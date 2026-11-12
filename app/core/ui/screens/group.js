@@ -1,11 +1,12 @@
 /* Your group (Oct 12 2026, every edition): who's traveling, food notes, special occasions, the "Show your server"
    card, drivers and rides listed by official sources, and the traveler's own trusted drivers.
    Everything the traveler enters stays in her trip on this phone. */
-import { S, P, save, curCityId, cityOf, cityName, myLang, today } from '../state.js?v=202611112153';
-import { esc, ic, toast, $, fmtDay } from '../dom.js?v=202611112153';
-import { FOOD_PREFS, FOOD_ALLERGIES, OCCASIONS, occasionLabel, newOccasion, newDriver, hasFoodNotes, localISO } from '../../models/schema.js?v=202611112153';
-import { phraseFor, speaksLocal, tripDays } from '../../models/schema.js?v=202611112153';
-import { peopleEditor, shareButton, groupNote } from './together.js?v=202611112153';
+import { S, P, save, curCityId, cityOf, cityName, myLang, today } from '../state.js?v=202611121151';
+import { esc, ic, toast, $, fmtDay } from '../dom.js?v=202611121151';
+import { FOOD_PREFS, FOOD_ALLERGIES, OCCASIONS, occasionLabel, newOccasion, newDriver, hasFoodNotes, localISO } from '../../models/schema.js?v=202611121151';
+import { phraseFor, speaksLocal, tripDays } from '../../models/schema.js?v=202611121151';
+import { peopleEditor, shareButton, groupNote } from './together.js?v=202611121151';
+import { liveBlock } from './live.js?v=202611121151';
 
 const chip = (act, k, label, on) => `<button class="chip" data-act="${act}" data-k="${esc(k)}" aria-pressed="${!!on}">${esc(label)}</button>`;
 
@@ -94,7 +95,7 @@ export const serverButton = (cls = 'btn line sm') => S.C.phrases.food_card && ha
 /* Essentials: the group block */
 export function groupBlock() {
   const ph = S.C.phrases;
-  return `<div class="block" id="groupBlock" tabindex="-1"><h2>Your group</h2>${peopleEditor()}${shareButton()}${groupNote()}<div style="height:6px"></div>${groupEditor()}${serverButton()}
+  return `<div class="block" id="groupBlock" tabindex="-1"><h2>Your group</h2>${liveBlock()}${peopleEditor()}${S.trip.live ? '' : shareButton() + groupNote()}<div style="height:6px"></div>${groupEditor()}${serverButton()}
     <div style="padding-top:8px">${occasionsEditor()}</div>
     <div style="display:flex;flex-direction:column;gap:6px;padding-top:8px"><span class="label">Phrases tab</span>
       <div class="chips wrap" role="group" aria-label="Phrases tab">${chip('hidephrases', 'show', 'Show Phrases', !P().hidePhrases)}${chip('hidephrases', 'hide', 'Hide Phrases', !!P().hidePhrases)}</div>

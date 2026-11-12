@@ -1,10 +1,10 @@
 /* Bookings in one place (approved Oct 11 2026): flights, stays, trains, tours and drivers, with import from
    pasted confirmation emails or calendar files. Everything is read and kept on this phone. */
-import { S, P, save, cityOf, cityName, cityIds, today } from '../state.js?v=202611112153';
-import { esc, ic, toast, $, fmtDay } from '../dom.js?v=202611112153';
-import { bookingLine } from '../components.js?v=202611112153';
-import { BOOKING_KINDS, bookingKindLabel, newBooking, sortedBookings, upsertBooking, removeBooking, newStay, syncLegs, sortedStays, tripRange } from '../../models/schema.js?v=202611112153';
-import { parseAny } from '../../models/importer.js?v=202611112153';
+import { S, P, save, cityOf, cityName, cityIds, today } from '../state.js?v=202611121151';
+import { esc, ic, toast, $, fmtDay } from '../dom.js?v=202611121151';
+import { bookingLine } from '../components.js?v=202611121151';
+import { BOOKING_KINDS, bookingKindLabel, newBooking, sortedBookings, upsertBooking, removeBooking, newStay, syncLegs, sortedStays, tripRange } from '../../models/schema.js?v=202611121151';
+import { parseAny } from '../../models/importer.js?v=202611121151';
 
 const IM = { text: '', found: [], mode: 'paste' };
 
@@ -82,6 +82,7 @@ function editorCard(b, i, importing) {
     ${route ? `<div class="fields"><label class="f">From<input type="text" id="${F(i, 'from')}" value="${esc(b.from)}" placeholder="${kind === 'flight' ? 'e.g. DXB' : 'e.g. Lisboa Oriente'}"></label><label class="f">To<input type="text" id="${F(i, 'to')}" value="${esc(b.to)}" placeholder="${kind === 'flight' ? 'e.g. LIS' : 'e.g. Faro'}"></label></div>` : ''}
     ${kind !== 'flight' ? `<div class="fields"><label class="f">${kind === 'stay' ? 'Address (for drivers)' : 'Where or meeting point'}<input type="text" id="${F(i, 'where')}" value="${esc(b.where)}" placeholder="Optional"></label></div>` : ''}
     <div class="fields"><label class="f">Booking reference (optional)<input type="text" id="${F(i, 'ref')}" value="${esc(b.ref)}" autocapitalize="characters"></label></div>
+    ${S.trip.live && !importing ? `<label class="check" style="min-height:32px"><input type="checkbox" id="${F(i, 'share')}" ${b.share || b.shared ? 'checked' : ''}><span class="small">Share with the group (the booking reference stays on your phone)</span></label>` : ''}
     ${['car', 'tour', 'restaurant', 'other'].includes(kind) ? `<div class="fields"><label class="f">${kind === 'car' ? 'Driver or company, phone' : 'Contact (optional)'}<input type="text" id="${F(i, 'contact')}" value="${esc(b.contact || '')}" placeholder="e.g. Carlos +1 787 …"></label><label class="f">Free cancellation until<input type="date" id="${F(i, 'cancel_by')}" value="${esc(b.cancel_by || '')}"></label></div>` : ''}
     ${kind === 'stay' && cityIds().length ? `<label class="check" style="min-height:32px;align-items:flex-start"><input type="checkbox" id="${F(i, 'asstay')}" ${importing ? 'checked' : ''} style="margin-top:2px"><span class="small">Use as my stay${city ? ` in ${esc(hood ? hood.name : cityName(city.city_id))}` : ''}, with these dates. The app follows you there.</span></label>
       ${!city && cityIds().length > 1 ? `<label class="f" style="flex:none">Where is it?<select id="${F(i, 'city')}">${cityIds().map(id => `<option value="${id}">${esc(cityName(id))}</option>`).join('')}</select></label>` : ''}` : ''}
@@ -92,6 +93,7 @@ function readCard(i, base) {
   const v = k => { const el = $('#' + F(i, k)); return el ? (el.type === 'checkbox' ? el.checked : el.value.trim()) : undefined; };
   const b = Object.assign({}, base);
   ['kind', 'title', 'date', 'time', 'end_date', 'end_time', 'from', 'to', 'where', 'ref', 'contact', 'cancel_by'].forEach(k => { const x = v(k); if (x !== undefined) b[k] = k === 'ref' || (b.kind === 'flight' && (k === 'from' || k === 'to')) ? x.toUpperCase() : x; });
+  if (v('share') !== undefined) { if (b.shared && !v('share')) { b.shared = false; } b.share = !!v('share'); }
   if (v('city')) b.city_id = v('city');
   if (!b.city_id && cityIds().length === 1) b.city_id = cityIds()[0];
   return { b, keep: v('keep') !== false, asStay: !!v('asstay'), asFlight: !!v('asflight') };

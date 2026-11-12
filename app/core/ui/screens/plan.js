@@ -1,20 +1,20 @@
 /* Planner mode: day strip across the whole trip, timeline or live map per day, add-to-a-day sheet.
    Oct 11 2026: bookings show on their day, closed days are flagged, and trip checks list clashes. */
-import { placeName } from '../state.js?v=202611112153';
-import { S, P, save, cityName, cityOf, placesIn, itemInfo, homePoint, stayHere, today, addMount, addCleanup, placeById, isPlanner } from '../state.js?v=202611112153';
-import { esc, ic, ill, fmtDay, shortDay, plural, modeIcon, toast, $, $$, KIND_NAME } from '../dom.js?v=202611112153';
-import { illustrationFor, masthead, bookingLine } from '../components.js?v=202611112153';
-import { planDays as tripDays, itemsOn, stayOn, planOf, addToDay, statusOf, isBooked, walkMinutes, km, closedOn, closedText, bookingsOn } from '../../models/schema.js?v=202611112153';
-import { tripChecks } from '../../models/checks.js?v=202611112153';
-import { clean } from '../theme.js?v=202611112153';
-import { checkText } from '../components.js?v=202611112153';
-import { openSpot } from './wanderer.js?v=202611112153';
-import { mapService } from '../../services/map-service.js?v=202611112153';
-import { fareService } from '../../services/fare-service.js?v=202611112153';
-import { currencyService } from '../../services/currency-service.js?v=202611112153';
-import { showStatus } from './offline.js?v=202611112153';
-import { whoChips, whoLine, dayPeople, shareButton, groupNote, toggleWho } from './together.js?v=202611112153';
-import { isGroup } from '../../models/schema.js?v=202611112153';
+import { placeName } from '../state.js?v=202611121151';
+import { S, P, save, cityName, cityOf, placesIn, itemInfo, homePoint, stayHere, today, addMount, addCleanup, placeById, isPlanner } from '../state.js?v=202611121151';
+import { esc, ic, ill, fmtDay, shortDay, plural, modeIcon, toast, $, $$, KIND_NAME } from '../dom.js?v=202611121151';
+import { illustrationFor, masthead, bookingLine } from '../components.js?v=202611121151';
+import { planDays as tripDays, itemsOn, stayOn, planOf, addToDay, statusOf, isBooked, walkMinutes, km, closedOn, closedText, bookingsOn } from '../../models/schema.js?v=202611121151';
+import { tripChecks } from '../../models/checks.js?v=202611121151';
+import { clean } from '../theme.js?v=202611121151';
+import { checkText } from '../components.js?v=202611121151';
+import { openSpot } from './wanderer.js?v=202611121151';
+import { mapService } from '../../services/map-service.js?v=202611121151';
+import { fareService } from '../../services/fare-service.js?v=202611121151';
+import { currencyService } from '../../services/currency-service.js?v=202611121151';
+import { showStatus } from './offline.js?v=202611121151';
+import { whoChips, whoLine, dayPeople, shareButton, groupNote, toggleWho } from './together.js?v=202611121151';
+import { isGroup } from '../../models/schema.js?v=202611121151';
 
 const dayCity = d => { const s = stayOn(S.trip, d); return s ? s.city_id : ''; };
 
@@ -166,6 +166,7 @@ export function openSched(id) {
     <div class="fields"><label class="f">Day<input type="date" id="sd-${id}" value="${esc(cur.date || mn)}" ${mn ? `min="${mn}"` : ''} ${mx ? `max="${mx}"` : ''}></label><label class="f">Time (optional)<input type="time" id="st-${id}" value="${esc(cur.time || '')}"></label></div>
     ${p && closedText(p) ? `<p class="small" style="color:var(--coral-ink);margin:0">${esc(closedText(p))}.</p>` : ''}
     <div data-whobox="${id}">${whoChips(schedWho, 'schedwho', cur.date)}</div>
+    ${S.trip.live ? `<label class="check" style="min-height:32px"><input type="checkbox" id="sp-${id}" ${cur.private ? 'checked' : ''}><span class="small">Only me (don’t share with the group)</span></label>` : ''}
     <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-act="savesched" data-id="${id}">Save</button>${cur.date && isPlanner() ? `<button class="btn line sm" data-act="move" data-id="${id}" data-dir="-1">Move earlier</button><button class="btn line sm" data-act="move" data-id="${id}" data-dir="1">Move later</button>` : ''}${cur.date ? `<button class="btn line sm" data-act="unsched" data-id="${id}">Remove from plan</button>` : ''}<button class="btn line sm" data-act="cancelsched" data-id="${id}">Cancel</button></div></div>`;
 }
 
@@ -199,6 +200,7 @@ export function openAddSheet(id) {
       ${near ? `<p class="serif" style="font-size:15px;margin-top:-4px">Day ${all.indexOf(near.day) + 1} already has ${esc(near.name)}, just nearby.</p>` : ''}
       <div class="fields" style="align-items:flex-end"><label class="f">Time (optional)<input type="time" id="sheetTime" value="${esc((cur || {}).time || '')}"></label></div>
       <div id="sheetWho">${whoChips(sheetWho, 'sheetwho', sheetSel)}</div>
+      ${S.trip.live ? `<label class="check" style="min-height:32px"><input type="checkbox" id="sheetPriv"><span class="small">Only me (don’t share with the group)</span></label>` : ''}
       <div style="display:flex;gap:8px"><button class="btn" data-act="sheetadd" data-id="${id}" id="sheetAddBtn" style="flex:1">Add to ${esc(sheetSel ? shortDay(sheetSel) : 'day')}</button><button class="btn line" data-act="sheetclose" style="flex:1">Later</button></div>`;
   }
   $('#scrim').hidden = false; sh.hidden = false;
