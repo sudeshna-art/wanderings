@@ -129,7 +129,14 @@ index = f'''<!doctype html>
 <script type="module">
 import {{ DESTINATIONS, chosenId, remember, REQUEST_URL }} from './destinations.js?v={version}';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({{ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }})[c]);
-const q = new URLSearchParams(location.search), id = chosenId();
+const q = new URLSearchParams(location.search);
+if (q.get('join')) {{   /* a join link: remember the code, open the app; it signs in quietly and joins */
+  const code = q.get('join'), m = code.toUpperCase().match(/^([A-Z]{{2}})-/);
+  try {{ localStorage.setItem('wanderings-live-invite', code); }} catch (err) {{}}
+  const d = (m && DESTINATIONS.find(x => x.code === m[1])) || DESTINATIONS.find(x => x.id === chosenId()) || DESTINATIONS[0];
+  remember(d.id); location.replace('./?d=' + encodeURIComponent(d.id));
+}}
+const id = chosenId();
 if (q.has('pick') || !id) {{
   const el = document.getElementById('picker');
   el.innerHTML = `<div class="in"><div class="word">wanderings<span>.</span></div>

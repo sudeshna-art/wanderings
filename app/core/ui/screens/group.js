@@ -1,12 +1,12 @@
 /* Your group (Oct 12 2026, every edition): who's traveling, food notes, special occasions, the "Show your server"
    card, drivers and rides listed by official sources, and the traveler's own trusted drivers.
    Everything the traveler enters stays in her trip on this phone. */
-import { S, P, save, curCityId, cityOf, cityName, myLang, today } from '../state.js?v=202611121748';
-import { esc, ic, toast, $, fmtDay } from '../dom.js?v=202611121748';
-import { FOOD_PREFS, FOOD_ALLERGIES, OCCASIONS, occasionLabel, newOccasion, newDriver, hasFoodNotes, localISO } from '../../models/schema.js?v=202611121748';
-import { phraseFor, speaksLocal, tripDays } from '../../models/schema.js?v=202611121748';
-import { peopleEditor, shareButton, groupNote } from './together.js?v=202611121748';
-import { liveBlock } from './live.js?v=202611121748';
+import { S, P, save, curCityId, cityOf, cityName, myLang, today } from '../state.js?v=202611121838';
+import { esc, ic, toast, $, fmtDay } from '../dom.js?v=202611121838';
+import { FOOD_PREFS, FOOD_ALLERGIES, OCCASIONS, occasionLabel, newOccasion, newDriver, hasFoodNotes, localISO } from '../../models/schema.js?v=202611121838';
+import { phraseFor, speaksLocal, tripDays } from '../../models/schema.js?v=202611121838';
+import { peopleEditor, shareButton, groupNote } from './together.js?v=202611121838';
+import { liveBlock } from './live.js?v=202611121838';
 
 const chip = (act, k, label, on) => `<button class="chip" data-act="${act}" data-k="${esc(k)}" aria-pressed="${!!on}">${esc(label)}</button>`;
 

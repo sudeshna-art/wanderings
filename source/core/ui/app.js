@@ -17,7 +17,7 @@ import { renderToday, showSlide, startSlides, stopSlides } from './screens/today
 import { renderPlaces, defaultView, addCustomPlace } from './screens/places.js';
 import { renderPlan, openSched, openAddSheet, closeSheet, setSheetDay, sheetDay, openAddStop, pickSheetWho, pickSchedWho, sheetWhoSel, schedWhoSel } from './screens/plan.js';
 import { addPerson, removePerson, refreshPeople, shareGroup, checkJoin, cancelJoin, applyJoin } from './screens/together.js';
-import { liveStart, customCode as liveCustom, editCode as liveEditCode, closeCode as liveCloseCode, joinWithCode as liveJoin, sendLink as liveSendLink, signInPassword as livePw, toggleMode as liveMode, startTrip as liveStartTrip, invite as liveInvite, leave as liveLeave, signOutLive, pickMe as livePick, isLive } from './screens/live.js';
+import { liveStart, shareFromPlan as liveShareFromPlan, customCode as liveCustom, editCode as liveEditCode, closeCode as liveCloseCode, joinWithCode as liveJoin, sendLink as liveSendLink, signInPassword as livePw, toggleMode as liveMode, startTrip as liveStartTrip, invite as liveInvite, leave as liveLeave, signOutLive, pickMe as livePick, isLive } from './screens/live.js';
 import { openSpot, recenter, refreshWanderer, wanderPos } from './screens/wanderer.js';
 import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js';
 import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js';
@@ -155,6 +155,8 @@ const A = {
   sched: el => openSched(el.dataset.id),
   livesend: () => liveSendLink(),
   livejoin: () => liveJoin(),
+  toastmsg: el => toast(el.dataset.msg),
+  planshare: () => liveShareFromPlan(),
   livehintoff: () => { P().liveHintOff = true; save(); rerender(); },
   livecustom: () => liveCustom(),
   liveeditcode: () => liveEditCode(),
@@ -377,6 +379,7 @@ async function boot() {
   catch (e) { root.innerHTML = '<p class="loading">Wanderings couldn’t load its guide. Check your connection and open it again.</p>'; return; }
   S.trip = await tripService.load();
   if (!S.trip.stays.length) { S.trip.stays = cityIds().map(id => newStay(id)); syncLegs(S.trip); }
+  if (!S.trip.dates) S.trip.dates = { start: '', end: '' };   /* trip dates without a stay (Nov 2026) */
   J.pending = await tripService.getPending(); J.draft = await tripService.getDraft();
   S.art = {};
   await Promise.all(S.C.cities.flatMap(c => [c.hero.art, c.mark].concat(c.illustrated_map ? [c.illustrated_map.art] : [])).map(async f => { S.art[f] = await contentService.art(f); }));

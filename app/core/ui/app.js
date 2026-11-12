@@ -1,36 +1,36 @@
 /* Wanderings app shell: boot, tabs, taps and form binding. All outside access goes through services. */
-import { CONFIG } from '../config/default-config.js?v=202611121748';
-import { S, P, save, copyOf, myLang, curCityId, cityIds, cityName, placeById, isPlanner, isWanderer, runMounts, runCleanups, today } from './state.js?v=202611121748';
-import { $, $$, esc, ic, toast } from './dom.js?v=202611121748';
-import { staysEditor, STAYQ } from './components.js?v=202611121748';
-import { geocodeService } from '../services/geocode-service.js?v=202611121748';
-import { nearestHood } from '../models/schema.js?v=202611121748';
-import { cityOf } from './state.js?v=202611121748';
-import { contentService } from '../services/content-service.js?v=202611121748';
-import { tripService } from '../services/trip-service.js?v=202611121748';
-import { storageService } from '../services/storage-service.js?v=202611121748';
-import { shareService } from '../services/share-service.js?v=202611121748';
-import { speechService } from '../services/speech-service.js?v=202611121748';
-import { currencyService } from '../services/currency-service.js?v=202611121748';
-import { newStay, syncLegs, setStatus, statusOf, setBooked, isBooked, addToDay, removeFromPlan, moveItem, planOf, tripDays, sortedStays } from '../models/schema.js?v=202611121748';
-import { renderToday, showSlide, startSlides, stopSlides } from './screens/today.js?v=202611121748';
-import { renderPlaces, defaultView, addCustomPlace } from './screens/places.js?v=202611121748';
-import { renderPlan, openSched, openAddSheet, closeSheet, setSheetDay, sheetDay, openAddStop, pickSheetWho, pickSchedWho, sheetWhoSel, schedWhoSel } from './screens/plan.js?v=202611121748';
-import { addPerson, removePerson, refreshPeople, shareGroup, checkJoin, cancelJoin, applyJoin } from './screens/together.js?v=202611121748';
-import { liveStart, customCode as liveCustom, editCode as liveEditCode, closeCode as liveCloseCode, joinWithCode as liveJoin, sendLink as liveSendLink, signInPassword as livePw, toggleMode as liveMode, startTrip as liveStartTrip, invite as liveInvite, leave as liveLeave, signOutLive, pickMe as livePick, isLive } from './screens/live.js?v=202611121748';
-import { openSpot, recenter, refreshWanderer, wanderPos } from './screens/wanderer.js?v=202611121748';
-import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js?v=202611121748';
-import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js?v=202611121748';
-import { renderEssentials, renderGuideHome, renderGuideBits, guideSubFor, showFare, updateConv, loadRate } from './screens/essentials.js?v=202611121748';
-import { renderWelcome, W, STEP_COUNT } from './screens/welcome.js?v=202611121748';
-import { downloadPack, downloadAll, removePack, autoSaveMaps } from './screens/offline.js?v=202611121748';
-import { openImport, importFind, importFile, importBack, importSave, openEditor, editorSave, editorDelete, changeKind } from './screens/bookings.js?v=202611121748';
-import { showEmergency, sharePlan, meetForm, meetSave, meetShare } from './screens/safety.js?v=202611121748';
-import { openAsk, closeAsk, askInput, askSet } from './screens/ask.js?v=202611121748';
-import { applyTheme, clean } from './theme.js?v=202611121748';
-import { openCover } from './screens/today.js?v=202611121748';
-import { togglePartyKids, togglePartyEasy, toggleFood, addOccasion, removeOccasion, refreshOccasions, showServerCard, driverForm, driverSave, driverDelete } from './screens/group.js?v=202611121748';
-import { stayHere, curCity } from './state.js?v=202611121748';
+import { CONFIG } from '../config/default-config.js?v=202611121838';
+import { S, P, save, copyOf, myLang, curCityId, cityIds, cityName, placeById, isPlanner, isWanderer, runMounts, runCleanups, today } from './state.js?v=202611121838';
+import { $, $$, esc, ic, toast } from './dom.js?v=202611121838';
+import { staysEditor, STAYQ } from './components.js?v=202611121838';
+import { geocodeService } from '../services/geocode-service.js?v=202611121838';
+import { nearestHood } from '../models/schema.js?v=202611121838';
+import { cityOf } from './state.js?v=202611121838';
+import { contentService } from '../services/content-service.js?v=202611121838';
+import { tripService } from '../services/trip-service.js?v=202611121838';
+import { storageService } from '../services/storage-service.js?v=202611121838';
+import { shareService } from '../services/share-service.js?v=202611121838';
+import { speechService } from '../services/speech-service.js?v=202611121838';
+import { currencyService } from '../services/currency-service.js?v=202611121838';
+import { newStay, syncLegs, setStatus, statusOf, setBooked, isBooked, addToDay, removeFromPlan, moveItem, planOf, tripDays, sortedStays } from '../models/schema.js?v=202611121838';
+import { renderToday, showSlide, startSlides, stopSlides } from './screens/today.js?v=202611121838';
+import { renderPlaces, defaultView, addCustomPlace } from './screens/places.js?v=202611121838';
+import { renderPlan, openSched, openAddSheet, closeSheet, setSheetDay, sheetDay, openAddStop, pickSheetWho, pickSchedWho, sheetWhoSel, schedWhoSel } from './screens/plan.js?v=202611121838';
+import { addPerson, removePerson, refreshPeople, shareGroup, checkJoin, cancelJoin, applyJoin } from './screens/together.js?v=202611121838';
+import { liveStart, shareFromPlan as liveShareFromPlan, customCode as liveCustom, editCode as liveEditCode, closeCode as liveCloseCode, joinWithCode as liveJoin, sendLink as liveSendLink, signInPassword as livePw, toggleMode as liveMode, startTrip as liveStartTrip, invite as liveInvite, leave as liveLeave, signOutLive, pickMe as livePick, isLive } from './screens/live.js?v=202611121838';
+import { openSpot, recenter, refreshWanderer, wanderPos } from './screens/wanderer.js?v=202611121838';
+import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js?v=202611121838';
+import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js?v=202611121838';
+import { renderEssentials, renderGuideHome, renderGuideBits, guideSubFor, showFare, updateConv, loadRate } from './screens/essentials.js?v=202611121838';
+import { renderWelcome, W, STEP_COUNT } from './screens/welcome.js?v=202611121838';
+import { downloadPack, downloadAll, removePack, autoSaveMaps } from './screens/offline.js?v=202611121838';
+import { openImport, importFind, importFile, importBack, importSave, openEditor, editorSave, editorDelete, changeKind } from './screens/bookings.js?v=202611121838';
+import { showEmergency, sharePlan, meetForm, meetSave, meetShare } from './screens/safety.js?v=202611121838';
+import { openAsk, closeAsk, askInput, askSet } from './screens/ask.js?v=202611121838';
+import { applyTheme, clean } from './theme.js?v=202611121838';
+import { openCover } from './screens/today.js?v=202611121838';
+import { togglePartyKids, togglePartyEasy, toggleFood, addOccasion, removeOccasion, refreshOccasions, showServerCard, driverForm, driverSave, driverDelete } from './screens/group.js?v=202611121838';
+import { stayHere, curCity } from './state.js?v=202611121838';
 
 /* Five tabs (Nov 2026): Today, Plan, Explore, Guide, Trip. Guide and Trip open short sub-pages (P().sub):
    Guide: phrases, around, money, knowhow, maps. Trip: journal. Each renders into its own section. */
@@ -155,6 +155,8 @@ const A = {
   sched: el => openSched(el.dataset.id),
   livesend: () => liveSendLink(),
   livejoin: () => liveJoin(),
+  toastmsg: el => toast(el.dataset.msg),
+  planshare: () => liveShareFromPlan(),
   livehintoff: () => { P().liveHintOff = true; save(); rerender(); },
   livecustom: () => liveCustom(),
   liveeditcode: () => liveEditCode(),
@@ -377,6 +379,7 @@ async function boot() {
   catch (e) { root.innerHTML = '<p class="loading">Wanderings couldn’t load its guide. Check your connection and open it again.</p>'; return; }
   S.trip = await tripService.load();
   if (!S.trip.stays.length) { S.trip.stays = cityIds().map(id => newStay(id)); syncLegs(S.trip); }
+  if (!S.trip.dates) S.trip.dates = { start: '', end: '' };   /* trip dates without a stay (Nov 2026) */
   J.pending = await tripService.getPending(); J.draft = await tripService.getDraft();
   S.art = {};
   await Promise.all(S.C.cities.flatMap(c => [c.hero.art, c.mark].concat(c.illustrated_map ? [c.illustrated_map.art] : [])).map(async f => { S.art[f] = await contentService.art(f); }));

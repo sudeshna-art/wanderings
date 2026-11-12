@@ -1,15 +1,15 @@
 /* Welcome steps (simplified Oct 11 2026; Oct 12 2026 adds an optional "your group" step): you, where you're staying,
    who's coming (kids, easy walking, food notes, occasions), how you like to travel.
    Arrival details now come from bookings or Essentials. Everything stays on this phone. */
-import { EDITION } from '../../../edition.config.js?v=202611121748';
-import { S, copyOf, placeName } from '../state.js?v=202611121748';
-import { esc, ic } from '../dom.js?v=202611121748';
-import { styleChoice, staysEditor, homeCurrencySelect } from '../components.js?v=202611121748';
-import { languageSelect } from './phrases.js?v=202611121748';
-import { groupEditor, occasionsEditor } from './group.js?v=202611121748';
-import { peopleEditor } from './together.js?v=202611121748';
-import { currencyService } from '../../services/currency-service.js?v=202611121748';
-import { cityOf, cityIds } from '../state.js?v=202611121748';
+import { EDITION } from '../../../edition.config.js?v=202611121838';
+import { S, copyOf, placeName } from '../state.js?v=202611121838';
+import { esc, ic } from '../dom.js?v=202611121838';
+import { styleChoice, staysEditor, homeCurrencySelect } from '../components.js?v=202611121838';
+import { languageSelect } from './phrases.js?v=202611121838';
+import { groupEditor, occasionsEditor } from './group.js?v=202611121838';
+import { peopleEditor } from './together.js?v=202611121838';
+import { currencyService } from '../../services/currency-service.js?v=202611121838';
+import { cityOf, cityIds } from '../state.js?v=202611121838';
 
 /* "Prices convert from euros into your currency" in the destination's own money. */
 function curNote() {
@@ -34,6 +34,9 @@ export function renderWelcome() {
     ${homeCurrencySelect()}
     <p class="small faint" style="margin-top:-8px">${esc(curNote())}</p>`;
   if (W.step === 2) body = `<div class="eyebrow">Step 2 of ${STEPS}</div><h1>Where are you staying?</h1><p class="lede">Add each place with its dates.${copyOf('follow') ? ' ' + esc(copyOf('follow')) : ''} Not sure yet? Skip it and fill it in later.</p>
+    <div class="label" style="margin-top:4px">Your trip dates</div>
+    <div class="fields"><label class="f">Trip starts<input type="date" data-bind="dates.start" value="${esc((S.trip.dates || {}).start || '')}"></label><label class="f">Trip ends<input type="date" data-bind="dates.end" value="${esc((S.trip.dates || {}).end || '')}"></label></div>
+    <div class="label" style="margin-top:4px">Where you’re staying (optional)</div>
     <button class="btn line sm" data-act="imopen" style="align-self:flex-start">${ic('upload', 'style="width:16px;height:16px"')}Have booking emails? Import them</button>${staysEditor()}`;
   if (W.step === 3) body = `<div class="eyebrow">Step 3 of ${STEPS} · optional</div><h1>Who’s coming?</h1><p class="lede">So the app can point out what suits your group. Skip anything that doesn’t apply.</p>${peopleEditor()}${groupEditor()}${occasionsEditor()}`;
   w.innerHTML = `<div class="inner"><div style="display:flex;gap:6px">${dots}</div>${body}

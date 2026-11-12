@@ -134,6 +134,9 @@ export function renderEssentials() {
     ${clean() ? '' : languageSelect('eLang')}
     ${homeCurrencySelect()}
     ${clean() ? '' : styleChoice('estyle')}
+    <h3 style="margin-top:10px">Trip dates</h3>
+    <p class="small muted" style="margin:0">Set these to plan days before you’ve booked a place to stay.</p>
+    <div class="fields"><label class="f">Trip starts<input type="date" data-bind="dates.start" value="${esc((S.trip.dates || {}).start || '')}"></label><label class="f">Trip ends<input type="date" data-bind="dates.end" value="${esc((S.trip.dates || {}).end || '')}"></label></div>
     <h3 style="margin-top:10px">Where you’re staying</h3>
     ${staysEditor({ info: cityIds().length < 2 })}
     <h3 style="margin-top:10px">Arriving and leaving</h3>
