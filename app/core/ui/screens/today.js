@@ -1,22 +1,22 @@
 /* Today: answers "what now?" for the current city. Simplified Oct 11 2026: the time-sensitive things first
    (meeting point, travel, bookings, clashes), then what to book, ideas, your base and a phrase. */
-import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202611112139';
-import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202611112139';
-import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202611112139';
-import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202611112139';
-import { tripChecks } from '../../models/checks.js?v=202611112139';
-import { timelineView } from './plan.js?v=202611112139';
-import { allPhotoIds } from './journal.js?v=202611112139';
-import { view as phraseView } from './phrases.js?v=202611112139';
-import { meetBlock } from './safety.js?v=202611112139';
-import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js?v=202611112139';
-import { speaksLocal } from '../../models/schema.js?v=202611112139';
-import { mapPackService } from '../../services/mappack-service.js?v=202611112139';
-import { clean } from '../theme.js?v=202611112139';
-import { placeCards, checkText } from '../components.js?v=202611112139';
-import { closedText } from '../../models/schema.js?v=202611112139';
-import { occasionAlert } from './group.js?v=202611112139';
-import { arrivalsAlert } from './together.js?v=202611112139';
+import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202611112153';
+import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202611112153';
+import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202611112153';
+import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202611112153';
+import { tripChecks } from '../../models/checks.js?v=202611112153';
+import { timelineView } from './plan.js?v=202611112153';
+import { allPhotoIds } from './journal.js?v=202611112153';
+import { view as phraseView } from './phrases.js?v=202611112153';
+import { meetBlock } from './safety.js?v=202611112153';
+import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js?v=202611112153';
+import { speaksLocal } from '../../models/schema.js?v=202611112153';
+import { mapPackService } from '../../services/mappack-service.js?v=202611112153';
+import { clean } from '../theme.js?v=202611112153';
+import { placeCards, checkText } from '../components.js?v=202611112153';
+import { closedText, closedOn } from '../../models/schema.js?v=202611112153';
+import { occasionAlert } from './group.js?v=202611112153';
+import { arrivalsAlert } from './together.js?v=202611112153';
 
 let slideTimer = null, slideIdx = 0;
 
@@ -286,6 +286,37 @@ function baseBlockClean(cityId, st) {
     ${walk ? `<p class="small muted">${esc(walk)}</p>` : ''}${h && h.tip ? `<div class="tipbox">${esc(h.tip)}</div>` : ''}
     <div style="display:flex;gap:8px;flex-wrap:wrap;padding-top:4px"><button class="btn sm" data-act="homedriver">${ic('home', 'style="width:16px;height:16px"')}Take me home</button>${home ? `<button class="btn line sm" data-act="go" data-tab="essentials" data-focus="#fareBlock">Taxi fare</button>` : ''}${sos}</div>${arrive}</div>`;
 }
+/* Nov 2026: "Tomorrow" for planning the night before, without forcing a plan or a booking.
+   Shows tomorrow's bookings and plan (if any), what's closed tomorrow among the traveler's places,
+   and a few ideas near their base that are open that day. Open days come from the guide; hours and
+   ticket availability are never shown as live: the traveler checks the official site. */
+function tomorrowBlock(cityId, st) {
+  if (!(st.k === 'during' || (st.k === 'before' && st.days != null && st.days <= 1))) return '';
+  const t = today(), tm = localISO(new Date(new Date(t + 'T12:00:00').getTime() + 864e5));
+  const dayLabel = new Date(tm + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+  const all = placesIn(cityId);
+  const books = bookingsOn(S.trip, tm);
+  const plan = itemsOn(S.trip, tm);
+  const mine = all.filter(p => statusOf(S.trip, p.id) === 'want' || p.must || plan.some(it => it.item_id === p.id));
+  const shut = mine.filter(p => closedOn(p, tm));
+  const home = homePoint(cityId);
+  let ideas = all.filter(p => p.location && p.location.lat && ['sight', 'food', 'shop'].includes(p.category) && !closedOn(p, tm) && statusOf(S.trip, p.id) !== 'went');
+  if (home) ideas = ideas.map(p => ({ p, m: walkMinutes(home, p.location) })).sort((a, b) => a.m - b.m).slice(0, 4);
+  else ideas = ideas.filter(p => p.must || p.popular).slice(0, 4).map(p => ({ p, m: null }));
+  const row = (p, extra) => `<button class="trow" data-act="spot" data-id="${p.id}"><span><b>${esc(placeName2(p))}</b>${extra ? `<span class="small muted">${extra}</span>` : ''}</span>${ic('arrow', 'style="width:16px;height:16px;flex:none"')}</button>`;
+  const need = p => p.booking_status === 'required' ? 'Needs a booking: check the official site' : '';
+  let h = `<div class="block" id="tomorrowBlock"><div class="head"><h2>Tomorrow</h2><span class="small muted">${esc(dayLabel)}</span></div>`;
+  if (books.length) h += `<div class="label">Booked</div>${books.map(x => bookingLine(x.b, x.role)).join('')}`;
+  if (plan.length) h += `<div class="label">In your plan</div><div class="trows">${plan.map(it => { const p = placeById(it.item_id); return p ? row(p, [it.time, closedOn(p, tm) ? 'Closed that day' : ''].filter(Boolean).join(' · ')) : ''; }).join('')}</div>`;
+  else h += `<p class="small muted" style="margin:0">Nothing planned${books.length ? ' besides your bookings' : ''}. That’s fine: a few ideas below, or just wander.</p>`;
+  if (shut.length) h += `<div class="alert warn">${ic('sos')}<div><b>Closed tomorrow</b><p class="small" style="margin:0">${esc(shut.map(placeName2).join(', '))}</p></div></div>`;
+  if (ideas.length) h += `<div class="label">${home ? 'Open tomorrow, near your base' : 'Open tomorrow'}</div><div class="trows">${ideas.map(({ p, m }) => row(p, [m != null ? (m <= 45 ? `${m} min walk` : 'Taxi or drive') : '', need(p)].filter(Boolean).join(' · '))).join('')}</div>`;
+  h += `<p class="small faint" style="margin:0">Open days are from our guide, checked ${esc(checkedText())}. Opening hours and ticket availability can change: check the official site before you go.</p>
+    <button class="text-btn" data-act="pview" data-v="nearby" data-tab="places" style="align-self:flex-start;min-height:32px">More near me</button></div>`;
+  return h;
+}
+const placeName2 = p => p.short_name || p.name;
+
 function renderTodayClean() {
   const st = stage(S.trip), cityId = curCityId(), name = S.trip.traveler_name;
   let eyebrow, h1;
@@ -310,6 +341,7 @@ function renderTodayClean() {
       <button class="text-btn" data-act="dismissinstall" style="align-self:flex-start;min-height:36px">Got it</button></div></div>`;
   }
   html += whatNow(st);
+  html += tomorrowBlock(cityId, st);
   if (st.k !== 'after' && toBook.length) {
     if (st.k === 'before') {
       html += unbooked.length ? `<div class="block"><div class="head"><h2>Book before you go</h2><span class="small muted">${toBook.length - unbooked.length} of ${toBook.length} done</span></div>
