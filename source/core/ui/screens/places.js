@@ -12,6 +12,19 @@ export function views() {
 }
 export function defaultView() { return isPlanner() ? 'plan' : isWanderer() ? 'nearby' : 'sights'; }
 
+/* Nov 2026: experiences grouped by the edition's themes (edition.json experience_themes), e.g. History and culture, Wellness.
+   Experiences without a theme, and editions without themes, show as one list as before. */
+function themedBlocks(isTrip, list) {
+  const one = l => clean() ? placeCards(l) : `${legend()}<div class="rows">${l.map(expRow).join('')}</div>`;
+  const themes = (!isTrip && S.C.edition.experience_themes) || [];
+  if (!themes.length) return `<div class="block" style="padding-top:12px">${one(list)}</div>`;
+  const ids = themes.map(x => x.id);
+  const blocks = themes.map(th => { const l = list.filter(p => p.theme === th.id); return l.length ? `<div class="block"><h2>${esc(th.name)}</h2>${one(l)}</div>` : ''; });
+  const rest = list.filter(p => !ids.includes(p.theme));
+  if (rest.length) blocks.push(`<div class="block"><h2>More to book</h2>${one(rest)}</div>`);
+  return blocks.join('');
+}
+
 export function renderPlaces() {
   const vs = views();
   if (!P().pview || !vs.some(([k]) => k === P().pview)) P().pview = defaultView();
@@ -25,8 +38,8 @@ export function renderPlaces() {
     const isTrip = v === 'trips';
     const list = placesIn(cityId, [isTrip ? 'day_trip' : 'experience']);
     root.innerHTML = masthead() + `<div class="greet"><h1>${isTrip ? 'Beyond the city.' : 'Worth booking.'}</h1></div>${cityBar()}${seg}
-      <div class="block" style="padding-top:12px">${clean() ? placeCards(list) : `${legend()}<div class="rows">${list.map(expRow).join('')}</div>`}
-      <p class="small faint">Durations are typical; providers set their own prices and times, so check when booking. Checked ${esc(checkedText())}.</p></div>`;
+      ${themedBlocks(isTrip, list)}
+      <div class="block" style="padding-top:0"><p class="small faint">Durations are typical; providers set their own prices and times, so check when booking. Checked ${esc(checkedText())}.</p></div>`;
     return;
   }
   /* Filters for the group (Oct 12 2026) appear only when the traveler said kids are coming or someone needs easy walking. */

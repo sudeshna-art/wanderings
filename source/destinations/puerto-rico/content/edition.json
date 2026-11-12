@@ -83,5 +83,23 @@
   "file_prefix": "puerto-rico",
   "greeting_place": "Puerto Rico"
  },
- "checked": "2026-10-12"
+ "checked": "2026-10-12",
+ "experience_themes": [
+  {
+   "id": "history",
+   "name": "History, culture and architecture"
+  },
+  {
+   "id": "wellness",
+   "name": "Wellness"
+  },
+  {
+   "id": "outdoors",
+   "name": "Rainforest and the bio bay"
+  },
+  {
+   "id": "food",
+   "name": "Food"
+  }
+ ]
 }
