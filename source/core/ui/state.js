@@ -28,6 +28,8 @@ export const hoodOf = (cityId, hoodId) => (cityOf(cityId).neighborhoods || []).f
 export const stayHere = (cityId = curCityId()) => stayForCity(S.trip, cityId);
 export function homePoint(cityId = curCityId()) {
   const s = stayHere(cityId); const h = s && hoodOf(cityId, s.neighborhood_id);
+  /* Nov 2026: a found hotel or address is more precise than the neighborhood's center. */
+  if (s && s.lat != null && s.lng != null) return { lat: s.lat, lng: s.lng, name: s.label || 'Where I’m staying', hood: h || { name: s.address || s.label || 'Where I’m staying' } };
   return h && h.center ? { lat: h.center.lat, lng: h.center.lng, name: s.label || 'Where I’m staying', hood: h } : null;
 }
 /* Edition wording (place names, hashtags), so screens never hard-code a destination. */

@@ -123,7 +123,7 @@ function baseBlock(cityId, st) {
   const sy = stayHere(cityId), c = cityOf(cityId);
   const sos = `<button class="btn line sm" data-act="emergency">${ic('sos', 'style="width:16px;height:16px"')}Emergency card</button>`;
   if (!sy || (!sy.neighborhood_id && !sy.address)) {
-    return `<div class="block"><h2>Where are you staying in ${esc(cityName(cityId))}?</h2><p class="small muted">Add your ${c.region ? 'town' : 'neighborhood'} for local tips, walking times and a one-tap “take me home” for drivers.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn line" data-act="welcome" data-step="2">Add where you’re staying</button>${sos}</div></div>`;
+    return `<div class="block"><h2>Where are you staying in ${esc(cityName(cityId))}?</h2><p class="small muted">Add your hotel or address for local tips, walking times and a one-tap “take me home” for drivers.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn line" data-act="welcome" data-step="2">Add where you’re staying</button>${sos}</div></div>`;
   }
   const h = hoodOf(cityId, sy.neighborhood_id), home = homePoint(cityId);
   let walk = '';

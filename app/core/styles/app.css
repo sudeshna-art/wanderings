@@ -353,3 +353,9 @@ nav.tabs button[aria-selected="true"]{color:var(--accent-deep);font-weight:600}
 /* One app, many destinations (Nov 2026): the header stamp opens the destination picker. */
 a.stamp.dest-switch{text-decoration:none;min-height:44px;-webkit-tap-highlight-color:transparent}
 .stamp .dest-change{font-size:11px;font-weight:600;color:var(--accent-deep);letter-spacing:0}
+/* Nov 2026: find your stay by hotel name or address */
+.staysearch{display:flex;flex-direction:column;gap:8px;margin:4px 0 2px}
+.found-list{display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.found{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:10px 12px;min-height:48px;background:none;border:0;border-top:1px solid var(--rule);font:inherit;color:inherit;cursor:pointer}
+.found:first-child{border-top:0}
+.found:active{background:var(--wash,#f4f6f7)}

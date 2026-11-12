@@ -156,6 +156,21 @@ export function legInfo(l) {
   if (!it) return '';
   return `<p class="small muted" style="margin:0">${esc(it.text)}${it.link ? ` <a href="${esc(it.link.url)}" target="_blank" rel="noopener">${esc(it.link.label)} ↗</a>` : ''}</p>`;
 }
+/* Nov 2026: find the stay by hotel name or address; the neighborhood is filled in from the result and can be changed.
+   STAYQ holds the current search for one stay row (index i). */
+export const STAYQ = { i: -1, q: '', busy: false, results: null, msg: '' };
+function staySearch(i, s, c) {
+  const mine = STAYQ.i === i;
+  const found = s.lat != null && s.lng != null;
+  const list = mine && STAYQ.results && STAYQ.results.length
+    ? `<div class="found-list" role="list">${STAYQ.results.map((r, k) => `<button class="found" role="listitem" data-act="staypick" data-i="${i}" data-k="${k}"><b>${esc(r.name)}</b><span class="small muted">${esc(r.address)}</span></button>`).join('')}</div>` : '';
+  const msg = mine && STAYQ.msg ? `<p class="small muted" style="margin:0">${esc(STAYQ.msg)}</p>` : '';
+  const done = found && !mine ? `<p class="small" style="margin:0">${ic('pin', 'style="width:14px;height:14px;vertical-align:-2px;margin-right:4px"')}Found${s.label ? ' ' + esc(s.label) : ''}. ${s.neighborhood_id ? 'We filled in the ' + (c.region ? 'town' : 'neighborhood') + '; change it below if it’s not right.' : 'Pick the ' + (c.region ? 'town' : 'neighborhood') + ' below if you know it, or leave it.'}</p>` : '';
+  return `<div class="staysearch"><label class="f" style="flex:none">Hotel name or address<div style="display:flex;gap:8px"><input type="search" id="stayq-${i}" data-stayq="${i}" value="${esc(mine ? STAYQ.q : '')}" placeholder="e.g. ${esc(c.example_stay || 'your hotel’s name')}" enterkeyhint="search" autocomplete="off" style="flex:1;min-width:0">
+    <button class="btn sm" data-act="staysearch" data-i="${i}" ${mine && STAYQ.busy ? 'disabled' : ''}>${mine && STAYQ.busy ? 'Finding…' : 'Find'}</button></div></label>
+    ${list}${msg}${done}${list ? '<p class="small faint" style="margin:0">Search by OpenStreetMap</p>' : ''}</div>`;
+}
+
 export function staysEditor(opts = {}) {
   const info = opts.info !== false;
   const stays = S.trip.stays;
@@ -166,10 +181,11 @@ export function staysEditor(opts = {}) {
     const h = (c.neighborhoods || []).find(n => n.id === s.neighborhood_id);
     return `<div class="stay"><div class="stay-h"><span class="label">Stay ${i + 1}</span>${stays.length > 1 ? `<button class="text-btn" data-act="staydel" data-i="${i}" style="min-height:32px;color:var(--muted);font-weight:500">Remove</button>` : ''}</div>
       <div class="fields">${cityIds().length > 1 ? `<label class="f">Where<select data-bind="stays.${i}.city_id">${cityOpts(s.city_id)}</select></label>` : ''}
-      <label class="f">${c.region ? 'Town' : 'Neighborhood'}<select data-bind="stays.${i}.neighborhood_id"><option value="">Choose…</option>${hoods}</select></label></div>
+      </div>${staySearch(i, s, c)}
+      <div class="fields"><label class="f">${c.region ? 'Town' : 'Neighborhood'} (optional)<select data-bind="stays.${i}.neighborhood_id"><option value="">Not sure</option>${hoods}</select></label></div>
       ${h && h.tip ? `<p class="small muted" style="margin-top:-2px">${esc(h.tip)}</p>` : ''}
       <div class="fields"><label class="f">From<input type="date" data-bind="stays.${i}.start" value="${esc(s.start)}"></label><label class="f">To<input type="date" data-bind="stays.${i}.end" value="${esc(s.end)}" ${s.start ? `min="${s.start}"` : ''}></label></div>
-      <div class="fields"><label class="f">Name it (optional)<input type="text" data-bind="stays.${i}.label" value="${esc(s.label)}" placeholder="e.g. Hotel name"></label>
+      <div class="fields"><label class="f">Name (optional)<input type="text" data-bind="stays.${i}.label" value="${esc(s.label)}" placeholder="e.g. Hotel name"></label>
       <label class="f">Street address (for drivers)<input type="text" data-bind="stays.${i}.address" value="${esc(s.address)}" placeholder="Optional"></label></div></div>`;
   }).join('');
   const legs = S.trip.legs.map((l, i) => `<div style="display:flex;flex-direction:column;gap:6px"><div class="legrow">${ic(l.mode ? modeIconName(l.mode) : 'arrow')}<span style="flex:none">${esc(cityName(l.from_city_id))} to ${esc(cityName(l.to_city_id))}${l.date ? ', ' + esc(fmtDay(l.date)) : ''}</span>

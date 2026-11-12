@@ -8,7 +8,26 @@ export const LEG_MODES = ['driver', 'taxi', 'car', 'train', 'bus', 'flight'];
 const uid = (p = '') => p + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
 
 export function newStay(cityId = '') {
-  return { city_id: cityId, start: '', end: '', label: '', neighborhood_id: '', address: '' };
+  return { city_id: cityId, start: '', end: '', label: '', neighborhood_id: '', address: '', lat: null, lng: null };
+}
+
+/* Nov 2026: the neighborhood nearest a found hotel or address (by the neighborhoods' centers).
+   Returns null when nothing is within maxKm, so the app never guesses wildly. */
+export function nearestHood(city, point, maxKm = 6) {
+  if (!city || !point || point.lat == null) return null;
+  let best = null, bestD = Infinity;
+  (city.neighborhoods || []).forEach(n => {
+    if (!n.center) return;
+    const d = kmBetween(point, n.center);
+    if (d < bestD) { bestD = d; best = n; }
+  });
+  return best && bestD <= maxKm ? best : null;
+}
+function kmBetween(a, b) {
+  const R = 6371, r = x => x * Math.PI / 180;
+  const dLat = r(b.lat - a.lat), dLng = r(b.lng - a.lng);
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(r(a.lat)) * Math.cos(r(b.lat)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(h));
 }
 
 export function newTrip(editionId) {
