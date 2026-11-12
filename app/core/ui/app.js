@@ -1,32 +1,35 @@
 /* Wanderings app shell: boot, tabs, taps and form binding. All outside access goes through services. */
-import { CONFIG } from '../config/default-config.js?v=202611111744';
-import { S, P, save, copyOf, myLang, curCityId, cityIds, cityName, placeById, isPlanner, isWanderer, runMounts, runCleanups, today } from './state.js?v=202611111744';
-import { $, $$, esc, ic, toast } from './dom.js?v=202611111744';
-import { staysEditor } from './components.js?v=202611111744';
-import { contentService } from '../services/content-service.js?v=202611111744';
-import { tripService } from '../services/trip-service.js?v=202611111744';
-import { storageService } from '../services/storage-service.js?v=202611111744';
-import { shareService } from '../services/share-service.js?v=202611111744';
-import { speechService } from '../services/speech-service.js?v=202611111744';
-import { currencyService } from '../services/currency-service.js?v=202611111744';
-import { newStay, syncLegs, setStatus, statusOf, setBooked, isBooked, addToDay, removeFromPlan, moveItem, planOf, tripDays, sortedStays } from '../models/schema.js?v=202611111744';
-import { renderToday, showSlide, startSlides, stopSlides } from './screens/today.js?v=202611111744';
-import { renderPlaces, defaultView, addCustomPlace } from './screens/places.js?v=202611111744';
-import { openSched, openAddSheet, closeSheet, setSheetDay, sheetDay, openAddStop, pickSheetWho, pickSchedWho, sheetWhoSel, schedWhoSel } from './screens/plan.js?v=202611111744';
-import { addPerson, removePerson, refreshPeople, shareGroup, checkJoin, cancelJoin, applyJoin } from './screens/together.js?v=202611111744';
-import { openSpot, recenter, refreshWanderer, wanderPos } from './screens/wanderer.js?v=202611111744';
-import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js?v=202611111744';
-import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js?v=202611111744';
-import { renderEssentials, showFare, updateConv, loadRate } from './screens/essentials.js?v=202611111744';
-import { renderWelcome, W, STEP_COUNT } from './screens/welcome.js?v=202611111744';
-import { downloadPack, downloadAll, removePack, autoSaveMaps } from './screens/offline.js?v=202611111744';
-import { openImport, importFind, importFile, importBack, importSave, openEditor, editorSave, editorDelete, changeKind } from './screens/bookings.js?v=202611111744';
-import { showEmergency, sharePlan, meetForm, meetSave, meetShare } from './screens/safety.js?v=202611111744';
-import { openAsk, closeAsk, askInput, askSet } from './screens/ask.js?v=202611111744';
-import { applyTheme, clean } from './theme.js?v=202611111744';
-import { openCover } from './screens/today.js?v=202611111744';
-import { togglePartyKids, togglePartyEasy, toggleFood, addOccasion, removeOccasion, refreshOccasions, showServerCard, driverForm, driverSave, driverDelete } from './screens/group.js?v=202611111744';
-import { stayHere, curCity } from './state.js?v=202611111744';
+import { CONFIG } from '../config/default-config.js?v=202611112124';
+import { S, P, save, copyOf, myLang, curCityId, cityIds, cityName, placeById, isPlanner, isWanderer, runMounts, runCleanups, today } from './state.js?v=202611112124';
+import { $, $$, esc, ic, toast } from './dom.js?v=202611112124';
+import { staysEditor, STAYQ } from './components.js?v=202611112124';
+import { geocodeService } from '../services/geocode-service.js?v=202611112124';
+import { nearestHood } from '../models/schema.js?v=202611112124';
+import { cityOf } from './state.js?v=202611112124';
+import { contentService } from '../services/content-service.js?v=202611112124';
+import { tripService } from '../services/trip-service.js?v=202611112124';
+import { storageService } from '../services/storage-service.js?v=202611112124';
+import { shareService } from '../services/share-service.js?v=202611112124';
+import { speechService } from '../services/speech-service.js?v=202611112124';
+import { currencyService } from '../services/currency-service.js?v=202611112124';
+import { newStay, syncLegs, setStatus, statusOf, setBooked, isBooked, addToDay, removeFromPlan, moveItem, planOf, tripDays, sortedStays } from '../models/schema.js?v=202611112124';
+import { renderToday, showSlide, startSlides, stopSlides } from './screens/today.js?v=202611112124';
+import { renderPlaces, defaultView, addCustomPlace } from './screens/places.js?v=202611112124';
+import { openSched, openAddSheet, closeSheet, setSheetDay, sheetDay, openAddStop, pickSheetWho, pickSchedWho, sheetWhoSel, schedWhoSel } from './screens/plan.js?v=202611112124';
+import { addPerson, removePerson, refreshPeople, shareGroup, checkJoin, cancelJoin, applyJoin } from './screens/together.js?v=202611112124';
+import { openSpot, recenter, refreshWanderer, wanderPos } from './screens/wanderer.js?v=202611112124';
+import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js?v=202611112124';
+import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js?v=202611112124';
+import { renderEssentials, showFare, updateConv, loadRate } from './screens/essentials.js?v=202611112124';
+import { renderWelcome, W, STEP_COUNT } from './screens/welcome.js?v=202611112124';
+import { downloadPack, downloadAll, removePack, autoSaveMaps } from './screens/offline.js?v=202611112124';
+import { openImport, importFind, importFile, importBack, importSave, openEditor, editorSave, editorDelete, changeKind } from './screens/bookings.js?v=202611112124';
+import { showEmergency, sharePlan, meetForm, meetSave, meetShare } from './screens/safety.js?v=202611112124';
+import { openAsk, closeAsk, askInput, askSet } from './screens/ask.js?v=202611112124';
+import { applyTheme, clean } from './theme.js?v=202611112124';
+import { openCover } from './screens/today.js?v=202611112124';
+import { togglePartyKids, togglePartyEasy, toggleFood, addOccasion, removeOccasion, refreshOccasions, showServerCard, driverForm, driverSave, driverDelete } from './screens/group.js?v=202611112124';
+import { stayHere, curCity } from './state.js?v=202611112124';
 
 const TABS = [['today', 'Today'], ['places', 'Places'], ['phrases', 'Phrases'], ['journal', 'Journal'], ['essentials', 'Essentials']];
 const RENDER = { today: renderToday, places: renderPlaces, phrases: renderPhrases, journal: renderJournal, essentials: renderEssentials };
@@ -79,7 +82,32 @@ function recordVisit(id, txt = '', stars = 0) {
 const quickVisit = id => { recordVisit(id); rerender(); };
 
 /* ---------- taps ---------- */
+/* Nov 2026: find a stay by hotel name or address (OpenStreetMap search), then fill in the neighborhood. */
+function cityBox(cityId) {
+  const packs = ((S.C.maps && S.C.maps.packs) || []).filter(p => p.city_id === cityId && !p.optional);
+  if (packs.length) return [Math.min(...packs.map(p => p.bbox[0])), Math.min(...packs.map(p => p.bbox[1])), Math.max(...packs.map(p => p.bbox[2])), Math.max(...packs.map(p => p.bbox[3]))];
+  const c = cityOf(cityId).center; return c ? [c.lng - 0.3, c.lat - 0.25, c.lng + 0.3, c.lat + 0.25] : null;
+}
+async function staySearchRun(i) {
+  const inp = document.getElementById('stayq-' + i), s = S.trip.stays[i]; if (!inp || !s) return;
+  Object.assign(STAYQ, { i, q: inp.value, busy: true, results: null, msg: '' }); refreshStays();
+  const r = await geocodeService.search(STAYQ.q, cityBox(s.city_id));
+  STAYQ.busy = false;
+  if (r.error === 'offline') STAYQ.msg = 'No signal right now. Type the name and street address below, and pick the neighborhood if you know it. You can also skip this.';
+  else if (r.error) STAYQ.msg = 'Search isn’t working right now. Type the name and address below instead, or skip this.';
+  else if (!r.results.length) STAYQ.msg = 'Nothing found nearby. Try the street address, or type it below. You can also skip this.';
+  else STAYQ.results = r.results;
+  refreshStays();
+}
 const A = {
+  staysearch: t => staySearchRun(+t.dataset.i),
+  staypick: t => {
+    const i = +t.dataset.i, r = STAYQ.results && STAYQ.results[+t.dataset.k], s = S.trip.stays[i]; if (!r || !s) return;
+    s.label = r.name; s.address = r.address; s.lat = r.lat; s.lng = r.lng;
+    const h = nearestHood(cityOf(s.city_id), r); s.neighborhood_id = h ? h.id : '';
+    Object.assign(STAYQ, { i: -1, q: '', results: null, msg: '' });
+    syncLegs(S.trip); save(); refreshStays(); if ($('#welcome').hidden) toast('Saved');
+  },
   go: el => { if (el.dataset.tab === 'places' && el.dataset.fromtab) P().pview = defaultView(); if (el.dataset.tab === 'phrases' && P().hidePhrases) { P().hidePhrases = false; save(); renderTabs(); } go(el.dataset.tab, { focus: el.dataset.focus }); },
   pview: el => { P().pview = el.dataset.v; save(); if (el.dataset.tab && P().tab !== el.dataset.tab) go(el.dataset.tab); else render('places'); if (P().tab === 'places') window.scrollTo(0, 0); },
   city: el => { P().city = el.dataset.id; save(); rerender(); },
@@ -272,7 +300,8 @@ document.addEventListener('change', async e => {
   if (/flight$/.test(bp)) v = v.toUpperCase().trim(); else if (el.type === 'text') v = v.trim();
   setPath(S.trip, bp, v);
   const inWelcome = !$('#welcome').hidden;
-  if (/^stays\.\d+\.city_id$/.test(bp)) setPath(S.trip, bp.replace('city_id', 'neighborhood_id'), '');
+  if (/^stays\.\d+\.city_id$/.test(bp)) { setPath(S.trip, bp.replace('city_id', 'neighborhood_id'), ''); setPath(S.trip, bp.replace('city_id', 'lat'), null); setPath(S.trip, bp.replace('city_id', 'lng'), null); }
+  if (/^stays\.\d+\.address$/.test(bp)) { setPath(S.trip, bp.replace('address', 'lat'), null); setPath(S.trip, bp.replace('address', 'lng'), null); }
   if (/^stays\.\d+\.start$/.test(bp)) { const i = +bp.split('.')[1], s = S.trip.stays[i]; if (s.end && s.end < s.start) s.end = s.start; }
   if (/^(stays|legs)\./.test(bp)) { syncLegs(S.trip); }
   save();
@@ -295,6 +324,7 @@ document.addEventListener('input', e => {
 });
 document.addEventListener('keydown', e => {
   if (e.key === 'Enter' && e.target.id === 'askq') { e.target.blur(); return; }
+  if (e.key === 'Enter' && e.target.dataset && e.target.dataset.stayq != null) { e.preventDefault(); staySearchRun(+e.target.dataset.stayq); return; }
   if (e.key === 'Escape') { if (!$('#sheet').hidden) { closeSheet(); return; } if (!$('#driver').hidden) { $('#driver').hidden = true; return; } if ($('#ask') && !$('#ask').hidden) { closeAsk(); return; } if (!$('#viewer').hidden) $('#viewer').hidden = true; if (!$('#driver').hidden) $('#driver').hidden = true; }
 });
 /* Photos are stored on the phone; fill <img data-photo> as they appear. */

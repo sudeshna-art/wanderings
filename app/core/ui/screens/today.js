@@ -1,22 +1,22 @@
 /* Today: answers "what now?" for the current city. Simplified Oct 11 2026: the time-sensitive things first
    (meeting point, travel, bookings, clashes), then what to book, ideas, your base and a phrase. */
-import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202611111744';
-import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202611111744';
-import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202611111744';
-import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202611111744';
-import { tripChecks } from '../../models/checks.js?v=202611111744';
-import { timelineView } from './plan.js?v=202611111744';
-import { allPhotoIds } from './journal.js?v=202611111744';
-import { view as phraseView } from './phrases.js?v=202611111744';
-import { meetBlock } from './safety.js?v=202611111744';
-import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js?v=202611111744';
-import { speaksLocal } from '../../models/schema.js?v=202611111744';
-import { mapPackService } from '../../services/mappack-service.js?v=202611111744';
-import { clean } from '../theme.js?v=202611111744';
-import { placeCards, checkText } from '../components.js?v=202611111744';
-import { closedText } from '../../models/schema.js?v=202611111744';
-import { occasionAlert } from './group.js?v=202611111744';
-import { arrivalsAlert } from './together.js?v=202611111744';
+import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202611112124';
+import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202611112124';
+import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202611112124';
+import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202611112124';
+import { tripChecks } from '../../models/checks.js?v=202611112124';
+import { timelineView } from './plan.js?v=202611112124';
+import { allPhotoIds } from './journal.js?v=202611112124';
+import { view as phraseView } from './phrases.js?v=202611112124';
+import { meetBlock } from './safety.js?v=202611112124';
+import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js?v=202611112124';
+import { speaksLocal } from '../../models/schema.js?v=202611112124';
+import { mapPackService } from '../../services/mappack-service.js?v=202611112124';
+import { clean } from '../theme.js?v=202611112124';
+import { placeCards, checkText } from '../components.js?v=202611112124';
+import { closedText } from '../../models/schema.js?v=202611112124';
+import { occasionAlert } from './group.js?v=202611112124';
+import { arrivalsAlert } from './together.js?v=202611112124';
 
 let slideTimer = null, slideIdx = 0;
 
@@ -123,7 +123,7 @@ function baseBlock(cityId, st) {
   const sy = stayHere(cityId), c = cityOf(cityId);
   const sos = `<button class="btn line sm" data-act="emergency">${ic('sos', 'style="width:16px;height:16px"')}Emergency card</button>`;
   if (!sy || (!sy.neighborhood_id && !sy.address)) {
-    return `<div class="block"><h2>Where are you staying in ${esc(cityName(cityId))}?</h2><p class="small muted">Add your ${c.region ? 'town' : 'neighborhood'} for local tips, walking times and a one-tap “take me home” for drivers.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn line" data-act="welcome" data-step="2">Add where you’re staying</button>${sos}</div></div>`;
+    return `<div class="block"><h2>Where are you staying in ${esc(cityName(cityId))}?</h2><p class="small muted">Add your hotel or address for local tips, walking times and a one-tap “take me home” for drivers.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn line" data-act="welcome" data-step="2">Add where you’re staying</button>${sos}</div></div>`;
   }
   const h = hoodOf(cityId, sy.neighborhood_id), home = homePoint(cityId);
   let walk = '';
