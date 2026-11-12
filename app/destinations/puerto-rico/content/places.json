@@ -750,12 +750,13 @@
    "note": "Tours grade their walks. Pick an easy one for older travelers."
   },
   "ride": "The tour’s van takes you in and out. Ride apps can’t pick up inside the forest.",
-  "remind_before": true
+  "remind_before": true,
+  "theme": "outdoors"
  },
  {
   "id": "pr-biobay",
   "city_id": "san-juan",
-  "name": "Laguna Grande bio bay",
+  "name": "Laguna Grande bio bay by kayak",
   "category": "experience",
   "kind": "boat",
   "group": "east",
@@ -784,7 +785,7 @@
   "tips": [
    "The full moon is December 24. After it, the moon rises later each night, so book the earliest tour for the darkest water.",
    "No swimming, and no lotion, sunscreen or repellent in the water.",
-   "Tours here are by kayak, in pairs, through a narrow channel. For a seated boat, see La Parguera bio bay by boat.",
+   "Tours here are by kayak, in pairs, through a narrow channel. For a seated tour, see Laguna Grande bio bay by electric boat.",
    "Operators listed by Discover Puerto Rico: Kayaking Puerto Rico, (787) 245-4545, and Pure Adventure."
   ],
   "audio": null,
@@ -802,60 +803,8 @@
    "note": "About an hour of paddling at night. Not for anyone unsteady in a kayak."
   },
   "ride": "Many tours offer pickup in San Juan. Otherwise, book a driver who waits: rides back from Fajardo late at night are hard to find.",
-  "remind_before": true
- },
- {
-  "id": "pr-parguera",
-  "city_id": "san-juan",
-  "name": "La Parguera bio bay by boat",
-  "category": "experience",
-  "kind": "boat",
-  "group": "east",
-  "area": "La Parguera, Lajas (southwest coast)",
-  "must": false,
-  "popular": false,
-  "location": {
-   "lat": 17.9746,
-   "lng": -67.0455
-  },
-  "google_place_id": null,
-  "booking_status": "required",
-  "urgency_level": "book_soon",
-  "ticket_url": null,
-  "affiliate_url": null,
-  "price": {
-   "amount": null,
-   "from": false,
-   "text": "$45 to $95 a person for standard tours",
-   "currency_code": "USD",
-   "checked": "2026-10-12",
-   "source": "Discover Puerto Rico",
-   "kind": "typical"
-  },
-  "lead_time": "Book ahead for holiday nights. Choose a tour with round-trip transport from San Juan, or a driver who waits.",
-  "description": "The seated option: a boat from La Parguera village out to a glowing bay on the southwest coast. No paddling, and swimming is often allowed. Good for families and bigger groups.",
-  "tips": [
-   "About 2 to 2.5 hours’ drive each way from San Juan; boat tours last 1 to 2 hours. Expect to be back late.",
-   "The glow is softer here than at the other bays and varies by night. Go on the darkest night you can: the moon rises later each night after the December 24 full moon, so book the earliest tour.",
-   "Swimming is allowed on most nights but not guaranteed; confirm with the operator.",
-   "Operator listed by Puerto Rico travel guide topuertorico.org: Eco Action Tours, (787) 791-7509."
-  ],
-  "audio": null,
-  "search_q": "La Parguera bioluminescent bay boat tour from San Juan",
-  "duration": "A long evening: about 7 to 8 hours door to door",
-  "how": null,
-  "stay": null,
-  "closed": [],
-  "closed_note": null,
-  "closed_source": null,
-  "access": {
-   "kids": true,
-   "teens": true,
-   "easy": true,
-   "note": "You sit on the boat the whole time. Boarding can mean a step down from a dock; ask the operator about help."
-  },
-  "ride": "Rides back from La Parguera late at night are very hard to find. Book a tour with transport from San Juan, or a driver who waits.",
-  "remind_before": true
+  "remind_before": true,
+  "theme": "outdoors"
  },
  {
   "id": "pr-foodtour",
@@ -906,7 +855,249 @@
     "pork_heavy"
    ],
    "note": "Most tours can swap dishes for no pork or pescatarian if told ahead. Check carefully with a seafood allergy."
-  }
+  },
+  "theme": "food"
+ },
+ {
+  "id": "pr-secrets",
+  "city_id": "san-juan",
+  "name": "Old San Juan’s Best Kept Secrets, with a local architect",
+  "category": "experience",
+  "kind": "landmark",
+  "group": "old_san_juan",
+  "area": "Old San Juan",
+  "must": false,
+  "popular": false,
+  "location": null,
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.airbnb.com/experiences/174126",
+  "affiliate_url": null,
+  "price": {
+   "amount": 30,
+   "from": true,
+   "text": "From $30 a guest",
+   "currency_code": "USD",
+   "checked": "2026-11-11",
+   "source": "Airbnb listing"
+  },
+  "lead_time": "Book on Airbnb. Free cancellation, per the listing.",
+  "description": "A walk led by Andy, an architect born and raised in San Juan who founded a nonprofit about Puerto Rico’s architectural legacy. Colonial courtyards, chapels with stained glass and corners most visitors miss, with the history behind each building.",
+  "tips": [
+   "Meets in Old San Juan; the exact spot is in the booking.",
+   "Hosted in English. Ages 2 and up."
+  ],
+  "audio": null,
+  "search_q": "Old San Juan Best Kept Secrets architect tour",
+  "duration": "About 1 hour 45 minutes",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "warn": [
+    "cobblestones"
+   ],
+   "note": "Rated light walking, on cobblestone streets."
+  },
+  "food": null,
+  "theme": "history"
+ },
+ {
+  "id": "pr-historywalk",
+  "city_id": "san-juan",
+  "name": "Walking History Tour of Old San Juan",
+  "category": "experience",
+  "kind": "landmark",
+  "group": "old_san_juan",
+  "area": "Old San Juan",
+  "must": false,
+  "popular": false,
+  "location": null,
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "flexible",
+  "ticket_url": "https://sanjuanfoodtours.com/?p=3764",
+  "affiliate_url": null,
+  "price": {
+   "amount": 39.99,
+   "from": false,
+   "text": "$39.99 an adult",
+   "currency_code": "USD",
+   "checked": "2026-11-11",
+   "source": "San Juan Food Tours"
+  },
+  "lead_time": "Book on the operator’s site.",
+  "description": "Two hours with a bilingual local guide past ten or more landmarks, from La Casa Estrecha, one of the narrowest houses in the Americas, to the Catedral de San Juan Bautista.",
+  "tips": [
+   "Run by San Juan Food Tours, the same company as many food tours, so you can pair them."
+  ],
+  "audio": null,
+  "search_q": "San Juan Food Tours Walking History Tour",
+  "duration": "About 2 hours",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "warn": [
+    "steep",
+    "cobblestones"
+   ],
+   "note": "Old San Juan’s hills and cobblestones."
+  },
+  "food": null,
+  "theme": "history"
+ },
+ {
+  "id": "pr-beachyoga",
+  "city_id": "san-juan",
+  "name": "Beach yoga, meditation and sound bath",
+  "category": "experience",
+  "kind": "beach",
+  "group": "beaches",
+  "area": "Condado",
+  "must": false,
+  "popular": false,
+  "location": null,
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.airbnb.com/experiences/2435989",
+  "affiliate_url": null,
+  "price": {
+   "amount": 38,
+   "from": true,
+   "text": "From $38 a guest",
+   "currency_code": "USD",
+   "checked": "2026-11-11",
+   "source": "Airbnb listing"
+  },
+  "lead_time": "Book on Airbnb.",
+  "description": "Yoga on the sand, a guided meditation and a sound bath with the waves, at Playa del Pueblo. All levels welcome.",
+  "tips": [
+   "Ages 18 and up.",
+   "Bring a towel or mat, a swimsuit and water."
+  ],
+  "audio": null,
+  "search_q": "Beach Yoga Meditation Sound Bath by the Sea San Juan",
+  "duration": "About 1 hour 15 minutes",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": 18,
+   "easy": true,
+   "note": "Flat beach; the listing mentions a disabled parking spot."
+  },
+  "food": null,
+  "theme": "wellness"
+ },
+ {
+  "id": "pr-beachbliss",
+  "city_id": "san-juan",
+  "name": "Beach Bliss Yoga in Isla Verde",
+  "category": "experience",
+  "kind": "beach",
+  "group": "beaches",
+  "area": "Isla Verde",
+  "must": false,
+  "popular": false,
+  "location": null,
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": 25,
+   "from": true,
+   "text": "From $25 a person",
+   "currency_code": "USD",
+   "checked": "2026-11-11",
+   "source": "Lokalee listing"
+  },
+  "lead_time": "Book through a tour site. Morning class.",
+  "description": "A morning class on the beach in Isla Verde by Yoga Pura PR: breathwork, a yoga flow and a short meditation with sound, then time to swim. Mats and props provided.",
+  "tips": [
+   "Fresh fruit and water included, per the listing."
+  ],
+  "audio": null,
+  "search_q": "Beach Bliss Yoga San Juan Yoga Pura PR",
+  "duration": "About 1 hour 15 minutes",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "teens": true,
+   "easy": true,
+   "note": "For all fitness levels, per the listing."
+  },
+  "food": null,
+  "theme": "wellness"
+ },
+ {
+  "id": "pr-biobay-boat",
+  "city_id": "san-juan",
+  "name": "Laguna Grande bio bay by electric boat",
+  "category": "experience",
+  "kind": "boat",
+  "group": "east",
+  "area": "Fajardo",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 18.3803,
+   "lng": -65.6363
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "book_soon",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": "Book early: the boats are small and fill up on holiday nights.",
+  "description": "The seated way into the closest bio bay to San Juan: a small boat that switches to an electric motor in the mangrove channel, so nobody has to paddle. Good for anyone who can’t or doesn’t want to kayak.",
+  "tips": [
+   "Leaves from the Las Croabas area of Fajardo, about an hour from San Juan.",
+   "No swimming in Laguna Grande, and no lotion or repellent in the water.",
+   "Operators include Bio Island; search for current times and prices."
+  ],
+  "audio": null,
+  "search_q": "Bio Island electric boat Laguna Grande Fajardo",
+  "duration": "About 2 hours",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "You sit the whole time. Ask the operator about the step into the boat."
+  },
+  "food": null,
+  "theme": "outdoors",
+  "remind_before": true
  },
  {
   "id": "pr-yunque",
