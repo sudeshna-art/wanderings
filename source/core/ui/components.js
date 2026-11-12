@@ -166,7 +166,7 @@ function staySearch(i, s, c) {
     ? `<div class="found-list" role="list">${STAYQ.results.map((r, k) => `<button class="found" role="listitem" data-act="staypick" data-i="${i}" data-k="${k}"><b>${esc(r.name)}</b><span class="small muted">${esc(r.address)}</span></button>`).join('')}</div>` : '';
   const msg = mine && STAYQ.msg ? `<p class="small muted" style="margin:0">${esc(STAYQ.msg)}</p>` : '';
   const done = found && !mine ? `<p class="small" style="margin:0">${ic('pin', 'style="width:14px;height:14px;vertical-align:-2px;margin-right:4px"')}Found${s.label ? ' ' + esc(s.label) : ''}. ${s.neighborhood_id ? 'We filled in the ' + (c.region ? 'town' : 'neighborhood') + '; change it below if it’s not right.' : 'Pick the ' + (c.region ? 'town' : 'neighborhood') + ' below if you know it, or leave it.'}</p>` : '';
-  return `<div class="staysearch"><label class="f" style="flex:none">Address or hotel name<div style="display:flex;gap:8px"><input type="search" id="stayq-${i}" data-stayq="${i}" value="${esc(mine ? STAYQ.q : '')}" placeholder="Street address, Airbnb or hotel" enterkeyhint="search" autocomplete="off" style="flex:1;min-width:0">
+  return `<div class="staysearch"><label class="f" style="flex:none">Address<div style="display:flex;gap:8px"><input type="search" id="stayq-${i}" data-stayq="${i}" value="${esc(mine ? STAYQ.q : (s.address || ''))}" placeholder="Street address or hotel name" enterkeyhint="search" autocomplete="off" style="flex:1;min-width:0">
     <button class="btn sm" data-act="staysearch" data-i="${i}" ${mine && STAYQ.busy ? 'disabled' : ''}>${mine && STAYQ.busy ? 'Finding…' : 'Find'}</button></div></label>
     ${list}${msg}${done}${list ? '<p class="small faint" style="margin:0">Search by OpenStreetMap</p>' : ''}</div>`;
 }
@@ -186,7 +186,7 @@ export function staysEditor(opts = {}) {
       ${h && h.tip ? `<p class="small muted" style="margin-top:-2px">${esc(h.tip)}</p>` : ''}
       <div class="fields"><label class="f">From<input type="date" data-bind="stays.${i}.start" value="${esc(s.start)}"></label><label class="f">To<input type="date" data-bind="stays.${i}.end" value="${esc(s.end)}" ${s.start ? `min="${s.start}"` : ''}></label></div>
       <div class="fields"><label class="f">Name (optional)<input type="text" data-bind="stays.${i}.label" value="${esc(s.label)}" placeholder="e.g. Our Airbnb"></label>
-      <label class="f">Street address (for drivers)<input type="text" data-bind="stays.${i}.address" value="${esc(s.address)}" placeholder="Optional"></label></div></div>`;
+</div></div>`;
   }).join('');
   const legs = S.trip.legs.map((l, i) => `<div style="display:flex;flex-direction:column;gap:6px"><div class="legrow">${ic(l.mode ? modeIconName(l.mode) : 'arrow')}<span style="flex:none">${esc(cityName(l.from_city_id))} to ${esc(cityName(l.to_city_id))}${l.date ? ', ' + esc(fmtDay(l.date)) : ''}</span>
     <select data-bind="legs.${i}.mode" aria-label="How you’ll travel"><option value="">How? Not sure yet</option>${S.C.edition.leg_modes.map(m => `<option value="${m.id}" ${l.mode === m.id ? 'selected' : ''}>${esc(m.label)}</option>`).join('')}</select></div>${info ? legInfo(l) : ''}</div>`).join('');

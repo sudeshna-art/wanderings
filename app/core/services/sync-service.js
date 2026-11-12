@@ -10,9 +10,9 @@ const EMAIL_KEY = 'wanderings-signin-email';
 async function load() {
   if (ready) return ready;
   ready = (async () => {
-    try { cfg = (await import('../../firebase-config.js?v=202611121731')).FIREBASE; } catch (e) { cfg = null; }
+    try { cfg = (await import('../../firebase-config.js?v=202611121748')).FIREBASE; } catch (e) { cfg = null; }
     if (!cfg || !cfg.apiKey) return false;
-    FB = await import('../vendor/firebase/firebase.js?v=202611121731');
+    FB = await import('../vendor/firebase/firebase.js?v=202611121748');
     app = FB.initializeApp(cfg);
     auth = FB.getAuth(app);
     try { await FB.setPersistence(auth, FB.indexedDBLocalPersistence); } catch (e) { try { await FB.setPersistence(auth, FB.browserLocalPersistence); } catch (e2) {} }

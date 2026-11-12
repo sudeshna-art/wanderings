@@ -1,6 +1,6 @@
 /* Shared UI state: the loaded trip and edition content, plus lookups. Talks to the outside only through services. */
-import { tripService } from '../services/trip-service.js?v=202611121731';
-import { currentCityId, stayForCity, sortedStays, localISO } from '../models/schema.js?v=202611121731';
+import { tripService } from '../services/trip-service.js?v=202611121748';
+import { currentCityId, stayForCity, sortedStays, localISO } from '../models/schema.js?v=202611121748';
 
 export const S = { trip: null, C: null, mounts: [], cleanups: [] };
 

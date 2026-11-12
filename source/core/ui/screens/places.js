@@ -8,9 +8,9 @@ import { renderPlan } from './plan.js';
 import { renderWanderer } from './wanderer.js';
 
 export function views() {
-  return (isPlanner() || isGroup(S.trip) ? [['plan', isGroup(S.trip) ? 'Group plan' : 'My plan']] : []).concat([['nearby', isWanderer() ? 'Nearby' : 'Near me'], ['sights', 'Sights'], ['experiences', 'Experiences'], ['trips', 'Day trips']]);
+  return [['nearby', 'Near me'], ['sights', 'Must-sees'], ['experiences', 'Experiences'], ['trips', 'Day trips']];   /* Nov 2026: the plan has its own tab */
 }
-export function defaultView() { return isPlanner() ? 'plan' : isWanderer() ? 'nearby' : 'sights'; }
+export function defaultView() { return isWanderer() ? 'nearby' : 'sights'; }
 
 /* Nov 2026: experiences grouped by the edition's themes (edition.json experience_themes), e.g. History and culture, Wellness.
    Experiences without a theme, and editions without themes, show as one list as before. */
@@ -29,7 +29,7 @@ export function renderPlaces() {
   const vs = views();
   if (!P().pview || !vs.some(([k]) => k === P().pview)) P().pview = defaultView();
   const v = P().pview;
-  const seg = modeSwitch() + `<div class="chips" role="tablist" aria-label="Places views" style="margin-bottom:4px">${vs.map(([k, l]) => `<button class="chip" data-act="pview" data-v="${k}" aria-pressed="${v === k}">${l}</button>`).join('')}</div>`;
+  const seg = `<div class="chips" role="tablist" aria-label="Places views" style="margin-bottom:4px">${vs.map(([k, l]) => `<button class="chip" data-act="pview" data-v="${k}" aria-pressed="${v === k}">${l}</button>`).join('')}</div>`;
   const root = document.querySelector('section[data-tab="places"]');
   if (v === 'plan') { root.innerHTML = renderPlan(seg); return; }
   if (v === 'nearby') { root.innerHTML = renderWanderer(seg); return; }

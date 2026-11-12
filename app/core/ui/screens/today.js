@@ -1,23 +1,23 @@
 /* Today: answers "what now?" for the current city. Simplified Oct 11 2026: the time-sensitive things first
    (meeting point, travel, bookings, clashes), then what to book, ideas, your base and a phrase. */
-import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202611121731';
-import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202611121731';
-import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202611121731';
-import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202611121731';
-import { tripChecks } from '../../models/checks.js?v=202611121731';
-import { timelineView } from './plan.js?v=202611121731';
-import { allPhotoIds } from './journal.js?v=202611121731';
-import { view as phraseView } from './phrases.js?v=202611121731';
-import { meetBlock } from './safety.js?v=202611121731';
-import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js?v=202611121731';
-import { speaksLocal } from '../../models/schema.js?v=202611121731';
-import { mapPackService } from '../../services/mappack-service.js?v=202611121731';
-import { clean } from '../theme.js?v=202611121731';
-import { placeCards, checkText } from '../components.js?v=202611121731';
-import { closedText, closedOn } from '../../models/schema.js?v=202611121731';
-import { occasionAlert } from './group.js?v=202611121731';
-import { arrivalsAlert } from './together.js?v=202611121731';
-import { liveUpdates } from './live.js?v=202611121731';
+import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202611121748';
+import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202611121748';
+import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202611121748';
+import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202611121748';
+import { tripChecks } from '../../models/checks.js?v=202611121748';
+import { timelineView } from './plan.js?v=202611121748';
+import { allPhotoIds } from './journal.js?v=202611121748';
+import { view as phraseView } from './phrases.js?v=202611121748';
+import { meetBlock } from './safety.js?v=202611121748';
+import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js?v=202611121748';
+import { speaksLocal } from '../../models/schema.js?v=202611121748';
+import { mapPackService } from '../../services/mappack-service.js?v=202611121748';
+import { clean } from '../theme.js?v=202611121748';
+import { placeCards, checkText } from '../components.js?v=202611121748';
+import { closedText, closedOn } from '../../models/schema.js?v=202611121748';
+import { occasionAlert } from './group.js?v=202611121748';
+import { arrivalsAlert } from './together.js?v=202611121748';
+import { liveUpdates, isLive, LV } from './live.js?v=202611121748';
 
 let slideTimer = null, slideIdx = 0;
 
@@ -342,6 +342,9 @@ function renderTodayClean() {
       <button class="text-btn" data-act="dismissinstall" style="align-self:flex-start;min-height:36px">Got it</button></div></div>`;
   }
   html += liveUpdates() ? `<div class="block" style="padding-top:12px">${liveUpdates()}</div>` : '';
+  /* Nov 2026: make group sharing easy to find. Dismissed with "Not now". */
+  if (LV.on && !isLive() && !P().liveHintOff && st.k !== 'after') html += `<div class="block" style="padding-top:12px"><div class="alert">${ic('people')}<div style="min-width:0;display:flex;flex-direction:column;gap:6px"><b>Traveling with others?</b><p class="small" style="margin:0">Share your plan so everyone sees changes as they happen. No email or password needed.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn sm" data-act="go" data-tab="trip" data-sub="" data-focus="#liveBlock">Share your plan</button><button class="text-btn" data-act="livehintoff" style="min-height:32px">Not now</button></div></div></div></div>`;
   html += whatNow(st);
   html += tomorrowBlock(cityId, st);
   if (st.k !== 'after' && toBook.length) {

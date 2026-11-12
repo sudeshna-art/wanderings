@@ -15,8 +15,8 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="core/vendor/leaflet/leaflet.css">
-<link rel="stylesheet" href="core/styles/app.css?v=202611121731">
-<link rel="stylesheet" href="core/styles/theme-clean.css?v=202611121731">
+<link rel="stylesheet" href="core/styles/app.css?v=202611121748">
+<link rel="stylesheet" href="core/styles/theme-clean.css?v=202611121748">
 <style>
 .pick{position:fixed;inset:0;z-index:1000;background:#fff;overflow:auto;padding:max(28px,env(safe-area-inset-top)) 20px 32px;box-sizing:border-box}
 .pick .in{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
@@ -56,7 +56,7 @@
 <div class="pick" id="picker" hidden></div>
 <script src="core/vendor/leaflet/leaflet.js"></script>
 <script type="module">
-import { DESTINATIONS, chosenId, remember, REQUEST_URL } from './destinations.js?v=202611121731';
+import { DESTINATIONS, chosenId, remember, REQUEST_URL } from './destinations.js?v=202611121748';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
 const q = new URLSearchParams(location.search), id = chosenId();
 if (q.has('pick') || !id) {
@@ -86,11 +86,11 @@ if (q.has('pick') || !id) {
 } else {
   remember(id);
   if (q.get('d') !== id) history.replaceState(null, '', './?d=' + encodeURIComponent(id) + location.hash);
-  import('./core/ui/app.js?v=202611121731');
+  import('./core/ui/app.js?v=202611121748');
 }
 </script>
 <script>
-/* offline support (version 202611121731) */
+/* offline support (version 202611121748) */
 if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
   window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
 }

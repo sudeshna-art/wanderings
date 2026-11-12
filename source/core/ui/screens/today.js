@@ -17,7 +17,7 @@ import { placeCards, checkText } from '../components.js';
 import { closedText, closedOn } from '../../models/schema.js';
 import { occasionAlert } from './group.js';
 import { arrivalsAlert } from './together.js';
-import { liveUpdates } from './live.js';
+import { liveUpdates, isLive, LV } from './live.js';
 
 let slideTimer = null, slideIdx = 0;
 
@@ -342,6 +342,9 @@ function renderTodayClean() {
       <button class="text-btn" data-act="dismissinstall" style="align-self:flex-start;min-height:36px">Got it</button></div></div>`;
   }
   html += liveUpdates() ? `<div class="block" style="padding-top:12px">${liveUpdates()}</div>` : '';
+  /* Nov 2026: make group sharing easy to find. Dismissed with "Not now". */
+  if (LV.on && !isLive() && !P().liveHintOff && st.k !== 'after') html += `<div class="block" style="padding-top:12px"><div class="alert">${ic('people')}<div style="min-width:0;display:flex;flex-direction:column;gap:6px"><b>Traveling with others?</b><p class="small" style="margin:0">Share your plan so everyone sees changes as they happen. No email or password needed.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn sm" data-act="go" data-tab="trip" data-sub="" data-focus="#liveBlock">Share your plan</button><button class="text-btn" data-act="livehintoff" style="min-height:32px">Not now</button></div></div></div></div>`;
   html += whatNow(st);
   html += tomorrowBlock(cityId, st);
   if (st.k !== 'after' && toBook.length) {
