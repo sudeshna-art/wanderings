@@ -137,7 +137,7 @@ if (q.has('pick') || !id) {{
     <p>Pick a destination. Each one keeps its own plans, places and journal on this phone, so switching never mixes them up.</p>
     <div class="list">${{DESTINATIONS.map(d => `<a class="d" href="./?d=${{encodeURIComponent(d.id)}}" data-id="${{esc(d.id)}}"><img src="destinations/${{esc(d.dir)}}/art/${{esc(d.mark)}}" alt=""><span><b>${{esc(d.title)}}</b><small>${{esc(d.sub)}}</small></span>${{d.id === id ? '<span class="now">Current</span>' : ''}}</a>`).join('')}}</div>
     <form class="req" id="codeForm"><b>Have a trip code?</b><p>Someone invited you to their trip. Type the code they sent.</p>
-      <div style="display:flex;gap:8px"><input id="codeIn" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. Sukla-2026" style="flex:1;min-width:0;font:inherit;padding:10px 12px;border:1px solid var(--rule,#e3e5e8);border-radius:10px"><button class="btn" type="submit">Join</button></div>
+      <div style="display:flex;gap:8px"><input id="codeIn" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. Beach-Trip-26" style="flex:1;min-width:0;font:inherit;padding:10px 12px;border:1px solid var(--rule,#e3e5e8);border-radius:10px"><button class="btn" type="submit">Join</button></div>
       <p class="pick-note" id="codeMsg" hidden></p></form>
     <div class="req"><b>Don’t see your destination yet?</b><p>Wanderings is growing one place at a time. Tell us where you’re headed and we’ll do our best to build it next.</p>
     ${{REQUEST_URL ? `<a class="btn line" href="${{esc(REQUEST_URL)}}" target="_blank" rel="noopener">Request a destination</a>` : '<p class="pick-note">Requests open soon.</p>'}}</div>
@@ -148,7 +148,7 @@ if (q.has('pick') || !id) {{
     const raw = document.getElementById('codeIn').value.trim(), m = raw.toUpperCase().match(/^([A-Z]{{2}})-/);
     const d = (m && DESTINATIONS.find(x => x.code === m[1])) || DESTINATIONS.find(x => x.id === id) || DESTINATIONS[0];   /* the app switches to the trip's destination if needed */
     const msg = document.getElementById('codeMsg');
-    if (raw.replace(/[^A-Za-z0-9]/g, '').length < 6) {{ msg.hidden = false; msg.textContent = 'Type the trip code you were sent, like Sukla-2026.'; return; }}
+    if (raw.replace(/[^A-Za-z0-9]/g, '').length < 6) {{ msg.hidden = false; msg.textContent = 'Type the trip code you were sent, like Beach-Trip-26.'; return; }}
     try {{ localStorage.setItem('wanderings-live-invite', raw); }} catch (err) {{}}
     remember(d.id); location.href = './?d=' + encodeURIComponent(d.id);
   }});

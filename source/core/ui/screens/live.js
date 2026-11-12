@@ -152,11 +152,11 @@ export async function joinWithCode() {
   await joinPending();
   LV.busy = false; refresh();
 }
-/* Choose your own code (e.g. Sukla-2026), and close it once everyone has joined. */
+/* Choose your own code (e.g. Beach-Trip-26), and close it once everyone has joined. */
 export async function customCode() {
   const lv = live(); if (!lv) return;
   const want = (($('#liveCustom') || {}).value || '').trim();
-  if (normCode(want).length < 6) { LV.msg = 'Make the code at least 6 letters or numbers, like Sukla-2026.'; refresh(); return; }
+  if (normCode(want).length < 6) { LV.msg = 'Make the code at least 6 letters or numbers, like Beach-Trip-26.'; refresh(); return; }
   LV.busy = true; LV.msg = ''; refresh();
   const r = await syncService.makeInvite(lv.tid, S.trip.traveler_name || '', EDITION.id, '', want);
   LV.busy = false;
@@ -216,7 +216,7 @@ export function liveBlock() {
     const anon = LV.user && !LV.user.email;
     body = `<p class="small muted" style="margin:0">Share your plan with family or friends. Everyone sees changes as they happen. No email or password needed.</p>
       <button class="btn sm" data-act="livestart" style="align-self:flex-start" ${LV.busy ? 'disabled' : ''}>${ic('people', 'style="width:16px;height:16px"')}Start a shared trip</button>
-      <label class="f" style="flex:none;margin-top:4px">Have a trip code?<div style="display:flex;gap:8px"><input id="liveCode" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. Sukla-2026" style="flex:1;min-width:0"><button class="btn line sm" data-act="livejoin" ${LV.busy ? 'disabled' : ''}>Join</button></div></label>${msg}
+      <label class="f" style="flex:none;margin-top:4px">Have a trip code?<div style="display:flex;gap:8px"><input id="liveCode" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. Beach-Trip-26" style="flex:1;min-width:0"><button class="btn line sm" data-act="livejoin" ${LV.busy ? 'disabled' : ''}>Join</button></div></label>${msg}
       ${LV.user && !anon ? `<p class="small muted" style="margin:0">Signed in as ${esc(LV.user.email)}. <button class="text-btn" data-act="livesignout" style="min-height:28px">Sign out</button></p>` : LV.mode === 'password' ? `<label class="f" style="flex:none">Email<input type="email" id="liveEmail" autocomplete="email"></label><label class="f" style="flex:none">Password<input type="password" id="livePw" autocomplete="current-password"></label>
         <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn line sm" data-act="livepw" data-create="0" ${LV.busy ? 'disabled' : ''}>Sign in</button><button class="text-btn" data-act="livemode" style="min-height:32px">Cancel</button></div>` : `<button class="text-btn" data-act="livemode" style="align-self:flex-start;min-height:28px;font-size:13px">Have an email account? Sign in</button>`}`;
   } else {
@@ -225,7 +225,7 @@ export function liveBlock() {
       ${lv.code ? `<div class="label">Trip code</div><div style="font-size:22px;font-weight:700;letter-spacing:.04em;user-select:all">${esc(showCode(lv))}</div>` : lv.closed ? '<p class="small muted" style="margin:0">The trip code is closed, so nobody new can join. Need to add someone? Make a new code.</p>' : ''}
       <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="btn sm" data-act="liveinvite" ${LV.busy ? 'disabled' : ''}>${ic('share', 'style="width:16px;height:16px"')}${lv.code ? 'Share the invite' : lv.closed ? 'Make a new code' : 'Invite your group'}</button>
         <button class="text-btn" data-act="liveeditcode" style="min-height:32px">${LV.editing ? 'Cancel' : 'Choose your own code'}</button></div>
-      ${LV.editing ? `<label class="f" style="flex:none">Your code<div style="display:flex;gap:8px"><input id="liveCustom" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. Sukla-2026" style="flex:1;min-width:0"><button class="btn line sm" data-act="livecustom" ${LV.busy ? 'disabled' : ''}>Use it</button></div></label>
+      ${LV.editing ? `<label class="f" style="flex:none">Your code<div style="display:flex;gap:8px"><input id="liveCustom" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. Beach-Trip-26" style="flex:1;min-width:0"><button class="btn line sm" data-act="livecustom" ${LV.busy ? 'disabled' : ''}>Use it</button></div></label>
         <p class="small muted" style="margin:0">Easy to remember is also easier to guess. Once everyone has joined, close the code.</p>` : ''}
       ${lv.code ? `<button class="text-btn" data-act="liveclosecode" style="align-self:flex-start;min-height:32px">Everyone’s in? Close the code</button>` : ''}
       ${log.length ? `<div class="label">What changed</div><ul class="small" style="margin:0;padding-left:18px">${log.map(l => `<li>${esc(l.text)}</li>`).join('')}</ul>` : ''}${msg}

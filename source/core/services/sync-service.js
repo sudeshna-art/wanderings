@@ -92,7 +92,7 @@ export const syncService = {
       return { tid };
     } catch (e) { return { error: friendly(e) }; }
   },
-  /* An invite code: random (prefix + 10 characters) or one the organizer chooses, like Sukla-2026.
+  /* An invite code: random (prefix + 10 characters) or one the organizer chooses, like Beach-Trip-26.
      A code already used by any trip can't be taken (the rules only allow creating new codes). */
   async makeInvite(tid, byName, edition, prefix, custom) {
     if (!(await load()) || !user) return { error: 'Sign in first.' };
