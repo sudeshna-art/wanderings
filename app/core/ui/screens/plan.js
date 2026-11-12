@@ -1,20 +1,20 @@
 /* Planner mode: day strip across the whole trip, timeline or live map per day, add-to-a-day sheet.
    Oct 11 2026: bookings show on their day, closed days are flagged, and trip checks list clashes. */
-import { placeName } from '../state.js?v=202611121748';
-import { S, P, save, cityName, cityOf, placesIn, itemInfo, homePoint, stayHere, today, addMount, addCleanup, placeById, isPlanner } from '../state.js?v=202611121748';
-import { esc, ic, ill, fmtDay, shortDay, plural, modeIcon, toast, $, $$, KIND_NAME } from '../dom.js?v=202611121748';
-import { illustrationFor, masthead, bookingLine } from '../components.js?v=202611121748';
-import { planDays as tripDays, itemsOn, stayOn, planOf, addToDay, statusOf, isBooked, walkMinutes, km, closedOn, closedText, bookingsOn } from '../../models/schema.js?v=202611121748';
-import { tripChecks } from '../../models/checks.js?v=202611121748';
-import { clean } from '../theme.js?v=202611121748';
-import { checkText } from '../components.js?v=202611121748';
-import { openSpot } from './wanderer.js?v=202611121748';
-import { mapService } from '../../services/map-service.js?v=202611121748';
-import { fareService } from '../../services/fare-service.js?v=202611121748';
-import { currencyService } from '../../services/currency-service.js?v=202611121748';
-import { showStatus } from './offline.js?v=202611121748';
-import { whoChips, whoLine, dayPeople, shareButton, groupNote, toggleWho } from './together.js?v=202611121748';
-import { isGroup } from '../../models/schema.js?v=202611121748';
+import { placeName } from '../state.js?v=202611121838';
+import { S, P, save, cityName, cityOf, placesIn, itemInfo, homePoint, stayHere, today, addMount, addCleanup, placeById, isPlanner } from '../state.js?v=202611121838';
+import { esc, ic, ill, fmtDay, shortDay, plural, modeIcon, toast, $, $$, KIND_NAME } from '../dom.js?v=202611121838';
+import { illustrationFor, masthead, bookingLine } from '../components.js?v=202611121838';
+import { planDays as tripDays, itemsOn, stayOn, planOf, addToDay, statusOf, isBooked, walkMinutes, km, closedOn, closedText, bookingsOn } from '../../models/schema.js?v=202611121838';
+import { tripChecks } from '../../models/checks.js?v=202611121838';
+import { clean } from '../theme.js?v=202611121838';
+import { checkText } from '../components.js?v=202611121838';
+import { openSpot } from './wanderer.js?v=202611121838';
+import { mapService } from '../../services/map-service.js?v=202611121838';
+import { fareService } from '../../services/fare-service.js?v=202611121838';
+import { currencyService } from '../../services/currency-service.js?v=202611121838';
+import { showStatus } from './offline.js?v=202611121838';
+import { whoChips, whoLine, dayPeople, shareButton, groupNote, toggleWho } from './together.js?v=202611121838';
+import { isGroup } from '../../models/schema.js?v=202611121838';
 
 const dayCity = d => { const s = stayOn(S.trip, d); return s ? s.city_id : ''; };
 
@@ -136,8 +136,9 @@ export function nearbyDay(id) {
 
 export function renderPlan(seg) {
   const days = tripDays(S.trip);
-  const head = masthead() + `<div class="greet"><h1>Day by day.</h1>${days.length ? '' : '<p class="lede">Give things a day, and a time if you like. Everything can move.</p>'}</div>${seg}`;
-  if (!days.length) return head + `<div class="block" style="padding-top:14px"><p class="serif" style="font-size:18px">Add your stays with dates to lay out your days.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn line" data-act="welcome" data-step="2">Add my stays</button><button class="btn line" data-act="imopen">Import bookings</button></div></div>` + trayBlock();
+  const shareBtn = `<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><button class="btn sm" data-act="planshare">${ic('share', 'style="width:16px;height:16px"')}${S.trip.live ? 'Share this plan' : 'Share this plan with your group'}</button>${S.trip.live ? '<span class="small muted">Shared live</span>' : ''}</div>`;
+  const head = masthead() + `<div class="greet"><h1>Day by day.</h1>${days.length ? '' : '<p class="lede">Give things a day, and a time if you like. Everything can move.</p>'}</div>${seg}${days.length ? shareBtn : ''}`;
+  if (!days.length) return head + `<div class="block" style="padding-top:14px"><p class="serif" style="font-size:18px;margin:0">When is your trip?</p><p class="small muted">Add your dates to lay out your days. No need to have a place to stay yet.</p><div class="fields"><label class="f">Trip starts<input type="date" data-bind="dates.start" value="${esc((S.trip.dates || {}).start || '')}"></label><label class="f">Trip ends<input type="date" data-bind="dates.end" value="${esc((S.trip.dates || {}).end || '')}"></label></div><button class="btn line sm" data-act="go" data-tab="places" style="align-self:flex-start">Browse places to save</button></div>`;
   if (!P().pday || !days.includes(P().pday)) P().pday = days.includes(today()) ? today() : days[0];
   const day = P().pday, di = days.indexOf(day), items = itemsOn(S.trip, day), city = dayCity(day);
   const multi = S.C.edition.city_ids.length > 1;   /* single-city trips: no city under every day */
@@ -149,7 +150,7 @@ export function renderPlan(seg) {
   const dayHead = `<div class="block" style="padding-top:22px;gap:4px"><div class="head"><h2>${esc(new Date(day + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }))}</h2><span class="label">Day ${di + 1}${city ? ' · ' + esc(cityName(city)) : ''}</span></div>
     <div style="font-family:var(--mono);font-size:11.5px;color:var(--muted)">${items.length ? plural(items.length, 'stop') : 'Open day'}</div>${travel}${dayPeople(day)}</div>`;
   const body = P().pmode === 'map' ? dayBookings(day) + mapView(day, items) : timelineView(day, items, true);
-  const share = isGroup(S.trip) ? `<div class="block" style="padding-top:8px;gap:6px">${shareButton()}${groupNote()}</div>` : '';
+  const share = isGroup(S.trip) && !S.trip.live ? `<div class="block" style="padding-top:8px;gap:6px">${shareButton()}${groupNote()}</div>` : '';
   return head + checksBlock() + share + strip + toggle + dayHead + body + trayBlock();
 }
 

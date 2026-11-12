@@ -15,8 +15,8 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="stylesheet" href="core/vendor/leaflet/leaflet.css">
-<link rel="stylesheet" href="core/styles/app.css?v=202611121748">
-<link rel="stylesheet" href="core/styles/theme-clean.css?v=202611121748">
+<link rel="stylesheet" href="core/styles/app.css?v=202611121838">
+<link rel="stylesheet" href="core/styles/theme-clean.css?v=202611121838">
 <style>
 .pick{position:fixed;inset:0;z-index:1000;background:#fff;overflow:auto;padding:max(28px,env(safe-area-inset-top)) 20px 32px;box-sizing:border-box}
 .pick .in{max-width:520px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
@@ -56,9 +56,16 @@
 <div class="pick" id="picker" hidden></div>
 <script src="core/vendor/leaflet/leaflet.js"></script>
 <script type="module">
-import { DESTINATIONS, chosenId, remember, REQUEST_URL } from './destinations.js?v=202611121748';
+import { DESTINATIONS, chosenId, remember, REQUEST_URL } from './destinations.js?v=202611121838';
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
-const q = new URLSearchParams(location.search), id = chosenId();
+const q = new URLSearchParams(location.search);
+if (q.get('join')) {   /* a join link: remember the code, open the app; it signs in quietly and joins */
+  const code = q.get('join'), m = code.toUpperCase().match(/^([A-Z]{2})-/);
+  try { localStorage.setItem('wanderings-live-invite', code); } catch (err) {}
+  const d = (m && DESTINATIONS.find(x => x.code === m[1])) || DESTINATIONS.find(x => x.id === chosenId()) || DESTINATIONS[0];
+  remember(d.id); location.replace('./?d=' + encodeURIComponent(d.id));
+}
+const id = chosenId();
 if (q.has('pick') || !id) {
   const el = document.getElementById('picker');
   el.innerHTML = `<div class="in"><div class="word">wanderings<span>.</span></div>
@@ -86,11 +93,11 @@ if (q.has('pick') || !id) {
 } else {
   remember(id);
   if (q.get('d') !== id) history.replaceState(null, '', './?d=' + encodeURIComponent(id) + location.hash);
-  import('./core/ui/app.js?v=202611121748');
+  import('./core/ui/app.js?v=202611121838');
 }
 </script>
 <script>
-/* offline support (version 202611121748) */
+/* offline support (version 202611121838) */
 if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
   window.addEventListener('load', () => { navigator.serviceWorker.register('sw.js').catch(() => {}); });
 }

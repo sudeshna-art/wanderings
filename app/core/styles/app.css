@@ -372,3 +372,5 @@ a.stamp.dest-switch{text-decoration:none;min-height:44px;-webkit-tap-highlight-c
 .gtile span{font-size:13px;color:var(--muted,#636366)}
 .gtile.warn{background:var(--red-bg,#FCEBEA);color:var(--coral-ink,#A8231B)}
 .gtile.warn span{color:var(--coral-ink,#A8231B)}
+/* Nov 2026: one outing with options (e.g. kayak or electric boat) */
+.choose{display:flex;flex-direction:column;gap:6px;padding:12px;border:1px solid var(--rule);border-radius:16px;margin:6px 0}

@@ -1,12 +1,12 @@
 /* Plan together, live (Nov 2026): sign in once, start or join a shared trip, and see everyone's changes.
    Uses syncService for everything outside the phone and models/sync.js for what is shared. */
-import { EDITION } from '../../../edition.config.js?v=202611121748';
-import { S, save, placeById } from '../state.js?v=202611121748';
-import { esc, ic, toast, $ } from '../dom.js?v=202611121748';
-import { syncService, normCode } from '../../services/sync-service.js?v=202611121748';
-import { tripService } from '../../services/trip-service.js?v=202611121748';
-import { shareService } from '../../services/share-service.js?v=202611121748';
-import { diffForPush, applyRemote, changeLine, entryId } from '../../models/sync.js?v=202611121748';
+import { EDITION } from '../../../edition.config.js?v=202611121838';
+import { S, save, placeById } from '../state.js?v=202611121838';
+import { esc, ic, toast, $ } from '../dom.js?v=202611121838';
+import { syncService, normCode } from '../../services/sync-service.js?v=202611121838';
+import { tripService } from '../../services/trip-service.js?v=202611121838';
+import { shareService } from '../../services/share-service.js?v=202611121838';
+import { diffForPush, applyRemote, changeLine, entryId } from '../../models/sync.js?v=202611121838';
 
 const INVITE_KEY = 'wanderings-live-invite';
 export const LV = { on: false, user: null, mode: 'link', msg: '', busy: false, picking: null, members: 0 };
@@ -174,6 +174,10 @@ export async function closeCode(el) {
   lv.closed = true; delete lv.code; delete lv.shown; tripService.save(S.trip); refresh();
   toast('Code closed. Everyone already in stays in.');
 }
+export async function shareFromPlan() {
+  if (!live()) { await startTrip(); if (!live()) return; }
+  await invite();
+}
 export function toggleMode() { LV.mode = LV.mode === 'link' ? 'password' : 'link'; LV.msg = ''; refresh(); }
 export async function startTrip() {
   if (!S.trip.traveler_name) { toast('Add your name first (Essentials, Settings, or the welcome steps)'); return; }
@@ -195,8 +199,8 @@ export async function invite() {
     if (r.error) { refresh(); toast(r.error); return; }
     lv.code = r.code; lv.shown = r.shown; lv.closed = false; tripService.save(S.trip); refresh();
   }
-  const url = location.origin + location.pathname;
-  const text = `Join our ${EDITION.name} trip on Wanderings!\n1. Get the app: open ${url} and add it to your home screen (Safari: Share, then Add to Home Screen).\n2. Open it from your home screen and enter this trip code: ${showCode(lv)}\nNo email or password needed.`;
+  const url = location.origin + location.pathname, join = url + '?join=' + encodeURIComponent(showCode(lv));
+  const text = `Join our ${EDITION.name} trip on Wanderings! Tap to see our plan, no app or sign-up needed:\n${join}\n\nWant it on your home screen? Open ${url}, add it to your home screen (Safari: Share, then Add to Home Screen), open it from there and enter the trip code: ${showCode(lv)}`;
   const s = await shareService.shareText(text, EDITION.name + ' trip');
   if (s !== 'shared' && s !== 'cancelled') { const ok = await shareService.copy(text); toast(ok ? 'Invite copied. Paste it in your family chat.' : 'Sharing isn’t available here'); }
 }

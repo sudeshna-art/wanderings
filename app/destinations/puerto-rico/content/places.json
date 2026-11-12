@@ -804,7 +804,9 @@
   },
   "ride": "Many tours offer pickup in San Juan. Otherwise, book a driver who waits: rides back from Fajardo late at night are hard to find.",
   "remind_before": true,
-  "theme": "outdoors"
+  "theme": "outdoors",
+  "booking_group": "laguna-grande",
+  "booking_group_name": "Laguna Grande bio bay: kayak or electric boat"
  },
  {
   "id": "pr-foodtour",
@@ -1097,7 +1099,9 @@
   },
   "food": null,
   "theme": "outdoors",
-  "remind_before": true
+  "remind_before": true,
+  "booking_group": "laguna-grande",
+  "booking_group_name": "Laguna Grande bio bay: kayak or electric boat"
  },
  {
   "id": "pr-yunque",

@@ -108,10 +108,12 @@ export function sortedStays(trip) {
   return trip.stays.filter(s => s.city_id).slice().sort((a, b) => (a.start || '9').localeCompare(b.start || '9'));
 }
 export function tripRange(trip) {
-  const st = sortedStays(trip).filter(s => s.start);
-  if (!st.length) return { start: '', end: '' };
-  const start = st[0].start;
-  const end = st.reduce((m, s) => { const e = s.end || s.start; return e > m ? e : m; }, start);
+  /* Nov 2026: trip dates can be set before any stay is booked (trip.dates); stays widen the range. */
+  const st = sortedStays(trip).filter(s => s.start), d = trip.dates || {};
+  const starts = st.map(s => s.start).concat(d.start ? [d.start] : []).sort();
+  if (!starts.length) return { start: '', end: '' };
+  const start = starts[0];
+  const end = st.map(s => s.end || s.start).concat(d.end ? [d.end] : d.start ? [d.start] : []).reduce((m, e) => e > m ? e : m, start);
   return { start, end };
 }
 export function tripDays(trip) {

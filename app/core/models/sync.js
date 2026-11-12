@@ -15,7 +15,8 @@ function personOf(trip, p) {
 function meAsPerson(trip) {
   const st = (trip.stays || []).filter(s => s.start).sort((a, b) => a.start.localeCompare(b.start));
   const first = st[0] || {}, last = st[st.length - 1] || {};
-  return { id: trip.me_id, name: trip.traveler_name || '', arrive: first.start || '', leave: last.end || first.end || '', hood: first.neighborhood_id || '', address: first.address || '' };
+  const d = trip.dates || {};   /* no dated stay yet: the trip dates stand in (Nov 2026) */
+  return { id: trip.me_id, name: trip.traveler_name || '', arrive: first.start || d.start || '', leave: last.end || first.end || d.end || '', hood: first.neighborhood_id || '', address: first.address || '' };
 }
 function bookingForGroup(b) {
   const d = clone(b); delete d.ref; delete d.note; delete d.share; delete d.shared; delete d.by; delete d.source; return d;
@@ -58,6 +59,12 @@ export function applyRemote(trip, remote) {
   });
   trip.plan = (trip.plan || []).filter(it => it.private).concat(plan);
   trip.people = people;
+  /* A phone with no dates of its own takes the group's span, so the shared plan has days to show. */
+  const hasOwn = (trip.stays || []).some(s => s.start) || (trip.dates && trip.dates.start);
+  if (!hasOwn) {
+    const a = people.map(x => x.arrive).filter(Boolean).sort(), l = people.map(x => x.leave || x.arrive).filter(Boolean).sort();
+    if (a.length) trip.dates = { start: a[0], end: l[l.length - 1] };
+  }
   const kept = [];
   (trip.bookings || []).forEach(b => {
     const r = books.get(b.id);

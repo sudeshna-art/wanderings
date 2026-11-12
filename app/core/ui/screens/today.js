@@ -1,23 +1,23 @@
 /* Today: answers "what now?" for the current city. Simplified Oct 11 2026: the time-sensitive things first
    (meeting point, travel, bookings, clashes), then what to book, ideas, your base and a phrase. */
-import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202611121748';
-import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202611121748';
-import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202611121748';
-import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202611121748';
-import { tripChecks } from '../../models/checks.js?v=202611121748';
-import { timelineView } from './plan.js?v=202611121748';
-import { allPhotoIds } from './journal.js?v=202611121748';
-import { view as phraseView } from './phrases.js?v=202611121748';
-import { meetBlock } from './safety.js?v=202611121748';
-import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js?v=202611121748';
-import { speaksLocal } from '../../models/schema.js?v=202611121748';
-import { mapPackService } from '../../services/mappack-service.js?v=202611121748';
-import { clean } from '../theme.js?v=202611121748';
-import { placeCards, checkText } from '../components.js?v=202611121748';
-import { closedText, closedOn } from '../../models/schema.js?v=202611121748';
-import { occasionAlert } from './group.js?v=202611121748';
-import { arrivalsAlert } from './together.js?v=202611121748';
-import { liveUpdates, isLive, LV } from './live.js?v=202611121748';
+import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202611121838';
+import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202611121838';
+import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202611121838';
+import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202611121838';
+import { tripChecks } from '../../models/checks.js?v=202611121838';
+import { timelineView } from './plan.js?v=202611121838';
+import { allPhotoIds } from './journal.js?v=202611121838';
+import { view as phraseView } from './phrases.js?v=202611121838';
+import { meetBlock } from './safety.js?v=202611121838';
+import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js?v=202611121838';
+import { speaksLocal } from '../../models/schema.js?v=202611121838';
+import { mapPackService } from '../../services/mappack-service.js?v=202611121838';
+import { clean } from '../theme.js?v=202611121838';
+import { placeCards, checkText } from '../components.js?v=202611121838';
+import { closedText, closedOn } from '../../models/schema.js?v=202611121838';
+import { occasionAlert } from './group.js?v=202611121838';
+import { arrivalsAlert } from './together.js?v=202611121838';
+import { liveUpdates, isLive, LV } from './live.js?v=202611121838';
 
 let slideTimer = null, slideIdx = 0;
 
@@ -326,20 +326,29 @@ function renderTodayClean() {
   else { eyebrow = 'Trip complete'; h1 = `${copyOf('greeting_place', placeName())}, remembered!`; }
   const toBook = placesIn(cityId).filter(p => p.booking_status === 'required' && (p.must || p.urgency_level === 'book_soon') && ((p.category !== 'experience' && p.category !== 'day_trip') || p.remind_before))
     .sort((a, b) => (a.urgency_level === 'book_soon' ? 0 : 1) - (b.urgency_level === 'book_soon' ? 0 : 1));
-  const unbooked = toBook.filter(p => !isBooked(S.trip, p.id));
+  /* Nov 2026: places with the same booking_group are one outing with options (e.g. kayak or electric boat): booking either completes it. */
+  const outings = []; const seenG = {};
+  toBook.forEach(p => { if (!p.booking_group) outings.push({ list: [p] }); else if (seenG[p.booking_group]) seenG[p.booking_group].list.push(p); else { seenG[p.booking_group] = { group: p.booking_group_name || p.name, list: [p] }; outings.push(seenG[p.booking_group]); } });
+  const outingDone = o => o.list.some(p => isBooked(S.trip, p.id));
+  const openOutings = outings.filter(o => !outingDone(o));
+  const unbooked = openOutings.flatMap(o => o.list);
   const visited = S.trip.saved.filter(s => s.status === 'went').length;
   const [moment, ph] = phraseNow();
+  const outingCards = os => os.map(o => o.list.length > 1 ? `<div class="choose"><div class="label">One outing, two ways · booking either counts</div><b style="font-size:17px">${esc(o.group)}</b>${placeCards(o.list)}</div>` : placeCards(o.list)).join('');
+  const bookBlock = st.k === 'before' && outings.length ? (openOutings.length ? `<div class="block"><div class="head"><h2>Book before you go</h2><span class="small muted">${outings.length - openOutings.length} of ${outings.length} done</span></div>
+        <p class="small muted">These sell out or need a set time. Checked ${esc(checkedText())}.</p>${outingCards(openOutings)}</div>`
+        : `<div class="block"><h2>All booked</h2><p class="small muted">Everything that needs a ticket is sorted. Nice work.</p></div>`) : '';
 
   let html = masthead({ noAsk: true }) + `<div class="greet"><div class="greet-row"><div><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(h1)}</h1></div>${coverTile(cityId)}</div></div>
     <button class="askbar" data-act="ask">${ic('search')}<span>Search trip &amp; guide…</span></button>
     <div class="askpills">${askPills(cityId).map(q => `<button data-act="askpill" data-q="${esc(q === 'Taxis' ? 'taxi' : q)}">${esc(q)}</button>`).join('')}</div>${cityBar()}`;
+  html += bookBlock;   /* Nov 2026: booking first, setup prompts after */
   if (!hasStays()) {
     html += `<div class="block" style="padding-top:20px"><div class="soft"><b>Your trip</b><p class="small">${cityIds().length > 1 ? `Add where you’re staying in ${esc(copyOf('place_list', placeName()))}, with dates, and the app follows you from place to place.` : 'Add where you’re staying, with dates, for local tips, walking times and a one-tap ride home.'}</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-act="welcome" data-step="2">Add my stays</button><button class="btn line sm" data-act="imopen">Import bookings</button></div></div></div>`;
   }
-  if (showInstallTip()) {
+  if (showInstallTip()) {   /* Nov 2026: a small optional tip, not a big card */
     const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
-    html += `<div class="block" style="padding-top:20px"><div class="soft"><b>Install Wanderings</b><p class="small">${ios ? 'Tap <b>Share</b> at the bottom of Safari, then <b>Add to Home Screen</b>. It opens like an app and works offline.' : 'Open your browser menu and tap <b>Install app</b> or <b>Add to Home screen</b>. It opens like an app and works offline.'}</p>
-      <button class="text-btn" data-act="dismissinstall" style="align-self:flex-start;min-height:36px">Got it</button></div></div>`;
+    html += `<p class="small muted" style="margin:6px 0 0">Tip: add Wanderings to your home screen to use it offline. <button class="text-btn" data-act="toastmsg" data-msg="${ios ? 'In Safari, tap Share, then Add to Home Screen.' : 'Open the browser menu and tap Install app or Add to Home screen.'}" style="min-height:32px;padding:0 4px">How</button><button class="text-btn" data-act="dismissinstall" style="min-height:32px;padding:0 4px">Hide</button></p>`;
   }
   html += liveUpdates() ? `<div class="block" style="padding-top:12px">${liveUpdates()}</div>` : '';
   /* Nov 2026: make group sharing easy to find. Dismissed with "Not now". */
@@ -348,11 +357,8 @@ function renderTodayClean() {
   html += whatNow(st);
   html += tomorrowBlock(cityId, st);
   if (st.k !== 'after' && toBook.length) {
-    if (st.k === 'before') {
-      html += unbooked.length ? `<div class="block"><div class="head"><h2>Book before you go</h2><span class="small muted">${toBook.length - unbooked.length} of ${toBook.length} done</span></div>
-        <p class="small muted">Checked ${esc(checkedText())}.</p>${placeCards(unbooked)}</div>`
-        : `<div class="block"><h2>All booked</h2><p class="small muted">Everything that needs a ticket is sorted. Nice work.</p></div>`;
-    } else if (unbooked.length) {
+    if (st.k === 'before') { /* shown at the top */ }
+    else if (unbooked.length) {
       html += `<div class="block"><div class="head"><h2>Still to book</h2><span class="small muted">${toBook.length - unbooked.length} of ${toBook.length} done</span></div><p>${unbooked.map(p => esc(p.name)).join(', ')}.</p><button class="text-btn" data-act="pview" data-v="sights" data-tab="places" style="align-self:flex-start">See tickets</button></div>`;
     }
   }
