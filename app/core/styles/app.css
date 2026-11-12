@@ -359,3 +359,9 @@ a.stamp.dest-switch{text-decoration:none;min-height:44px;-webkit-tap-highlight-c
 .found{display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;padding:10px 12px;min-height:48px;background:none;border:0;border-top:1px solid var(--rule);font:inherit;color:inherit;cursor:pointer}
 .found:first-child{border-top:0}
 .found:active{background:var(--wash,#f4f6f7)}
+/* Nov 2026: Tomorrow block on Today */
+#tomorrowBlock{display:flex;flex-direction:column;gap:10px}
+.trows{display:flex;flex-direction:column;border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.trow{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;padding:10px 12px;min-height:48px;background:none;border:0;border-top:1px solid var(--rule);font:inherit;color:inherit;cursor:pointer}
+.trow:first-child{border-top:0}
+.trow > span{display:flex;flex-direction:column;gap:2px;min-width:0}
