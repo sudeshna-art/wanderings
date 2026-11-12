@@ -1,7 +1,7 @@
 /* One app, many destinations (Nov 2026). The shared core reads EDITION from here.
    This loader picks the chosen destination and returns its own settings, with paths pointing at its folder.
    Each destination keeps its own edition id and storage names, so saved trips stay separate when switching. */
-import { DESTINATIONS, chosenId } from './destinations.js?v=202611112124';
+import { DESTINATIONS, chosenId } from './destinations.js?v=202611112130';
 
 const d = DESTINATIONS.find(x => x.id === chosenId()) || DESTINATIONS[0];
 const base = `./destinations/${d.dir}/`;
