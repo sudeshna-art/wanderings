@@ -23,6 +23,10 @@
    "caption": "A garita on the city walls",
    "alt": "Pen and ink sketch of a garita, a sentry box on the old city walls of San Juan, above the sea"
   },
+  "cover": {
+   "art": "san-juan-cover.svg",
+   "note": "QA 4 (Nov 2026): the destination cover on Today. Original line drawing made by tools/make_puerto_rico_cover.py (plastered houses, blue cobblestones, the city wall and a garita above the sea). Puerto Rico only until the owner approves the look for other cities."
+  },
   "mark": "san-juan-mark.svg",
   "groups": [
    {

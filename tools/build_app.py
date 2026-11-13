@@ -109,19 +109,19 @@ index = f'''<!doctype html>
 </style>
 </head>
 <body>
-<div class="app" id="app"><p class="loading">Loading Wanderings…</p>
+<main class="app" id="app"><p class="loading">Loading Wanderings…</p>
   <section data-tab="today" hidden></section>
   <section data-tab="places" hidden></section>
   <section data-tab="phrases" hidden></section>
   <section data-tab="journal" hidden></section>
   <section data-tab="essentials" hidden></section>
-</div>
-<nav class="tabs" aria-label="Sections"><div class="in" id="tabbar" role="tablist"></div></nav>
-<div class="driver" id="driver" hidden></div>
+</main>
+<nav class="tabs" aria-label="Sections"><div class="in" id="tabbar"></div></nav>
+<div class="driver" id="driver" role="dialog" aria-modal="true" aria-label="Card" hidden></div>
 <div class="driver" id="welcome" hidden></div>
-<div class="driver" id="viewer" hidden></div>
+<div class="driver" id="viewer" role="dialog" aria-modal="true" aria-label="Photo" hidden></div>
 <div class="scrim" id="scrim" hidden></div>
-<div class="sheet" id="sheet" role="dialog" aria-modal="true" hidden></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Details" tabindex="-1" hidden></div>
 <input type="file" id="photoInput" class="offscreen" accept="image/*" multiple aria-hidden="true" tabindex="-1">
 <div class="toast" id="toast" role="status" hidden></div>
 <div class="pick" id="picker" hidden></div>

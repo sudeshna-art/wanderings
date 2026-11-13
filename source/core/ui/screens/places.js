@@ -29,7 +29,7 @@ export function renderPlaces() {
   const vs = views();
   if (!P().pview || !vs.some(([k]) => k === P().pview)) P().pview = defaultView();
   const v = P().pview;
-  const seg = `<div class="chips" role="tablist" aria-label="Places views" style="margin-bottom:4px">${vs.map(([k, l]) => `<button class="chip" data-act="pview" data-v="${k}" aria-pressed="${v === k}">${l}</button>`).join('')}</div>`;
+  const seg = `<div class="chips" role="group" aria-label="Places views" style="margin-bottom:4px">${vs.map(([k, l]) => `<button class="chip" data-act="pview" data-v="${k}" aria-pressed="${v === k}">${l}</button>`).join('')}</div>`;
   const root = document.querySelector('section[data-tab="places"]');
   if (v === 'plan') { root.innerHTML = renderPlan(seg); return; }
   if (v === 'nearby') { root.innerHTML = renderWanderer(seg); return; }

@@ -6,6 +6,11 @@ import { EDITION } from '../../edition.config.js';
 
 export const theme = () => document.documentElement.getAttribute('data-look') || EDITION.theme || '';
 export const clean = () => theme() === 'clean';
+/* QA 3 (Nov 2026): wide screens (laptops, tablets in landscape) get a side rail and two-column Today and Plan.
+   Keep this width in step with the @media (min-width:1024px) rules in theme-clean.css. */
+const WIDE_MQ = (() => { try { return matchMedia('(min-width: 1024px)'); } catch (e) { return { matches: false }; } })();
+export const wide = () => clean() && !!WIDE_MQ.matches;
+export function onWideChange(fn) { try { WIDE_MQ.addEventListener('change', fn); } catch (e) {} }
 
 /* Called once at boot: apply an edition's theme if the page didn't, and the city tint. */
 export function applyTheme(city) {
