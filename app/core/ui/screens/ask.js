@@ -1,17 +1,17 @@
 /* Ask: one search box for quick answers (Oct 11 2026). Works offline: answers come from this edition's guide
    and the traveler's own trip. Money, taxi, help, home, phrases, bookings and opening days get answer cards;
    everything else is listed by best match. */
-import { S, P, curCityId, cityOf, cityName, placeById, spot, homePoint, stayHere, myLang, today, itemInfo, sos, sosDigits, localSym } from '../state.js?v=202611121929';
-import { esc, ic, ill, toast, $, fmtDay, fmtNum, KIND_NAME } from '../dom.js?v=202611121929';
-import { bookingLine } from '../components.js?v=202611121929';
-import { buildIndex, ask } from '../../models/finder.js?v=202611121929';
-import { closedText, closedOn, sortedBookings, itemsOn, weekdayOf, tripDays, localISO } from '../../models/schema.js?v=202611121929';
-import { phraseRow } from './phrases.js?v=202611121929';
-import { meetBlock } from './safety.js?v=202611121929';
-import { currencyService } from '../../services/currency-service.js?v=202611121929';
-import { fareService } from '../../services/fare-service.js?v=202611121929';
-import { linkService } from '../../services/link-service.js?v=202611121929';
-import { clean } from '../theme.js?v=202611121929';
+import { S, P, curCityId, cityOf, cityName, placeById, spot, homePoint, stayHere, myLang, today, itemInfo, sos, sosDigits, localSym } from '../state.js?v=202611131348';
+import { esc, ic, ill, toast, $, fmtDay, fmtNum, KIND_NAME } from '../dom.js?v=202611131348';
+import { bookingLine } from '../components.js?v=202611131348';
+import { buildIndex, ask } from '../../models/finder.js?v=202611131348';
+import { closedText, closedOn, sortedBookings, itemsOn, weekdayOf, tripDays, localISO } from '../../models/schema.js?v=202611131348';
+import { phraseRow } from './phrases.js?v=202611131348';
+import { meetBlock } from './safety.js?v=202611131348';
+import { currencyService } from '../../services/currency-service.js?v=202611131348';
+import { fareService } from '../../services/fare-service.js?v=202611131348';
+import { linkService } from '../../services/link-service.js?v=202611131348';
+import { clean } from '../theme.js?v=202611131348';
 
 const A = { docs: null, timer: null, q: '' };
 const DAY_NAME = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];

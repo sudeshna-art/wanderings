@@ -1,11 +1,11 @@
 /* Places tab: Plan (Planner), Near me (everyone; the default for True Wanderer), Sights, Experiences, Day trips. Follows the current city. */
-import { S, P, save, checkedText, curCityId, cityOf, cityName, placesIn, isPlanner, isWanderer, placeById } from '../state.js?v=202611121929';
-import { esc, toast, $$, $, CUSTOM_KINDS, KIND_NAME } from '../dom.js?v=202611121929';
-import { masthead, cityBar, legend, placeRow, expRow, placeCards, modeSwitch } from '../components.js?v=202611121929';
-import { clean } from '../theme.js?v=202611121929';
-import { isGroup, statusOf, hasKids, easyWalk, goodForKids, kidAges } from '../../models/schema.js?v=202611121929';
-import { renderPlan } from './plan.js?v=202611121929';
-import { renderWanderer } from './wanderer.js?v=202611121929';
+import { S, P, save, checkedText, curCityId, cityOf, cityName, placesIn, isPlanner, isWanderer, placeById } from '../state.js?v=202611131348';
+import { esc, toast, $$, $, CUSTOM_KINDS, KIND_NAME } from '../dom.js?v=202611131348';
+import { masthead, cityBar, legend, placeRow, expRow, placeCards, modeSwitch } from '../components.js?v=202611131348';
+import { clean } from '../theme.js?v=202611131348';
+import { isGroup, statusOf, hasKids, easyWalk, goodForKids, kidAges } from '../../models/schema.js?v=202611131348';
+import { renderPlan } from './plan.js?v=202611131348';
+import { renderWanderer } from './wanderer.js?v=202611131348';
 
 export function views() {
   return [['nearby', 'Near me'], ['sights', 'Must-sees'], ['experiences', 'Experiences'], ['trips', 'Day trips']];   /* Nov 2026: the plan has its own tab */

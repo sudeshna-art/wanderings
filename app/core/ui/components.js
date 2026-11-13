@@ -1,9 +1,9 @@
 /* Shared pieces of UI used by several screens. */
-import { EDITION } from '../../edition.config.js?v=202611121929';
-import { S, P, cityOf, cityName, curCityId, autoCityId, cityIds, placeById, isPlanner, today } from './state.js?v=202611121929';
-import { esc, ic, ill, KIND_NAME, fmtDay } from './dom.js?v=202611121929';
-import { statusOf, isBooked, planOf, BOOKING_LABEL, URGENCY_LABEL, priceText, priceShort, closedText, bookingKindLabel, goodForKids, hasKids, easyWalk, foodFlags, WALK_WARN, kidAges } from '../models/schema.js?v=202611121929';
-import { linkService } from '../services/link-service.js?v=202611121929';
+import { EDITION } from '../../edition.config.js?v=202611131348';
+import { S, P, cityOf, cityName, curCityId, autoCityId, cityIds, placeById, isPlanner, today } from './state.js?v=202611131348';
+import { esc, ic, ill, KIND_NAME, fmtDay } from './dom.js?v=202611131348';
+import { whoSaved, statusOf, isBooked, planOf, BOOKING_LABEL, URGENCY_LABEL, priceText, priceShort, closedText, bookingKindLabel, goodForKids, hasKids, easyWalk, foodFlags, WALK_WARN, kidAges } from '../models/schema.js?v=202611131348';
+import { linkService } from '../services/link-service.js?v=202611131348';
 
 export const art = file => (S.art && S.art[file]) || '';
 /* A city's own illustrated map (original line art drawn to a known area), for the offline sketch map. */
@@ -267,7 +267,7 @@ export function placeCard(p) {
   const price = cardPrice(p), cl = closedText(p);
   return `<div class="pcard" id="pl-${p.id}"><button class="pcard-tap" data-act="spot" data-id="${p.id}" aria-label="${esc(p.name)}, details">
     <span class="pcard-top"><b>${esc(p.name)}</b>${chev()}</span>
-    <span class="pmeta">${price ? `<span>${price}</span>` : ''}${statusBadge(p, booked)}${st === 'went' ? '<span class="badge gray">Went ✓</span>' : st === 'want' ? '<span class="badge gray">Saved</span>' : ''}${cl ? `<span class="closed-day" style="margin:0">${esc(cl)}</span>` : ''}${flagBadges(groupFlags(p))}</span>
+    <span class="pmeta">${price ? `<span>${price}</span>` : ''}${statusBadge(p, booked)}${st === 'went' ? '<span class="badge gray">Went ✓</span>' : st === 'want' ? '<span class="badge gray">Saved</span>' : ''}${whoSaved(S.trip, p.id).length ? `<span class="badge gray">★ ${esc(whoSaved(S.trip, p.id).join(', '))}</span>` : ''}${cl ? `<span class="closed-day" style="margin:0">${esc(cl)}</span>` : ''}${flagBadges(groupFlags(p))}</span>
     ${tip ? `<span class="tipbox">${esc(tip)}</span>` : ''}</button>
     ${cardLink(p, booked)}${affiliateLink(p)}</div>`;
 }

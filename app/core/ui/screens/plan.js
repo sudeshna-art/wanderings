@@ -1,20 +1,20 @@
 /* Planner mode: day strip across the whole trip, timeline or live map per day, add-to-a-day sheet.
    Oct 11 2026: bookings show on their day, closed days are flagged, and trip checks list clashes. */
-import { placeName } from '../state.js?v=202611121929';
-import { S, P, save, cityName, cityOf, placesIn, itemInfo, homePoint, stayHere, today, addMount, addCleanup, placeById, isPlanner } from '../state.js?v=202611121929';
-import { esc, ic, ill, fmtDay, shortDay, plural, modeIcon, toast, $, $$, KIND_NAME } from '../dom.js?v=202611121929';
-import { illustrationFor, masthead, bookingLine } from '../components.js?v=202611121929';
-import { planDays as tripDays, itemsOn, stayOn, planOf, addToDay, statusOf, isBooked, walkMinutes, km, closedOn, closedText, bookingsOn } from '../../models/schema.js?v=202611121929';
-import { tripChecks } from '../../models/checks.js?v=202611121929';
-import { clean, wide } from '../theme.js?v=202611121929';
-import { checkText } from '../components.js?v=202611121929';
-import { openSpot } from './wanderer.js?v=202611121929';
-import { mapService } from '../../services/map-service.js?v=202611121929';
-import { fareService } from '../../services/fare-service.js?v=202611121929';
-import { currencyService } from '../../services/currency-service.js?v=202611121929';
-import { showStatus } from './offline.js?v=202611121929';
-import { whoChips, whoLine, dayPeople, shareButton, groupNote, toggleWho } from './together.js?v=202611121929';
-import { isGroup } from '../../models/schema.js?v=202611121929';
+import { placeName } from '../state.js?v=202611131348';
+import { S, P, save, cityName, cityOf, placesIn, itemInfo, homePoint, stayHere, today, addMount, addCleanup, placeById, isPlanner } from '../state.js?v=202611131348';
+import { esc, ic, ill, fmtDay, shortDay, plural, modeIcon, toast, $, $$, KIND_NAME } from '../dom.js?v=202611131348';
+import { illustrationFor, masthead, bookingLine } from '../components.js?v=202611131348';
+import { planDays as tripDays, itemsOn, stayOn, planOf, addToDay, statusOf, isBooked, walkMinutes, km, closedOn, closedText, bookingsOn } from '../../models/schema.js?v=202611131348';
+import { tripChecks } from '../../models/checks.js?v=202611131348';
+import { clean, wide } from '../theme.js?v=202611131348';
+import { checkText } from '../components.js?v=202611131348';
+import { openSpot } from './wanderer.js?v=202611131348';
+import { mapService } from '../../services/map-service.js?v=202611131348';
+import { fareService } from '../../services/fare-service.js?v=202611131348';
+import { currencyService } from '../../services/currency-service.js?v=202611131348';
+import { showStatus } from './offline.js?v=202611131348';
+import { whoChips, whoLine, dayPeople, shareButton, groupNote, toggleWho } from './together.js?v=202611131348';
+import { isGroup, whoSaved } from '../../models/schema.js?v=202611131348';
 
 const dayCity = d => { const s = stayOn(S.trip, d); return s ? s.city_id : ''; };
 
@@ -126,9 +126,9 @@ function pinCard(items, home) {
 /* Things saved but not on a day yet */
 function trayBlock() {
   const scheduled = new Set(S.trip.plan.map(p => p.item_id));
-  const ids = [...new Set(S.trip.saved.filter(s => s.status === 'want').map(s => s.place_id).concat(S.trip.booked))].filter(id => !scheduled.has(id) && placeById(id));
+  const ids = [...new Set(S.trip.saved.filter(s => s.status === 'want').map(s => s.place_id).concat(S.trip.booked, (S.trip.group_saved || []).map(x => x.place_id)))].filter(id => !scheduled.has(id) && placeById(id));
   const days = tripDays(S.trip);
-  return `<div class="block"><div class="head"><h2>Saved, not on a day yet</h2><span class="label">${ids.length}</span></div>${ids.length ? `<div>${ids.map(id => { const nb = nearbyDay(id), info = itemInfo(id); return `<div class="prow" style="grid-template-columns:40px minmax(0,1fr) auto">${ill(info.kind, 40)}<div><div style="font-weight:600">${esc(info.name)}</div><div class="small muted">${esc(cityName(info.city_id))}${nb ? ` · near ${esc(nb.name)}, fits Day ${days.indexOf(nb.day) + 1}` : ''}</div></div><button class="btn line sm" data-act="addsheet" data-id="${id}">Add to a day</button></div>`; }).join('')}</div>` : '<p class="small muted">Tap “Want to go” on any place and it waits here until you give it a day.</p>'}
+  return `<div class="block"><div class="head"><h2>Saved, not on a day yet</h2><span class="label">${ids.length}</span></div>${ids.length ? `<div>${ids.map(id => { const nb = nearbyDay(id), info = itemInfo(id); return `<div class="prow" style="grid-template-columns:40px minmax(0,1fr) auto">${ill(info.kind, 40)}<div><div style="font-weight:600">${esc(info.name)}</div><div class="small muted">${esc(cityName(info.city_id))}${nb ? ` · near ${esc(nb.name)}, fits Day ${days.indexOf(nb.day) + 1}` : ''}</div>${whoSaved(S.trip, id).length ? `<div class="small" style="color:var(--accent-deep)">★ ${esc(whoSaved(S.trip, id).join(', '))} saved this</div>` : ''}</div><button class="btn line sm" data-act="addsheet" data-id="${id}">Add to a day</button></div>`; }).join('')}</div>` : '<p class="small muted">Tap “Want to go” on any place and it waits here until you give it a day.</p>'}
     ${clean() ? '<button class="btn line sm" data-act="pview" data-v="sights" style="align-self:flex-start">Browse places</button>' : '<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn line sm" data-act="pview" data-v="sights">Browse sights</button><button class="btn line sm" data-act="pview" data-v="experiences">Experiences</button><button class="btn line sm" data-act="pview" data-v="trips">Day trips</button></div>'}</div>`;
 }
 
