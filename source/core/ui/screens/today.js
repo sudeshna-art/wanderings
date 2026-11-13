@@ -263,7 +263,8 @@ function destCover(cityId, eyebrow, h1) {
   const c = cityOf(cityId); if (!c.cover || !art(c.cover.art)) return '';
   const photos = allPhotoIds();
   const photo = P().coverMode === 'photo' && P().cover && photos.includes(P().cover) ? P().cover : (P().coverMode === 'slides' && photos.length ? photos[0] : null);
-  return `<div class="greet dcover"><button class="dc-art" data-act="cover" aria-label="Trip cover: the drawing or your photos">${photo ? `<img data-photo="${photo}" alt="">` : art(c.cover.art)}</button>
+  const look = (c.cover.band ? `--dc-band:${esc(c.cover.band)};` : '') + (c.cover.eyebrow ? `--dc-eyebrow:${esc(c.cover.eyebrow)};` : '');   /* cover.band, cover.eyebrow: per-city title band colors */
+  return `<div class="greet dcover"${look ? ` style="${look}"` : ''}><button class="dc-art" data-act="cover" aria-label="Trip cover: the drawing or your photos">${photo ? `<img data-photo="${photo}" alt="">` : art(c.cover.art)}</button>
     <div class="dc-title"><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(h1)}</h1></div></div>`;
 }
 export function openCover() {

@@ -294,6 +294,12 @@
     "brand": {
       "tint": "#E7EEF8",
       "note": "Clean theme: light azulejo blue behind the city mark (art/lisbon-mark.svg)."
+    },
+    "cover": {
+      "art": "lisbon-cover.svg",
+      "band": "#E7EEF8",
+      "eyebrow": "#3F4D63",
+      "note": "Destination cover on Today (approved Nov 12, 2026): light pen-sketch drawing made by tools/covers/make_covers.py. band = the solid color behind the title; eyebrow = the small line above it."
     }
   },
   {
@@ -542,6 +548,12 @@
     "brand": {
       "tint": "#F4EEE2",
       "note": "Clean theme: light cliff sandstone behind the city mark (art/algarve-mark.svg)."
+    },
+    "cover": {
+      "art": "algarve-cover.svg",
+      "band": "#F4EEE2",
+      "eyebrow": "#5E4B36",
+      "note": "Destination cover on Today (approved Nov 12, 2026): light pen-sketch drawing made by tools/covers/make_covers.py. band = the solid color behind the title; eyebrow = the small line above it."
     }
   }
 ]

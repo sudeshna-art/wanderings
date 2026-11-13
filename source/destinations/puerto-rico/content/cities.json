@@ -25,7 +25,9 @@
   },
   "cover": {
    "art": "san-juan-cover.svg",
-   "note": "QA 4 (Nov 2026): the destination cover on Today. Original line drawing made by tools/make_puerto_rico_cover.py (plastered houses, blue cobblestones, the city wall and a garita above the sea). Puerto Rico only until the owner approves the look for other cities."
+   "band": "#FAEDE4",
+   "eyebrow": "#5A4A3F",
+   "note": "Destination cover on Today (approved Nov 12, 2026): light pen-sketch drawing made by tools/covers/make_covers.py. band = the solid color behind the title; eyebrow = the small line above it."
   },
   "mark": "san-juan-mark.svg",
   "groups": [

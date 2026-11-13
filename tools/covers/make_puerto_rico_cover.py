@@ -1,3 +1,4 @@
+"""San Juan cover: Old San Juan houses, blue cobblestones, the city wall and a garita above a peacock-blue sea."""
 import random
 random.seed(7)
 W,H=1200,300
@@ -109,4 +110,4 @@ for r in range(4):
     for c in range(0,790-24,18):
         A(f'<rect x="{c+off}" y="{y}" width="15" height="8" rx="3" fill="#7896AA"/>')
 A('</svg>')
-open(__import__('pathlib').Path(__file__).resolve().parent.parent / 'source/destinations/puerto-rico/art/san-juan-cover.svg','w').write('\n'.join(o))
+open(__import__('sys').argv[1],'w').write('\n'.join(o))

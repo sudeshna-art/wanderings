@@ -333,6 +333,12 @@
   "brand": {
    "tint": "#EAF2F3",
    "note": "Clean theme: light tint behind the city mark. The mark itself is art/florence-mark.svg."
+  },
+  "cover": {
+   "art": "florence-cover.svg",
+   "band": "#F1E4CF",
+   "eyebrow": "#5E4B36",
+   "note": "Destination cover on Today (approved Nov 12, 2026): light pen-sketch drawing made by tools/covers/make_covers.py. band = the solid color behind the title; eyebrow = the small line above it."
   }
  }
 ]
