@@ -1,9 +1,11 @@
 /* Shared trips (Nov 2026): what one phone shares with the group, and how the group's changes come back in.
    Pure logic: no network, storage or screens. The sync service sends and receives; this decides what.
 
-   Shared: plan items (unless marked "Only me"), people and their dates, bookings the traveler chose to share
-   (never the booking reference or private note). Never shared: journal, photos, phrases, food notes,
-   emergency contact, My drivers, saved favorites, private plan items and private bookings. */
+   Shared: plan items (unless marked "Only me"), people and their dates, places each person saved ("Want to go",
+   from Nov 13 2026), bookings the traveler chose to share (never the booking reference or private note).
+   Never shared with the group: journal, photos, phrases, food notes, emergency contact, My drivers,
+   private plan items and private bookings. The journal can follow its owner to other devices with a
+   personal code (models/mine.js). */
 
 const clone = x => JSON.parse(JSON.stringify(x));
 const hash = x => JSON.stringify(x);
@@ -28,6 +30,9 @@ export function sharedEntries(trip) {
   (trip.plan || []).filter(it => !it.private).forEach(it => out.set(entryId('plan', it.item_id), { kind: 'plan', key: it.item_id, data: clone(it) }));
   out.set(entryId('person', trip.me_id), { kind: 'person', key: trip.me_id, data: meAsPerson(trip) });
   (trip.people || []).forEach(p => out.set(entryId('person', p.id), { kind: 'person', key: p.id, data: personOf(trip, p) }));
+  (trip.saved || []).filter(x => x.status === 'want').forEach(x => out.set(entryId('saved', trip.me_id + '_' + x.place_id), { kind: 'saved', key: trip.me_id + '_' + x.place_id, data: { person: trip.me_id, place_id: x.place_id } }));
+  /* Others' saved places are theirs: carried as they came, so this phone never removes them. */
+  (trip.group_saved || []).forEach(x => out.set(entryId('saved', x.person + '_' + x.place_id), { kind: 'saved', key: x.person + '_' + x.place_id, data: { person: x.person, place_id: x.place_id } }));
   (trip.bookings || []).filter(b => b.share || b.shared).forEach(b => out.set(entryId('booking', b.id), { kind: 'booking', key: b.id, data: bookingForGroup(b) }));
   return out;
 }
@@ -51,12 +56,14 @@ export function markSent(trip) {
 /* Bring the group's entries into this phone's trip. remote: Map id -> { kind, key, data, by_uid, by_name }.
    Private plan items, my own booking references and everything never shared stay as they are. */
 export function applyRemote(trip, remote) {
-  const plan = [], people = [], books = new Map();
+  const plan = [], people = [], books = new Map(), gsaved = [];
   remote.forEach(e => {
     if (e.kind === 'plan' && e.data && e.data.item_id) plan.push(clone(e.data));
     else if (e.kind === 'person' && e.data && e.data.id && e.data.id !== trip.me_id) people.push(clone(e.data));
     else if (e.kind === 'booking' && e.data && e.data.id) books.set(e.data.id, e);
+    else if (e.kind === 'saved' && e.data && e.data.place_id && e.data.person !== trip.me_id) gsaved.push({ place_id: e.data.place_id, person: e.data.person, by: e.by_name || '' });
   });
+  trip.group_saved = gsaved;   /* what the others want to go to; my own list stays in trip.saved */
   trip.plan = (trip.plan || []).filter(it => it.private).concat(plan);
   trip.people = people;
   /* A phone with no dates of its own takes the group's span, so the shared plan has days to show. */
@@ -82,6 +89,7 @@ export function applyRemote(trip, remote) {
 /* A short line for "What changed", written from another person's change. */
 export function changeLine(ch, nameOf) {
   const who = ch.by_name || 'Someone', d = ch.data || {};
+  if (ch.kind === 'saved') return ch.type === 'removed' ? '' : `${who} saved ${nameOf(d.place_id) || 'a place'}`;
   const what = ch.kind === 'plan' ? (nameOf(d.item_id) || 'a plan') : ch.kind === 'booking' ? (d.title || 'a booking') : (d.name || 'someone');
   const day = d.date ? ' on ' + new Date(d.date + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '';
   if (ch.kind === 'person') return ch.type === 'removed' ? `${who} removed ${what}` : ch.type === 'added' ? `${what} joined the trip` : `${who} updated ${what === who ? 'their' : what + '’s'} dates`;

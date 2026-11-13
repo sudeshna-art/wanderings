@@ -1,12 +1,13 @@
 /* Plan together, live (Nov 2026): sign in once, start or join a shared trip, and see everyone's changes.
    Uses syncService for everything outside the phone and models/sync.js for what is shared. */
-import { EDITION } from '../../../edition.config.js?v=202611121929';
-import { S, save, placeById } from '../state.js?v=202611121929';
-import { esc, ic, toast, $ } from '../dom.js?v=202611121929';
-import { syncService, normCode } from '../../services/sync-service.js?v=202611121929';
-import { tripService } from '../../services/trip-service.js?v=202611121929';
-import { shareService } from '../../services/share-service.js?v=202611121929';
-import { diffForPush, applyRemote, changeLine, entryId } from '../../models/sync.js?v=202611121929';
+import { EDITION } from '../../../edition.config.js?v=202611131348';
+import { S, save, placeById } from '../state.js?v=202611131348';
+import { esc, ic, toast, $ } from '../dom.js?v=202611131348';
+import { syncService, normCode } from '../../services/sync-service.js?v=202611131348';
+import { tripService } from '../../services/trip-service.js?v=202611131348';
+import { shareService } from '../../services/share-service.js?v=202611131348';
+import { mineSchedule } from './mine.js?v=202611131348';
+import { diffForPush, applyRemote, changeLine, entryId } from '../../models/sync.js?v=202611131348';
 
 const INVITE_KEY = 'wanderings-live-invite';
 export const LV = { on: false, user: null, mode: 'link', msg: '', busy: false, picking: null, members: 0 };
@@ -24,7 +25,7 @@ export async function liveStart(rerender) {
     try { localStorage.setItem(INVITE_KEY, h.slice(6)); } catch (e) {}
     try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
   }
-  S.afterSave = schedulePush;
+  S.afterSave = () => { schedulePush(); mineSchedule(); };
   LV.on = await syncService.available();
   if (!LV.on) return;
   refresh();
@@ -70,7 +71,7 @@ function listen() {
     if (pushTimer) flush();
     applyRemote(S.trip, all);
     const mine = LV.user && LV.user.uid;
-    const lines = changes.filter(c => c.by_uid !== mine).map(c => changeLine(c, placeLabel));
+    const lines = changes.filter(c => c.by_uid !== mine).map(c => changeLine(c, placeLabel)).filter(Boolean);
     if (lines.length) {
       lv.log = lines.map(text => ({ at: new Date().toISOString(), text })).concat(lv.log || []).slice(0, 30);
       toast(lines[0] + (lines.length > 1 ? ` (+${lines.length - 1} more)` : ''));
@@ -107,7 +108,7 @@ function showPicker() {
     <div style="display:flex;flex-direction:column;gap:8px">${people.map(p => `<button class="btn line" data-act="livepick" data-id="${esc(p.id)}" style="justify-content:flex-start">${esc(p.name || 'Someone')}</button>`).join('')}
     <label class="f" style="flex:none;margin-top:6px">Not on the list? Your first name<input type="text" id="liveName" autocomplete="given-name" value="${esc(S.trip.traveler_name || '')}"></label>
     <button class="btn ${people.length ? 'line' : ''}" data-act="livepick" data-id="">Join as a new person</button></div>
-    <p class="small muted">Your journal, photos, food notes and private plans stay on your phone.</p></div>`;
+    <p class="small muted">Your journal, photos, food notes and private plans stay on your phone. Places you save are shared.</p></div>`;
   el.hidden = false;
 }
 export function pickMe(id) {

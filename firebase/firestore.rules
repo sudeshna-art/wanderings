@@ -14,6 +14,17 @@ service cloud.firestore {
       allow list, update: if false;
     }
 
+    // Personal codes (Nov 13 2026): one traveler's journal on all their devices. The code is the key:
+    // long and random, never listable. Items can only be written under a code that was created.
+    match /personal/{code} {
+      allow get: if signedIn();
+      allow create: if signedIn() && code.size() >= 12;
+      allow list, update, delete: if false;
+      match /editions/{ed}/items/{id} {
+        allow read, write: if signedIn() && exists(/databases/$(db)/documents/personal/$(code));
+      }
+    }
+
     match /trips/{tid} {
       allow get: if member(tid);
       allow create: if signedIn() && request.resource.data.created_by == request.auth.uid;

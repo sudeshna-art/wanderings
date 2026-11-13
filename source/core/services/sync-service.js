@@ -3,7 +3,7 @@
    Returns plain data; the UI never touches Firebase directly. Rules: firebase/firestore.rules. */
 
 let FB = null, app = null, auth = null, db = null, cfg = null, ready = null;
-let user = null, unsub = null;
+let user = null, unsub = null, unsubMine = null;
 const authWatchers = new Set();
 const EMAIL_KEY = 'wanderings-signin-email';
 
@@ -134,6 +134,39 @@ export const syncService = {
     }, () => handler(null, [], false));
     return true;
   },
+  /* Personal code (Nov 13 2026): personal/{code} marks a real code; its items hold one traveler's journal.
+     Only someone who knows the code can reach it, and nobody can list codes. */
+  async mineCreate(shown) {
+    if (!(await load()) || !user) return { error: 'Sign in first.' };
+    const code = normCode(shown);
+    try { await FB.setDoc(FB.doc(db, 'personal', code), { created_at: FB.serverTimestamp() }); return { code }; }
+    catch (e) { return { error: /permission/.test((e && e.code) || '') ? 'taken' : friendly(e) }; }
+  },
+  async mineCheck(shown) {
+    if (!(await load()) || !user) return { error: 'Sign in first.' };
+    const code = normCode(shown);
+    if (code.length < 12) return { error: 'That code is too short. Check it and try again.' };
+    try { const s = await FB.getDoc(FB.doc(db, 'personal', code)); return s.exists() ? { code } : { error: 'That code wasn’t found. Check the spelling.' }; }
+    catch (e) { return { error: friendly(e) }; }
+  },
+  async mineListen(code, edition, handler) {
+    this.mineStop();
+    if (!(await load()) || !user) return false;
+    unsubMine = FB.onSnapshot(FB.collection(db, 'personal', normCode(code), 'editions', edition, 'items'), { includeMetadataChanges: false }, snap => {
+      const all = new Map(); snap.forEach(d => all.set(d.id, d.data())); handler(all);
+    }, () => handler(null));
+    return true;
+  },
+  mineStop() { if (unsubMine) { try { unsubMine(); } catch (e) {} unsubMine = null; } },
+  async minePush(code, edition, upserts, deletes) {
+    if (!(await load()) || !user) return false;
+    const b = FB.writeBatch(db), col = ['personal', normCode(code), 'editions', edition, 'items'];
+    upserts.forEach(u => b.set(FB.doc(db, ...col, u.id), { kind: u.kind, data: u.data, at: FB.serverTimestamp() }));
+    deletes.forEach(id => b.delete(FB.doc(db, ...col, id)));
+    b.commit().catch(() => {});
+    return true;
+  },
+
   stop() { if (unsub) { try { unsub(); } catch (e) {} unsub = null; } },
 
   /* Send this phone's changes. Writes are queued while offline and go out when there is signal. */

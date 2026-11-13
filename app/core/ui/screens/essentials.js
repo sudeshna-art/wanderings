@@ -1,17 +1,18 @@
 /* Essentials: emergency card, you and your trip, bookings, getting between places, currency, getting around,
    taxis, audio, know-how, emergencies. */
-import { EDITION } from '../../../edition.config.js?v=202611121929';
-import { S, P, save, curCityId, cityOf, cityName, cityIds, spot, spotOptions, homePoint, addMount } from '../state.js?v=202611121929';
-import { esc, ic, fmtNum, parseNum, fmtISO, $, modeIcon } from '../dom.js?v=202611121929';
-import { masthead, cityBar, styleChoice, staysEditor, arrivalFields, homeCurrencySelect } from '../components.js?v=202611121929';
-import { currencyService } from '../../services/currency-service.js?v=202611121929';
-import { fareService } from '../../services/fare-service.js?v=202611121929';
-import { speechService } from '../../services/speech-service.js?v=202611121929';
-import { languageSelect } from './phrases.js?v=202611121929';
-import { offlineMapsBlock, fillOfflineMaps } from './offline.js?v=202611121929';
-import { bookingsBlock } from './bookings.js?v=202611121929';
-import { clean } from '../theme.js?v=202611121929';
-import { groupBlock, ridesBlock } from './group.js?v=202611121929';
+import { mineBlock } from './mine.js?v=202611131348';
+import { EDITION } from '../../../edition.config.js?v=202611131348';
+import { S, P, save, curCityId, cityOf, cityName, cityIds, spot, spotOptions, homePoint, addMount } from '../state.js?v=202611131348';
+import { esc, ic, fmtNum, parseNum, fmtISO, $, modeIcon } from '../dom.js?v=202611131348';
+import { masthead, cityBar, styleChoice, staysEditor, arrivalFields, homeCurrencySelect } from '../components.js?v=202611131348';
+import { currencyService } from '../../services/currency-service.js?v=202611131348';
+import { fareService } from '../../services/fare-service.js?v=202611131348';
+import { speechService } from '../../services/speech-service.js?v=202611131348';
+import { languageSelect } from './phrases.js?v=202611131348';
+import { offlineMapsBlock, fillOfflineMaps } from './offline.js?v=202611131348';
+import { bookingsBlock } from './bookings.js?v=202611131348';
+import { clean } from '../theme.js?v=202611131348';
+import { groupBlock, ridesBlock } from './group.js?v=202611131348';
 
 export const E = { rate: null };
 
@@ -145,7 +146,7 @@ export function renderEssentials() {
     ${S.trip.refs ? `<div class="fields"><label class="f">Booking notes<input type="text" data-bind="refs" value="${esc(S.trip.refs)}"></label></div><p class="small faint">From before bookings had their own list. You can move these into Your bookings below.</p>` : ''}
     ${clean() ? '' : '<button class="text-btn" data-act="welcome" data-step="1" style="align-self:flex-start">Show the welcome steps again</button>'}</div>
   ${bookingsBlock()}
-  <div class="block"><h2>Journal</h2><p class="small muted" style="margin:0">Notes, photos and voice memos from the trip. They stay on this phone.</p><button class="btn line sm" data-act="go" data-tab="trip" data-sub="journal" style="align-self:flex-start">${ic('journal', 'style="width:16px;height:16px"')}Open your journal</button></div>
+  ${mineBlock()}
   ${clean() ? `<div class="block" id="settingsBlock"><h2>Settings</h2><div class="setgroup">${languageSelect('eLang')}${styleChoice('estyle')}<button class="text-btn" data-act="welcome" data-step="1" style="align-self:flex-start">Show the welcome steps again</button>${EDITION.multi ? '<a class="text-btn" href="./?pick=1" style="align-self:flex-start">Change destination</a>' : ''}</div></div>` : ''}
   <p class="small faint" style="padding-top:10px">Wanderings by Whiskers &amp; Wanderings · ${esc(EDITION.name)} edition</p>`;
   document.querySelector('section[data-tab="essentials"]').innerHTML = html;

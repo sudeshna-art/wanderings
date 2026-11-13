@@ -166,6 +166,8 @@ export function syncLegs(trip) {
 }
 
 /* ---------- saved, booked, plan ---------- */
+/* Others in a shared trip who saved this place (Nov 13 2026): first names, no repeats. */
+export const whoSaved = (trip, id) => [...new Set((trip.group_saved || []).filter(x => x.place_id === id).map(x => x.by || 'Someone'))];
 export const statusOf = (trip, id) => (trip.saved.find(s => s.place_id === id) || {}).status;
 export function setStatus(trip, id, status) {
   trip.saved = trip.saved.filter(s => s.place_id !== id);

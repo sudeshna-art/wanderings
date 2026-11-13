@@ -17,7 +17,8 @@ import { renderToday, showSlide, startSlides, stopSlides } from './screens/today
 import { renderPlaces, defaultView, addCustomPlace } from './screens/places.js';
 import { renderPlan, openSched, openAddSheet, closeSheet, setSheetDay, sheetDay, openAddStop, pickSheetWho, pickSchedWho, sheetWhoSel, schedWhoSel } from './screens/plan.js';
 import { addPerson, removePerson, refreshPeople, shareGroup, checkJoin, cancelJoin, applyJoin } from './screens/together.js';
-import { liveStart, shareFromPlan as liveShareFromPlan, customCode as liveCustom, editCode as liveEditCode, closeCode as liveCloseCode, joinWithCode as liveJoin, sendLink as liveSendLink, signInPassword as livePw, toggleMode as liveMode, startTrip as liveStartTrip, invite as liveInvite, leave as liveLeave, signOutLive, pickMe as livePick, isLive } from './screens/live.js';
+import { mineStart, mineMake, mineUse, mineOff, mineCopy } from './screens/mine.js';
+import { liveStart, shareFromPlan as liveShareFromPlan, customCode as liveCustom, editCode as liveEditCode, closeCode as liveCloseCode, joinWithCode as liveJoin, sendLink as liveSendLink, signInPassword as livePw, toggleMode as liveMode, startTrip as liveStartTrip, invite as liveInvite, leave as liveLeave, signOutLive, pickMe as livePick, isLive, LV } from './screens/live.js';
 import { openSpot, recenter, refreshWanderer, wanderPos } from './screens/wanderer.js';
 import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js';
 import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js';
@@ -164,6 +165,7 @@ const A = {
   livepw: el => livePw(el.dataset.create === '1'),
   livemode: () => liveMode(),
   livestart: () => liveStartTrip(),
+  minemake: () => mineMake(), mineuse: () => mineUse(), mineoff: () => mineOff(), minecopy: () => mineCopy(),
   liveinvite: () => liveInvite(),
   liveleave: el => liveLeave(el),
   livesignout: () => signOutLive(),
@@ -422,7 +424,8 @@ async function boot() {
   go(['phrases', 'journal', 'essentials'].includes(P().tab) || TABS.some(([k]) => k === P().tab) ? P().tab : 'today', { sub: P().sub });
   let force = false; try { force = location.hash === '#welcome'; } catch (e) {}
   let invited = location.hash.startsWith('#live='); try { invited = invited || !!localStorage.getItem('wanderings-live-invite'); } catch (e) {}
-  liveStart(() => rerender());   /* live shared trips (Nov 2026) */
+  liveStart(() => rerender());
+  mineStart(() => rerender());   /* personal code (Nov 13 2026) */   /* live shared trips (Nov 2026) */
   if (invited) { S.trip.onboarded = true; save(); go('essentials', { focus: '#liveBlock' }); }
   if (await checkJoin()) {}   /* a shared group plan link: choose who you are (Oct 12 2026) */
   else if (!S.trip.onboarded || force) { W.step = 1; renderWelcome(); }
@@ -432,6 +435,6 @@ async function boot() {
   window.addEventListener('online', () => autoSaveMaps());
   onWideChange(() => rerender());   /* QA 3 (Nov 2026): Today and Plan lay out differently on wide screens */
   initLayerFocus();
-  window.__wanderings = { S, go, render };   // for testing only
+  window.__wanderings = { S, go, render, LV };   // for testing only
 }
 boot();

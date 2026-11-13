@@ -1,12 +1,12 @@
 /* Safety (approved Oct 11 2026): an offline emergency card, "meet back here" for when friends split up,
    and sharing your plan with someone at home. Everything stays on this phone until the traveler shares it. */
-import { S, save, curCityId, cityName, stayHere, placeById, homePoint, today, myLang } from '../state.js?v=202611121929';
-import { esc, ic, toast, $, fmtDay, fmtISO } from '../dom.js?v=202611121929';
-import { sortedStays, sortedBookings, itemsOn, bookingKindLabel, tripDays } from '../../models/schema.js?v=202611121929';
-import { shareService } from '../../services/share-service.js?v=202611121929';
-import { linkService } from '../../services/link-service.js?v=202611121929';
-import { clean } from '../theme.js?v=202611121929';
-import { hoodOf, sos, sosDigits } from '../state.js?v=202611121929';
+import { S, save, curCityId, cityName, stayHere, placeById, homePoint, today, myLang } from '../state.js?v=202611131348';
+import { esc, ic, toast, $, fmtDay, fmtISO } from '../dom.js?v=202611131348';
+import { sortedStays, sortedBookings, itemsOn, bookingKindLabel, tripDays } from '../../models/schema.js?v=202611131348';
+import { shareService } from '../../services/share-service.js?v=202611131348';
+import { linkService } from '../../services/link-service.js?v=202611131348';
+import { clean } from '../theme.js?v=202611131348';
+import { hoodOf, sos, sosDigits } from '../state.js?v=202611131348';
 
 const tel = n => 'tel:' + String(n).replace(/[^\d+]/g, '');
 
