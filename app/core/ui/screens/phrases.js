@@ -1,14 +1,14 @@
 /* Phrases by situation, shown with meanings in the traveler's own language.
    Tap to hear with the best local voice (never an English fallback). Top 10, favorites, search, driver card.
    Oct 11 2026: opens on your starred phrases, or the edition's Top 10 ("top" in phrases.json) until you star some. */
-import { S, P, curCityId, cityName, spot, spotOptions, stayHere, myLang } from '../state.js?v=202611121838';
-import { esc, ic, toast, $ } from '../dom.js?v=202611121838';
-import { masthead } from '../components.js?v=202611121838';
-import { speechService } from '../../services/speech-service.js?v=202611121838';
-import { CONFIG } from '../../config/default-config.js?v=202611121838';
-import { clean } from '../theme.js?v=202611121838';
-import { phraseFor, speaksLocal } from '../../models/schema.js?v=202611121838';
-import { serverButton } from './group.js?v=202611121838';
+import { S, P, curCityId, cityName, spot, spotOptions, stayHere, myLang } from '../state.js?v=202611121929';
+import { esc, ic, toast, $ } from '../dom.js?v=202611121929';
+import { masthead } from '../components.js?v=202611121929';
+import { speechService } from '../../services/speech-service.js?v=202611121929';
+import { CONFIG } from '../../config/default-config.js?v=202611121929';
+import { clean } from '../theme.js?v=202611121929';
+import { phraseFor, speaksLocal } from '../../models/schema.js?v=202611121929';
+import { serverButton } from './group.js?v=202611121929';
 
 let pq = '';
 export const setQuery = q => { pq = q; };

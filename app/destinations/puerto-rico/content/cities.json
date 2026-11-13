@@ -23,6 +23,12 @@
    "caption": "A garita on the city walls",
    "alt": "Pen and ink sketch of a garita, a sentry box on the old city walls of San Juan, above the sea"
   },
+  "cover": {
+   "art": "san-juan-cover.svg",
+   "band": "#FAEDE4",
+   "eyebrow": "#5A4A3F",
+   "note": "Destination cover on Today (approved Nov 12, 2026): light pen-sketch drawing made by tools/covers/make_covers.py. band = the solid color behind the title; eyebrow = the small line above it."
+  },
   "mark": "san-juan-mark.svg",
   "groups": [
    {

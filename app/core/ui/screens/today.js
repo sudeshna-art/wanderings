@@ -1,23 +1,23 @@
 /* Today: answers "what now?" for the current city. Simplified Oct 11 2026: the time-sensitive things first
    (meeting point, travel, bookings, clashes), then what to book, ideas, your base and a phrase. */
-import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202611121838';
-import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202611121838';
-import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202611121838';
-import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202611121838';
-import { tripChecks } from '../../models/checks.js?v=202611121838';
-import { timelineView } from './plan.js?v=202611121838';
-import { allPhotoIds } from './journal.js?v=202611121838';
-import { view as phraseView } from './phrases.js?v=202611121838';
-import { meetBlock } from './safety.js?v=202611121838';
-import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js?v=202611121838';
-import { speaksLocal } from '../../models/schema.js?v=202611121838';
-import { mapPackService } from '../../services/mappack-service.js?v=202611121838';
-import { clean } from '../theme.js?v=202611121838';
-import { placeCards, checkText } from '../components.js?v=202611121838';
-import { closedText, closedOn } from '../../models/schema.js?v=202611121838';
-import { occasionAlert } from './group.js?v=202611121838';
-import { arrivalsAlert } from './together.js?v=202611121838';
-import { liveUpdates, isLive, LV } from './live.js?v=202611121838';
+import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202611121929';
+import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202611121929';
+import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202611121929';
+import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202611121929';
+import { tripChecks } from '../../models/checks.js?v=202611121929';
+import { timelineView } from './plan.js?v=202611121929';
+import { allPhotoIds } from './journal.js?v=202611121929';
+import { view as phraseView } from './phrases.js?v=202611121929';
+import { meetBlock } from './safety.js?v=202611121929';
+import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js?v=202611121929';
+import { speaksLocal } from '../../models/schema.js?v=202611121929';
+import { mapPackService } from '../../services/mappack-service.js?v=202611121929';
+import { clean, wide } from '../theme.js?v=202611121929';
+import { placeCards, checkText } from '../components.js?v=202611121929';
+import { closedText, closedOn } from '../../models/schema.js?v=202611121929';
+import { occasionAlert } from './group.js?v=202611121929';
+import { arrivalsAlert } from './together.js?v=202611121929';
+import { liveUpdates, isLive, LV } from './live.js?v=202611121929';
 
 let slideTimer = null, slideIdx = 0;
 
@@ -256,6 +256,17 @@ function coverTile(cityId) {
   const photo = P().coverMode === 'photo' && P().cover && photos.includes(P().cover) ? P().cover : (P().coverMode === 'slides' && photos.length ? photos[0] : null);
   return `<button class="cover-tile" data-act="cover" aria-label="Trip cover: the sketch or your photos">${photo ? `<img data-photo="${photo}" alt="">` : art(c.mark)}</button>`;
 }
+/* QA 4 (Nov 2026): a compact destination cover (cities.json "cover"): the drawing carries the color, the title sits on a
+   solid band below it so it always reads. The cover keeps its job as the way into the trip cover (sketch or your photos).
+   Cities without "cover" keep the small tile. */
+function destCover(cityId, eyebrow, h1) {
+  const c = cityOf(cityId); if (!c.cover || !art(c.cover.art)) return '';
+  const photos = allPhotoIds();
+  const photo = P().coverMode === 'photo' && P().cover && photos.includes(P().cover) ? P().cover : (P().coverMode === 'slides' && photos.length ? photos[0] : null);
+  const look = (c.cover.band ? `--dc-band:${esc(c.cover.band)};` : '') + (c.cover.eyebrow ? `--dc-eyebrow:${esc(c.cover.eyebrow)};` : '');   /* cover.band, cover.eyebrow: per-city title band colors */
+  return `<div class="greet dcover"${look ? ` style="${look}"` : ''}><button class="dc-art" data-act="cover" aria-label="Trip cover: the drawing or your photos">${photo ? `<img data-photo="${photo}" alt="">` : art(c.cover.art)}</button>
+    <div class="dc-title"><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(h1)}</h1></div></div>`;
+}
 export function openCover() {
   const sh = document.getElementById('sheet'), cityId = curCityId();
   sh.innerHTML = `<div class="grab"></div><div class="cover-sheet" style="display:flex;flex-direction:column;gap:10px"><div class="sh-title">${esc(cityName(cityId))}</div>${coverHero(cityId)}
@@ -339,10 +350,13 @@ function renderTodayClean() {
         <p class="small muted">These sell out or need a set time. Checked ${esc(checkedText())}.</p>${outingCards(openOutings)}</div>`
         : `<div class="block"><h2>All booked</h2><p class="small muted">Everything that needs a ticket is sorted. Nice work.</p></div>`) : '';
 
-  let html = masthead({ noAsk: true }) + `<div class="greet"><div class="greet-row"><div><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(h1)}</h1></div>${coverTile(cityId)}</div></div>
+  const greet = destCover(cityId, eyebrow, h1) || `<div class="greet"><div class="greet-row"><div><div class="eyebrow">${esc(eyebrow)}</div><h1>${esc(h1)}</h1></div>${coverTile(cityId)}</div></div>`;
+  let html = masthead({ noAsk: true }) + `${greet}
     <button class="askbar" data-act="ask">${ic('search')}<span>Search trip &amp; guide…</span></button>
     <div class="askpills">${askPills(cityId).map(q => `<button data-act="askpill" data-q="${esc(q === 'Taxis' ? 'taxi' : q)}">${esc(q)}</button>`).join('')}</div>${cityBar()}`;
+  const top = html.length, MN = [], SD = []; let mark = top; const cut = a => { a.push(html.slice(mark)); mark = html.length; };   /* QA 3: main and side columns */
   html += bookBlock;   /* Nov 2026: booking first, setup prompts after */
+  cut(MN);
   if (!hasStays()) {
     html += `<div class="block" style="padding-top:20px"><div class="soft"><b>Your trip</b><p class="small">${cityIds().length > 1 ? `Add where you’re staying in ${esc(copyOf('place_list', placeName()))}, with dates, and the app follows you from place to place.` : 'Add where you’re staying, with dates, for local tips, walking times and a one-tap ride home.'}</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn sm" data-act="welcome" data-step="2">Add my stays</button><button class="btn line sm" data-act="imopen">Import bookings</button></div></div></div>`;
   }
@@ -354,15 +368,19 @@ function renderTodayClean() {
   /* Nov 2026: make group sharing easy to find. Dismissed with "Not now". */
   if (LV.on && !isLive() && !P().liveHintOff && st.k !== 'after') html += `<div class="block" style="padding-top:12px"><div class="alert">${ic('people')}<div style="min-width:0;display:flex;flex-direction:column;gap:6px"><b>Traveling with others?</b><p class="small" style="margin:0">Share your plan so everyone sees changes as they happen. No email or password needed.</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap"><button class="btn sm" data-act="go" data-tab="trip" data-sub="" data-focus="#liveBlock">Share your plan</button><button class="text-btn" data-act="livehintoff" style="min-height:32px">Not now</button></div></div></div></div>`;
+  cut(SD);
   html += whatNow(st);
   html += tomorrowBlock(cityId, st);
+  cut(MN);
   if (st.k !== 'after' && toBook.length) {
     if (st.k === 'before') { /* shown at the top */ }
     else if (unbooked.length) {
       html += `<div class="block"><div class="head"><h2>Still to book</h2><span class="small muted">${toBook.length - unbooked.length} of ${toBook.length} done</span></div><p>${unbooked.map(p => esc(p.name)).join(', ')}.</p><button class="text-btn" data-act="pview" data-v="sights" data-tab="places" style="align-self:flex-start">See tickets</button></div>`;
     }
   }
+  cut(MN);
   html += planBlock(st);
+  cut(MN);
   html += baseBlockClean(cityId, st);
   if (!P().hidePhrases) html += `<div class="block"><div class="panel"><div class="label">Phrase for ${esc(moment.toLowerCase())}</div>
     <div style="display:flex;gap:12px;align-items:center;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:3px;min-width:0"><div class="it">${esc(ph.t)}</div>${myLang() === 'en' ? `<div class="say">${esc(ph.say)}</div>` : ''}${speaksLocal(myLang(), S.C.phrases.language) ? '' : `<div class="en">${esc(ph.m)}</div>`}</div>
@@ -373,5 +391,7 @@ function renderTodayClean() {
       <p>${plural(visited, 'place')} visited, ${S.trip.journal.length} journal entr${S.trip.journal.length === 1 ? 'y' : 'ies'}.</p>
       ${st.k === 'after' ? `<button class="btn" data-act="go" data-tab="journal" data-focus="#summary">See your trip summary</button>` : ''}</div>`;
   }
+  cut(SD);
+  if (wide() && SD.join('').trim()) html = html.slice(0, top) + `<div class="today-cols"><div class="today-main">${MN.join('')}</div><div class="today-side">${SD.join('')}</div></div>`;   /* QA 3: two columns on wide screens */
   document.querySelector('section[data-tab="today"]').innerHTML = html;
 }
