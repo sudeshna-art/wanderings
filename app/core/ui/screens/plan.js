@@ -1,20 +1,20 @@
 /* Planner mode: day strip across the whole trip, timeline or live map per day, add-to-a-day sheet.
    Oct 11 2026: bookings show on their day, closed days are flagged, and trip checks list clashes. */
-import { placeName } from '../state.js?v=202611121838';
-import { S, P, save, cityName, cityOf, placesIn, itemInfo, homePoint, stayHere, today, addMount, addCleanup, placeById, isPlanner } from '../state.js?v=202611121838';
-import { esc, ic, ill, fmtDay, shortDay, plural, modeIcon, toast, $, $$, KIND_NAME } from '../dom.js?v=202611121838';
-import { illustrationFor, masthead, bookingLine } from '../components.js?v=202611121838';
-import { planDays as tripDays, itemsOn, stayOn, planOf, addToDay, statusOf, isBooked, walkMinutes, km, closedOn, closedText, bookingsOn } from '../../models/schema.js?v=202611121838';
-import { tripChecks } from '../../models/checks.js?v=202611121838';
-import { clean } from '../theme.js?v=202611121838';
-import { checkText } from '../components.js?v=202611121838';
-import { openSpot } from './wanderer.js?v=202611121838';
-import { mapService } from '../../services/map-service.js?v=202611121838';
-import { fareService } from '../../services/fare-service.js?v=202611121838';
-import { currencyService } from '../../services/currency-service.js?v=202611121838';
-import { showStatus } from './offline.js?v=202611121838';
-import { whoChips, whoLine, dayPeople, shareButton, groupNote, toggleWho } from './together.js?v=202611121838';
-import { isGroup } from '../../models/schema.js?v=202611121838';
+import { placeName } from '../state.js?v=202611121929';
+import { S, P, save, cityName, cityOf, placesIn, itemInfo, homePoint, stayHere, today, addMount, addCleanup, placeById, isPlanner } from '../state.js?v=202611121929';
+import { esc, ic, ill, fmtDay, shortDay, plural, modeIcon, toast, $, $$, KIND_NAME } from '../dom.js?v=202611121929';
+import { illustrationFor, masthead, bookingLine } from '../components.js?v=202611121929';
+import { planDays as tripDays, itemsOn, stayOn, planOf, addToDay, statusOf, isBooked, walkMinutes, km, closedOn, closedText, bookingsOn } from '../../models/schema.js?v=202611121929';
+import { tripChecks } from '../../models/checks.js?v=202611121929';
+import { clean, wide } from '../theme.js?v=202611121929';
+import { checkText } from '../components.js?v=202611121929';
+import { openSpot } from './wanderer.js?v=202611121929';
+import { mapService } from '../../services/map-service.js?v=202611121929';
+import { fareService } from '../../services/fare-service.js?v=202611121929';
+import { currencyService } from '../../services/currency-service.js?v=202611121929';
+import { showStatus } from './offline.js?v=202611121929';
+import { whoChips, whoLine, dayPeople, shareButton, groupNote, toggleWho } from './together.js?v=202611121929';
+import { isGroup } from '../../models/schema.js?v=202611121929';
 
 const dayCity = d => { const s = stayOn(S.trip, d); return s ? s.city_id : ''; };
 
@@ -59,7 +59,7 @@ export function timelineView(day, items, withHome) {
   items.forEach((v, i) => {
     const info = itemInfo(v.item_id), went = statusOf(S.trip, v.item_id) === 'went', loc = info.location;
     if (i > 0 || home) html += legHTML(prev, loc, info.city_id || city);
-    html += `<div class="stop"><div class="t ${v.time ? '' : 'any'}">${v.time ? esc(v.time) : 'Anytime'}</div><div class="num ${went ? 'done' : (v.time ? '' : 'o')}">${i + 1}</div>
+    html += `<div class="stop" data-stop="${esc(v.item_id)}"><div class="t ${v.time ? '' : 'any'}">${v.time ? esc(v.time) : 'Anytime'}</div><div class="num ${went ? 'done' : (v.time ? '' : 'o')}">${i + 1}</div>
       <div style="padding-top:3px;display:flex;flex-direction:column;gap:3px"><div style="font-size:16px;font-weight:600;${went ? 'color:var(--muted)' : ''}">${esc(info.name)}</div><div class="small muted" style="font-size:12px">${esc(KIND_NAME[info.kind] || '')}</div>${whoLine(v)}${stopStatus(v.item_id, day)}<div data-schedform="${v.item_id}" hidden></div></div>
       <button class="handle" data-act="sched" data-id="${v.item_id}" aria-label="Edit or move ${esc(info.name)}"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="9" cy="6" r="1.4"/><circle cx="15" cy="6" r="1.4"/><circle cx="9" cy="12" r="1.4"/><circle cx="15" cy="12" r="1.4"/><circle cx="9" cy="18" r="1.4"/><circle cx="15" cy="18" r="1.4"/></svg></button></div>`;
     prev = loc || prev;
@@ -87,6 +87,30 @@ function mapView(day, items) {
     addCleanup(() => { mapService.destroy(planMap); planMap = null; });
   });
   return `<div class="block" style="padding-top:12px"><div class="wmap small"><div class="wcanvas" id="planMap"></div></div><div data-mapstatus id="planMapStatus" style="padding-top:8px"></div><div id="pinCard"></div>${list}</div>`;
+}
+/* QA 3 (Nov 2026), wide screens: the day's list and its map side by side. The map follows the list: hovering or
+   focusing a stop picks its pin, and tapping a pin highlights the stop (and opens its details, as on the phone). */
+let splitDraw = null;
+function mapPane(day, items) {
+  const city = dayCity(day), home = city ? homePoint(city) : null;
+  const pts = items.map((v, i) => ({ v, i, info: itemInfo(v.item_id) })).filter(o => o.info.location);
+  if (!P().pin || !pts.some(o => o.v.item_id === P().pin)) P().pin = pts.length ? pts[0].v.item_id : null;
+  const off = items.filter(v => !itemInfo(v.item_id).location).length;
+  addMount(() => {
+    const el = document.getElementById('planMap'); if (!el) return;
+    const c = cityOf(city || S.C.edition.city_ids[0]);
+    planMap = mapService.create(el, { center: home || c.center, zoom: 14, illustration: illustrationFor(c), onMode: m => showStatus(document.getElementById('planMapStatus'), m) });
+    const markers = pts.map(o => ({ id: o.v.item_id, name: o.info.name, location: o.info.location, number: o.i + 1, hollow: !o.v.time, went: statusOf(S.trip, o.v.item_id) === 'went' }));
+    const mark = (scroll) => document.querySelectorAll('[data-stop]').forEach(s => { const on = s.dataset.stop === P().pin; s.classList.toggle('pinsel', on); if (on && scroll) s.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); });
+    splitDraw = (id, scroll) => { if (id) P().pin = id; mapService.setMarkers(planMap, markers, { selectedId: P().pin, route: true, routeStart: home, onTap: tid => { splitDraw(tid, true); save(); openSpot(tid); } }); mark(scroll); };
+    splitDraw();
+    mapService.fitTo(planMap, markers.map(m => m.location).concat(home ? [home] : []));
+    const list = document.querySelector('.plan-list');
+    const pick = e => { const s = e.target.closest && e.target.closest('[data-stop]'); if (s && s.dataset.stop !== P().pin && pts.some(o => o.v.item_id === s.dataset.stop)) splitDraw(s.dataset.stop); };
+    if (list) { list.addEventListener('mouseover', pick); list.addEventListener('focusin', pick); }
+    addCleanup(() => { if (list) { list.removeEventListener('mouseover', pick); list.removeEventListener('focusin', pick); } mapService.destroy(planMap); planMap = null; splitDraw = null; });
+  });
+  return `<div class="wmap plan-map"><div class="wcanvas" id="planMap"></div></div><div data-mapstatus id="planMapStatus" style="padding-top:8px"></div>${items.length ? (off ? `<p class="small muted" style="margin-top:6px">${plural(off, 'stop')} not on the map.</p>` : '') : '<p class="small muted" style="margin-top:6px">No stops on this day yet. Add one from the list.</p>'}`;
 }
 function pinCard(items, home) {
   const el = document.getElementById('pinCard'); if (!el) return;
@@ -149,8 +173,9 @@ export function renderPlan(seg) {
   const travel = leg ? `<div class="travelday">${ic(modeIcon(leg.mode))}<span><b>Travel day:</b> ${esc(cityName(leg.from_city_id))} to ${esc(cityName(leg.to_city_id))}${mode ? ' by ' + esc(mode.label.toLowerCase()) : ''}. Keep the plan light.</span></div>` : '';
   const dayHead = `<div class="block" style="padding-top:22px;gap:4px"><div class="head"><h2>${esc(new Date(day + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' }))}</h2><span class="label">Day ${di + 1}${city ? ' · ' + esc(cityName(city)) : ''}</span></div>
     <div style="font-family:var(--mono);font-size:11.5px;color:var(--muted)">${items.length ? plural(items.length, 'stop') : 'Open day'}</div>${travel}${dayPeople(day)}</div>`;
-  const body = P().pmode === 'map' ? dayBookings(day) + mapView(day, items) : timelineView(day, items, true);
   const share = isGroup(S.trip) && !S.trip.live ? `<div class="block" style="padding-top:8px;gap:6px">${shareButton()}${groupNote()}</div>` : '';
+  if (wide()) return head + checksBlock() + share + strip + `<div class="plan-split"><div class="plan-list">${dayHead}${timelineView(day, items, true)}${trayBlock()}</div><aside class="plan-mapcol" aria-label="Map of ${esc(fmtDay(day))}">${mapPane(day, items)}</aside></div>`;
+  const body = P().pmode === 'map' ? dayBookings(day) + mapView(day, items) : timelineView(day, items, true);
   return head + checksBlock() + share + strip + toggle + dayHead + body + trayBlock();
 }
 

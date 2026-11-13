@@ -2,10 +2,15 @@
    build (build_edition.py --theme=clean), which writes <html data-look="clean">. Without it, every screen renders
    exactly as before. Each edition supplies its own city values: cities.json `brand.tint` (a light tint for the
    city mark tile) and the `mark` sketch it already has. Peacock stays the accent everywhere. */
-import { EDITION } from '../../edition.config.js?v=202611121838';
+import { EDITION } from '../../edition.config.js?v=202611121929';
 
 export const theme = () => document.documentElement.getAttribute('data-look') || EDITION.theme || '';
 export const clean = () => theme() === 'clean';
+/* QA 3 (Nov 2026): wide screens (laptops, tablets in landscape) get a side rail and two-column Today and Plan.
+   Keep this width in step with the @media (min-width:1024px) rules in theme-clean.css. */
+const WIDE_MQ = (() => { try { return matchMedia('(min-width: 1024px)'); } catch (e) { return { matches: false }; } })();
+export const wide = () => clean() && !!WIDE_MQ.matches;
+export function onWideChange(fn) { try { WIDE_MQ.addEventListener('change', fn); } catch (e) {} }
 
 /* Called once at boot: apply an edition's theme if the page didn't, and the city tint. */
 export function applyTheme(city) {

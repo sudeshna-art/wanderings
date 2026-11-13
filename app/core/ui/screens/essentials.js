@@ -1,17 +1,17 @@
 /* Essentials: emergency card, you and your trip, bookings, getting between places, currency, getting around,
    taxis, audio, know-how, emergencies. */
-import { EDITION } from '../../../edition.config.js?v=202611121838';
-import { S, P, save, curCityId, cityOf, cityName, cityIds, spot, spotOptions, homePoint, addMount } from '../state.js?v=202611121838';
-import { esc, ic, fmtNum, parseNum, fmtISO, $, modeIcon } from '../dom.js?v=202611121838';
-import { masthead, cityBar, styleChoice, staysEditor, arrivalFields, homeCurrencySelect } from '../components.js?v=202611121838';
-import { currencyService } from '../../services/currency-service.js?v=202611121838';
-import { fareService } from '../../services/fare-service.js?v=202611121838';
-import { speechService } from '../../services/speech-service.js?v=202611121838';
-import { languageSelect } from './phrases.js?v=202611121838';
-import { offlineMapsBlock, fillOfflineMaps } from './offline.js?v=202611121838';
-import { bookingsBlock } from './bookings.js?v=202611121838';
-import { clean } from '../theme.js?v=202611121838';
-import { groupBlock, ridesBlock } from './group.js?v=202611121838';
+import { EDITION } from '../../../edition.config.js?v=202611121929';
+import { S, P, save, curCityId, cityOf, cityName, cityIds, spot, spotOptions, homePoint, addMount } from '../state.js?v=202611121929';
+import { esc, ic, fmtNum, parseNum, fmtISO, $, modeIcon } from '../dom.js?v=202611121929';
+import { masthead, cityBar, styleChoice, staysEditor, arrivalFields, homeCurrencySelect } from '../components.js?v=202611121929';
+import { currencyService } from '../../services/currency-service.js?v=202611121929';
+import { fareService } from '../../services/fare-service.js?v=202611121929';
+import { speechService } from '../../services/speech-service.js?v=202611121929';
+import { languageSelect } from './phrases.js?v=202611121929';
+import { offlineMapsBlock, fillOfflineMaps } from './offline.js?v=202611121929';
+import { bookingsBlock } from './bookings.js?v=202611121929';
+import { clean } from '../theme.js?v=202611121929';
+import { groupBlock, ridesBlock } from './group.js?v=202611121929';
 
 export const E = { rate: null };
 

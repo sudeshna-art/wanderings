@@ -1,11 +1,11 @@
 /* Places tab: Plan (Planner), Near me (everyone; the default for True Wanderer), Sights, Experiences, Day trips. Follows the current city. */
-import { S, P, save, checkedText, curCityId, cityOf, cityName, placesIn, isPlanner, isWanderer, placeById } from '../state.js?v=202611121838';
-import { esc, toast, $$, $, CUSTOM_KINDS, KIND_NAME } from '../dom.js?v=202611121838';
-import { masthead, cityBar, legend, placeRow, expRow, placeCards, modeSwitch } from '../components.js?v=202611121838';
-import { clean } from '../theme.js?v=202611121838';
-import { isGroup, statusOf, hasKids, easyWalk, goodForKids, kidAges } from '../../models/schema.js?v=202611121838';
-import { renderPlan } from './plan.js?v=202611121838';
-import { renderWanderer } from './wanderer.js?v=202611121838';
+import { S, P, save, checkedText, curCityId, cityOf, cityName, placesIn, isPlanner, isWanderer, placeById } from '../state.js?v=202611121929';
+import { esc, toast, $$, $, CUSTOM_KINDS, KIND_NAME } from '../dom.js?v=202611121929';
+import { masthead, cityBar, legend, placeRow, expRow, placeCards, modeSwitch } from '../components.js?v=202611121929';
+import { clean } from '../theme.js?v=202611121929';
+import { isGroup, statusOf, hasKids, easyWalk, goodForKids, kidAges } from '../../models/schema.js?v=202611121929';
+import { renderPlan } from './plan.js?v=202611121929';
+import { renderWanderer } from './wanderer.js?v=202611121929';
 
 export function views() {
   return [['nearby', 'Near me'], ['sights', 'Must-sees'], ['experiences', 'Experiences'], ['trips', 'Day trips']];   /* Nov 2026: the plan has its own tab */
@@ -29,7 +29,7 @@ export function renderPlaces() {
   const vs = views();
   if (!P().pview || !vs.some(([k]) => k === P().pview)) P().pview = defaultView();
   const v = P().pview;
-  const seg = `<div class="chips" role="tablist" aria-label="Places views" style="margin-bottom:4px">${vs.map(([k, l]) => `<button class="chip" data-act="pview" data-v="${k}" aria-pressed="${v === k}">${l}</button>`).join('')}</div>`;
+  const seg = `<div class="chips" role="group" aria-label="Places views" style="margin-bottom:4px">${vs.map(([k, l]) => `<button class="chip" data-act="pview" data-v="${k}" aria-pressed="${v === k}">${l}</button>`).join('')}</div>`;
   const root = document.querySelector('section[data-tab="places"]');
   if (v === 'plan') { root.innerHTML = renderPlan(seg); return; }
   if (v === 'nearby') { root.innerHTML = renderWanderer(seg); return; }

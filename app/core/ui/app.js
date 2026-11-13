@@ -1,36 +1,36 @@
 /* Wanderings app shell: boot, tabs, taps and form binding. All outside access goes through services. */
-import { CONFIG } from '../config/default-config.js?v=202611121838';
-import { S, P, save, copyOf, myLang, curCityId, cityIds, cityName, placeById, isPlanner, isWanderer, runMounts, runCleanups, today } from './state.js?v=202611121838';
-import { $, $$, esc, ic, toast } from './dom.js?v=202611121838';
-import { staysEditor, STAYQ } from './components.js?v=202611121838';
-import { geocodeService } from '../services/geocode-service.js?v=202611121838';
-import { nearestHood } from '../models/schema.js?v=202611121838';
-import { cityOf } from './state.js?v=202611121838';
-import { contentService } from '../services/content-service.js?v=202611121838';
-import { tripService } from '../services/trip-service.js?v=202611121838';
-import { storageService } from '../services/storage-service.js?v=202611121838';
-import { shareService } from '../services/share-service.js?v=202611121838';
-import { speechService } from '../services/speech-service.js?v=202611121838';
-import { currencyService } from '../services/currency-service.js?v=202611121838';
-import { newStay, syncLegs, setStatus, statusOf, setBooked, isBooked, addToDay, removeFromPlan, moveItem, planOf, tripDays, sortedStays } from '../models/schema.js?v=202611121838';
-import { renderToday, showSlide, startSlides, stopSlides } from './screens/today.js?v=202611121838';
-import { renderPlaces, defaultView, addCustomPlace } from './screens/places.js?v=202611121838';
-import { renderPlan, openSched, openAddSheet, closeSheet, setSheetDay, sheetDay, openAddStop, pickSheetWho, pickSchedWho, sheetWhoSel, schedWhoSel } from './screens/plan.js?v=202611121838';
-import { addPerson, removePerson, refreshPeople, shareGroup, checkJoin, cancelJoin, applyJoin } from './screens/together.js?v=202611121838';
-import { liveStart, shareFromPlan as liveShareFromPlan, customCode as liveCustom, editCode as liveEditCode, closeCode as liveCloseCode, joinWithCode as liveJoin, sendLink as liveSendLink, signInPassword as livePw, toggleMode as liveMode, startTrip as liveStartTrip, invite as liveInvite, leave as liveLeave, signOutLive, pickMe as livePick, isLive } from './screens/live.js?v=202611121838';
-import { openSpot, recenter, refreshWanderer, wanderPos } from './screens/wanderer.js?v=202611121838';
-import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js?v=202611121838';
-import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js?v=202611121838';
-import { renderEssentials, renderGuideHome, renderGuideBits, guideSubFor, showFare, updateConv, loadRate } from './screens/essentials.js?v=202611121838';
-import { renderWelcome, W, STEP_COUNT } from './screens/welcome.js?v=202611121838';
-import { downloadPack, downloadAll, removePack, autoSaveMaps } from './screens/offline.js?v=202611121838';
-import { openImport, importFind, importFile, importBack, importSave, openEditor, editorSave, editorDelete, changeKind } from './screens/bookings.js?v=202611121838';
-import { showEmergency, sharePlan, meetForm, meetSave, meetShare } from './screens/safety.js?v=202611121838';
-import { openAsk, closeAsk, askInput, askSet } from './screens/ask.js?v=202611121838';
-import { applyTheme, clean } from './theme.js?v=202611121838';
-import { openCover } from './screens/today.js?v=202611121838';
-import { togglePartyKids, togglePartyEasy, toggleFood, addOccasion, removeOccasion, refreshOccasions, showServerCard, driverForm, driverSave, driverDelete } from './screens/group.js?v=202611121838';
-import { stayHere, curCity } from './state.js?v=202611121838';
+import { CONFIG } from '../config/default-config.js?v=202611121929';
+import { S, P, save, copyOf, myLang, curCityId, cityIds, cityName, placeById, isPlanner, isWanderer, runMounts, runCleanups, today } from './state.js?v=202611121929';
+import { $, $$, esc, ic, toast } from './dom.js?v=202611121929';
+import { staysEditor, STAYQ } from './components.js?v=202611121929';
+import { geocodeService } from '../services/geocode-service.js?v=202611121929';
+import { nearestHood } from '../models/schema.js?v=202611121929';
+import { cityOf } from './state.js?v=202611121929';
+import { contentService } from '../services/content-service.js?v=202611121929';
+import { tripService } from '../services/trip-service.js?v=202611121929';
+import { storageService } from '../services/storage-service.js?v=202611121929';
+import { shareService } from '../services/share-service.js?v=202611121929';
+import { speechService } from '../services/speech-service.js?v=202611121929';
+import { currencyService } from '../services/currency-service.js?v=202611121929';
+import { newStay, syncLegs, setStatus, statusOf, setBooked, isBooked, addToDay, removeFromPlan, moveItem, planOf, tripDays, sortedStays } from '../models/schema.js?v=202611121929';
+import { renderToday, showSlide, startSlides, stopSlides } from './screens/today.js?v=202611121929';
+import { renderPlaces, defaultView, addCustomPlace } from './screens/places.js?v=202611121929';
+import { renderPlan, openSched, openAddSheet, closeSheet, setSheetDay, sheetDay, openAddStop, pickSheetWho, pickSchedWho, sheetWhoSel, schedWhoSel } from './screens/plan.js?v=202611121929';
+import { addPerson, removePerson, refreshPeople, shareGroup, checkJoin, cancelJoin, applyJoin } from './screens/together.js?v=202611121929';
+import { liveStart, shareFromPlan as liveShareFromPlan, customCode as liveCustom, editCode as liveEditCode, closeCode as liveCloseCode, joinWithCode as liveJoin, sendLink as liveSendLink, signInPassword as livePw, toggleMode as liveMode, startTrip as liveStartTrip, invite as liveInvite, leave as liveLeave, signOutLive, pickMe as livePick, isLive } from './screens/live.js?v=202611121929';
+import { openSpot, recenter, refreshWanderer, wanderPos } from './screens/wanderer.js?v=202611121929';
+import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js?v=202611121929';
+import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js?v=202611121929';
+import { renderEssentials, renderGuideHome, renderGuideBits, guideSubFor, showFare, updateConv, loadRate } from './screens/essentials.js?v=202611121929';
+import { renderWelcome, W, STEP_COUNT } from './screens/welcome.js?v=202611121929';
+import { downloadPack, downloadAll, removePack, autoSaveMaps } from './screens/offline.js?v=202611121929';
+import { openImport, importFind, importFile, importBack, importSave, openEditor, editorSave, editorDelete, changeKind } from './screens/bookings.js?v=202611121929';
+import { showEmergency, sharePlan, meetForm, meetSave, meetShare } from './screens/safety.js?v=202611121929';
+import { openAsk, closeAsk, askInput, askSet } from './screens/ask.js?v=202611121929';
+import { applyTheme, clean, onWideChange } from './theme.js?v=202611121929';
+import { openCover } from './screens/today.js?v=202611121929';
+import { togglePartyKids, togglePartyEasy, toggleFood, addOccasion, removeOccasion, refreshOccasions, showServerCard, driverForm, driverSave, driverDelete } from './screens/group.js?v=202611121929';
+import { stayHere, curCity } from './state.js?v=202611121929';
 
 /* Five tabs (Nov 2026): Today, Plan, Explore, Guide, Trip. Guide and Trip open short sub-pages (P().sub):
    Guide: phrases, around, money, knowhow, maps. Trip: journal. Each renders into its own section. */
@@ -58,7 +58,7 @@ const shownTabs = () => TABS;
 function renderTabs() {
   $('#tabbar').innerHTML = shownTabs().map(([k, l]) => {
     const label = l, icon = TAB_ICON[k];
-    return `<button role="tab" data-act="go" data-tab="${k}" data-fromtab="1" id="tab-${k}" aria-selected="${P().tab === k}">${ic(icon)}<span>${label}</span></button>`;
+    return `<button data-act="go" data-tab="${k}" data-fromtab="1" id="tab-${k}"${P().tab === k ? ' aria-current="page"' : ''}>${ic(icon)}<span>${label}</span></button>`;
   }).join('');
 }
 function render(k = P().tab, keepScroll = false) {
@@ -77,7 +77,7 @@ function render(k = P().tab, keepScroll = false) {
 function go(k, opts = {}) {
   const [tab, sub] = route(k, opts);
   k = tab; P().tab = k; P().sub = sub; save();
-  TABS.forEach(([t]) => { const b = $('#tab-' + t); if (b) b.setAttribute('aria-selected', t === k); });
+  TABS.forEach(([t]) => { const b = $('#tab-' + t); if (b) { if (t === k) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); } });
   render(k); window.scrollTo(0, 0);
   if (opts.focus) { const el = $(opts.focus); if (el) setTimeout(() => { el.focus(); el.scrollIntoView({ block: 'center' }); }, 80); }
 }
@@ -369,6 +369,38 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Enter' && e.target.dataset && e.target.dataset.stayq != null) { e.preventDefault(); staySearchRun(+e.target.dataset.stayq); return; }
   if (e.key === 'Escape') { if (!$('#sheet').hidden) { closeSheet(); return; } if (!$('#driver').hidden) { $('#driver').hidden = true; return; } if ($('#ask') && !$('#ask').hidden) { closeAsk(); return; } if (!$('#viewer').hidden) $('#viewer').hidden = true; if (!$('#driver').hidden) $('#driver').hidden = true; }
 });
+/* QA 3 (Nov 2026), keyboard: a sheet or full-screen card takes focus when it opens, keeps Tab inside it,
+   and gives focus back to the button that opened it when it closes. */
+const LAYERS = ['sheet', 'driver', 'ask', 'viewer'];
+const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]):not([type=hidden]),select,textarea,summary,[tabindex]:not([tabindex="-1"])';
+const openLayer = () => LAYERS.map(id => document.getElementById(id)).filter(el => el && !el.hidden).pop() || null;
+function initLayerFocus() {
+  const opener = {};
+  if (!document.getElementById('ask')) document.body.insertAdjacentHTML('beforeend', '<div class="driver" id="ask" role="dialog" aria-label="Ask" hidden></div>');
+  LAYERS.forEach(id => {
+    const el = document.getElementById(id); if (!el) return;
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    try { new MutationObserver(() => {
+      if (!el.hidden && !el.dataset.focused) {
+        el.dataset.focused = '1'; opener[id] = document.activeElement;
+        setTimeout(() => { if (el.hidden || el.contains(document.activeElement)) return; const h = el.querySelector('.sh-title,h1,h2'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } else el.focus({ preventScroll: true }); }, 30);
+      } else if (el.hidden && el.dataset.focused) {
+        delete el.dataset.focused; const o = opener[id]; opener[id] = null;
+        if (o && o.isConnected && !openLayer()) o.focus({ preventScroll: true });
+      }
+    }).observe(el, { attributes: true, attributeFilter: ['hidden'] }); } catch (_) {}
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Tab') return;
+    const L = openLayer(); if (!L) return;
+    const f = [...L.querySelectorAll(FOCUSABLE)].filter(x => x.offsetParent !== null || x === document.activeElement);
+    if (!f.length) { e.preventDefault(); L.focus(); return; }
+    const first = f[0], last = f[f.length - 1];
+    if (!L.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+    else if (e.shiftKey && (document.activeElement === first || document.activeElement === L)) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  });
+}
 /* Photos are stored on the phone; fill <img data-photo> as they appear. */
 function hydratePhotos() { $$('img[data-photo]:not([src])').forEach(img => { img.setAttribute('src', ''); storageService.photoURL(img.dataset.photo).then(u => { if (u) img.src = u; }); }); }
 try { new MutationObserver(hydratePhotos).observe(document.body, { childList: true, subtree: true }); } catch (e) {}
@@ -382,7 +414,7 @@ async function boot() {
   if (!S.trip.dates) S.trip.dates = { start: '', end: '' };   /* trip dates without a stay (Nov 2026) */
   J.pending = await tripService.getPending(); J.draft = await tripService.getDraft();
   S.art = {};
-  await Promise.all(S.C.cities.flatMap(c => [c.hero.art, c.mark].concat(c.illustrated_map ? [c.illustrated_map.art] : [])).map(async f => { S.art[f] = await contentService.art(f); }));
+  await Promise.all(S.C.cities.flatMap(c => [c.hero.art, c.mark].concat(c.illustrated_map ? [c.illustrated_map.art] : [], c.cover ? [c.cover.art] : [])).map(async f => { S.art[f] = await contentService.art(f); }));
   applyTheme(curCity());
   root.querySelector('.loading')?.remove();
   SECTIONS.forEach(k => { if (!document.querySelector(`section[data-tab="${k}"]`)) root.insertAdjacentHTML('beforeend', `<section data-tab="${k}" hidden></section>`); });
@@ -398,6 +430,8 @@ async function boot() {
   speechService.onVoicesChanged(() => { if (P().tab === 'guide' && P().sub === 'knowhow') rerender(); });
   setTimeout(autoSaveMaps, 2500);                                   // editions that save their offline map by themselves
   window.addEventListener('online', () => autoSaveMaps());
+  onWideChange(() => rerender());   /* QA 3 (Nov 2026): Today and Plan lay out differently on wide screens */
+  initLayerFocus();
   window.__wanderings = { S, go, render };   // for testing only
 }
 boot();
