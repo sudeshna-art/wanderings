@@ -2341,7 +2341,7 @@
   "google_place_id": null,
   "booking_status": "required",
   "urgency_level": "flexible",
-  "ticket_url": "https://www.cityexperiences.com",
+  "ticket_url": "https://citycruises.com/washington-dc",
   "affiliate_url": null,
   "price": {
    "amount": 106,
@@ -2358,7 +2358,8 @@
    "Spirit of Washington: about 2 to 2.5 hours with buffet and dancing, around $170.",
    "Departs from Pier 4, 580 Water Street SW. Boarding starts 30 to 60 minutes before; check your ticket.",
    "From Bethesda: Red Line to Gallery Place, then the Green Line to Waterfront, two blocks from the pier.",
-   "Tickets are sold per person with a table for your party, so it works well on your own. Drinks are extra."
+   "Tickets are sold per person with a table for your party, so it works well on your own. Drinks are extra.",
+   "City Cruises also runs special holiday sailings (Thanksgiving, Christmas, New Year's Eve); see citycruises.com for dates."
   ],
   "audio": null,
   "search_q": null,
@@ -2426,7 +2427,7 @@
  {
   "id": "dc-potomac-sightseeing",
   "city_id": "washington-dc",
-  "name": "Potomac sightseeing cruise and water taxi",
+  "name": "Potomac Water Taxi and Monuments Cruise",
   "category": "experience",
   "kind": "boat",
   "group": "hoods",
@@ -2440,7 +2441,7 @@
   "google_place_id": null,
   "booking_status": "optional",
   "urgency_level": "flexible",
-  "ticket_url": "https://www.wharfdc.com/waterfront/city-cruises",
+  "ticket_url": "https://citycruises.com/washington-dc/water-taxis",
   "affiliate_url": null,
   "price": {
    "amount": null,
@@ -2451,10 +2452,12 @@
    "source": null
   },
   "lead_time": null,
-  "description": "A shorter, cheaper way onto the river: narrated sightseeing cruises past the monuments, or the water taxi between The Wharf, Georgetown, Old Town Alexandria and National Harbor.",
+  "description": "City Cruises' water taxi links The Wharf, Georgetown, Old Town Alexandria and National Harbor, with monument views on the way. The Georgetown to Alexandria run doubles as its Monuments Cruise, passing the Lincoln and Jefferson memorials. A shorter, cheaper way onto the river than a dinner cruise.",
   "tips": [
-   "Sightseeing cruises leave from the Transit Pier, 970 Wharf Street SW; dinner cruises use Pier 4.",
-   "Fewer departures in the cold months. Check the day's schedule before you go."
+   "Runs March to December, so it is running in November, but with fewer departures in the cold months. Check the day's schedule on citycruises.com before you go.",
+   "The Wharf dock is the Transit Pier, 950 Wharf Street SW (pedestrian access only). Wharf to Georgetown takes about 30 minutes.",
+   "One-day and two-day passes give unlimited rides on the regular routes.",
+   "Not running now: Capitol River Cruises in Georgetown closes from November to mid-March, and Potomac Riverboat Company's sightseeing tours run April to October."
   ],
   "audio": null,
   "search_q": null,

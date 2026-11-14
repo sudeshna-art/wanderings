@@ -1,19 +1,19 @@
 /* Near me (True Wanderer): live map with "You are here" and nearby curated spots. Location is asked for only here.
    Oct 11 2026: open to every travel style as "Near me", with "Meet back here" for friends who split up. */
-import { EDITION } from '../../../edition.config.js?v=202611141446';
-import { S, P, save, curCityId, cityOf, cityName, placeById, addMount, addCleanup, isWanderer, homePoint, stayHere } from '../state.js?v=202611141446';
-import { clean } from '../theme.js?v=202611141446';
-import { statusBadge, cardPrice, chev, groupFlags, flagBadges } from '../components.js?v=202611141446';
-import { closedText } from '../../models/schema.js?v=202611141446';
-import { esc, ic, ill, KIND_NAME, metres, $, toast } from '../dom.js?v=202611141446';
-import { masthead, illustrationFor, statusLine, ticketButtons, searchButtons, pricePlaceholder, closedLine, tipsOf } from '../components.js?v=202611141446';
-import { statusOf, isBooked, walkMinutes, km, priceText, priceShort } from '../../models/schema.js?v=202611141446';
-import { mapService } from '../../services/map-service.js?v=202611141446';
-import { locationService } from '../../services/location-service.js?v=202611141446';
-import { placesService } from '../../services/places-service.js?v=202611141446';
-import { fareService } from '../../services/fare-service.js?v=202611141446';
-import { currencyService } from '../../services/currency-service.js?v=202611141446';
-import { showStatus } from './offline.js?v=202611141446';
+import { EDITION } from '../../../edition.config.js?v=202611141506';
+import { S, P, save, curCityId, cityOf, cityName, placeById, addMount, addCleanup, isWanderer, homePoint, stayHere } from '../state.js?v=202611141506';
+import { clean } from '../theme.js?v=202611141506';
+import { statusBadge, cardPrice, chev, groupFlags, flagBadges } from '../components.js?v=202611141506';
+import { closedText } from '../../models/schema.js?v=202611141506';
+import { esc, ic, ill, KIND_NAME, metres, $, toast } from '../dom.js?v=202611141506';
+import { masthead, illustrationFor, statusLine, ticketButtons, searchButtons, pricePlaceholder, closedLine, tipsOf } from '../components.js?v=202611141506';
+import { statusOf, isBooked, walkMinutes, km, priceText, priceShort } from '../../models/schema.js?v=202611141506';
+import { mapService } from '../../services/map-service.js?v=202611141506';
+import { locationService } from '../../services/location-service.js?v=202611141506';
+import { placesService } from '../../services/places-service.js?v=202611141506';
+import { fareService } from '../../services/fare-service.js?v=202611141506';
+import { currencyService } from '../../services/currency-service.js?v=202611141506';
+import { showStatus } from './offline.js?v=202611141506';
 
 const RADIUS = 3000;           // metres counted as "near you"
 const W = { map: null, stop: null, pos: null, list: [], mode: 'locating', fallbackMap: false, centered: false };
