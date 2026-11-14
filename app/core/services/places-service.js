@@ -1,8 +1,8 @@
 /* places-service: search, details and nearby places.
    Local provider: the edition's own researched list plus the traveler's custom places.
    Later provider: Google Places (autocomplete, details, nearby), returning these same shapes. */
-import { contentService } from './content-service.js?v=202611131348';
-import { km } from '../models/schema.js?v=202611131348';
+import { contentService } from './content-service.js?v=202611132137';
+import { km } from '../models/schema.js?v=202611132137';
 
 export const placesService = {
   async all() { return (await contentService.load()).places; },
