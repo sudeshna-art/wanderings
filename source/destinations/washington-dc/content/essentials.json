@@ -49,7 +49,7 @@
   },
   {
    "title": "Sales tax",
-   "text": "Prices on menus and shelves don't include tax; it's added at the till. In DC, restaurant meals and drinks are taxed at 10% and most shopping at 6%. Virginia and Maryland have their own rates."
+   "text": "Prices on menus and shelves don't include tax; it's added at the till. In DC, restaurant meals and drinks are taxed at 10% and most shopping at 6%. In Maryland (Bethesda), most purchases are 6% and alcohol 9%. Virginia has its own rates."
   },
   {
    "title": "Cards and cash",
@@ -76,7 +76,7 @@
    "text": "Coverage is good across the city. A US eSIM or local SIM is usually cheaper than roaming for a week or more."
   }
  ],
- "know_how_note": "General customs, not rules. Tax rates from the DC Office of the Chief Financial Officer, checked Nov 14, 2026.",
+ "know_how_note": "General customs, not rules. Tax rates from the DC Office of the Chief Financial Officer and the Comptroller of Maryland, checked Nov 14, 2026.",
  "emergency": [
   {
    "number": "911",
@@ -86,14 +86,26 @@
   },
   {
    "number": "311",
-   "label": "City services and police non-emergencies (lost or stolen items). 24 hours.",
+   "label": "In DC: city services and police non-emergencies (lost or stolen items). 24 hours.",
    "source": "DC Office of Unified Communications",
+   "checked": "2026-11-14"
+  },
+  {
+   "number": "301-279-8000",
+   "label": "In Bethesda and Montgomery County: police non-emergencies. 24 hours.",
+   "source": "Montgomery County Department of Police",
    "checked": "2026-11-14"
   },
   {
    "number": "202-715-4000",
    "label": "George Washington University Hospital, 900 23rd St NW. 24-hour emergency room six blocks from the White House.",
    "source": "gwhospital.com",
+   "checked": "2026-11-14"
+  },
+  {
+   "number": "301-896-3100",
+   "label": "Suburban Hospital (Johns Hopkins), 8600 Old Georgetown Rd, Bethesda. 24-hour emergency room.",
+   "source": "Maryland 211 and Johns Hopkins Medicine",
    "checked": "2026-11-14"
   },
   {

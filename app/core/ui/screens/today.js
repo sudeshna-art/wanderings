@@ -1,23 +1,23 @@
 /* Today: answers "what now?" for the current city. Simplified Oct 11 2026: the time-sensitive things first
    (meeting point, travel, bookings, clashes), then what to book, ideas, your base and a phrase. */
-import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202611140948';
-import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202611140948';
-import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202611140948';
-import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202611140948';
-import { tripChecks } from '../../models/checks.js?v=202611140948';
-import { timelineView } from './plan.js?v=202611140948';
-import { allPhotoIds } from './journal.js?v=202611140948';
-import { view as phraseView } from './phrases.js?v=202611140948';
-import { meetBlock } from './safety.js?v=202611140948';
-import { myLang, placeName, copyOf, checkedText, cityIds, noPhrases, phrasesOff } from '../state.js?v=202611140948';
-import { speaksLocal } from '../../models/schema.js?v=202611140948';
-import { mapPackService } from '../../services/mappack-service.js?v=202611140948';
-import { clean, wide } from '../theme.js?v=202611140948';
-import { placeCards, checkText } from '../components.js?v=202611140948';
-import { closedText, closedOn } from '../../models/schema.js?v=202611140948';
-import { occasionAlert } from './group.js?v=202611140948';
-import { arrivalsAlert } from './together.js?v=202611140948';
-import { liveUpdates, isLive, LV } from './live.js?v=202611140948';
+import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202611141003';
+import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202611141003';
+import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202611141003';
+import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202611141003';
+import { tripChecks } from '../../models/checks.js?v=202611141003';
+import { timelineView } from './plan.js?v=202611141003';
+import { allPhotoIds } from './journal.js?v=202611141003';
+import { view as phraseView } from './phrases.js?v=202611141003';
+import { meetBlock } from './safety.js?v=202611141003';
+import { myLang, placeName, copyOf, checkedText, cityIds, noPhrases, phrasesOff } from '../state.js?v=202611141003';
+import { speaksLocal } from '../../models/schema.js?v=202611141003';
+import { mapPackService } from '../../services/mappack-service.js?v=202611141003';
+import { clean, wide } from '../theme.js?v=202611141003';
+import { placeCards, checkText } from '../components.js?v=202611141003';
+import { closedText, closedOn } from '../../models/schema.js?v=202611141003';
+import { occasionAlert } from './group.js?v=202611141003';
+import { arrivalsAlert } from './together.js?v=202611141003';
+import { liveUpdates, isLive, LV } from './live.js?v=202611141003';
 
 let slideTimer = null, slideIdx = 0;
 
