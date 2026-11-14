@@ -1,6 +1,6 @@
 /* content-service: the edition's researched content (edition, cities, places, phrases, essentials, art).
    Local provider reads the JSON files bundled with the edition. Later provider: Firestore. */
-import { EDITION } from '../../edition.config.js?v=202611131348';
+import { EDITION } from '../../edition.config.js?v=202611132137';
 
 let cache = null;
 const artCache = {};
