@@ -1,0 +1,113 @@
+{
+ "schema_version": 1,
+ "edition_id": "washington-dc",
+ "name": "Wanderings Washington, DC",
+ "tagline": "The capital and nearby Virginia",
+ "language": "en-US",
+ "language_name": "English",
+ "city_ids": [
+  "washington-dc"
+ ],
+ "modules": {
+  "phrases": false,
+  "currency": "auto",
+  "taxi_estimator": true,
+  "true_wanderer": true
+ },
+ "home_currencies": [
+  "USD",
+  "AED",
+  "EUR",
+  "GBP",
+  "CAD",
+  "AUD",
+  "INR",
+  "CHF",
+  "SGD",
+  "JPY"
+ ],
+ "arrival_options": [
+  {
+   "id": "DCA",
+   "label": "Reagan National airport (DCA)",
+   "city_id": "washington-dc",
+   "tip": "Metro's Blue and Yellow lines stop at the airport. Taxis wait outside baggage claim and use the meter."
+  },
+  {
+   "id": "IAD",
+   "label": "Dulles airport (IAD)",
+   "city_id": "washington-dc",
+   "tip": "The Silver Line runs from the airport station to downtown, about 50 minutes to Metro Center."
+  },
+  {
+   "id": "BWI",
+   "label": "Baltimore airport (BWI)",
+   "city_id": "washington-dc",
+   "tip": "Take the free shuttle to the BWI rail station, then a MARC or Amtrak train to Union Station."
+  },
+  {
+   "id": "UNION",
+   "label": "Train to Union Station",
+   "city_id": "washington-dc",
+   "tip": "Union Station is on Metro's Red Line, a short walk from the Capitol."
+  },
+  {
+   "id": "CAR",
+   "label": "Car or private driver",
+   "city_id": ""
+  },
+  {
+   "id": "OTHER",
+   "label": "Other",
+   "city_id": ""
+  }
+ ],
+ "leg_modes": [
+  {
+   "id": "metro",
+   "label": "Metro"
+  },
+  {
+   "id": "taxi",
+   "label": "Taxi or ride app"
+  },
+  {
+   "id": "car",
+   "label": "Rental car"
+  },
+  {
+   "id": "train",
+   "label": "Train"
+  },
+  {
+   "id": "bus",
+   "label": "Bus or coach"
+  },
+  {
+   "id": "flight",
+   "label": "Flight"
+  }
+ ],
+ "copy": {
+  "place": "Washington, DC",
+  "place_list": "Washington, DC and nearby Virginia",
+  "hashtags": "#WashingtonDC #NationalMall #travel",
+  "file_prefix": "washington-dc",
+  "greeting_place": "Washington"
+ },
+ "checked": "2026-11-14",
+ "experience_themes": [
+  {
+   "id": "history",
+   "name": "History and memorials"
+  },
+  {
+   "id": "walks",
+   "name": "Neighborhood walks"
+  },
+  {
+   "id": "food",
+   "name": "Food"
+  }
+ ]
+}

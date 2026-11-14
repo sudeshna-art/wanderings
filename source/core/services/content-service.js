@@ -15,7 +15,9 @@ export const contentService = {
   async load() {
     if (cache) return cache;
     const [edition, cities, places, phrases, essentials, maps] = await Promise.all(
-      ['edition.json', 'cities.json', 'places.json', 'phrases.json', 'essentials.json', 'maps.json'].map(n => n === 'maps.json' ? getJSON(n).catch(() => ({ packs: [] })) : getJSON(n)));
+      ['edition.json', 'cities.json', 'places.json', 'phrases.json', 'essentials.json', 'maps.json'].map(n => n === 'maps.json' ? getJSON(n).catch(() => ({ packs: [] }))
+        : n === 'phrases.json' ? getJSON(n).catch(() => ({ language: 'en', language_name: 'English', situations: {}, greetings: [], moments: [] }))   /* optional when an edition switches phrases off */
+        : getJSON(n)));
     cache = { edition, cities, places, phrases, essentials, maps };
     return cache;
   },

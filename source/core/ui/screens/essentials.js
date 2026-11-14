@@ -2,7 +2,7 @@
    taxis, audio, know-how, emergencies. */
 import { mineBlock } from './mine.js';
 import { EDITION } from '../../../edition.config.js';
-import { S, P, save, curCityId, cityOf, cityName, cityIds, spot, spotOptions, homePoint, addMount } from '../state.js';
+import { S, P, save, curCityId, cityOf, cityName, cityIds, spot, spotOptions, homePoint, addMount, noPhrases, phrasesOff, hasMapPacks } from '../state.js';
 import { esc, ic, fmtNum, parseNum, fmtISO, $, modeIcon } from '../dom.js';
 import { masthead, cityBar, styleChoice, staysEditor, arrivalFields, homeCurrencySelect } from '../components.js';
 import { currencyService } from '../../services/currency-service.js';
@@ -108,7 +108,7 @@ function taxiBlock(c) {
     ${(t.discounts || []).map(d => `<p class="small"><b>${esc(d.title)}:</b> ${esc(d.text)}</p>`).join('')}
     <p class="small faint">${t.periods ? '' : esc(t.note) + ' '}Source: ${esc(t.source)}, checked ${esc(fmtISO(t.checked))}.</p>
     ${t.rush_note ? `<p class="small muted"><b>Rush hour:</b> ${esc(t.rush_note)}</p>` : ''}
-    <button class="btn line" data-act="ptabgo" data-v="${esc((S.C.phrases.driver && S.C.phrases.driver.situation) || 'Taxi and transport')}" style="align-self:flex-start">Taxi phrases &amp; “Show driver”</button></div>`;
+    ${noPhrases() ? '' : `<button class="btn line" data-act="ptabgo" data-v="${esc((S.C.phrases.driver && S.C.phrases.driver.situation) || 'Taxi and transport')}" style="align-self:flex-start">Taxi phrases &amp; “Show driver”</button>`}</div>`;
 }
 export async function showFare() {
   const out = $('#fareOut'); if (!out) return;
@@ -163,11 +163,11 @@ export function renderGuideHome() {
   const html = masthead() + `<div class="greet"><h1>Guide.</h1><p class="small muted" style="margin:0">Everything here works without signal.</p></div>
   <div class="gtiles">
     ${tile('Emergency card', 'Call ' + sos + ' · your address', 'sos', 'data-act="emergency"', true)}
-    ${P().hidePhrases ? '' : tile('Phrases', 'Top 10 · ' + (S.C.edition.language_name || 'local') + ' with audio', 'phrases', 'data-act="go" data-tab="guide" data-sub="phrases"')}
+    ${phrasesOff() ? '' : tile('Phrases', 'Top 10 · ' + (S.C.edition.language_name || 'local') + ' with audio', 'phrases', 'data-act="go" data-tab="guide" data-sub="phrases"')}
     ${tile('Getting around', 'Taxis, fares, drivers', 'taxi', 'data-act="go" data-tab="guide" data-sub="around"')}
     ${tile('Money', 'Currency and prices', 'convert', 'data-act="go" data-tab="guide" data-sub="money"')}
-    ${tile('Local know-how', 'Tips, audio, emergencies', 'star', 'data-act="go" data-tab="guide" data-sub="knowhow"')}
-    ${tile('Offline maps', 'Save maps for no signal', 'pin', 'data-act="go" data-tab="guide" data-sub="maps"')}
+    ${tile('Local know-how', noPhrases() ? 'Tips, tipping, emergencies' : 'Tips, audio, emergencies', 'star', 'data-act="go" data-tab="guide" data-sub="knowhow"')}
+    ${hasMapPacks() ? tile('Offline maps', 'Save maps for no signal', 'pin', 'data-act="go" data-tab="guide" data-sub="maps"') : ''}
   </div>`;
   document.querySelector('section[data-tab="guide"]').innerHTML = html;
 }
@@ -185,14 +185,14 @@ export function renderGuideBits(sub) {
     <ul class="plain">${ess.embassies.map(e => `<li><a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(e.label)} ↗</a></li>`).join('')}</ul>
     <p class="small muted">${esc(ess.emergency_note)}</p>
     <button class="btn line sm" data-act="emergency" style="align-self:flex-start">${ic('sos', 'style="width:16px;height:16px"')}Open the emergency card</button></div>
-  <div class="block" id="voiceBlock"><h2>Pronunciation audio</h2><p class="small" id="voiceInfo">Checking this phone’s voices…</p>
+  ${noPhrases() ? '' : `<div class="block" id="voiceBlock"><h2>Pronunciation audio</h2><p class="small" id="voiceInfo">Checking this phone’s voices…</p>
     <p class="small muted">Phrases use your phone’s built-in voice. For the most natural sound, download a better one (free):</p>
     <ul class="plain">${ess.voice_help.map(v => `<li><b>${esc(v.title)}</b>${esc(v.text)}</li>`).join('')}</ul><p class="small muted">Then close and reopen this app.</p>
-    <button class="btn line" data-act="say" data-text="${esc(ess.voice_test)}" style="align-self:flex-start">${ic('speak', 'style="width:18px;height:18px"')}Test: “${esc(ess.voice_test)}”</button></div>`,
+    <button class="btn line" data-act="say" data-text="${esc(ess.voice_test)}" style="align-self:flex-start">${ic('speak', 'style="width:18px;height:18px"')}Test: “${esc(ess.voice_test)}”</button></div>`}`,
     maps: `${offlineMapsBlock()}`
   };
   const back = `<button class="text-btn backlink" data-act="go" data-tab="guide" data-sub="" style="align-self:flex-start;min-height:40px">‹ Guide</button>`;
   const html = masthead() + back + `<div class="greet"><h1>${esc(GUIDE_SUBS[sub] || 'Guide')}.</h1></div>${cityIds().length > 1 && sub !== 'maps' ? cityBar() : ''}` + (parts[sub] || '') + `<p class="small faint" style="padding-top:28px">Prices, hours and fares checked ${esc(fmtISO(ess.checked, { month: 'short', day: 'numeric', year: 'numeric' }))} from official sites and travel sources. They change, so confirm when booking.</p>`;
   document.querySelector('section[data-tab="guidebits"]').innerHTML = html;
-  addMount(() => { if (sub === 'money') loadRate(); if (sub === 'around') showFare(); if (sub === 'knowhow') voiceBlock(); if (sub === 'maps') fillOfflineMaps(); });
+  addMount(() => { if (sub === 'money') loadRate(); if (sub === 'around') showFare(); if (sub === 'knowhow' && !noPhrases()) voiceBlock(); if (sub === 'maps') fillOfflineMaps(); });
 }

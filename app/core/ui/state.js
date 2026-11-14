@@ -1,11 +1,17 @@
 /* Shared UI state: the loaded trip and edition content, plus lookups. Talks to the outside only through services. */
-import { tripService } from '../services/trip-service.js?v=202611132137';
-import { currentCityId, stayForCity, sortedStays, localISO } from '../models/schema.js?v=202611132137';
+import { tripService } from '../services/trip-service.js?v=202611140948';
+import { currentCityId, stayForCity, sortedStays, localISO } from '../models/schema.js?v=202611140948';
 
 export const S = { trip: null, C: null, mounts: [], cleanups: [] };
 
 export const save = () => { const r = tripService.save(S.trip); if (S.afterSave) S.afterSave(); return r; };   /* afterSave: live sharing (Nov 2026) */
 export const P = () => S.trip.prefs;
+/* Editions for English-speaking cities switch phrases off in edition.json modules (Nov 14 2026, Washington, DC).
+   Other editions leave the switch out and keep phrases. phrasesOff also covers travelers who hid the Phrases tab. */
+export const noPhrases = () => !!(S.C && S.C.edition && S.C.edition.modules && S.C.edition.modules.phrases === false);
+export const phrasesOff = () => noPhrases() || !!P().hidePhrases;
+/* Offline map packs are optional: an edition without maps.json packs uses the online map only. */
+export const hasMapPacks = () => !!(S.C && S.C.maps && (S.C.maps.packs || []).length);
 
 export const cityIds = () => S.C.edition.city_ids;
 export const cityOf = id => S.C.cities.find(c => c.city_id === id) || S.C.cities[0];

@@ -1,0 +1,133 @@
+{
+ "reference_rates": {
+  "base": "EUR",
+  "rates": {
+   "USD": 1.1206,
+   "GBP": 0.84763,
+   "CAD": 1.5942,
+   "AUD": 1.6052,
+   "INR": 108.3965,
+   "CHF": 0.9313,
+   "SGD": 1.4348,
+   "JPY": 177.34
+  },
+  "checked": "2026-10-09",
+  "source": "European Central Bank via frankfurter.dev"
+ },
+ "typical_prices": [
+  {
+   "label": "DC taxi meter start",
+   "amount": 4,
+   "kind": "official"
+  },
+  {
+   "label": "Metro ride, weekday",
+   "amount": 2.25,
+   "kind": "official"
+  },
+  {
+   "label": "Washington Monument online ticket fee",
+   "amount": 1,
+   "kind": "official"
+  },
+  {
+   "label": "Mount Vernon, adult",
+   "amount": 30,
+   "kind": "official"
+  }
+ ],
+ "typical_note": "Official prices, checked Nov 14, 2026. Metro rides cost $2.25 to $6.75 on weekdays depending on distance.",
+ "sos": {
+  "number": "911",
+  "note": "Police, ambulance and fire, free from any phone. For non-emergencies, call 311.",
+  "share_label": "Emergency number in Washington, DC"
+ },
+ "know_how": [
+  {
+   "title": "Tipping",
+   "text": "Restaurants with table service: 15 to 20% of the bill before tax. Check the bill first, since some places add a service charge. Taxis and ride apps: about 15 to 20%. Bartenders: about $1 to $2 a drink."
+  },
+  {
+   "title": "Sales tax",
+   "text": "Prices on menus and shelves don't include tax; it's added at the till. In DC, restaurant meals and drinks are taxed at 10% and most shopping at 6%. Virginia and Maryland have their own rates."
+  },
+  {
+   "title": "Cards and cash",
+   "text": "Cards and phone payments work almost everywhere, including Metro gates. Some places are card only. Carry a little cash for tips and market stalls."
+  },
+  {
+   "title": "Free museums",
+   "text": "The Smithsonian museums, the National Gallery of Art and the memorials are free. Air and Space and the African American History museum need free timed passes; book them before you go."
+  },
+  {
+   "title": "Security checks",
+   "text": "Museums, the Capitol and the Washington Monument screen bags at the door, and lines can build. Travel light; large bags slow you down."
+  },
+  {
+   "title": "November weather",
+   "text": "Cool to cold, with short days. The memorials are open around the clock and lit at night, so a walk after dark is worth it. Bring layers and a warm jacket."
+  },
+  {
+   "title": "Metro manners",
+   "text": "On escalators, stand on the right and walk on the left. Let people off the train before you board."
+  },
+  {
+   "title": "Phones",
+   "text": "Coverage is good across the city. A US eSIM or local SIM is usually cheaper than roaming for a week or more."
+  }
+ ],
+ "know_how_note": "General customs, not rules. Tax rates from the DC Office of the Chief Financial Officer, checked Nov 14, 2026.",
+ "emergency": [
+  {
+   "number": "911",
+   "label": "Police, ambulance, fire",
+   "source": "DC Office of Unified Communications",
+   "checked": "2026-11-14"
+  },
+  {
+   "number": "311",
+   "label": "City services and police non-emergencies (lost or stolen items). 24 hours.",
+   "source": "DC Office of Unified Communications",
+   "checked": "2026-11-14"
+  },
+  {
+   "number": "202-715-4000",
+   "label": "George Washington University Hospital, 900 23rd St NW. 24-hour emergency room six blocks from the White House.",
+   "source": "gwhospital.com",
+   "checked": "2026-11-14"
+  },
+  {
+   "number": "1-800-222-1222",
+   "label": "Poison Help, free and open 24 hours anywhere in the US",
+   "source": "HRSA Poison Help",
+   "checked": "2026-11-14"
+  }
+ ],
+ "embassies": [
+  {
+   "label": "Embassy of the United Arab Emirates, (202) 243-2400",
+   "url": "https://www.uae-embassy.org/contact"
+  }
+ ],
+ "emergency_note": "Pharmacies such as CVS and Walgreens are easy to find, and some are open late. Another 24-hour emergency room: MedStar Georgetown University Hospital, 3800 Reservoir Road NW. For a lost passport, contact your country's embassy here in Washington.",
+ "voice_help": [],
+ "voice_test": "",
+ "travel_notes": [
+  [
+   "camera",
+   "Look up",
+   "The Washington Monument changes color about a third of the way up: building stopped for over 20 years, and the new stone came from a different quarry."
+  ],
+  [
+   "coffee",
+   "Travel note",
+   "The Mall's museums open around 10 a.m. Start with a memorial or a market and beat the lines."
+  ],
+  [
+   "camera",
+   "Look across",
+   "From the Lincoln Memorial steps, the Reflecting Pool lines up with the Washington Monument and the Capitol dome."
+  ]
+ ],
+ "checked": "2026-11-14"
+}

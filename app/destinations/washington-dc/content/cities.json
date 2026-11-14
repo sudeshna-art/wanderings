@@ -1,0 +1,416 @@
+[
+ {
+  "city_id": "washington-dc",
+  "name": "Washington, DC",
+  "short_name": "Washington",
+  "local_name": "Washington, DC",
+  "stamp": "WASHINGTON",
+  "coords_label": "38.89° N · 77.04° W",
+  "country_code": "US",
+  "currency_code": "USD",
+  "language": "en-US",
+  "timezone": "America/New_York",
+  "center": {
+   "lat": 38.8977,
+   "lng": -77.0365
+  },
+  "landmark_center": {
+   "lat": 38.8895,
+   "lng": -77.0353,
+   "name": "the Washington Monument"
+  },
+  "hero": {
+   "art": "washington-dc.svg",
+   "caption": "The Capitol dome above the trees",
+   "alt": "Pen and ink sketch of the Capitol dome rising above trees"
+  },
+  "cover": {
+   "art": "washington-dc-cover.svg",
+   "band": "#EEF0EC",
+   "eyebrow": "#4A4E52",
+   "note": "Destination cover on Today (approved Nov 14, 2026): light pen-sketch drawing made by tools/covers/make_washington_dc_cover.py. band = the solid color behind the title; eyebrow = the small line above it."
+  },
+  "mark": "washington-dc-mark.svg",
+  "groups": [
+   {
+    "id": "mall",
+    "name": "The National Mall and memorials"
+   },
+   {
+    "id": "museums",
+    "name": "Museums on the Mall"
+   },
+   {
+    "id": "capitol",
+    "name": "Capitol Hill"
+   },
+   {
+    "id": "hoods",
+    "name": "Neighborhoods and food"
+   },
+   {
+    "id": "virginia",
+    "name": "Across the river in Virginia"
+   }
+  ],
+  "neighborhoods": [
+   {
+    "id": "mall",
+    "name": "National Mall and downtown",
+    "center": {
+     "lat": 38.8935,
+     "lng": -77.03
+    },
+    "central": true,
+    "tip": "Museums and memorials are close together but the Mall is long: about 2 miles from the Capitol to the Lincoln Memorial. Metro stations: Smithsonian, Federal Triangle, L'Enfant Plaza.",
+    "aliases": [
+     "National Mall",
+     "Downtown",
+     "Federal Triangle",
+     "L'Enfant Plaza",
+     "Smithsonian",
+     "Metro Center",
+     "McPherson Square"
+    ]
+   },
+   {
+    "id": "penn_quarter",
+    "name": "Penn Quarter and Chinatown",
+    "center": {
+     "lat": 38.8985,
+     "lng": -77.0215
+    },
+    "central": true,
+    "tip": "Central and lively at night, a few minutes' walk to the museums. Gallery Place and Archives stations.",
+    "aliases": [
+     "Penn Quarter",
+     "Chinatown",
+     "Gallery Place",
+     "Capital One Arena",
+     "Archives"
+    ]
+   },
+   {
+    "id": "capitol_hill",
+    "name": "Capitol Hill",
+    "center": {
+     "lat": 38.886,
+     "lng": -76.999
+    },
+    "central": false,
+    "tip": "Rowhouse streets behind the Capitol, with Eastern Market. Capitol South, Eastern Market and Union Station stations.",
+    "aliases": [
+     "Capitol Hill",
+     "Eastern Market",
+     "Union Station",
+     "Barracks Row",
+     "H Street",
+     "Lincoln Park"
+    ]
+   },
+   {
+    "id": "noma",
+    "name": "NoMa and Union Market",
+    "center": {
+     "lat": 38.907,
+     "lng": -77.003
+    },
+    "central": false,
+    "tip": "Newer apartments and hotels near Union Station and the Union Market food hall. NoMa-Gallaudet station.",
+    "aliases": [
+     "NoMa",
+     "Union Market",
+     "Navy Yard"
+    ]
+   },
+   {
+    "id": "foggy_bottom",
+    "name": "Foggy Bottom and the West End",
+    "center": {
+     "lat": 38.901,
+     "lng": -77.05
+    },
+    "central": false,
+    "tip": "Near the Lincoln Memorial, the river and Georgetown. Foggy Bottom station is the closest Metro to Georgetown.",
+    "aliases": [
+     "Foggy Bottom",
+     "West End",
+     "GWU",
+     "Kennedy Center",
+     "Watergate"
+    ]
+   },
+   {
+    "id": "georgetown",
+    "name": "Georgetown",
+    "center": {
+     "lat": 38.9055,
+     "lng": -77.063
+    },
+    "central": false,
+    "tip": "Brick Federal houses, shops and the canal. No Metro stop: walk from Foggy Bottom, or take a bus or ride.",
+    "aliases": [
+     "Georgetown",
+     "M Street",
+     "Wisconsin Avenue",
+     "Glover Park"
+    ]
+   },
+   {
+    "id": "dupont",
+    "name": "Dupont Circle and Logan Circle",
+    "center": {
+     "lat": 38.9096,
+     "lng": -77.0434
+    },
+    "central": false,
+    "tip": "Cafes, embassies and Victorian rowhouses, about 30 minutes' walk or a short Metro ride to the Mall. Dupont Circle station.",
+    "aliases": [
+     "Dupont Circle",
+     "Logan Circle",
+     "Embassy Row",
+     "Kalorama",
+     "14th Street"
+    ]
+   },
+   {
+    "id": "u_street",
+    "name": "U Street, Shaw and Adams Morgan",
+    "center": {
+     "lat": 38.917,
+     "lng": -77.03
+    },
+    "central": false,
+    "tip": "Music, nightlife and restaurants. U Street and Shaw stations.",
+    "aliases": [
+     "U Street",
+     "Shaw",
+     "Adams Morgan",
+     "Columbia Heights"
+    ]
+   },
+   {
+    "id": "wharf",
+    "name": "The Wharf and Navy Yard",
+    "center": {
+     "lat": 38.879,
+     "lng": -77.023
+    },
+    "central": false,
+    "tip": "Waterfront promenade, restaurants and the fish market. Waterfront and Navy Yard stations.",
+    "aliases": [
+     "The Wharf",
+     "Southwest Waterfront",
+     "Navy Yard",
+     "Southwest"
+    ]
+   },
+   {
+    "id": "arlington",
+    "name": "Arlington, Virginia",
+    "center": {
+     "lat": 38.88,
+     "lng": -77.07
+    },
+    "central": false,
+    "tip": "Across the Potomac with direct Metro lines into DC: Rosslyn, Pentagon City, Crystal City.",
+    "aliases": [
+     "Arlington",
+     "Rosslyn",
+     "Crystal City",
+     "Pentagon City",
+     "Clarendon",
+     "Ballston",
+     "National Landing"
+    ]
+   },
+   {
+    "id": "alexandria",
+    "name": "Old Town Alexandria, Virginia",
+    "center": {
+     "lat": 38.8048,
+     "lng": -77.043
+    },
+    "central": false,
+    "tip": "Historic brick town on the river, about 20 minutes by Metro from downtown DC. King Street-Old Town station.",
+    "aliases": [
+     "Alexandria",
+     "Old Town",
+     "King Street"
+    ]
+   },
+   {
+    "id": "maryland",
+    "name": "Maryland suburbs (Bethesda, Silver Spring…)",
+    "center": null,
+    "central": false,
+    "tip": "Red Line Metro runs into the city from Bethesda and Silver Spring.",
+    "aliases": [
+     "Bethesda",
+     "Silver Spring",
+     "Chevy Chase",
+     "National Harbor",
+     "College Park",
+     "Maryland"
+    ]
+   },
+   {
+    "id": "other",
+    "name": "Somewhere else, or not sure",
+    "center": null,
+    "central": false,
+    "tip": "",
+    "aliases": []
+   }
+  ],
+  "airports": [
+   {
+    "id": "DCA",
+    "name": "Reagan National airport (DCA)",
+    "short": "Reagan National",
+    "local": "Ronald Reagan Washington National Airport",
+    "location": {
+     "lat": 38.8512,
+     "lng": -77.0402
+    },
+    "tip": "The closest airport, in Virginia. Metro Blue and Yellow lines from the terminals; taxis are metered and take cash or card."
+   },
+   {
+    "id": "IAD",
+    "name": "Dulles airport (IAD)",
+    "short": "Dulles",
+    "local": "Washington Dulles International Airport",
+    "location": {
+     "lat": 38.9531,
+     "lng": -77.4565
+    },
+    "tip": "Most long-haul flights land here, in Virginia. The Silver Line takes about 50 minutes to Metro Center; by road it can take much longer at rush hour."
+   },
+   {
+    "id": "BWI",
+    "name": "Baltimore airport (BWI)",
+    "short": "BWI",
+    "local": "Baltimore/Washington International Thurgood Marshall Airport",
+    "location": {
+     "lat": 39.1754,
+     "lng": -76.6683
+    },
+    "tip": "In Maryland. A free 24-hour shuttle goes to the BWI rail station; MARC or Amtrak trains reach Union Station in about 35 minutes."
+   }
+  ],
+  "stations": [],
+  "getting_around": {
+   "items": [
+    {
+     "title": "Metro: just tap your card or phone",
+     "text": "Tap a contactless credit or debit card, or your phone or watch, at the faregate, and tap out with the same one. Each rider needs their own card or phone. No need to buy a SmarTrip card."
+    },
+    {
+     "title": "Metro fares",
+     "text": "Weekdays $2.25 to $6.75 depending on distance. After 9:30 p.m. on weeknights and all weekend, $2.25 to $2.50. Buses are $2.25, paid the same way."
+    },
+    {
+     "title": "From the airports",
+     "text": "Reagan National: Blue or Yellow Line from the terminal. Dulles: Silver Line, about 50 minutes to Metro Center. BWI: free shuttle to the rail station, then MARC or Amtrak to Union Station (about 35 minutes)."
+    },
+    {
+     "title": "Taxis and ride apps",
+     "text": "DC taxis use the meter; you can hail one on the street or find one at hotels and Union Station. Uber and Lyft work across DC, Virginia and Maryland, including the airports."
+    },
+    {
+     "title": "Walking the Mall",
+     "text": "The Mall is about 2 miles long, Capitol to Lincoln Memorial. The museums sit in the middle; the memorials are at the west end, around the Reflecting Pool and the Tidal Basin. Wear comfortable shoes and plan rests."
+    },
+    {
+     "title": "Driving and parking",
+     "text": "Parking downtown is scarce and costly, and the Smithsonian museums on the Mall have no parking. Use Metro or a ride app in the city; a car only helps for Mount Vernon or the Udvar-Hazy Center."
+    }
+   ],
+   "links": [
+    {
+     "label": "Tap. Ride. Go. (Metro, official)",
+     "url": "https://www.wmata.com/pay/tap-ride-go.html"
+    },
+    {
+     "label": "Metro trip planner and fares",
+     "url": "https://www.wmata.com"
+    }
+   ],
+   "checked": "2026-11-14",
+   "source": "WMATA (Tap. Ride. Go. and 2024 fare tables, fares unchanged for FY2027), BWI and Mount Vernon official sites, Smithsonian, Reagan National taxi page"
+  },
+  "taxis": {
+   "intro_bold": "DC taxis run on the meter.",
+   "intro": "Hail one on the street or find one at hotels, Union Station and the airports. At Reagan National, taxis wait outside baggage claim and take cash or card. Tip about 15 to 20%.",
+   "numbers": [],
+   "apps": "Uber and Lyft work across DC, Virginia and Maryland. Check the price in the app before you book.",
+   "checked": "2026-11-14"
+  },
+  "taxi_tariff": {
+   "currency_code": "USD",
+   "table_title": "DC taxi meter",
+   "periods": [
+    {
+     "id": "all",
+     "label": "all times",
+     "rule": "all times, incl. $0.50 surcharge and $1 fuel surcharge",
+     "base": 5.5
+    }
+   ],
+   "per_km": 1.59,
+   "per_hour_slow": 25,
+   "slow_min_per_km": [
+    1,
+    3
+   ],
+   "road_factor": 1.35,
+   "supplements": [
+    {
+     "label": "Each extra passenger (one charge)",
+     "amount": 1
+    },
+    {
+     "label": "Ordering a taxi by phone",
+     "amount": 2
+    }
+   ],
+   "rush_note": "The meter adds $25 an hour when the taxi is stopped or crawling, so traffic costs more. Trips from Reagan National and Dulles start in Virginia and use the airport's own taxi rates; airport fees and tolls are added.",
+   "note": "Rough estimate from the DC meter rates ($4.00 start, $2.56 a mile, shown here per km) and straight-line distance. The meter decides. The $1 fuel surcharge runs until Dec 25, 2026.",
+   "checked": "2026-11-14",
+   "source": "DC Department of For-Hire Vehicles taxicab fares (in force since Aug 2, 2024)"
+  },
+  "rides": {
+   "title": "Drivers and rides",
+   "intro": "In the city, Metro, taxis and ride apps cover almost everything. For Mount Vernon or a day in Virginia, a ride app or a car is simplest.",
+   "items": [
+    {
+     "name": "Taxis at Reagan National",
+     "what": "Metered taxis wait outside baggage claim at each terminal and take cash or card.",
+     "area": "Reagan National airport",
+     "listed_by": "Reagan National airport (official)",
+     "source_url": "https://flyreagan.com/dca/taxi-service",
+     "checked": "2026-11-14"
+    },
+    {
+     "name": "Uber and Lyft",
+     "what": "Ride apps work across the region, including the three airports.",
+     "area": "DC, Virginia and Maryland",
+     "listed_by": "Destination DC (official tourism site)",
+     "source_url": "https://washington.org",
+     "checked": "2026-11-14"
+    }
+   ],
+   "note": "Listed because an official source names them, not because Wanderings has ridden with them."
+  },
+  "connections": [],
+  "emergency": {
+   "checked": "2026-11-14",
+   "source": "DC Office of Unified Communications (911 and 311)"
+  },
+  "greeting_name": "Washington",
+  "brand": {
+   "tint": "#EEF0EC",
+   "note": "Clean theme: light tint behind the city mark (the pale limestone and marble of the Mall). The mark itself is art/washington-dc-mark.svg."
+  }
+ }
+]

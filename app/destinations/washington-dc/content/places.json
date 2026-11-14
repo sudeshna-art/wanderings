@@ -1,0 +1,1183 @@
+[
+ {
+  "id": "dc-lincoln",
+  "city_id": "washington-dc",
+  "name": "Lincoln Memorial",
+  "category": "sight",
+  "kind": "landmark",
+  "group": "mall",
+  "area": "West end of the Mall",
+  "must": true,
+  "popular": false,
+  "location": {
+   "lat": 38.8893,
+   "lng": -77.0502
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free · open 24 hours",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "nps.gov"
+  },
+  "lead_time": null,
+  "description": "The great marble temple at the west end of the Mall, with the seated Lincoln and his two most famous speeches carved on the walls. The view east over the Reflecting Pool is the city's classic picture.",
+  "tips": [
+   "Open 24 hours, every day. Rangers are on duty from 9:30 a.m. to 10 p.m.",
+   "Come back after dark: the memorial is lit and much quieter.",
+   "Nearest Metro: Foggy Bottom, about a 15 to 20 minute walk."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": false,
+   "warn": [
+    "stairs",
+    "no_shade"
+   ],
+   "note": "A wide flight of steps up the front. Ask a ranger about the accessible entrance."
+  }
+ },
+ {
+  "id": "dc-monument",
+  "city_id": "washington-dc",
+  "name": "Washington Monument",
+  "category": "sight",
+  "kind": "view",
+  "group": "mall",
+  "area": "Middle of the Mall",
+  "must": true,
+  "popular": false,
+  "location": {
+   "lat": 38.8895,
+   "lng": -77.0353
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "book_soon",
+  "ticket_url": "https://www.recreation.gov/ticket/facility/234635",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free · $1 online booking fee per ticket",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "nps.gov"
+  },
+  "lead_time": "Book ahead: tickets open online 30 days before at 10 a.m. Eastern, plus a day-before release.",
+  "description": "The marble obelisk at the center of the Mall. An elevator takes about 70 seconds to the top, with views over the city, the river and Virginia.",
+  "tips": [
+   "Free, but everyone 2 and older needs a timed ticket. Online tickets have a $1 booking fee.",
+   "Online tickets open 30 days ahead at 10 a.m. Eastern, with more released the day before. Make a recreation.gov account early.",
+   "Free same-day tickets at the Washington Monument Lodge on 15th Street from 8:45 a.m., while they last. Expect a line.",
+   "Closes one day a month for maintenance, on July 4 and Dec 25, and in high wind or storms. Check the alerts on nps.gov/wamo."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": "Closed Dec 25 and one day a month for maintenance",
+  "closed_source": {
+   "text": "National Park Service, Washington Monument",
+   "checked": "2026-11-14"
+  },
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "The visit is by elevator. Waiting outside before your time can be cold and windy."
+  },
+  "closed_dates": [
+   "12-25"
+  ],
+  "remind_before": true
+ },
+ {
+  "id": "dc-wwii-vietnam",
+  "city_id": "washington-dc",
+  "name": "World War II and Vietnam Veterans Memorials",
+  "category": "sight",
+  "kind": "landmark",
+  "group": "mall",
+  "area": "Between the Monument and Lincoln",
+  "must": false,
+  "popular": true,
+  "location": {
+   "lat": 38.8904,
+   "lng": -77.044
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free · open 24 hours",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "nps.gov"
+  },
+  "lead_time": null,
+  "description": "Two very different memorials a short walk apart: the fountains and granite pillars of the World War II Memorial, and the black wall of the Vietnam Veterans Memorial, cut into the ground with more than 58,000 names.",
+  "tips": [
+   "Open 24 hours and free.",
+   "Walk them on the way from the Washington Monument to the Lincoln Memorial."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "warn": [
+    "no_shade"
+   ],
+   "note": "Flat paths, few benches."
+  },
+  "short_name": "WWII and Vietnam memorials",
+  "theme": "history"
+ },
+ {
+  "id": "dc-tidal-basin",
+  "city_id": "washington-dc",
+  "name": "Tidal Basin memorials: MLK, FDR and Jefferson",
+  "category": "sight",
+  "kind": "landmark",
+  "group": "mall",
+  "area": "Tidal Basin",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.8862,
+   "lng": -77.0442
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free · open 24 hours",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "nps.gov"
+  },
+  "lead_time": null,
+  "description": "Three memorials around the Tidal Basin: Martin Luther King Jr. carved from a block of granite, the outdoor rooms of the FDR Memorial, and the domed Jefferson Memorial across the water.",
+  "tips": [
+   "Open 24 hours and free.",
+   "A walk around the water links all three. Allow an hour or more.",
+   "Beautiful at night, when the Jefferson Memorial is lit."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": false,
+   "warn": [
+    "long_walk",
+    "no_shade"
+   ],
+   "note": "Flat but long. Cold and windy by the water in November."
+  },
+  "short_name": "Tidal Basin memorials",
+  "theme": "history"
+ },
+ {
+  "id": "dc-white-house",
+  "city_id": "washington-dc",
+  "name": "The White House from Lafayette Square",
+  "category": "sight",
+  "kind": "landmark",
+  "group": "mall",
+  "area": "Pennsylvania Avenue NW",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.8995,
+   "lng": -77.0366
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free to see from outside",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "house.gov and washington.org"
+  },
+  "lead_time": null,
+  "description": "See the north front from Lafayette Square, or the south front from the Ellipse. The White House Visitor Center nearby has exhibits and a short film.",
+  "tips": [
+   "Tours for international visitors can only be requested through your embassy, well ahead, and are not guaranteed.",
+   "White House Visitor Center: 1450 Pennsylvania Avenue NW.",
+   "Security zones change often; follow the signs and the officers' directions."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "short_name": "The White House"
+ },
+ {
+  "id": "dc-air-space",
+  "city_id": "washington-dc",
+  "name": "National Air and Space Museum",
+  "category": "sight",
+  "kind": "museum",
+  "group": "museums",
+  "area": "National Mall",
+  "must": true,
+  "popular": false,
+  "location": {
+   "lat": 38.8882,
+   "lng": -77.0199
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "book_soon",
+  "ticket_url": "https://airandspace.si.edu/visit/museum-dc",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free · timed pass required",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "airandspace.si.edu"
+  },
+  "lead_time": "Reserve free timed passes before you go; same-day passes go fast.",
+  "description": "The Wright Flyer, Apollo 11's command module and a huge gallery of aircraft and spacecraft. After a decade of renovation, its last galleries reopened in fall 2026.",
+  "tips": [
+   "Free, but everyone needs a free timed-entry pass for the DC museum.",
+   "A limited batch of same-day passes is released online each morning at 8:30 a.m. Eastern.",
+   "Enter on Jefferson Drive, the National Mall side.",
+   "Open 10 a.m. to 5:30 p.m. daily except Dec 25."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": "Closed Dec 25",
+  "closed_source": {
+   "text": "Smithsonian Institution",
+   "checked": "2026-11-14"
+  },
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "Step-free, with elevators and benches."
+  },
+  "closed_dates": [
+   "12-25"
+  ],
+  "short_name": "Air and Space"
+ },
+ {
+  "id": "dc-nmaahc",
+  "city_id": "washington-dc",
+  "name": "National Museum of African American History and Culture",
+  "category": "sight",
+  "kind": "museum",
+  "group": "museums",
+  "area": "National Mall",
+  "must": true,
+  "popular": false,
+  "location": {
+   "lat": 38.8911,
+   "lng": -77.0326
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "book_soon",
+  "ticket_url": "https://nmaahc.si.edu/visit/passes",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free · timed pass required",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "nmaahc.si.edu"
+  },
+  "lead_time": "Reserve free timed passes before you go.",
+  "description": "A deeply moving museum that starts underground with the history of slavery and rises to music, sport and culture. Plan at least three hours.",
+  "tips": [
+   "Free, but everyone of any age needs a free timed-entry pass.",
+   "Advance passes open 30 days ahead at 8 a.m. Eastern; same-day passes go online at 8:15 a.m.",
+   "Open 10 a.m. to 5:30 p.m. Tuesday to Sunday, and noon to 5:30 p.m. on Monday. Closed Dec 25.",
+   "Start at the bottom, in the history galleries, then work your way up."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": "Closed Dec 25",
+  "closed_source": {
+   "text": "Smithsonian Institution",
+   "checked": "2026-11-14"
+  },
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "Step-free with elevators. The history galleries are crowded and emotionally heavy."
+  },
+  "closed_dates": [
+   "12-25"
+  ],
+  "short_name": "African American History museum",
+  "theme": "history"
+ },
+ {
+  "id": "dc-natural-history",
+  "city_id": "washington-dc",
+  "name": "National Museum of Natural History",
+  "category": "sight",
+  "kind": "museum",
+  "group": "museums",
+  "area": "National Mall",
+  "must": false,
+  "popular": true,
+  "location": {
+   "lat": 38.8913,
+   "lng": -77.0261
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free · no pass needed",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "washington.org timed-entry guide"
+  },
+  "lead_time": null,
+  "description": "Dinosaurs, the Hope Diamond, a life-size whale and the ocean hall, under a great rotunda with an African elephant.",
+  "tips": [
+   "Free, no pass needed.",
+   "Busiest at midday and on weekends; go at opening."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "short_name": "Natural History"
+ },
+ {
+  "id": "dc-american-history",
+  "city_id": "washington-dc",
+  "name": "National Museum of American History",
+  "category": "sight",
+  "kind": "museum",
+  "group": "museums",
+  "area": "National Mall",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.8912,
+   "lng": -77.03
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free · no pass needed",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "washington.org timed-entry guide"
+  },
+  "lead_time": null,
+  "description": "The Star-Spangled Banner that inspired the anthem, first ladies' gowns, presidents and pop culture. A good rainy-day museum.",
+  "tips": [
+   "Free, no pass needed."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "short_name": "American History"
+ },
+ {
+  "id": "dc-nga",
+  "city_id": "washington-dc",
+  "name": "National Gallery of Art",
+  "category": "sight",
+  "kind": "museum",
+  "group": "museums",
+  "area": "National Mall",
+  "must": false,
+  "popular": true,
+  "location": {
+   "lat": 38.8913,
+   "lng": -77.02
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free · open 10 a.m. to 5 p.m.",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "nga.gov"
+  },
+  "lead_time": null,
+  "description": "Old masters in the West Building, including the only Leonardo da Vinci painting in the Americas, and modern art in the I. M. Pei East Building, linked by an underground walkway.",
+  "tips": [
+   "Always free, no pass needed.",
+   "Open 10 a.m. to 5 p.m.",
+   "The Sculpture Garden next door is good for a break."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "short_name": "National Gallery"
+ },
+ {
+  "id": "dc-holocaust",
+  "city_id": "washington-dc",
+  "name": "United States Holocaust Memorial Museum",
+  "category": "sight",
+  "kind": "museum",
+  "group": "museums",
+  "area": "Near the Washington Monument",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.8867,
+   "lng": -77.0326
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free · no pass needed Sept to Feb",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "washington.org"
+  },
+  "lead_time": null,
+  "description": "The national memorial to the Holocaust, told through objects, photographs and survivors' voices. A powerful, demanding visit.",
+  "tips": [
+   "Free. From September to February no pass is needed for the permanent exhibition.",
+   "Open daily 10 a.m. to 5:30 p.m. Closed Yom Kippur and Dec 25.",
+   "Recommended for ages 11 and up; a separate exhibition, Daniel's Story, is for younger visitors."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": "Closed Yom Kippur and Dec 25",
+  "closed_source": {
+   "text": "Destination DC (washington.org)",
+   "checked": "2026-11-14"
+  },
+  "access": {
+   "teens": true,
+   "easy": true,
+   "note": "Step-free. The permanent exhibition is graphic in places."
+  },
+  "closed_dates": [
+   "12-25"
+  ],
+  "short_name": "Holocaust Museum",
+  "theme": "history"
+ },
+ {
+  "id": "dc-capitol",
+  "city_id": "washington-dc",
+  "name": "US Capitol tour",
+  "category": "sight",
+  "kind": "landmark",
+  "group": "capitol",
+  "area": "Capitol Hill",
+  "must": true,
+  "popular": false,
+  "location": {
+   "lat": 38.8899,
+   "lng": -77.0091
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://tours.visitthecapitol.gov/cvc",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free · guided tours",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "visitthecapitol.gov"
+  },
+  "lead_time": "Reserve a tour time online; same-day passes may be available.",
+  "description": "A free guided tour of the Crypt, the Rotunda under the dome and National Statuary Hall, starting at the underground Capitol Visitor Center.",
+  "tips": [
+   "Tours are free. Reserving a time is recommended, not required.",
+   "Open Monday to Saturday, 8:30 a.m. to 4:30 p.m. The last tour starts at 3:20 p.m.",
+   "No reservation? Arrive early, and no later than 2:30 p.m., for a same-day pass.",
+   "Check the prohibited items list before you go; security is airport-style."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [
+   0
+  ],
+  "closed_note": "Closed Sundays, Thanksgiving, Dec 25, Jan 1 and Inauguration Day",
+  "closed_source": {
+   "text": "Capitol Visitor Center",
+   "checked": "2026-11-14"
+  },
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "The visitor center and tour route are fully accessible."
+  },
+  "closed_dates": [
+   "12-25",
+   "01-01"
+  ],
+  "short_name": "The Capitol"
+ },
+ {
+  "id": "dc-library",
+  "city_id": "washington-dc",
+  "name": "Library of Congress",
+  "category": "sight",
+  "kind": "landmark",
+  "group": "capitol",
+  "area": "Capitol Hill",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.8887,
+   "lng": -77.0047
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "book_soon",
+  "ticket_url": "https://www.loc.gov/visit/",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free · timed ticket required",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "loc.gov"
+  },
+  "lead_time": "Reserve a free timed ticket; same-day tickets go online at 9 a.m.",
+  "description": "The Thomas Jefferson Building: a dazzling marble Great Hall, mosaics and a balcony view down into the domed Main Reading Room. Across the street from the Capitol.",
+  "tips": [
+   "Free, but you need a free timed-entry ticket.",
+   "Tickets open 30 days ahead; free same-day tickets go online each day at 9 a.m. Eastern.",
+   "Open Tuesday to Saturday, 10 a.m. to 5 p.m., to 8 p.m. on Thursdays. Closed Sundays and Mondays.",
+   "Easy to pair with a Capitol tour: a tunnel links the two buildings."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [
+   0,
+   1
+  ],
+  "closed_note": "Closed Sundays, Mondays and some federal holidays",
+  "closed_source": {
+   "text": "Library of Congress",
+   "checked": "2026-11-14"
+  },
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  }
+ },
+ {
+  "id": "dc-eastern-market",
+  "city_id": "washington-dc",
+  "name": "Eastern Market",
+  "category": "food",
+  "kind": "market",
+  "group": "capitol",
+  "area": "Capitol Hill",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.8866,
+   "lng": -76.9965
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "A brick market hall from 1873 with butchers, bakers, cheese and a lunch counter. On weekends, farmers, craft and flea stalls fill the street outside.",
+  "tips": [
+   "Indoor South Hall: Tuesday to Friday 7 a.m. to 7 p.m., Saturday 7 a.m. to 6 p.m., Sunday 9 a.m. to 5 p.m.",
+   "Weekends are the liveliest, with the outdoor stalls.",
+   "Eastern Market Metro is a short walk away."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [
+   1
+  ],
+  "closed_note": "Indoor hall closed Mondays",
+  "closed_source": {
+   "text": "Time Out Washington DC",
+   "checked": "2026-11-14"
+  },
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "food": {
+   "tags": [
+    "simple"
+   ],
+   "note": "Lots of choice: sandwiches, crab cakes, pastries and fruit."
+  },
+  "theme": "food"
+ },
+ {
+  "id": "dc-union-market",
+  "city_id": "washington-dc",
+  "name": "Union Market",
+  "category": "food",
+  "kind": "food",
+  "group": "hoods",
+  "area": "NoMa",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.9086,
+   "lng": -76.9973
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "A big, bright food hall with more than 40 local vendors, from tacos and ramen to oysters and cookies. La Cosecha, a Latin American market, is across the street.",
+  "tips": [
+   "Open Monday to Saturday 8 a.m. to 9 p.m., Sunday 8 a.m. to 8 p.m. Each stall sets its own hours.",
+   "A short ride from Union Station, or about 15 minutes' walk from NoMa-Gallaudet Metro."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "food": {
+   "tags": [
+    "simple"
+   ],
+   "note": "Many kitchens under one roof, so everyone finds something. Ask each stall about ingredients."
+  },
+  "theme": "food"
+ },
+ {
+  "id": "dc-bens",
+  "city_id": "washington-dc",
+  "name": "Ben's Chili Bowl",
+  "category": "food",
+  "kind": "food",
+  "group": "hoods",
+  "area": "U Street",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.917,
+   "lng": -77.0287
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "A U Street landmark since 1958, famous for its chili half-smoke. The original diner reopened in May 2026 after a long restoration, with its old counter and booths kept.",
+  "tips": [
+   "Open until 4 a.m. on Friday and Saturday nights.",
+   "Across from the U Street Metro station.",
+   "Expect a line at busy times; it moves fast."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "food": {
+   "tags": [
+    "pork_heavy",
+    "simple"
+   ],
+   "note": "Ask which sausages and chili contain pork; the menu has other choices."
+  },
+  "theme": "food"
+ },
+ {
+  "id": "dc-georgetown",
+  "city_id": "washington-dc",
+  "name": "Georgetown and the C&O Canal",
+  "category": "experience",
+  "kind": "view",
+  "group": "hoods",
+  "area": "Georgetown",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.905,
+   "lng": -77.063
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "The city's oldest neighborhood: brick Federal houses, cobbled side streets, shops along M Street and a towpath beside the old canal, down to the river and the waterfront park.",
+  "tips": [
+   "No Metro stop: walk from Foggy Bottom station, or take a bus or ride.",
+   "Walk the quiet residential streets north of M Street, then down to the waterfront."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": "Half a day",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": false,
+   "warn": [
+    "steep",
+    "cobblestones"
+   ],
+   "note": "Brick sidewalks and some steep streets up from the river."
+  },
+  "theme": "walks"
+ },
+ {
+  "id": "dc-wharf",
+  "city_id": "washington-dc",
+  "name": "The Wharf",
+  "category": "experience",
+  "kind": "view",
+  "group": "hoods",
+  "area": "Southwest Waterfront",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.879,
+   "lng": -77.023
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "A waterfront promenade with restaurants, piers and the Municipal Fish Market, a historic open-air seafood market. A good evening stroll.",
+  "tips": [
+   "Free to walk. Waterfront Metro is a few minutes away.",
+   "Easy to pair with the Tidal Basin memorials, a walk to the west."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "theme": "walks"
+ },
+ {
+  "id": "dc-arlington",
+  "city_id": "washington-dc",
+  "name": "Arlington National Cemetery",
+  "category": "day_trip",
+  "kind": "landmark",
+  "group": "virginia",
+  "area": "Arlington, Virginia",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.8821,
+   "lng": -77.0702
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "washington.org and Arlington National Cemetery"
+  },
+  "lead_time": null,
+  "description": "The national military cemetery across the river: rows of white headstones, the Kennedy graves and the Changing of the Guard at the Tomb of the Unknown Soldier.",
+  "tips": [
+   "Free. Open daily 8 a.m. to 5 p.m. from October to March.",
+   "The Changing of the Guard is every hour, on the hour, from October to March.",
+   "Metro Blue Line to Arlington Cemetery station, right by the welcome center.",
+   "An active cemetery with daily funerals: be quiet and respectful."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "Metro Blue Line to Arlington Cemetery",
+  "stay": "Half a day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": false,
+   "warn": [
+    "steep",
+    "long_walk",
+    "no_shade"
+   ],
+   "note": "Hilly and spread out. A paid tram tour saves the walking."
+  },
+  "theme": "history"
+ },
+ {
+  "id": "dc-alexandria",
+  "city_id": "washington-dc",
+  "name": "Old Town Alexandria",
+  "category": "day_trip",
+  "kind": "view",
+  "group": "virginia",
+  "area": "Alexandria, Virginia",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.8048,
+   "lng": -77.043
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "An 18th-century river town of brick rowhouses, shops and restaurants along King Street, down to the Potomac waterfront.",
+  "tips": [
+   "Take Metro to King Street-Old Town, then the free King Street Trolley down to the river.",
+   "The trolley runs every 15 minutes, 11 a.m. to 11 p.m., every day."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "Metro Blue or Yellow Line to King Street-Old Town, then the free trolley",
+  "stay": "Half a day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "theme": "walks"
+ },
+ {
+  "id": "dc-mount-vernon",
+  "city_id": "washington-dc",
+  "name": "George Washington's Mount Vernon",
+  "category": "day_trip",
+  "kind": "palace",
+  "group": "virginia",
+  "area": "Mount Vernon, Virginia",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.7293,
+   "lng": -77.1073
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.mountvernon.org/plan-your-visit",
+  "affiliate_url": null,
+  "price": {
+   "amount": 30,
+   "from": false,
+   "text": "$30 adults · $16 ages 6 to 11 · 5 and under free",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "mountvernon.org"
+  },
+  "lead_time": "Buy tickets online for a good Mansion tour time.",
+  "description": "George Washington's home and farm above the Potomac: the mansion, gardens, a working farm and the tombs of George and Martha Washington, with an honest look at the enslaved people who lived and worked here.",
+  "tips": [
+   "Adults $30, ages 6 to 11 $16, 5 and under free. Parking is free.",
+   "Open every day of the year; 9 a.m. to 4 p.m. from November to March.",
+   "Buy online for the best Mansion tour time; on busy days the next tour can be hours away.",
+   "By public transport: Metro Yellow Line to Huntington, then the Fairfax Connector bus."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "About 30 to 45 minutes by car or ride app; or Metro and bus",
+  "stay": "Half a day or more",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": false,
+   "warn": [
+    "long_walk"
+   ],
+   "note": "Gravel paths and a fair amount of walking between buildings."
+  },
+  "theme": "history"
+ },
+ {
+  "id": "dc-udvar-hazy",
+  "city_id": "washington-dc",
+  "name": "Udvar-Hazy Center (Air and Space)",
+  "category": "day_trip",
+  "kind": "museum",
+  "group": "virginia",
+  "area": "Chantilly, Virginia, near Dulles",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.911,
+   "lng": -77.444
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free · parking $15",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "Smithsonian Institution"
+  },
+  "lead_time": null,
+  "description": "Air and Space's giant hangars near Dulles airport: Space Shuttle Discovery, an SR-71 Blackbird, a Concorde and hundreds of aircraft.",
+  "tips": [
+   "Free, no passes needed. Open 10 a.m. to 5:30 p.m. daily except Dec 25.",
+   "Parking is $15, free after 4 p.m.",
+   "Good on the way to or from a flight at Dulles."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "By car or ride app, about 10 minutes from Dulles airport",
+  "stay": "Half a day",
+  "closed": [],
+  "closed_note": "Closed Dec 25",
+  "closed_source": {
+   "text": "Smithsonian Institution",
+   "checked": "2026-11-14"
+  },
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "Huge, flat hangars with elevators."
+  },
+  "closed_dates": [
+   "12-25"
+  ]
+ }
+]
