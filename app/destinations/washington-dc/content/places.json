@@ -2323,5 +2323,153 @@
    "note": "Steep, uneven streets and stone steps."
   },
   "theme": "tours"
+ },
+ {
+  "id": "dc-dinner-cruise",
+  "city_id": "washington-dc",
+  "name": "Potomac dinner cruises from The Wharf",
+  "category": "experience",
+  "kind": "boat",
+  "group": "hoods",
+  "area": "The Wharf, Pier 4",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.8787,
+   "lng": -77.0249
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.cityexperiences.com",
+  "affiliate_url": null,
+  "price": {
+   "amount": 106,
+   "from": true,
+   "text": "from about $106 (Odyssey); Spirit of Washington around $170",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "City Cruises listings on Tripster"
+  },
+  "lead_time": "Book ahead; weekend and holiday sailings fill up.",
+  "description": "City Cruises' evening cruises on the Potomac past the lit monuments, the Georgetown waterfront and the Jefferson and Lincoln memorials. Two styles: the elegant Odyssey, with a three-course plated dinner under glass, or the livelier Spirit of Washington, with a buffet and a DJ.",
+  "tips": [
+   "Odyssey: about 2.5 to 3 hours, from about $106. It sails under the low bridges for close-up views, and the dining rooms are climate-controlled, so it runs in any weather.",
+   "Spirit of Washington: about 2 to 2.5 hours with buffet and dancing, around $170.",
+   "Departs from Pier 4, 580 Water Street SW. Boarding starts 30 to 60 minutes before; check your ticket.",
+   "From Bethesda: Red Line to Gallery Place, then the Green Line to Waterfront, two blocks from the pier.",
+   "Tickets are sold per person with a table for your party, so it works well on your own. Drinks are extra."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": "2 to 3 hours",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "teens": true,
+   "easy": true
+  },
+  "theme": "tours"
+ },
+ {
+  "id": "dc-baltimore-cruise",
+  "city_id": "washington-dc",
+  "name": "Spirit of Baltimore dinner cruise",
+  "category": "experience",
+  "kind": "boat",
+  "group": "beyond",
+  "area": "Baltimore Inner Harbor",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 39.2843,
+   "lng": -76.6129
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.cityexperiences.com",
+  "affiliate_url": null,
+  "price": {
+   "amount": 94,
+   "from": true,
+   "text": "from about $94",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "City Cruises Baltimore listings (AAA, Booking.com)"
+  },
+  "lead_time": null,
+  "description": "A 2.5-hour evening cruise on Baltimore's Inner Harbor and the Patapsco River: buffet dinner, a DJ, and the city skyline lit up from the rooftop deck.",
+  "tips": [
+   "From about $94. Coffee and tea are included; other drinks are extra.",
+   "Departs from 561 Light Street, Inner Harbor. Boarding starts 30 minutes before.",
+   "City Cruises sails from Baltimore all year.",
+   "Pair it with a day in Baltimore by train, and check the last train back to Union Station before you book."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": "2.5 hours",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "teens": true,
+   "easy": true
+  },
+  "theme": "tours"
+ },
+ {
+  "id": "dc-potomac-sightseeing",
+  "city_id": "washington-dc",
+  "name": "Potomac sightseeing cruise and water taxi",
+  "category": "experience",
+  "kind": "boat",
+  "group": "hoods",
+  "area": "The Wharf, Transit Pier",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.8778,
+   "lng": -77.027
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.wharfdc.com/waterfront/city-cruises",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "A shorter, cheaper way onto the river: narrated sightseeing cruises past the monuments, or the water taxi between The Wharf, Georgetown, Old Town Alexandria and National Harbor.",
+  "tips": [
+   "Sightseeing cruises leave from the Transit Pier, 970 Wharf Street SW; dinner cruises use Pier 4.",
+   "Fewer departures in the cold months. Check the day's schedule before you go."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": "45 minutes and up",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "Open decks are cold in November; dress warmly."
+  },
+  "theme": "tours"
  }
 ]
