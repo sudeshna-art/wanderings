@@ -1,23 +1,23 @@
 /* Today: answers "what now?" for the current city. Simplified Oct 11 2026: the time-sensitive things first
    (meeting point, travel, bookings, clashes), then what to book, ideas, your base and a phrase. */
-import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202611132137';
-import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202611132137';
-import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202611132137';
-import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202611132137';
-import { tripChecks } from '../../models/checks.js?v=202611132137';
-import { timelineView } from './plan.js?v=202611132137';
-import { allPhotoIds } from './journal.js?v=202611132137';
-import { view as phraseView } from './phrases.js?v=202611132137';
-import { meetBlock } from './safety.js?v=202611132137';
-import { myLang, placeName, copyOf, checkedText, cityIds } from '../state.js?v=202611132137';
-import { speaksLocal } from '../../models/schema.js?v=202611132137';
-import { mapPackService } from '../../services/mappack-service.js?v=202611132137';
-import { clean, wide } from '../theme.js?v=202611132137';
-import { placeCards, checkText } from '../components.js?v=202611132137';
-import { closedText, closedOn } from '../../models/schema.js?v=202611132137';
-import { occasionAlert } from './group.js?v=202611132137';
-import { arrivalsAlert } from './together.js?v=202611132137';
-import { liveUpdates, isLive, LV } from './live.js?v=202611132137';
+import { S, P, curCityId, cityOf, cityName, cityTitle, placesIn, stayHere, homePoint, hoodOf, isPlanner, isWanderer, hasStays, today, itemInfo, addMount, placeById } from '../state.js?v=202611140948';
+import { esc, ic, ill, fmtISO, fmtDay, plural, modeIcon } from '../dom.js?v=202611140948';
+import { masthead, cityBar, legend, bookRow, placeRow, art, legInfo, bookingLine } from '../components.js?v=202611140948';
+import { stage, statusOf, isBooked, itemsOn, walkMinutes, sortedStays, bookingsOn, sortedBookings, localISO } from '../../models/schema.js?v=202611140948';
+import { tripChecks } from '../../models/checks.js?v=202611140948';
+import { timelineView } from './plan.js?v=202611140948';
+import { allPhotoIds } from './journal.js?v=202611140948';
+import { view as phraseView } from './phrases.js?v=202611140948';
+import { meetBlock } from './safety.js?v=202611140948';
+import { myLang, placeName, copyOf, checkedText, cityIds, noPhrases, phrasesOff } from '../state.js?v=202611140948';
+import { speaksLocal } from '../../models/schema.js?v=202611140948';
+import { mapPackService } from '../../services/mappack-service.js?v=202611140948';
+import { clean, wide } from '../theme.js?v=202611140948';
+import { placeCards, checkText } from '../components.js?v=202611140948';
+import { closedText, closedOn } from '../../models/schema.js?v=202611140948';
+import { occasionAlert } from './group.js?v=202611140948';
+import { arrivalsAlert } from './together.js?v=202611140948';
+import { liveUpdates, isLive, LV } from './live.js?v=202611140948';
 
 let slideTimer = null, slideIdx = 0;
 
@@ -189,7 +189,7 @@ export function renderToday() {
   const toBook = placesIn(cityId).filter(p => p.booking_status === 'required' && (p.must || p.urgency_level === 'book_soon') && ((p.category !== 'experience' && p.category !== 'day_trip') || p.remind_before))
     .sort((a, b) => (a.urgency_level === 'book_soon' ? 0 : 1) - (b.urgency_level === 'book_soon' ? 0 : 1));
   const unbooked = toBook.filter(p => !isBooked(S.trip, p.id));
-  const [moment, ph] = phraseNow();
+  const [moment, ph] = phrasesOff() ? ['', null] : phraseNow();
   const wants = placesIn(cityId).filter(p => statusOf(S.trip, p.id) === 'want');
   const visited = S.trip.saved.filter(s => s.status === 'went').length;
 
@@ -206,7 +206,7 @@ export function renderToday() {
   }
   const convert = S.trip.home_currency && S.trip.home_currency !== c.currency_code;
   html += `<div class="quick">
-    ${isWanderer() ? `<button data-act="pview" data-v="nearby" data-tab="places">${ic('compass')}Nearby</button>` : `<button data-act="go" data-tab="phrases">${ic('phrases')}Say it</button>`}
+    ${isWanderer() || noPhrases() ? `<button data-act="pview" data-v="nearby" data-tab="places">${ic('compass')}Nearby</button>` : `<button data-act="go" data-tab="phrases">${ic('phrases')}Say it</button>`}
     ${convert ? `<button data-act="go" data-tab="essentials" data-focus="#amtIn">${ic('convert')}Convert</button>` : ''}
     <button data-act="go" data-tab="essentials" data-focus="#taxiBlock">${ic('taxi')}Taxi</button>
     <button class="rec" data-act="go" data-tab="journal" data-focus="#jText"><span>${ic('mic')}</span>Record</button></div>`;
@@ -230,7 +230,7 @@ export function renderToday() {
       <div class="rows">${id.map(p => placeRow(p, true)).join('')}</div></div>`;
   }
   html += baseBlock(cityId, st);
-  if (!P().hidePhrases) html += `<div class="block"><div class="panel"><div class="label">Phrase for ${esc(moment.toLowerCase())}</div>
+  if (!phrasesOff()) html += `<div class="block"><div class="panel"><div class="label">Phrase for ${esc(moment.toLowerCase())}</div>
     <div style="display:flex;gap:12px;align-items:center;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:4px;min-width:0"><div class="it">${esc(ph.t)}</div>${myLang() === 'en' ? `<div class="say">${esc(ph.say)}</div>` : ''}${speaksLocal(myLang(), S.C.phrases.language) ? '' : `<div class="en">${esc(ph.m)}</div>`}</div>
     <button class="hear" data-act="say" data-text="${esc(ph.t)}" aria-label="Hear it">${ic('speak')}</button></div>
     <button class="text-btn" data-act="go" data-tab="phrases" style="align-self:flex-start;min-height:32px">More phrases</button></div></div>`;
@@ -344,7 +344,7 @@ function renderTodayClean() {
   const openOutings = outings.filter(o => !outingDone(o));
   const unbooked = openOutings.flatMap(o => o.list);
   const visited = S.trip.saved.filter(s => s.status === 'went').length;
-  const [moment, ph] = phraseNow();
+  const [moment, ph] = phrasesOff() ? ['', null] : phraseNow();
   const outingCards = os => os.map(o => o.list.length > 1 ? `<div class="choose"><div class="label">One outing, two ways · booking either counts</div><b style="font-size:17px">${esc(o.group)}</b>${placeCards(o.list)}</div>` : placeCards(o.list)).join('');
   const bookBlock = st.k === 'before' && outings.length ? (openOutings.length ? `<div class="block"><div class="head"><h2>Book before you go</h2><span class="small muted">${outings.length - openOutings.length} of ${outings.length} done</span></div>
         <p class="small muted">These sell out or need a set time. Checked ${esc(checkedText())}.</p>${outingCards(openOutings)}</div>`
@@ -382,7 +382,7 @@ function renderTodayClean() {
   html += planBlock(st);
   cut(MN);
   html += baseBlockClean(cityId, st);
-  if (!P().hidePhrases) html += `<div class="block"><div class="panel"><div class="label">Phrase for ${esc(moment.toLowerCase())}</div>
+  if (!phrasesOff()) html += `<div class="block"><div class="panel"><div class="label">Phrase for ${esc(moment.toLowerCase())}</div>
     <div style="display:flex;gap:12px;align-items:center;justify-content:space-between"><div style="display:flex;flex-direction:column;gap:3px;min-width:0"><div class="it">${esc(ph.t)}</div>${myLang() === 'en' ? `<div class="say">${esc(ph.say)}</div>` : ''}${speaksLocal(myLang(), S.C.phrases.language) ? '' : `<div class="en">${esc(ph.m)}</div>`}</div>
     <button class="hear" data-act="say" data-text="${esc(ph.t)}" aria-label="Hear it">${ic('speak')}</button></div>
     <button class="text-btn" data-act="go" data-tab="phrases" style="align-self:flex-start;min-height:32px">More phrases</button></div></div>`;

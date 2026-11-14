@@ -1,12 +1,12 @@
 /* Your group (Oct 12 2026, every edition): who's traveling, food notes, special occasions, the "Show your server"
    card, drivers and rides listed by official sources, and the traveler's own trusted drivers.
    Everything the traveler enters stays in her trip on this phone. */
-import { S, P, save, curCityId, cityOf, cityName, myLang, today } from '../state.js?v=202611132137';
-import { esc, ic, toast, $, fmtDay } from '../dom.js?v=202611132137';
-import { FOOD_PREFS, FOOD_ALLERGIES, OCCASIONS, occasionLabel, newOccasion, newDriver, hasFoodNotes, localISO } from '../../models/schema.js?v=202611132137';
-import { phraseFor, speaksLocal, tripDays } from '../../models/schema.js?v=202611132137';
-import { peopleEditor, shareButton, groupNote } from './together.js?v=202611132137';
-import { liveBlock } from './live.js?v=202611132137';
+import { S, P, save, curCityId, cityOf, cityName, myLang, today, noPhrases } from '../state.js?v=202611140948';
+import { esc, ic, toast, $, fmtDay } from '../dom.js?v=202611140948';
+import { FOOD_PREFS, FOOD_ALLERGIES, OCCASIONS, occasionLabel, newOccasion, newDriver, hasFoodNotes, localISO } from '../../models/schema.js?v=202611140948';
+import { phraseFor, speaksLocal, tripDays } from '../../models/schema.js?v=202611140948';
+import { peopleEditor, shareButton, groupNote } from './together.js?v=202611140948';
+import { liveBlock } from './live.js?v=202611140948';
 
 const chip = (act, k, label, on) => `<button class="chip" data-act="${act}" data-k="${esc(k)}" aria-pressed="${!!on}">${esc(label)}</button>`;
 
@@ -25,7 +25,7 @@ export function groupEditor() {
       <span class="small muted">Allergies</span>
       <div class="chips wrap" role="group" aria-label="Allergies">${FOOD_ALLERGIES.map(([k, l]) => chip('foodallergy', k, l, fd.allergies.includes(k))).join('')}</div>
       <label class="f" style="flex:none">Anything else (optional)<input type="text" data-bind="food.other" value="${esc(fd.other)}" placeholder="e.g. one of us is a picky eater"></label>
-      <p class="small muted" style="margin:0">Places with lots of seafood or pork get a note, and Phrases gets a card in ${esc(S.C.phrases.language_name)} to show your server. Food notes stay on this phone.</p></div>
+      <p class="small muted" style="margin:0">Places with lots of seafood or pork get a note${noPhrases() ? '.' : `, and Phrases gets a card in ${esc(S.C.phrases.language_name)} to show your server.`} Food notes stay on this phone.</p></div>
   </div>`;
 }
 export const refreshGroup = () => { const el = $('#groupEd'); if (el && el.isConnected) try { el.outerHTML = groupEditor(); } catch (e) {} };
@@ -97,9 +97,9 @@ export function groupBlock() {
   const ph = S.C.phrases;
   return `<div class="block" id="groupBlock" tabindex="-1"><h2>Your group</h2>${liveBlock()}${peopleEditor()}${S.trip.live ? '' : shareButton() + groupNote()}<div style="height:6px"></div>${groupEditor()}${serverButton()}
     <div style="padding-top:8px">${occasionsEditor()}</div>
-    <div style="display:flex;flex-direction:column;gap:6px;padding-top:8px"><span class="label">Phrases tab</span>
+    ${noPhrases() ? '' : `<div style="display:flex;flex-direction:column;gap:6px;padding-top:8px"><span class="label">Phrases tab</span>
       <div class="chips wrap" role="group" aria-label="Phrases tab">${chip('hidephrases', 'show', 'Show Phrases', !P().hidePhrases)}${chip('hidephrases', 'hide', 'Hide Phrases', !!P().hidePhrases)}</div>
-      <p class="small muted" style="margin:0">Already speak ${esc(ph.language_name)}? Hide the tab to keep the app simple. You can bring it back here anytime.</p></div></div>`;
+      <p class="small muted" style="margin:0">Already speak ${esc(ph.language_name)}? Hide the tab to keep the app simple. You can bring it back here anytime.</p></div>`}</div>`;
 }
 
 /* ---------- drivers and rides ---------- */
