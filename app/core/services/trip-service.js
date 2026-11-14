@@ -1,9 +1,9 @@
 /* trip-service: the traveler's own trip (stays, legs, saved, plan, journal). Lives only on this phone.
    Later provider: Firestore under an optional account, only if the owner approves accounts. */
-import { storageService } from './storage-service.js?v=202611141506';
-import { newTrip, migrateTrip } from '../models/schema.js?v=202611141506';
-import { fromV0 } from '../models/legacy.js?v=202611141506';
-import { EDITION } from '../../edition.config.js?v=202611141506';
+import { storageService } from './storage-service.js?v=202611141542';
+import { newTrip, migrateTrip } from '../models/schema.js?v=202611141542';
+import { fromV0 } from '../models/legacy.js?v=202611141542';
+import { EDITION } from '../../edition.config.js?v=202611141542';
 
 let saveTimer = null;
 

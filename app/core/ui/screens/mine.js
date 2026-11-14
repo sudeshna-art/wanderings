@@ -1,12 +1,12 @@
 /* Personal code (Nov 13 2026): optional. Keeps one traveler's journal and phrase favorites on every device
    (phone, laptop, browser or home-screen app) that has the code. No email or password.
    The code is stored on the device for all destinations; what was last synced is kept per destination. */
-import { EDITION } from '../../../edition.config.js?v=202611141506';
-import { S } from '../state.js?v=202611141506';
-import { esc, toast, $ } from '../dom.js?v=202611141506';
-import { syncService } from '../../services/sync-service.js?v=202611141506';
-import { tripService } from '../../services/trip-service.js?v=202611141506';
-import { mineDiff, applyMine } from '../../models/mine.js?v=202611141506';
+import { EDITION } from '../../../edition.config.js?v=202611141542';
+import { S, noPhrases } from '../state.js?v=202611141542';
+import { esc, toast, $ } from '../dom.js?v=202611141542';
+import { syncService } from '../../services/sync-service.js?v=202611141542';
+import { tripService } from '../../services/trip-service.js?v=202611141542';
+import { mineDiff, applyMine } from '../../models/mine.js?v=202611141542';
 
 const KEY = 'wanderings-mycode';
 export const MINE = { code: '', status: '', msg: '', busy: false };
@@ -93,7 +93,7 @@ export function mineBlock() {
   const open = `<button class="btn line sm" data-act="go" data-tab="trip" data-sub="journal" style="align-self:flex-start">Open your journal</button>`;
   const msg = MINE.msg && MINE.msg !== 'new' ? `<p class="small" style="margin:0;color:var(--red-ink, #a33)">${esc(MINE.msg)}</p>` : '';
   if (MINE.code) return `<div class="block" id="mineBlock"><h2>Journal</h2>
-    <p class="small muted" style="margin:0">Your journal and favorite phrases are on every device with your personal code. Photos stay on the device that took them.</p>
+    <p class="small muted" style="margin:0">Your ${noPhrases() ? 'journal is' : 'journal and favorite phrases are'} on every device with your personal code. Photos stay on the device that took them.</p>
     ${open}
     <div class="label" style="margin-top:6px">Your personal code${MINE.status ? ' · ' + esc(MINE.status) : ''}</div>
     <div style="font-family:var(--mono);font-size:17px;letter-spacing:.04em">${esc(MINE.code)}</div>
@@ -104,7 +104,7 @@ export function mineBlock() {
     ${open}
     <details style="margin-top:4px"${MINE.msg || MINE.busy ? ' open' : ''}><summary class="small" style="cursor:pointer;font-weight:600">Use your journal on more than one device?</summary>
       <div style="display:flex;flex-direction:column;gap:10px;padding-top:10px">
-        <p class="small muted" style="margin:0">Optional. A personal code keeps your journal and favorite phrases the same on your phone, laptop or any browser. No email or password.</p>
+        <p class="small muted" style="margin:0">Optional. A personal code keeps your ${noPhrases() ? 'journal' : 'journal and favorite phrases'} the same on your phone, laptop or any browser. No email or password.</p>
         <button class="btn sm" data-act="minemake" style="align-self:flex-start"${MINE.busy ? ' disabled' : ''}>Create my personal code</button>
         <div class="fields"><label class="f">Already have one? Enter it<input type="text" id="mineIn" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="e.g. NAME-K7P2Q-X9MZD"></label></div>
         <button class="btn line sm" data-act="mineuse" style="align-self:flex-start"${MINE.busy ? ' disabled' : ''}>Use this code</button>${msg}
