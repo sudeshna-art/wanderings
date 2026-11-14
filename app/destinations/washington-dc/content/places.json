@@ -1179,5 +1179,1149 @@
   "closed_dates": [
    "12-25"
   ]
+ },
+ {
+  "id": "dc-tatte-bethesda",
+  "city_id": "washington-dc",
+  "name": "Tatte Bakery & Cafe, Bethesda",
+  "category": "food",
+  "kind": "cafe",
+  "group": "bethesda",
+  "area": "Downtown Bethesda",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.9813,
+   "lng": -77.0935
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "A bright bakery cafe steps from Bethesda Row: pastries, shakshuka, breakfast sandwiches and salads, from early morning.",
+  "tips": [
+   "Good for: breakfast, coffee, a quick lunch.",
+   "Open Monday to Saturday 7 a.m. to 8 p.m., Sunday 8 a.m. to 7 p.m.",
+   "7276 Wisconsin Avenue."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "food": {
+   "tags": [
+    "simple"
+   ],
+   "note": "Lots of vegetarian dishes. Ask about ingredients at the counter."
+  },
+  "theme": "bethesda"
+ },
+ {
+  "id": "dc-popup-bagels",
+  "city_id": "washington-dc",
+  "name": "PopUp Bagels",
+  "category": "food",
+  "kind": "cafe",
+  "group": "bethesda",
+  "area": "Woodmont Triangle, Bethesda",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.9865,
+   "lng": -77.0975
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "New in Bethesda in 2026: warm 'rip and dip' bagels with signature schmears. A fast breakfast on the way to work.",
+  "tips": [
+   "Good for: breakfast to go.",
+   "7607 Old Georgetown Road."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "food": {
+   "tags": [
+    "simple"
+   ],
+   "note": "Simple and quick."
+  },
+  "theme": "bethesda"
+ },
+ {
+  "id": "dc-dalias",
+  "city_id": "washington-dc",
+  "name": "Dalia's Falafel",
+  "category": "food",
+  "kind": "food",
+  "group": "bethesda",
+  "area": "Woodmont Triangle, Bethesda",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.9878,
+   "lng": -77.0985
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "Began as a pop-up: falafel bowls, pita and kebabs with a clean-eating focus. A light, quick lunch.",
+  "tips": [
+   "Good for: weekday lunch.",
+   "7750 Old Georgetown Road."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "food": {
+   "tags": [
+    "simple"
+   ],
+   "note": "Plenty of vegetarian choices."
+  },
+  "theme": "bethesda"
+ },
+ {
+  "id": "dc-six-ways",
+  "city_id": "washington-dc",
+  "name": "Six Ways to Sunday",
+  "category": "food",
+  "kind": "food",
+  "group": "bethesda",
+  "area": "Woodmont Triangle, Bethesda",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.9905,
+   "lng": -77.096
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "A small Sino-Siamese spot with fusion plates inspired by Bangkok's late-night food culture.",
+  "tips": [
+   "Good for: dinner with a friend or two.",
+   "8003 Norfolk Avenue."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "teens": true,
+   "easy": true
+  },
+  "food": {
+   "tags": [
+    "pork_heavy"
+   ],
+   "note": "Ask which dishes contain pork or shellfish."
+  },
+  "theme": "bethesda"
+ },
+ {
+  "id": "dc-agora-bethesda",
+  "city_id": "washington-dc",
+  "name": "Agora Bethesda",
+  "category": "food",
+  "kind": "food",
+  "group": "bethesda",
+  "area": "Bethesda Metro Center",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.9846,
+   "lng": -77.0942
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "Mezze from Turkey, Greece and Lebanon under the Hyatt Regency, right above Bethesda Metro. Opened in July 2026; the third Agora after DC and Tysons.",
+  "tips": [
+   "Good for: dinner, a group meal, weekend brunch (bottomless brunch option).",
+   "1 Bethesda Metro Center, at Wisconsin Avenue.",
+   "Book a table for weekend evenings and brunch."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "food": {
+   "tags": [
+    "simple"
+   ],
+   "note": "Lots of shared plates, many vegetarian. Ask about halal meat and alcohol in sauces."
+  },
+  "theme": "bethesda"
+ },
+ {
+  "id": "dc-pisco-y-nazca",
+  "city_id": "washington-dc",
+  "name": "Pisco y Nazca",
+  "category": "food",
+  "kind": "food",
+  "group": "bethesda",
+  "area": "Downtown Bethesda",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.9838,
+   "lng": -77.096
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "Modern Peruvian: eight ceviches, lomo saltado and fusion dishes, with pisco sours.",
+  "tips": [
+   "Good for: a lively lunch or dinner.",
+   "7401 Woodmont Avenue."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "teens": true,
+   "easy": true
+  },
+  "food": {
+   "tags": [
+    "seafood"
+   ],
+   "note": "Seafood-forward; meat dishes too. Ask what contains pork."
+  },
+  "theme": "bethesda"
+ },
+ {
+  "id": "dc-mon-ami-gabi",
+  "city_id": "washington-dc",
+  "name": "Mon Ami Gabi",
+  "category": "food",
+  "kind": "food",
+  "group": "bethesda",
+  "area": "Bethesda Row",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.9812,
+   "lng": -77.0966
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "A long-running, recently renovated French bistro on Bethesda Row: steak frites and onion soup.",
+  "tips": [
+   "Good for: a relaxed dinner after a walk on Bethesda Row.",
+   "7239 Woodmont Avenue."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "food": {
+   "tags": [
+    "simple"
+   ],
+   "note": "Classic bistro menu."
+  },
+  "theme": "bethesda"
+ },
+ {
+  "id": "dc-food-market",
+  "city_id": "washington-dc",
+  "name": "The Food Market",
+  "category": "food",
+  "kind": "food",
+  "group": "bethesda",
+  "area": "Downtown Bethesda",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.983,
+   "lng": -77.0925
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "Chef Chad Gauss's comfort-food restaurant with mixed cuisines and a long cocktail list. Made for a long sit-down.",
+  "tips": [
+   "Good for: a celebration dinner.",
+   "4720 Hampden Lane."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "teens": true,
+   "easy": true
+  },
+  "food": {
+   "tags": [
+    "simple"
+   ],
+   "note": "Mixed menu. Ask about ingredients."
+  },
+  "theme": "bethesda"
+ },
+ {
+  "id": "dc-bethesda-row",
+  "city_id": "washington-dc",
+  "name": "Bethesda Row",
+  "category": "experience",
+  "kind": "shop",
+  "group": "bethesda",
+  "area": "Bethesda Avenue and Woodmont Avenue",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.981,
+   "lng": -77.096
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "Bethesda's walkable shopping and dining streets around Bethesda Avenue and Woodmont Avenue, with fashion and lifestyle shops, cafes and restaurants.",
+  "tips": [
+   "Good for: an evening stroll after work, or Saturday shopping.",
+   "The free Bethesda Circulator stops nearby."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": "An hour or two",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "theme": "bethesda"
+ },
+ {
+  "id": "dc-capital-crescent",
+  "city_id": "washington-dc",
+  "name": "Capital Crescent Trail to Georgetown",
+  "category": "experience",
+  "kind": "trail",
+  "group": "bethesda",
+  "area": "Bethesda to Georgetown",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.9805,
+   "lng": -77.0975
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "National Park Service and the Coalition for the Capital Crescent Trail"
+  },
+  "lead_time": null,
+  "description": "A paved, 7-mile rail trail through the trees from downtown Bethesda to the Georgetown waterfront. Gently downhill toward Georgetown.",
+  "tips": [
+   "Good for: a weekend morning walk, run or bike ride.",
+   "The trailhead is on Bethesda Avenue, just west of Woodmont Avenue.",
+   "Rent a Capital Bikeshare bike in Bethesda (station at Woodmont Avenue and Strathmore Street) and ride down to Georgetown.",
+   "In Georgetown the trail ends at Water Street NW, near the waterfront."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": "Half a day",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "teens": true,
+   "easy": false,
+   "warn": [
+    "long_walk"
+   ],
+   "note": "Paved and wide. It climbs gently on the way back to Bethesda."
+  },
+  "theme": "bethesda"
+ },
+ {
+  "id": "dc-round-house",
+  "city_id": "washington-dc",
+  "name": "Round House Theatre",
+  "category": "experience",
+  "kind": "music",
+  "group": "bethesda",
+  "area": "Downtown Bethesda",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.985,
+   "lng": -77.0905
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.roundhousetheatre.org",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Tickets vary by show",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "roundhousetheatre.org"
+  },
+  "lead_time": null,
+  "description": "Bethesda's well-loved theater, celebrating its 50th anniversary, with new plays and many Helen Hayes Award nominations.",
+  "tips": [
+   "Good for: an evening out without going into DC.",
+   "4545 East-West Highway, a short walk from Bethesda Metro.",
+   "Check the season and buy tickets ahead."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "teens": true,
+   "easy": true
+  },
+  "theme": "bethesda"
+ },
+ {
+  "id": "dc-strathmore",
+  "city_id": "washington-dc",
+  "name": "Strathmore",
+  "category": "experience",
+  "kind": "music",
+  "group": "bethesda",
+  "area": "North Bethesda",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 39.0289,
+   "lng": -77.1037
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.strathmore.org",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Tickets vary by concert",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "strathmore.org"
+  },
+  "lead_time": null,
+  "description": "A concert hall and historic mansion beside Grosvenor-Strathmore Metro: orchestras, touring artists and jazz in the Music Center, smaller concerts, exhibitions and afternoon teas in the Mansion.",
+  "tips": [
+   "Good for: an evening concert.",
+   "Two stops north of Bethesda on the Red Line; a covered sky bridge links the Metro garage to the Music Center.",
+   "5301 Tuckerman Lane. Check strathmore.org for the calendar."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "teens": true,
+   "easy": true,
+   "note": "Step-free from the Metro garage across the sky bridge."
+  },
+  "theme": "bethesda"
+ },
+ {
+  "id": "dc-mccrillis",
+  "city_id": "washington-dc",
+  "name": "McCrillis Gardens",
+  "category": "experience",
+  "kind": "garden",
+  "group": "bethesda",
+  "area": "Bethesda",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.9977,
+   "lng": -77.1166
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "A quiet five-acre garden with walking paths, gazebos and benches. A peaceful break close to downtown Bethesda.",
+  "tips": [
+   "Good for: a quiet morning or a lunchtime walk.",
+   "6910 Greentree Road."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "theme": "bethesda"
+ },
+ {
+  "id": "dc-glen-echo",
+  "city_id": "washington-dc",
+  "name": "Glen Echo Park",
+  "category": "experience",
+  "kind": "landmark",
+  "group": "bethesda",
+  "area": "Glen Echo, Maryland",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.966,
+   "lng": -77.138
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free · free parking",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "National Park Service"
+  },
+  "lead_time": null,
+  "description": "A former amusement park on the Potomac, now an arts park run with the National Park Service: Art Deco buildings, studios, galleries and dances in the historic Spanish Ballroom.",
+  "tips": [
+   "Good for: a weekend afternoon.",
+   "Grounds open daily 6 a.m. to 1 a.m. Free entry and free parking.",
+   "The 1921 Dentzel carousel runs in the warmer months, not in November.",
+   "Check glenechopark.org for social dances and events."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "About 15 minutes by car or ride app from downtown Bethesda",
+  "stay": null,
+  "closed": [],
+  "closed_note": "Closed Thanksgiving and Dec 25",
+  "closed_source": {
+   "text": "National Park Service",
+   "checked": "2026-11-14"
+  },
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "closed_dates": [
+   "12-25"
+  ],
+  "theme": "bethesda"
+ },
+ {
+  "id": "dc-great-falls-md",
+  "city_id": "washington-dc",
+  "name": "Great Falls (C&O Canal, Maryland side)",
+  "category": "day_trip",
+  "kind": "view",
+  "group": "bethesda",
+  "area": "Potomac, Maryland",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 39.0019,
+   "lng": -77.2468
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": 20,
+   "from": false,
+   "text": "$20 per car, valid 7 days",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "nps.gov/choh"
+  },
+  "lead_time": null,
+  "description": "The Potomac pours through a rocky gorge just outside the city. From Great Falls Tavern, walk along the old canal and out to the overlooks.",
+  "tips": [
+   "$20 per car, valid 7 days and also at Great Falls Park in Virginia. Card only at the entrance.",
+   "Grounds open during daylight. From November to February the visitor center is closed Monday to Wednesday.",
+   "Wear good shoes: rocky paths, and the river is dangerous. Stay behind the barriers."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "About 25 minutes by car or ride app from Bethesda; no Metro",
+  "stay": "Half a day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "teens": true,
+   "easy": false,
+   "warn": [
+    "uneven",
+    "rough_water"
+   ],
+   "note": "Flat towpath to the canal, rocky paths to the overlooks."
+  },
+  "theme": "bethesda"
+ },
+ {
+  "id": "dc-cathedral",
+  "city_id": "washington-dc",
+  "name": "Washington National Cathedral",
+  "category": "sight",
+  "kind": "landmark",
+  "group": "hoods",
+  "area": "Upper Wisconsin Avenue NW",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.9306,
+   "lng": -77.0707
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://cathedral.org",
+  "affiliate_url": null,
+  "price": {
+   "amount": 12,
+   "from": false,
+   "text": "$12 adults · $8 ages 5 to 17",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "washington.org and cathedral.org"
+  },
+  "lead_time": null,
+  "description": "A vast Gothic cathedral on a hill, with stained glass, carved stone and views over the city. On Wisconsin Avenue between Bethesda and Georgetown.",
+  "tips": [
+   "Sightseeing admission: $12 adults, $8 ages 5 to 17, 4 and under free.",
+   "Sightseeing most Mondays to Saturdays; Sundays are for worship. Events can close it, so check the visiting page first.",
+   "Buy online up to 24 hours ahead, or at the door.",
+   "Nearest Metro: Tenleytown or Woodley Park, about 1.5 miles away. A ride app is easier."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [
+   0
+  ],
+  "closed_note": "No sightseeing on Sundays",
+  "closed_source": {
+   "text": "Washington National Cathedral",
+   "checked": "2026-11-14"
+  },
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "theme": "history"
+ },
+ {
+  "id": "dc-big-bus",
+  "city_id": "washington-dc",
+  "name": "Big Bus hop-on hop-off tour",
+  "category": "experience",
+  "kind": "view",
+  "group": "mall",
+  "area": "Starts at Union Station",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.8973,
+   "lng": -77.0063
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.bigbustours.com/en/washington-dc/washington-dc-tour-tickets-and-passes/bus-tours",
+  "affiliate_url": null,
+  "price": {
+   "amount": 54,
+   "from": true,
+   "text": "from $54 online · 24 hours",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "bigbustours.com"
+  },
+  "lead_time": null,
+  "description": "Open-top double-decker buses loop past the memorials, museums and the Capitol with recorded commentary in several languages. Hop off where you like and catch a later bus.",
+  "tips": [
+   "Online tickets from $54 for 24 hours (full price $65); 48 and 72 hour tickets cost more.",
+   "In winter, buses come every 30 to 45 minutes; the first bus is around 9:30 a.m. and the last around 4:30 p.m.",
+   "Big Bus also runs a 2-hour panoramic night tour.",
+   "Union Station is on the Red Line, direct from Bethesda. Track the buses in the Big Bus app."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": "A day, on and off",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "The open top deck is cold in November; sit downstairs if needed."
+  },
+  "theme": "tours"
+ },
+ {
+  "id": "dc-moonlight",
+  "city_id": "washington-dc",
+  "name": "Monuments by Moonlight night tour",
+  "category": "experience",
+  "kind": "landmark",
+  "group": "mall",
+  "area": "Union Station or Washington Welcome Center",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.897,
+   "lng": -77.0258
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.trolleytours.com/washington-dc",
+  "affiliate_url": null,
+  "price": {
+   "amount": 59.95,
+   "from": false,
+   "text": "about $60 per adult",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "Old Town Trolley Tours via Tripster and Travelocity listings"
+  },
+  "lead_time": "Book ahead; popular nights sell out.",
+  "description": "A 2.5-hour trolley tour with a live guide after dark, with stops to walk up to the lit memorials, including MLK and FDR, Lincoln, Vietnam and Korean War.",
+  "tips": [
+   "Departs at 7:30 p.m. from Union Station or the Washington Welcome Center, 1001 E Street NW. About $60 per adult.",
+   "Runs nightly except July 4, Thanksgiving and Dec 25.",
+   "A good way to see the memorials at night without walking alone."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": "2.5 hours",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": "No tours July 4, Thanksgiving and Dec 25",
+  "closed_source": {
+   "text": "Old Town Trolley Tours (tour listings)",
+   "checked": "2026-11-14"
+  },
+  "access": {
+   "teens": true,
+   "easy": true
+  },
+  "closed_dates": [
+   "12-25",
+   "07-04"
+  ],
+  "theme": "tours"
+ },
+ {
+  "id": "dc-wine-tour",
+  "city_id": "washington-dc",
+  "name": "Virginia wine country group tour",
+  "category": "experience",
+  "kind": "wine",
+  "group": "virginia",
+  "area": "Loudoun and Fauquier counties, Virginia",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 39.1157,
+   "lng": -77.5636
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": 99,
+   "from": true,
+   "text": "from about $99 (Vineyard Voyages)",
+   "currency_code": "USD",
+   "checked": "2026-11-14",
+   "source": "Vineyard Voyages listing; washington.org (Spirited Tours)"
+  },
+  "lead_time": null,
+  "description": "Join a small-group day tour to Northern Virginia's wineries: transport, a guide and tastings at two or three wineries, without driving.",
+  "tips": [
+   "Spirited Tours (listed by Destination DC): group tours with a certified wine guide, pickups in DC at L'Enfant Plaza and at Ballston and Vienna Metro stations.",
+   "Vineyard Voyages: 6 to 7 hour day trips from DC or Leesburg, from $99.",
+   "Tastings and lunch are often extra; check what each tour includes.",
+   "Group tours sell single seats, so they work well on your own."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "Tour bus or van with pickup in DC or at a Metro station",
+  "stay": "6 to 7 hours",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "easy": true,
+   "note": "21 and over for tastings. Bring ID."
+  },
+  "theme": "tours"
+ },
+ {
+  "id": "dc-philadelphia",
+  "city_id": "washington-dc",
+  "name": "Philadelphia by train",
+  "category": "day_trip",
+  "kind": "landmark",
+  "group": "beyond",
+  "area": "Philadelphia, Pennsylvania",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 39.9489,
+   "lng": -75.15
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.amtrak.com",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "The Liberty Bell, Independence Hall and Reading Terminal Market, a simple day trip by train from Union Station.",
+  "tips": [
+   "Amtrak Northeast Regional takes about 2 hours, Acela about 1 hour 40 minutes, with many trains a day.",
+   "Union Station is on the Red Line, direct from Bethesda.",
+   "Book Amtrak ahead for lower fares; holiday weekends fill up early."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "Amtrak from Union Station to Philadelphia 30th Street",
+  "stay": "A full day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "teens": true,
+   "easy": true
+  },
+  "theme": "tours"
+ },
+ {
+  "id": "dc-baltimore",
+  "city_id": "washington-dc",
+  "name": "Baltimore by train",
+  "category": "day_trip",
+  "kind": "view",
+  "group": "beyond",
+  "area": "Baltimore, Maryland",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 39.2858,
+   "lng": -76.6131
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.amtrak.com",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "The Inner Harbor waterfront, the National Aquarium and Fells Point's old streets and seafood.",
+  "tips": [
+   "Amtrak Northeast Regional is about 40 minutes from Union Station, Acela about 30.",
+   "Then a short ride from Baltimore Penn Station to the harbor."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "Amtrak from Union Station to Baltimore Penn Station",
+  "stay": "Half a day or more",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "theme": "tours"
+ },
+ {
+  "id": "dc-harpers-ferry",
+  "city_id": "washington-dc",
+  "name": "Harpers Ferry, West Virginia",
+  "category": "day_trip",
+  "kind": "view",
+  "group": "beyond",
+  "area": "Harpers Ferry, West Virginia",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 39.3254,
+   "lng": -77.7389
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "A historic river town where the Potomac and Shenandoah meet, now a national historical park with hiking and views. About 70 miles from DC.",
+  "tips": [
+   "Trains don't allow a same-day round trip (MARC runs weekdays only, Amtrak once a day), so go by car, ride app or a guided tour.",
+   "Wear good shoes for the steep streets and trails."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "By car (about 1.5 hours) or a guided day tour",
+  "stay": "A full day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "teens": true,
+   "easy": false,
+   "warn": [
+    "steep",
+    "uneven"
+   ],
+   "note": "Steep, uneven streets and stone steps."
+  },
+  "theme": "tours"
  }
 ]

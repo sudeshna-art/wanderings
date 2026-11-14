@@ -1,18 +1,18 @@
 /* Essentials: emergency card, you and your trip, bookings, getting between places, currency, getting around,
    taxis, audio, know-how, emergencies. */
-import { mineBlock } from './mine.js?v=202611140948';
-import { EDITION } from '../../../edition.config.js?v=202611140948';
-import { S, P, save, curCityId, cityOf, cityName, cityIds, spot, spotOptions, homePoint, addMount, noPhrases, phrasesOff, hasMapPacks } from '../state.js?v=202611140948';
-import { esc, ic, fmtNum, parseNum, fmtISO, $, modeIcon } from '../dom.js?v=202611140948';
-import { masthead, cityBar, styleChoice, staysEditor, arrivalFields, homeCurrencySelect } from '../components.js?v=202611140948';
-import { currencyService } from '../../services/currency-service.js?v=202611140948';
-import { fareService } from '../../services/fare-service.js?v=202611140948';
-import { speechService } from '../../services/speech-service.js?v=202611140948';
-import { languageSelect } from './phrases.js?v=202611140948';
-import { offlineMapsBlock, fillOfflineMaps } from './offline.js?v=202611140948';
-import { bookingsBlock } from './bookings.js?v=202611140948';
-import { clean } from '../theme.js?v=202611140948';
-import { groupBlock, ridesBlock } from './group.js?v=202611140948';
+import { mineBlock } from './mine.js?v=202611141003';
+import { EDITION } from '../../../edition.config.js?v=202611141003';
+import { S, P, save, curCityId, cityOf, cityName, cityIds, spot, spotOptions, homePoint, addMount, noPhrases, phrasesOff, hasMapPacks } from '../state.js?v=202611141003';
+import { esc, ic, fmtNum, parseNum, fmtISO, $, modeIcon } from '../dom.js?v=202611141003';
+import { masthead, cityBar, styleChoice, staysEditor, arrivalFields, homeCurrencySelect } from '../components.js?v=202611141003';
+import { currencyService } from '../../services/currency-service.js?v=202611141003';
+import { fareService } from '../../services/fare-service.js?v=202611141003';
+import { speechService } from '../../services/speech-service.js?v=202611141003';
+import { languageSelect } from './phrases.js?v=202611141003';
+import { offlineMapsBlock, fillOfflineMaps } from './offline.js?v=202611141003';
+import { bookingsBlock } from './bookings.js?v=202611141003';
+import { clean } from '../theme.js?v=202611141003';
+import { groupBlock, ridesBlock } from './group.js?v=202611141003';
 
 export const E = { rate: null };
 

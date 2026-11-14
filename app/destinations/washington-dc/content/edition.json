@@ -2,7 +2,7 @@
  "schema_version": 1,
  "edition_id": "washington-dc",
  "name": "Wanderings Washington, DC",
- "tagline": "The capital and nearby Virginia",
+ "tagline": "The capital, Bethesda and nearby Virginia",
  "language": "en-US",
  "language_name": "English",
  "city_ids": [
@@ -90,7 +90,7 @@
  ],
  "copy": {
   "place": "Washington, DC",
-  "place_list": "Washington, DC and nearby Virginia",
+  "place_list": "Washington, DC, Bethesda and nearby Virginia",
   "hashtags": "#WashingtonDC #NationalMall #travel",
   "file_prefix": "washington-dc",
   "greeting_place": "Washington"
@@ -108,6 +108,14 @@
   {
    "id": "food",
    "name": "Food"
+  },
+  {
+   "id": "bethesda",
+   "name": "Bethesda: mornings, evenings and weekends"
+  },
+  {
+   "id": "tours",
+   "name": "Tours you can join on your own"
   }
  ]
 }

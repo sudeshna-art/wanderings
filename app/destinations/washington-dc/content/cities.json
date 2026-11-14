@@ -51,6 +51,14 @@
    {
     "id": "virginia",
     "name": "Across the river in Virginia"
+   },
+   {
+    "id": "bethesda",
+    "name": "Bethesda and nearby Maryland"
+   },
+   {
+    "id": "beyond",
+    "name": "Further afield: Philadelphia, Baltimore, West Virginia"
    }
   ],
   "neighborhoods": [
@@ -240,15 +248,45 @@
     ]
    },
    {
-    "id": "maryland",
-    "name": "Maryland suburbs (Bethesda, Silver Spring…)",
-    "center": null,
+    "id": "bethesda",
+    "name": "Bethesda, Maryland",
+    "center": {
+     "lat": 38.9843,
+     "lng": -77.0941
+    },
     "central": false,
-    "tip": "Red Line Metro runs into the city from Bethesda and Silver Spring.",
+    "tip": "Downtown Bethesda is walkable, with the free Bethesda Circulator bus. The Red Line runs from Bethesda station to Metro Center in about 20 minutes.",
     "aliases": [
      "Bethesda",
-     "Silver Spring",
+     "Downtown Bethesda",
+     "Woodmont Triangle",
+     "Bethesda Row",
+     "Wisconsin Avenue",
+     "Old Georgetown Road",
+     "Marriott headquarters",
+     "Medical Center",
+     "NIH",
      "Chevy Chase",
+     "Friendship Heights",
+     "North Bethesda",
+     "Pike & Rose",
+     "Grosvenor",
+     "Strathmore",
+     "20814",
+     "20817"
+    ]
+   },
+   {
+    "id": "maryland",
+    "name": "Elsewhere in Maryland (Silver Spring, Rockville…)",
+    "center": null,
+    "central": false,
+    "tip": "Red Line Metro runs into the city from Rockville and Silver Spring.",
+    "aliases": [
+     "Silver Spring",
+     "Rockville",
+     "Gaithersburg",
+     "Potomac",
      "National Harbor",
      "College Park",
      "Maryland"
@@ -310,6 +348,14 @@
      "text": "Weekdays $2.25 to $6.75 depending on distance. After 9:30 p.m. on weeknights and all weekend, $2.25 to $2.50. Buses are $2.25, paid the same way."
     },
     {
+     "title": "From Bethesda",
+     "text": "Red Line from Bethesda station to Metro Center, about 20 minutes. For Virginia, change at Metro Center to the Blue, Orange or Silver Line (Rosslyn, Arlington Cemetery). For Reagan National airport, take the Blue Line from Metro Center or the Yellow Line from Gallery Place."
+    },
+    {
+     "title": "Around downtown Bethesda",
+     "text": "The free Bethesda Circulator bus loops past the Metro station, Bethesda Row and the Woodmont Triangle every 10 to 15 minutes: Monday to Friday 7 a.m. to 11 p.m., Saturday 10 a.m. to 11 p.m., no Sunday service."
+    },
+    {
      "title": "From the airports",
      "text": "Reagan National: Blue or Yellow Line from the terminal. Dulles: Silver Line, about 50 minutes to Metro Center. BWI: free shuttle to the rail station, then MARC or Amtrak to Union Station (about 35 minutes)."
     },
@@ -337,12 +383,21 @@
     }
    ],
    "checked": "2026-11-14",
-   "source": "WMATA (Tap. Ride. Go. and 2024 fare tables, fares unchanged for FY2027), BWI and Mount Vernon official sites, Smithsonian, Reagan National taxi page"
+   "source": "WMATA (Tap. Ride. Go. and 2024 fare tables, fares unchanged for FY2027), Bethesda Urban Partnership (Circulator), BWI and Mount Vernon official sites, Smithsonian, Reagan National taxi page"
   },
   "taxis": {
    "intro_bold": "DC taxis run on the meter.",
-   "intro": "Hail one on the street or find one at hotels, Union Station and the airports. At Reagan National, taxis wait outside baggage claim and take cash or card. Tip about 15 to 20%.",
-   "numbers": [],
+   "intro": "Hail one on the street or find one at hotels, Union Station and the airports. At Reagan National, taxis wait outside baggage claim and take cash or card. In Bethesda, call a Montgomery County taxi or use a ride app. Tip about 15 to 20%.",
+   "numbers": [
+    {
+     "number": "(301) 990-9000",
+     "label": "Regency Taxi, Montgomery County (Bethesda)"
+    },
+    {
+     "number": "(301) 840-1000",
+     "label": "Action Taxi, Montgomery County (Bethesda)"
+    }
+   ],
    "apps": "Uber and Lyft work across DC, Virginia and Maryland. Check the price in the app before you book.",
    "checked": "2026-11-14"
   },
@@ -374,10 +429,10 @@
      "amount": 2
     }
    ],
-   "rush_note": "The meter adds $25 an hour when the taxi is stopped or crawling, so traffic costs more. Trips from Reagan National and Dulles start in Virginia and use the airport's own taxi rates; airport fees and tolls are added.",
+   "rush_note": "The meter adds $25 an hour when the taxi is stopped or crawling, so traffic costs more. Montgomery County (Bethesda) taxis charge $4.00 to start and $2.50 a mile, plus $1 from 10 p.m. to 5 a.m., so trips from Bethesda come out close to this estimate. Trips from Reagan National and Dulles start in Virginia and use the airport's own taxi rates; airport fees and tolls are added.",
    "note": "Rough estimate from the DC meter rates ($4.00 start, $2.56 a mile, shown here per km) and straight-line distance. The meter decides. The $1 fuel surcharge runs until Dec 25, 2026.",
    "checked": "2026-11-14",
-   "source": "DC Department of For-Hire Vehicles taxicab fares (in force since Aug 2, 2024)"
+   "source": "DC Department of For-Hire Vehicles taxicab fares (in force since Aug 2, 2024); Montgomery County DOT taxi rates (from Feb 1, 2026)"
   },
   "rides": {
    "title": "Drivers and rides",
