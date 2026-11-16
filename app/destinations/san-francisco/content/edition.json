@@ -1,0 +1,129 @@
+{
+ "schema_version": 1,
+ "edition_id": "san-francisco",
+ "name": "Wanderings San Francisco",
+ "tagline": "The city, the redwoods and wine country",
+ "language": "en-US",
+ "language_name": "English",
+ "city_ids": [
+  "san-francisco"
+ ],
+ "modules": {
+  "phrases": false,
+  "currency": "auto",
+  "taxi_estimator": true,
+  "true_wanderer": true
+ },
+ "home_currencies": [
+  "USD",
+  "EUR",
+  "GBP",
+  "CAD",
+  "AUD",
+  "INR",
+  "AED",
+  "JPY",
+  "CHF",
+  "SGD"
+ ],
+ "arrival_options": [
+  {
+   "id": "SFO",
+   "label": "San Francisco airport (SFO)",
+   "city_id": "san-francisco",
+   "tip": "BART leaves from the International Terminal and reaches downtown in about 30 minutes. Tap a bank card or phone at the gate."
+  },
+  {
+   "id": "OAK",
+   "label": "Oakland airport (OAK)",
+   "city_id": "san-francisco",
+   "tip": "BART from the airport to Coliseum station, then a San Francisco train downtown."
+  },
+  {
+   "id": "SJC",
+   "label": "San Jose airport (SJC)",
+   "city_id": "san-francisco",
+   "tip": "About an hour south of the city by car."
+  },
+  {
+   "id": "TRAIN",
+   "label": "Train (Caltrain or Amtrak)",
+   "city_id": "san-francisco",
+   "tip": "Caltrain ends at 4th and King, where Muni Metro and buses continue downtown."
+  },
+  {
+   "id": "CAR",
+   "label": "Car or private driver",
+   "city_id": ""
+  },
+  {
+   "id": "OTHER",
+   "label": "Other",
+   "city_id": ""
+  }
+ ],
+ "leg_modes": [
+  {
+   "id": "muni",
+   "label": "Muni or cable car"
+  },
+  {
+   "id": "bart",
+   "label": "BART"
+  },
+  {
+   "id": "taxi",
+   "label": "Taxi or ride app"
+  },
+  {
+   "id": "ferry",
+   "label": "Ferry"
+  },
+  {
+   "id": "car",
+   "label": "Rental car"
+  },
+  {
+   "id": "bus",
+   "label": "Tour or coach"
+  },
+  {
+   "id": "flight",
+   "label": "Flight"
+  }
+ ],
+ "copy": {
+  "place": "San Francisco",
+  "place_list": "San Francisco, Marin, wine country and the coast",
+  "hashtags": "#SanFrancisco #GoldenGate #travel",
+  "file_prefix": "san-francisco",
+  "greeting_place": "San Francisco"
+ },
+ "checked": "2026-11-16",
+ "experience_themes": [
+  {
+   "id": "classics",
+   "name": "Only in San Francisco"
+  },
+  {
+   "id": "evenings",
+   "name": "Evenings out and hands-on"
+  },
+  {
+   "id": "sunset",
+   "name": "West Coast sunsets"
+  },
+  {
+   "id": "food",
+   "name": "Food, by time of day"
+  },
+  {
+   "id": "tours",
+   "name": "Tours you can join on your own"
+  },
+  {
+   "id": "wine",
+   "name": "Wine country"
+  }
+ ]
+}

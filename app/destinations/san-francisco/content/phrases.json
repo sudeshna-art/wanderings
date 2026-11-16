@@ -1,0 +1,33 @@
+{
+ "language": "en-US",
+ "language_name": "English",
+ "note": "San Francisco edition: English, so the Phrases tab is switched off in edition.json modules. Only the greeting and the driver card are used.",
+ "greetings": [
+  {
+   "until": 12,
+   "t": "Good morning"
+  },
+  {
+   "until": 18,
+   "t": "Good afternoon"
+  },
+  {
+   "until": 24,
+   "t": "Good evening"
+  }
+ ],
+ "top": [],
+ "situations": {},
+ "moments": [],
+ "driver": {
+  "situation": "",
+  "template": "Please take me here: {place}",
+  "ask": {
+   "t": "About how much will it cost?",
+   "say": "",
+   "m": {
+    "en": "Ask before you set off, or check the price in the ride app first."
+   }
+  }
+ }
+}

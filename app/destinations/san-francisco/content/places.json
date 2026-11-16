@@ -1,0 +1,2338 @@
+[
+ {
+  "id": "sf-golden-gate-bridge",
+  "city_id": "san-francisco",
+  "name": "Golden Gate Bridge",
+  "category": "sight",
+  "kind": "landmark",
+  "group": "icons",
+  "area": "Presidio, north end of the city",
+  "must": true,
+  "popular": false,
+  "location": {
+   "lat": 37.8077,
+   "lng": -122.475
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free to walk",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "Golden Gate Bridge, Highway and Transportation District"
+  },
+  "lead_time": null,
+  "description": "The bridge everyone comes for, painted International Orange and often half hidden in fog. Walk out onto the east sidewalk from the Welcome Center for the classic view back to the city.",
+  "tips": [
+   "Free to walk. Start at the Welcome Center on the city side.",
+   "It is 1.7 miles across. Walking to the first tower and back is enough for most people.",
+   "Fog is most common on summer mornings. If the towers are hidden, come back in the afternoon.",
+   "Windy and much cooler than downtown, in every season. Bring a jacket."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "Windy and often cool, even in summer. Bring a layer."
+  },
+  "short_name": "Golden Gate Bridge"
+ },
+ {
+  "id": "sf-alcatraz",
+  "city_id": "san-francisco",
+  "name": "Alcatraz Island",
+  "category": "sight",
+  "kind": "landmark",
+  "group": "icons",
+  "area": "Ferry from Pier 33, the Embarcadero",
+  "must": true,
+  "popular": false,
+  "location": {
+   "lat": 37.8067,
+   "lng": -122.4049
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "book_soon",
+  "ticket_url": "https://www.cityexperiences.com/san-francisco/city-cruises/alcatraz/",
+  "affiliate_url": null,
+  "price": {
+   "amount": 47.95,
+   "from": false,
+   "text": "$47.95 adult · ferry and audio tour included",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "National Park Service, Alcatraz fees (page updated Jan 21, 2026)"
+  },
+  "lead_time": "Book ahead: tickets open 90 days before, and weekends and summer dates sell out early.",
+  "description": "The island prison in the middle of the bay. The ferry ride, the cellhouse audio tour told by former guards and inmates, and the view back to the city make this the most booked visit in San Francisco.",
+  "tips": [
+   "Book ahead: tickets go on sale 90 days before and popular dates sell out.",
+   "Day Tour: $47.95 adult, $45.15 age 62 and over, $29.15 ages 5 to 11, free under 5. Ferry and audio tour included.",
+   "Buy only from Alcatraz City Cruises, the one ferry the National Park Service allows to land. Ferries leave from Pier 33.",
+   "Allow about 2.5 to 3 hours. You pick your ferry out and can take any ferry back.",
+   "The walk from the dock up to the cellhouse is steep. Ask at the dock about the accessible tram."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": "Closed Thanksgiving, Dec 25 and Jan 1",
+  "closed_source": {
+   "text": "Alcatraz City Cruises",
+   "checked": "2026-11-16"
+  },
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": false,
+   "warn": [
+    "stairs"
+   ],
+   "note": "A steep quarter-mile walk up from the dock. An accessible tram is available for those who need it."
+  },
+  "closed_dates": [
+   "12-25",
+   "01-01"
+  ],
+  "short_name": "Alcatraz",
+  "remind_before": true,
+  "booking_group": "alcatraz"
+ },
+ {
+  "id": "sf-cable-cars",
+  "city_id": "san-francisco",
+  "name": "Cable cars",
+  "category": "sight",
+  "kind": "landmark",
+  "group": "icons",
+  "area": "Powell and Market turnaround, Union Square",
+  "must": true,
+  "popular": false,
+  "location": {
+   "lat": 37.7846,
+   "lng": -122.4078
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.sfmta.com/fares/cable-car-single-ride",
+  "affiliate_url": null,
+  "price": {
+   "amount": 9,
+   "from": false,
+   "text": "$9 a ride · $15 one-day Visitor Passport",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "SFMTA (Cable Car Single Ride; 1-Day Visitor Passport)"
+  },
+  "lead_time": null,
+  "description": "The last hand-operated cable cars in the world, and yes, it is touristy and yes, it is wonderful. Stand on the running board, hold on, and ride over Nob Hill down to the bay.",
+  "tips": [
+   "$9 a ride, one way, any age over 4. Unlimited rides are included in a Visitor Passport ($15 for one day).",
+   "At Powell and Market, Bay and Taylor, and Hyde and Beach, buy your fare before boarding (8 a.m. to 5 p.m.). Pay with Clipper or at the ticket booth.",
+   "The Powell-Hyde line has the best views: Lombard Street, Alcatraz and the bay.",
+   "Lines at the Powell turnaround are long by late morning. Ride early, ride after dinner, or take the quieter California Street line."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": false,
+   "warn": [
+    "stairs"
+   ],
+   "note": "High steps up into the car and not wheelchair accessible. The F-line historic streetcars are the accessible option."
+  },
+  "short_name": "Cable cars"
+ },
+ {
+  "id": "sf-ferry-building",
+  "city_id": "san-francisco",
+  "name": "Ferry Building",
+  "category": "sight",
+  "kind": "market",
+  "group": "icons",
+  "area": "The Embarcadero at Market Street",
+  "must": false,
+  "popular": true,
+  "location": {
+   "lat": 37.7955,
+   "lng": -122.3937
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.ferrybuildingmarketplace.com",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free to enter",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "Ferry Building Marketplace"
+  },
+  "lead_time": null,
+  "description": "The 1898 ferry terminal with its clock tower, now a food hall of local bakers, cheesemakers, oyster bars and coffee. Ferries to Sausalito and Larkspur still leave from behind it.",
+  "tips": [
+   "Free to walk through. Go hungry.",
+   "A farmers market sets up outside on market days. Check the Ferry Building site for the current days.",
+   "Walk out the back for the bay, the Bay Bridge and the ferry gates."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "food": {
+   "tags": [
+    "simple"
+   ],
+   "note": "Many counters under one roof, so everyone finds something. Ask each one about ingredients."
+  }
+ },
+ {
+  "id": "sf-coit-tower",
+  "city_id": "san-francisco",
+  "name": "Coit Tower and Telegraph Hill",
+  "category": "sight",
+  "kind": "view",
+  "group": "icons",
+  "area": "Telegraph Hill, above North Beach",
+  "must": false,
+  "popular": true,
+  "location": {
+   "lat": 37.8024,
+   "lng": -122.4058
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://sfrecpark.org/facilities/facility/details/Coit-Tower-290",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "The white tower on top of Telegraph Hill, with 1930s murals of California life around the ground floor and a full circle view of the bay from the top.",
+  "tips": [
+   "The murals on the ground floor are free to see. The elevator to the top has a fee: check the price at the tower.",
+   "Walk down the Filbert Steps on the east side, through gardens, and listen for the wild parrots.",
+   "Parking at the top is tiny. Walk up from North Beach or take the 39 Coit bus."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": false,
+   "warn": [
+    "stairs"
+   ],
+   "note": "Steep streets and steps. A taxi or bus to the top saves the climb."
+  },
+  "short_name": "Coit Tower"
+ },
+ {
+  "id": "sf-palace-fine-arts",
+  "city_id": "san-francisco",
+  "name": "Palace of Fine Arts",
+  "category": "sight",
+  "kind": "landmark",
+  "group": "icons",
+  "area": "The Marina",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.8029,
+   "lng": -122.4484
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "San Francisco Recreation and Parks"
+  },
+  "lead_time": null,
+  "description": "A Roman-style rotunda and colonnade beside a lagoon with swans, left over from the 1915 world fair. One of the calmest, most beautiful corners of the city.",
+  "tips": [
+   "Free, outdoors, open all day.",
+   "Lovely in the late afternoon light, and an easy walk on to Crissy Field and the bridge views."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  }
+ },
+ {
+  "id": "sf-painted-ladies",
+  "city_id": "san-francisco",
+  "name": "Painted Ladies at Alamo Square",
+  "category": "sight",
+  "kind": "view",
+  "group": "icons",
+  "area": "Alamo Square",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.7763,
+   "lng": -122.4328
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "San Francisco Recreation and Parks"
+  },
+  "lead_time": null,
+  "description": "The row of pastel Victorian houses with the downtown skyline behind them. Sit on the grass slope of Alamo Square for the postcard view.",
+  "tips": [
+   "Free. The houses are private homes, so enjoy them from the park.",
+   "Best light is mid to late afternoon, when the sun is on the house fronts."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "short_name": "Painted Ladies"
+ },
+ {
+  "id": "sf-lombard",
+  "city_id": "san-francisco",
+  "name": "Lombard Street",
+  "category": "sight",
+  "kind": "landmark",
+  "group": "icons",
+  "area": "Russian Hill",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.8021,
+   "lng": -122.4187
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "Public street"
+  },
+  "lead_time": null,
+  "description": "One block, eight hairpin turns, flower beds all the way down. Touristy and still charming.",
+  "tips": [
+   "Free. Walk down the steps on either side rather than driving it.",
+   "The Powell-Hyde cable car stops at the top."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": false,
+   "warn": [
+    "stairs"
+   ],
+   "note": "Steep streets and steps. A taxi or bus to the top saves the climb."
+  }
+ },
+ {
+  "id": "sf-de-young",
+  "city_id": "san-francisco",
+  "name": "de Young Museum",
+  "category": "sight",
+  "kind": "museum",
+  "group": "parks",
+  "area": "Golden Gate Park",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.7715,
+   "lng": -122.4687
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.famsf.org/visit/de-young",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "The city's fine arts museum in a copper-clad building in Golden Gate Park: American art, textiles, and art of Africa, Oceania and the Americas.",
+  "tips": [
+   "Ticketed. Check today's price and hours on the museum site.",
+   "The observation tower has a wide view over the park and out to the ocean.",
+   "Pair it with the Japanese Tea Garden next door."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  }
+ },
+ {
+  "id": "sf-cal-academy",
+  "city_id": "san-francisco",
+  "name": "California Academy of Sciences",
+  "category": "sight",
+  "kind": "museum",
+  "group": "parks",
+  "area": "Golden Gate Park",
+  "must": false,
+  "popular": true,
+  "location": {
+   "lat": 37.7699,
+   "lng": -122.4661
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.calacademy.org",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "An aquarium, a planetarium, a four-story rainforest and a natural history museum under one living roof. The best rainy-day stop in the city, and a favorite with children.",
+  "tips": [
+   "Ticketed, and prices change by date. Buy online ahead for the best price.",
+   "Reserve a planetarium show time when you arrive."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "short_name": "Academy of Sciences"
+ },
+ {
+  "id": "sf-tea-garden",
+  "city_id": "san-francisco",
+  "name": "Japanese Tea Garden",
+  "category": "sight",
+  "kind": "garden",
+  "group": "parks",
+  "area": "Golden Gate Park",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.7701,
+   "lng": -122.4704
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://gggp.org/japanese-tea-garden/",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "The oldest public Japanese garden in the United States: koi ponds, a high arched drum bridge, a pagoda and a tea house.",
+  "tips": [
+   "Entry fee for visitors from outside San Francisco. Check gggp.org for today's price and any free hours.",
+   "Small and peaceful first thing in the morning. Cherry blossom is around March and April; maples turn in fall."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  }
+ },
+ {
+  "id": "sf-lands-end",
+  "city_id": "san-francisco",
+  "name": "Lands End and the Sutro Baths",
+  "category": "sight",
+  "kind": "trail",
+  "group": "parks",
+  "area": "Northwest corner of the city",
+  "must": false,
+  "popular": true,
+  "location": {
+   "lat": 37.7804,
+   "lng": -122.5137
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "National Park Service, Golden Gate National Recreation Area"
+  },
+  "lead_time": null,
+  "description": "A clifftop trail at the wild northwest corner of the city, with the ruins of a huge Victorian swimming palace below and the Golden Gate Bridge appearing around the bend.",
+  "tips": [
+   "Free. Start at the Lands End Lookout visitor center.",
+   "One of the best places in the city to watch the sun set into the Pacific.",
+   "Foggy and windy more often than not. Layers, always."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": false,
+   "warn": [
+    "stairs"
+   ],
+   "note": "The main trail is wide and fairly level. The path down to the baths is steep with steps."
+  },
+  "short_name": "Lands End"
+ },
+ {
+  "id": "sf-tunnel-tops",
+  "city_id": "san-francisco",
+  "name": "Presidio Tunnel Tops and Crissy Field",
+  "category": "sight",
+  "kind": "view",
+  "group": "parks",
+  "area": "The Presidio",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.8016,
+   "lng": -122.456
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "National Park Service, Golden Gate National Recreation Area"
+  },
+  "lead_time": null,
+  "description": "A park built over the highway tunnels, with lawns, fire pits, food trucks and a straight-on view of the bridge. Below it, Crissy Field is a flat bayside walk toward the Golden Gate.",
+  "tips": [
+   "Free. The Presidio has no entrance fee.",
+   "A good picnic stop between the Palace of Fine Arts and the bridge."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "Windy and often cool, even in summer. Bring a layer."
+  },
+  "short_name": "Tunnel Tops"
+ },
+ {
+  "id": "sf-sfmoma",
+  "city_id": "san-francisco",
+  "name": "SFMOMA",
+  "category": "sight",
+  "kind": "museum",
+  "group": "parks",
+  "area": "South of Market",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.7857,
+   "lng": -122.4011
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.sfmoma.org",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "The San Francisco Museum of Modern Art: seven floors of modern and contemporary art, photography and design, a short walk from Union Square.",
+  "tips": [
+   "Ticketed. Check today's price and hours on the museum site.",
+   "Yerba Buena Gardens across the street is a nice place to sit afterwards."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  }
+ },
+ {
+  "id": "sf-exploratorium",
+  "city_id": "san-francisco",
+  "name": "Exploratorium",
+  "category": "sight",
+  "kind": "museum",
+  "group": "parks",
+  "area": "Pier 15, the Embarcadero",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.8017,
+   "lng": -122.3973
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.exploratorium.edu",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "A hands-on museum of science, art and perception on a pier over the bay. Hundreds of exhibits to touch, pull and puzzle over, for adults as much as children.",
+  "tips": [
+   "Ticketed. Check today's price and hours on the museum site.",
+   "A short, flat walk along the water from the Ferry Building."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  }
+ },
+ {
+  "id": "sf-twin-peaks",
+  "city_id": "san-francisco",
+  "name": "Twin Peaks",
+  "category": "sight",
+  "kind": "view",
+  "group": "parks",
+  "area": "Center of the city",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.7544,
+   "lng": -122.4477
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "San Francisco Recreation and Parks"
+  },
+  "lead_time": null,
+  "description": "Two hills in the middle of the city with the whole of San Francisco laid out below: downtown, the bay, both bridges.",
+  "tips": [
+   "Free. Easiest by taxi or ride app; ask the driver to wait or book the ride back from the top.",
+   "Go on a clear day, or at dusk for the city lights. In fog you will see nothing at all.",
+   "Very windy. Bring a jacket."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "Windy and often cool, even in summer. Bring a layer."
+  }
+ },
+ {
+  "id": "sf-chinatown",
+  "city_id": "san-francisco",
+  "name": "Chinatown",
+  "category": "sight",
+  "kind": "landmark",
+  "group": "hoods",
+  "area": "Grant Avenue and Stockton Street",
+  "must": false,
+  "popular": true,
+  "location": {
+   "lat": 37.7908,
+   "lng": -122.4058
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "Public streets"
+  },
+  "lead_time": null,
+  "description": "The oldest Chinatown in North America. Enter through the Dragon Gate on Grant Avenue for lanterns and shops, then move one block over to Stockton Street for the working markets.",
+  "tips": [
+   "Free to wander. Mornings are liveliest on Stockton Street.",
+   "Look for the small alleys between Grant and Stockton, including the fortune cookie bakery in Ross Alley.",
+   "North Beach starts where Chinatown ends, so do both in one walk."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": false,
+   "warn": [
+    "stairs"
+   ],
+   "note": "Steep streets and steps. A taxi or bus to the top saves the climb."
+  }
+ },
+ {
+  "id": "sf-north-beach",
+  "city_id": "san-francisco",
+  "name": "North Beach",
+  "category": "sight",
+  "kind": "cafe",
+  "group": "hoods",
+  "area": "Columbus Avenue and Washington Square",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.8009,
+   "lng": -122.4103
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "Public streets"
+  },
+  "lead_time": null,
+  "description": "The old Italian neighborhood and the home of the Beat poets: espresso bars, delis, a famous bookshop and Washington Square under the twin spires of Saints Peter and Paul.",
+  "tips": [
+   "Free to wander. Sit in Washington Square with a coffee and a focaccia.",
+   "City Lights bookstore on Columbus Avenue is worth an hour on its own.",
+   "Coit Tower is a steep 10 to 15 minute walk up from the square."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  }
+ },
+ {
+  "id": "sf-mission",
+  "city_id": "san-francisco",
+  "name": "The Mission: murals and Dolores Park",
+  "category": "sight",
+  "kind": "landmark",
+  "group": "hoods",
+  "area": "Mission District",
+  "must": false,
+  "popular": true,
+  "location": {
+   "lat": 37.7596,
+   "lng": -122.4269
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "Public streets"
+  },
+  "lead_time": null,
+  "description": "The sunniest neighborhood in the city. Walls of murals in Balmy Alley and Clarion Alley, the 1776 Mission Dolores, taquerias on every block, and Dolores Park with its skyline view.",
+  "tips": [
+   "Free. The murals are outdoors, in alleys between 24th Street and 18th Street.",
+   "On a warm weekend afternoon all of San Francisco is in Dolores Park.",
+   "BART stops at 16th Street and 24th Street."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "short_name": "The Mission"
+ },
+ {
+  "id": "sf-hayes-valley",
+  "city_id": "san-francisco",
+  "name": "Hayes Valley",
+  "category": "sight",
+  "kind": "shop",
+  "group": "hoods",
+  "area": "Hayes Street, west of City Hall",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.7766,
+   "lng": -122.4243
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "Public streets"
+  },
+  "lead_time": null,
+  "description": "A few blocks of independent shops, wine bars and good restaurants around a small green, close to the opera house, the symphony hall and City Hall.",
+  "tips": [
+   "Free to wander. Good for an unhurried afternoon and an early dinner before a performance.",
+   "The Painted Ladies are a 10 minute walk west."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  }
+ },
+ {
+  "id": "sf-japantown",
+  "city_id": "san-francisco",
+  "name": "Japantown",
+  "category": "sight",
+  "kind": "shop",
+  "group": "hoods",
+  "area": "Post Street at Buchanan",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.7853,
+   "lng": -122.4298
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "Public streets"
+  },
+  "lead_time": null,
+  "description": "One of the few Japantowns left in the United States: the Peace Pagoda, and indoor malls of ramen counters, stationery, ceramics and sweets.",
+  "tips": [
+   "Free to wander. Mostly indoors, so a good choice on a wet or foggy day."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  }
+ },
+ {
+  "id": "sf-food-ferry-morning",
+  "city_id": "san-francisco",
+  "name": "Morning: coffee and pastry at the Ferry Building",
+  "category": "food",
+  "kind": "cafe",
+  "group": "hoods",
+  "area": "The Embarcadero",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.7953,
+   "lng": -122.3935
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.ferrybuildingmarketplace.com",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "Start the day on the waterfront with coffee and something from one of the bakery counters, then eat it on a bench facing the Bay Bridge.",
+  "tips": [
+   "Good for: breakfast, coffee, a picnic to take on the ferry."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "theme": "food",
+  "food": {
+   "tags": [
+    "simple"
+   ],
+   "note": "Lots of choice. Ask at each counter about ingredients."
+  }
+ },
+ {
+  "id": "sf-food-chinatown-noon",
+  "city_id": "san-francisco",
+  "name": "Midday: dim sum in Chinatown",
+  "category": "food",
+  "kind": "food",
+  "group": "hoods",
+  "area": "Chinatown",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.7949,
+   "lng": -122.4078
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "Dumplings, buns and egg tarts from the bakeries and dim sum counters along Stockton Street and its side streets. Point at what looks good.",
+  "tips": [
+   "Good for: a cheap, quick lunch. Many counters are cash only and sell out by early afternoon."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "theme": "food",
+  "food": {
+   "tags": [
+    "pork_heavy"
+   ],
+   "note": "Pork and shellfish are common fillings. Ask before you order."
+  }
+ },
+ {
+  "id": "sf-food-mission-noon",
+  "city_id": "san-francisco",
+  "name": "Midday: a Mission burrito",
+  "category": "food",
+  "kind": "food",
+  "group": "hoods",
+  "area": "Mission District",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.7525,
+   "lng": -122.4183
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "The foil-wrapped, overstuffed burrito was born here. Pick any busy taqueria on Mission Street or 24th Street and take it to Dolores Park.",
+  "tips": [
+   "Good for: lunch on a sunny day. Order at the counter; one burrito is a full meal."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "theme": "food",
+  "food": {
+   "tags": [
+    "simple"
+   ],
+   "note": "Vegetarian fillings are easy to find. Ask about lard in the beans."
+  }
+ },
+ {
+  "id": "sf-food-north-beach-eve",
+  "city_id": "san-francisco",
+  "name": "Evening: Italian dinner in North Beach",
+  "category": "food",
+  "kind": "food",
+  "group": "hoods",
+  "area": "North Beach",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.799,
+   "lng": -122.4085
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "Red-sauce classics, wood-fired pizza and old bars along Columbus Avenue and Green Street. Easy to pair with a show at Club Fugazi.",
+  "tips": [
+   "Good for: a relaxed dinner, a date, dinner before or after a show. Reserve on weekends."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "theme": "food",
+  "food": {
+   "tags": [
+    "simple"
+   ],
+   "note": "Pasta and pizza for simple eaters; plenty of seafood too."
+  }
+ },
+ {
+  "id": "sf-food-japantown-eve",
+  "city_id": "san-francisco",
+  "name": "Evening: ramen in Japantown",
+  "category": "food",
+  "kind": "food",
+  "group": "hoods",
+  "area": "Japantown",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.7851,
+   "lng": -122.4305
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "Ramen, sushi and izakaya plates inside and around the Japan Center malls.",
+  "tips": [
+   "Good for: a casual dinner, cold or foggy nights. Expect a wait at the popular counters."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "theme": "food",
+  "food": {
+   "tags": [
+    "pork_heavy"
+   ],
+   "note": "Many broths are pork based. Ask for chicken or vegetable options."
+  }
+ },
+ {
+  "id": "sf-alcatraz-night",
+  "city_id": "san-francisco",
+  "name": "Alcatraz Night Tour",
+  "category": "experience",
+  "kind": "landmark",
+  "group": "icons",
+  "area": "Ferry from Pier 33",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.8067,
+   "lng": -122.4049
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "book_soon",
+  "ticket_url": "https://www.cityexperiences.com/san-francisco/city-cruises/alcatraz/",
+  "affiliate_url": null,
+  "price": {
+   "amount": 59.65,
+   "from": false,
+   "text": "$59.65 adult",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "National Park Service, Alcatraz fees (page updated Jan 21, 2026)"
+  },
+  "lead_time": "Book as early as you can: tickets open 90 days before.",
+  "description": "The island after the day crowds leave: a narrated sail around it, a smaller group, extra talks, and the city lights on the ferry home. The same cellhouse, a very different mood.",
+  "tips": [
+   "$59.65 adult, $55.25 age 62 and over, $34.85 ages 5 to 11. Sells out sooner than the Day Tour.",
+   "Runs on selected evenings, with earlier sailings in winter when it gets dark sooner. Check the dates when you book.",
+   "Cold on the water after dark, all year. Dress warmly."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": "About 3 hours",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": "Closed Thanksgiving, Dec 25 and Jan 1",
+  "closed_source": {
+   "text": "Alcatraz City Cruises",
+   "checked": "2026-11-16"
+  },
+  "access": {
+   "teens": true,
+   "easy": false,
+   "warn": [
+    "stairs"
+   ],
+   "note": "A steep walk up from the dock, in the dark on the way down."
+  },
+  "closed_dates": [
+   "12-25",
+   "01-01"
+  ],
+  "theme": "classics",
+  "booking_group": "alcatraz"
+ },
+ {
+  "id": "sf-bay-cruise",
+  "city_id": "san-francisco",
+  "name": "Sunset cruise on the bay",
+  "category": "experience",
+  "kind": "boat",
+  "group": "icons",
+  "area": "Pier 43 1/2, Fisherman's Wharf",
+  "must": false,
+  "popular": true,
+  "location": {
+   "lat": 37.8093,
+   "lng": -122.4155
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "flexible",
+  "ticket_url": "https://redandwhite.com",
+  "affiliate_url": null,
+  "price": {
+   "amount": 58,
+   "from": true,
+   "text": "about $58 adult (booking sites)",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "Red and White Fleet listings on Expedia and Tripster"
+  },
+  "lead_time": null,
+  "description": "Two hours on the water with the Red and White Fleet, a family-owned company that has sailed here for over 130 years: under the Golden Gate Bridge, around Alcatraz and along the skyline as the light goes.",
+  "tips": [
+   "About $58 an adult on booking sites. Check the fleet's own site for today's price and sailing time.",
+   "In summer and fall it sails as the California Sunset Cruise. In winter, when the sun sets early, the same trip runs as the City Lights Cruise after dark.",
+   "Shorter on time? The one-hour Golden Gate Bay Cruise runs through the day.",
+   "It is colder on the bay than on land in every season. Bring a warm layer."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": "2 hours",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "Open decks are cold and windy. There is indoor seating."
+  },
+  "theme": "classics"
+ },
+ {
+  "id": "sf-dear-sf",
+  "city_id": "san-francisco",
+  "name": "Dear San Francisco at Club Fugazi",
+  "category": "experience",
+  "kind": "music",
+  "group": "hoods",
+  "area": "678 Green Street, North Beach",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.7993,
+   "lng": -122.4106
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.clubfugazisf.com",
+  "affiliate_url": null,
+  "price": {
+   "amount": 87,
+   "from": true,
+   "text": "from about $87 (booking sites)",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "Club Fugazi show listings (Tripster, BroadwayWorld)"
+  },
+  "lead_time": "Book ahead for weekends and holidays.",
+  "description": "A 90-minute acrobatic love letter to the city, performed in the round in a small North Beach theater: the Gold Rush, the 1906 earthquake and the Beat poets told through circus. Food and drinks are served at your table.",
+  "tips": [
+   "Shows Wednesday to Friday at 7:30 p.m., Saturday at 2 and 7:30 p.m., Sunday at 1 and 6 p.m. Times can change, so check when you book.",
+   "From about $87 on booking sites. Buy from the Club Fugazi box office for the full choice of seats.",
+   "Have dinner in North Beach before or after: the theater is in the middle of it."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": "90 minutes",
+  "how": null,
+  "stay": null,
+  "closed": [
+   1,
+   2
+  ],
+  "closed_note": "No shows Mondays and Tuesdays",
+  "closed_source": {
+   "text": "Club Fugazi (dearsf.clubfugazisf.com)",
+   "checked": "2026-11-16"
+  },
+  "access": {
+   "teens": true,
+   "easy": true,
+   "note": "Not written as a children's show; best for older children and adults."
+  },
+  "short_name": "Dear San Francisco",
+  "theme": "evenings"
+ },
+ {
+  "id": "sf-cooking-class",
+  "city_id": "san-francisco",
+  "name": "A cooking class at 18 Reasons",
+  "category": "experience",
+  "kind": "food",
+  "group": "hoods",
+  "area": "3674 18th Street, the Mission",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.7614,
+   "lng": -122.4268
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "flexible",
+  "ticket_url": "https://18reasons.org",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "varies by class · others about $145 a person",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "18 Reasons listing (tablejourney.com); Cozymeal classes on Expedia"
+  },
+  "lead_time": null,
+  "description": "The Mission's community cooking school, across from Dolores Park. Small hands-on evening classes built around what is in season, where you cook together and then sit down to eat.",
+  "tips": [
+   "Classes change every month and the popular ones fill up. See the calendar and prices on 18reasons.org.",
+   "Other hands-on classes around the city, such as pasta or dumpling making, are sold on booking sites at around $145 a person."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": "About 3 hours",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "short_name": "Cooking class",
+  "theme": "evenings"
+ },
+ {
+  "id": "sf-city-guides",
+  "city_id": "san-francisco",
+  "name": "Free walking tours with City Guides",
+  "category": "experience",
+  "kind": "landmark",
+  "group": "hoods",
+  "area": "Meeting points across the city",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.7793,
+   "lng": -122.4157
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "flexible",
+  "ticket_url": "https://sfcityguides.org",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free · sign up online, donations welcome",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "San Francisco City Guides tour listings (sf.funcheap.com, 2026)"
+  },
+  "lead_time": null,
+  "description": "Volunteer guides trained through the San Francisco Public Library lead dozens of walks every week: Chinatown, Coit Tower murals, Victorian houses, the Mission murals, the Presidio and many more.",
+  "tips": [
+   "Free. Donations are welcome and you need to sign up online first.",
+   "A good way to meet other travelers if you are on your own."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": "1.5 to 2 hours",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": false,
+   "warn": [
+    "stairs"
+   ],
+   "note": "Steep streets and steps. A taxi or bus to the top saves the climb."
+  },
+  "short_name": "City Guides walks",
+  "theme": "tours"
+ },
+ {
+  "id": "sf-big-bus",
+  "city_id": "san-francisco",
+  "name": "Hop-on hop-off bus tour",
+  "category": "experience",
+  "kind": "view",
+  "group": "icons",
+  "area": "First stop at Fisherman's Wharf",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.808,
+   "lng": -122.4156
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.bigbustours.com/en/san-francisco/san-francisco-bus-tours",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "An open-top bus loop with around 17 stops, across the Golden Gate Bridge and back. An easy first-day overview that saves your legs on the hills, with a separate sunset tour in the evening.",
+  "tips": [
+   "Tickets are sold for 24 or 48 hours and can be bundled with a bay cruise. Check today's price on bigbustours.com.",
+   "Sit upstairs for the bridge crossing and bring a windproof layer: it is cold up there in any month."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": "About 2 hours for the full loop",
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "theme": "tours"
+ },
+ {
+  "id": "sf-sunset-baker",
+  "city_id": "san-francisco",
+  "name": "A West Coast sunset at Baker Beach",
+  "category": "experience",
+  "kind": "beach",
+  "group": "parks",
+  "area": "The Presidio, ocean side",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.7936,
+   "lng": -122.4836
+  },
+  "google_place_id": null,
+  "booking_status": "none",
+  "urgency_level": "flexible",
+  "ticket_url": null,
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "Free",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "National Park Service, Golden Gate National Recreation Area"
+  },
+  "lead_time": null,
+  "description": "A wide sandy beach just outside the Golden Gate, with the bridge on your right and the sun going down into the Pacific in front of you.",
+  "tips": [
+   "Free. Sunset is around 5 p.m. in December and around 8:30 p.m. in late June, so check the time for your date.",
+   "Clear evenings are most likely in September and October. Summer evenings are often foggy.",
+   "The water is cold with strong currents: this is a beach for walking, not swimming.",
+   "Other good sunset spots: Lands End, Ocean Beach, Twin Peaks and Mount Tamalpais."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": null,
+  "stay": null,
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "Windy and often cool, even in summer. Bring a layer."
+  },
+  "short_name": "Sunset at Baker Beach",
+  "theme": "sunset"
+ },
+ {
+  "id": "sf-sausalito",
+  "city_id": "san-francisco",
+  "name": "Sausalito by ferry",
+  "category": "day_trip",
+  "kind": "boat",
+  "group": "marin",
+  "area": "Marin County, across the bay",
+  "must": false,
+  "popular": true,
+  "location": {
+   "lat": 37.856,
+   "lng": -122.478
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.goldengate.org/ferry/",
+  "affiliate_url": null,
+  "price": {
+   "amount": 14,
+   "from": false,
+   "text": "$14 one way by paper ticket",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "Golden Gate Ferry fares and 2026 ferry card (effective July 1, 2026)"
+  },
+  "lead_time": null,
+  "description": "A hillside waterfront town facing the city. The 30-minute ferry from behind the Ferry Building passes Alcatraz and is half the pleasure.",
+  "tips": [
+   "Golden Gate Ferry: $14 one way with a paper ticket, less if you tap a Clipper card, a bank card or your phone.",
+   "Each person taps their own card. Leaving Sausalito, you pay when you get off in San Francisco.",
+   "No ferries on New Year's Day, Thanksgiving or Christmas Day.",
+   "Walk the waterfront to the houseboats, or rent a bike in the city, ride over the bridge and take the ferry back."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "Golden Gate Ferry from the Ferry Building, gates B and C",
+  "stay": "Half a day",
+  "closed": [],
+  "closed_note": "No ferry on Thanksgiving, Dec 25 and Jan 1",
+  "closed_source": {
+   "text": "Golden Gate Ferry",
+   "checked": "2026-11-16"
+  },
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "closed_dates": [
+   "12-25",
+   "01-01"
+  ]
+ },
+ {
+  "id": "sf-muir-woods",
+  "city_id": "san-francisco",
+  "name": "Muir Woods: the redwoods",
+  "category": "day_trip",
+  "kind": "trail",
+  "group": "marin",
+  "area": "Marin County, 16 miles north",
+  "must": true,
+  "popular": false,
+  "location": {
+   "lat": 37.897,
+   "lng": -122.5811
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "book_soon",
+  "ticket_url": "https://gomuirwoods.com",
+  "affiliate_url": null,
+  "price": {
+   "amount": 15,
+   "from": false,
+   "text": "$15 entrance · parking $10 a car, booked ahead",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "National Park Service and gomuirwoods.com"
+  },
+  "lead_time": "Reserve parking or the shuttle ahead: weekend and summer slots go first.",
+  "description": "A valley of ancient coast redwoods, some over 250 feet tall, on boardwalks and easy trails. The nearest old-growth redwood forest to the city.",
+  "tips": [
+   "You must reserve parking or a shuttle seat before you go, every day of the year. No reservation, no entry by car.",
+   "Entrance $15 for age 16 and over. Parking reservation $10 a car. Shuttle $4 a person.",
+   "Reservations open 90 days ahead at gomuirwoods.com.",
+   "The Muir Woods Shuttle runs on weekends and holidays from April through October only, from Larkspur. In other months go by car or with a tour.",
+   "Cool and damp under the trees in any season. In winter the creek runs full and the crowds are thin."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "By car over the Golden Gate Bridge (about 45 minutes), or with a tour",
+  "stay": "Half a day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "The main loop is a level boardwalk. Side trails climb steeply."
+  },
+  "short_name": "Muir Woods",
+  "remind_before": true
+ },
+ {
+  "id": "sf-mount-tam",
+  "city_id": "san-francisco",
+  "name": "Sunset from Mount Tamalpais",
+  "category": "day_trip",
+  "kind": "view",
+  "group": "marin",
+  "area": "Marin County",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.929,
+   "lng": -122.5778
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.parks.ca.gov/?page_id=471",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "The mountain above Marin. On a clear evening you look down on the fog pouring through the Golden Gate, with the city and the ocean beyond.",
+  "tips": [
+   "A winding drive, about an hour from the city. You need a car.",
+   "Check the state park site for gate closing times, which change with the season."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "By car over the Golden Gate Bridge",
+  "stay": "An afternoon and evening",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "teens": true,
+   "easy": false,
+   "note": "A very curvy mountain road."
+  },
+  "short_name": "Mount Tam",
+  "theme": "sunset"
+ },
+ {
+  "id": "sf-angel-island",
+  "city_id": "san-francisco",
+  "name": "Angel Island",
+  "category": "day_trip",
+  "kind": "trail",
+  "group": "marin",
+  "area": "In the bay, by ferry",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.8609,
+   "lng": -122.4326
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.goldengate.org/ferry/",
+  "affiliate_url": null,
+  "price": {
+   "amount": 15.5,
+   "from": false,
+   "text": "$15.50 one way by paper ticket",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "Golden Gate Ferry fares (effective July 1, 2026)"
+  },
+  "lead_time": null,
+  "description": "A state park island with a paved road all the way around it, a full circle view of the bay, and the old immigration station that was the Ellis Island of the West.",
+  "tips": [
+   "Golden Gate Ferry from the Ferry Building: $15.50 one way with a paper ticket.",
+   "Check the ferry timetable first: sailings are few and change by season."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "Golden Gate Ferry from the Ferry Building",
+  "stay": "Most of a day",
+  "closed": [],
+  "closed_note": "No ferry on Thanksgiving, Dec 25 and Jan 1",
+  "closed_source": {
+   "text": "Golden Gate Ferry",
+   "checked": "2026-11-16"
+  },
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "Windy and often cool, even in summer. Bring a layer."
+  },
+  "closed_dates": [
+   "12-25",
+   "01-01"
+  ]
+ },
+ {
+  "id": "sf-napa",
+  "city_id": "san-francisco",
+  "name": "Napa Valley",
+  "category": "day_trip",
+  "kind": "wine",
+  "group": "wine",
+  "area": "About 1.5 hours north",
+  "must": false,
+  "popular": true,
+  "location": {
+   "lat": 38.2975,
+   "lng": -122.2869
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.visitnapavalley.com",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "The best-known wine valley in the country: tasting rooms from grand estates to small family cellars, and some of the best restaurants in California.",
+  "tips": [
+   "Most wineries take visitors by appointment, so book tastings ahead.",
+   "Someone has to drive. A tour, a driver or the Wine Train solves that.",
+   "Harvest, roughly August to October, is the busiest and most expensive season. Winter is quiet, green and easier to book."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "By car, with a tour, or by ferry to Vallejo and a connection",
+  "stay": "A full day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "theme": "wine"
+ },
+ {
+  "id": "sf-wine-train",
+  "city_id": "san-francisco",
+  "name": "Napa Valley Wine Train",
+  "category": "day_trip",
+  "kind": "wine",
+  "group": "wine",
+  "area": "1275 McKinstry Street, Napa",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.3027,
+   "lng": -122.2835
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.winetrain.com",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": "prices change by date · see winetrain.com",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "Napa Valley Wine Train (winetrain.com, experience guide)"
+  },
+  "lead_time": "Book ahead, especially weekends, harvest season and December.",
+  "description": "Restored vintage rail cars rolling past the vineyards between Napa and St. Helena while lunch or dinner is served. Nobody has to drive.",
+  "tips": [
+   "The lunch train runs daily, 11:30 a.m. to 2:30 p.m. Dinner trains run Fridays and Saturdays and selected dates.",
+   "The all-day Legacy trip (about 6 hours) adds three winery stops with tastings.",
+   "On the plain lunch and dinner trains, a welcome glass is included and other wine is extra.",
+   "Seasonal trains: Santa trains in December and a New Year's Eve trip. Prices change by date; check winetrain.com.",
+   "Packages from San Francisco use the ferry to Vallejo on weekdays, a bus at weekends, then a shuttle to Napa."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "By car to Napa, or a package from the Ferry Building",
+  "stay": "A full day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "short_name": "Wine Train",
+  "theme": "wine"
+ },
+ {
+  "id": "sf-sonoma",
+  "city_id": "san-francisco",
+  "name": "Sonoma",
+  "category": "day_trip",
+  "kind": "wine",
+  "group": "wine",
+  "area": "About 1 hour north",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.2919,
+   "lng": -122.458
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.sonomavalley.com",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "Napa's quieter neighbor. A leafy Spanish-era plaza ringed by tasting rooms, cheese shops and restaurants, with wineries a short drive in every direction.",
+  "tips": [
+   "Easier and more relaxed than Napa for a first visit, and closer to the city.",
+   "You can taste at several rooms on foot around the plaza, with no driving between them."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "By car over the Golden Gate Bridge, or with a tour",
+  "stay": "A full day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "theme": "wine"
+ },
+ {
+  "id": "sf-wine-tour",
+  "city_id": "san-francisco",
+  "name": "Wine country day tour from the city",
+  "category": "day_trip",
+  "kind": "wine",
+  "group": "wine",
+  "area": "Pick-up in San Francisco",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.2919,
+   "lng": -122.458
+  },
+  "google_place_id": null,
+  "booking_status": "required",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.sftravel.com",
+  "affiliate_url": null,
+  "price": {
+   "amount": 94,
+   "from": true,
+   "text": "from about $94 (booking sites)",
+   "currency_code": "USD",
+   "checked": "2026-11-16",
+   "source": "Napa and Sonoma tour listings on Fever and Trip.com"
+  },
+  "lead_time": null,
+  "description": "A small coach or van picks you up in the city, visits two or three wineries in Napa and Sonoma and brings you back. One of the most booked day trips from San Francisco, and an easy one to join on your own.",
+  "tips": [
+   "From about $94 to $175 a person on booking sites, depending on group size. Tasting fees are sometimes extra, so read what is included.",
+   "Tours run all year. Some combine the redwoods at Muir Woods with wine country in one day."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "Coach or van from the city",
+  "stay": "A full day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "short_name": "Wine country tour",
+  "theme": "tours"
+ },
+ {
+  "id": "sf-berkeley",
+  "city_id": "san-francisco",
+  "name": "Berkeley",
+  "category": "day_trip",
+  "kind": "landmark",
+  "group": "bay",
+  "area": "East Bay",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.8719,
+   "lng": -122.2585
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.visitberkeley.com",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "The university town across the bay. Walk the campus up to the bell tower, browse Telegraph Avenue and eat in the neighborhood where California cooking was invented.",
+  "tips": [
+   "BART from downtown San Francisco to Downtown Berkeley takes under half an hour. Tap a bank card or phone at the gate."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "BART to Downtown Berkeley",
+  "stay": "Half a day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  }
+ },
+ {
+  "id": "sf-half-moon-bay",
+  "city_id": "san-francisco",
+  "name": "Half Moon Bay and the coast road",
+  "category": "day_trip",
+  "kind": "beach",
+  "group": "bay",
+  "area": "About 45 minutes south",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.4636,
+   "lng": -122.4286
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.visithalfmoonbay.org",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "Highway 1 south of the city: cliffs, empty beaches, a small harbor and an old main street. Farm stands and pumpkin fields in fall.",
+  "tips": [
+   "You need a car. The coast is often foggy in summer and clearest in fall and on crisp winter days.",
+   "The ocean here is cold and rough. Enjoy it from the sand."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "By car on Highway 1",
+  "stay": "Half a day or a full day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "Windy and often cool, even in summer. Bring a layer."
+  },
+  "short_name": "Half Moon Bay"
+ },
+ {
+  "id": "sf-point-reyes",
+  "city_id": "san-francisco",
+  "name": "Point Reyes National Seashore",
+  "category": "day_trip",
+  "kind": "trail",
+  "group": "bay",
+  "area": "Marin coast, about 1.5 hours north",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 38.0403,
+   "lng": -122.7998
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.nps.gov/pore",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "A wild peninsula of beaches, dairy ranches, tule elk and a lighthouse at the end of the world. Oysters on the way home.",
+  "tips": [
+   "You need a car, and a full day. Start at the Bear Valley Visitor Center for maps and conditions.",
+   "Gray whales pass in winter and spring; wildflowers peak in spring. The lighthouse has its own opening days, so check before driving out."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "By car over the Golden Gate Bridge",
+  "stay": "A full day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true,
+   "note": "Windy and often cool, even in summer. Bring a layer."
+  },
+  "short_name": "Point Reyes"
+ },
+ {
+  "id": "sf-stanford",
+  "city_id": "san-francisco",
+  "name": "Stanford and Palo Alto",
+  "category": "day_trip",
+  "kind": "landmark",
+  "group": "bay",
+  "area": "The Peninsula, about 45 minutes south",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 37.4275,
+   "lng": -122.1697
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://visit.stanford.edu",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "The sandstone arcades and palm-lined approach of Stanford University, its art museum and sculpture garden, and the cafes of downtown Palo Alto in the heart of Silicon Valley.",
+  "tips": [
+   "Caltrain runs from San Francisco to Palo Alto; the campus is a short bus ride or a long walk from the station."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "Caltrain to Palo Alto, or by car",
+  "stay": "Half a day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "short_name": "Stanford"
+ },
+ {
+  "id": "sf-monterey-carmel",
+  "city_id": "san-francisco",
+  "name": "Monterey and Carmel",
+  "category": "day_trip",
+  "kind": "view",
+  "group": "bay",
+  "area": "About 2 hours south",
+  "must": false,
+  "popular": false,
+  "location": {
+   "lat": 36.6002,
+   "lng": -121.8947
+  },
+  "google_place_id": null,
+  "booking_status": "optional",
+  "urgency_level": "flexible",
+  "ticket_url": "https://www.seemonterey.com",
+  "affiliate_url": null,
+  "price": {
+   "amount": null,
+   "from": false,
+   "text": null,
+   "currency_code": "USD",
+   "checked": null,
+   "source": null
+  },
+  "lead_time": null,
+  "description": "A long day, and worth it: the Monterey Bay Aquarium, the coast road past Pebble Beach, and the cottage village and white beach of Carmel.",
+  "tips": [
+   "The aquarium sells timed tickets, so book before you go.",
+   "It is two hours each way by car. Group tours from the city do it in one long day."
+  ],
+  "audio": null,
+  "search_q": null,
+  "duration": null,
+  "how": "By car, or with a tour",
+  "stay": "A long full day",
+  "closed": [],
+  "closed_note": null,
+  "closed_source": null,
+  "access": {
+   "kids": true,
+   "teens": true,
+   "easy": true
+  },
+  "short_name": "Monterey and Carmel"
+ }
+]
