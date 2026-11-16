@@ -1,0 +1,148 @@
+{
+ "reference_rates": {
+  "base": "EUR",
+  "rates": {
+   "USD": 1.1206,
+   "GBP": 0.84763,
+   "CAD": 1.5942,
+   "AUD": 1.6052,
+   "INR": 108.3965,
+   "CHF": 0.9313,
+   "SGD": 1.4348,
+   "JPY": 177.34
+  },
+  "checked": "2026-10-09",
+  "source": "European Central Bank via frankfurter.dev"
+ },
+ "typical_prices": [
+  {
+   "label": "Muni ride, tap to pay",
+   "amount": 2.85,
+   "kind": "official"
+  },
+  {
+   "label": "Cable car ride",
+   "amount": 9,
+   "kind": "official"
+  },
+  {
+   "label": "One-day Visitor Passport",
+   "amount": 15,
+   "kind": "official"
+  },
+  {
+   "label": "Taxi meter start",
+   "amount": 4.15,
+   "kind": "official"
+  },
+  {
+   "label": "Alcatraz Day Tour, adult",
+   "amount": 47.95,
+   "kind": "official"
+  },
+  {
+   "label": "Muir Woods entrance",
+   "amount": 15,
+   "kind": "official"
+  }
+ ],
+ "typical_note": "Official prices, checked Nov 16, 2026. BART fares depend on distance.",
+ "sos": {
+  "number": "911",
+  "note": "Police, ambulance and fire, free from any phone. For non-emergencies, call 311.",
+  "share_label": "Emergency number in San Francisco"
+ },
+ "know_how": [
+  {
+   "title": "Dress in layers, in every month",
+   "text": "The city is cooler and windier than visitors expect, and the weather changes from one neighborhood to the next. Carry a jacket even on a sunny morning."
+  },
+  {
+   "title": "The seasons, roughly",
+   "text": "June to August: fog and cool wind near the ocean, sunnier inland and in wine country. September and October: the warmest, clearest weeks of the year. November to March: the rainy season, with crisp clear days in between and the shortest daylight. April and May: mild, green hills and wildflowers."
+  },
+  {
+   "title": "Sunset times",
+   "text": "Around 5 p.m. in December, 7:30 p.m. in April and September, and 8:30 p.m. in late June. Plan sunset walks and cruises around your dates."
+  },
+  {
+   "title": "Tipping",
+   "text": "Restaurants with table service: 18 to 20% of the bill before tax. Check the bill first, since some places add a service charge or a small health surcharge. Taxis and ride apps: about 15 to 20%. Bartenders: about $1 to $2 a drink."
+  },
+  {
+   "title": "Sales tax",
+   "text": "Prices on menus and shelves do not include tax; it is added at the till. The sales tax in San Francisco is 8.625%. Other Bay Area cities have their own rates."
+  },
+  {
+   "title": "Cards and cash",
+   "text": "Cards and phone payments work almost everywhere, including buses, trains and ferries. Carry a little cash for small Chinatown bakeries, market stalls and tips."
+  },
+  {
+   "title": "Car break-ins",
+   "text": "Leave nothing in a parked car, not a bag, not a jacket, not a charging cable, especially at viewpoints and near the wharf. Take luggage to your hotel before sightseeing."
+  },
+  {
+   "title": "Book these first",
+   "text": "Alcatraz and Muir Woods both need reservations and both sell out, in every season. Book them before anything else."
+  },
+  {
+   "title": "Street sense",
+   "text": "Like any big city, a few central blocks are rough, mainly parts of the Tenderloin and mid-Market near Civic Center. Stay on the busy streets there, especially after dark, or take a ride."
+  }
+ ],
+ "know_how_note": "General customs, not rules. Sales tax rate from California tax rate tables (CDTFA), checked Nov 16, 2026.",
+ "emergency": [
+  {
+   "number": "911",
+   "label": "Police, ambulance, fire",
+   "source": "City and County of San Francisco (sf.gov)",
+   "checked": "2026-11-16"
+  },
+  {
+   "number": "311",
+   "label": "City services and information, 24 hours. From outside the city: 415-701-2311.",
+   "source": "SF311 (sf.gov)",
+   "checked": "2026-11-16"
+  },
+  {
+   "number": "415-553-0123",
+   "label": "San Francisco police, non-emergencies (a theft that has already happened, a lost item).",
+   "source": "City and County of San Francisco (sf.gov)",
+   "checked": "2026-11-16"
+  },
+  {
+   "number": "628-206-8000",
+   "label": "Zuckerberg San Francisco General Hospital, 1001 Potrero Avenue: general information. 24-hour emergency room and the city's only Level 1 trauma center.",
+   "source": "zuckerbergsanfranciscogeneral.org",
+   "checked": "2026-11-16"
+  },
+  {
+   "number": "1-800-222-1222",
+   "label": "Poison Help, free and open 24 hours anywhere in the US",
+   "source": "Poison Help (HRSA)",
+   "checked": "2026-11-16"
+  }
+ ],
+ "embassies": [],
+ "emergency_note": "Pharmacies such as Walgreens and CVS are easy to find, and some are open late. For a lost passport, contact your country's consulate: many countries have one in San Francisco.",
+ "voice_help": [],
+ "voice_test": "",
+ "travel_notes": [
+  [
+   "camera",
+   "Look up",
+   "The Golden Gate Bridge is not gold. Its color is International Orange, chosen so the bridge would stand out in the fog."
+  ],
+  [
+   "coffee",
+   "Travel note",
+   "If the fog hides the bridge in the morning, do a museum or a neighborhood first and come back in the afternoon."
+  ],
+  [
+   "camera",
+   "Look west",
+   "The sun sets into the Pacific here. Lands End, Baker Beach and Ocean Beach all face it."
+  ]
+ ],
+ "checked": "2026-11-16"
+}

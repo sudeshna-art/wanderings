@@ -1,0 +1,505 @@
+[
+ {
+  "city_id": "san-francisco",
+  "name": "San Francisco",
+  "short_name": "San Francisco",
+  "local_name": "San Francisco",
+  "stamp": "SAN FRANCISCO",
+  "coords_label": "37.77° N · 122.42° W",
+  "country_code": "US",
+  "currency_code": "USD",
+  "language": "en-US",
+  "timezone": "America/Los_Angeles",
+  "center": {
+   "lat": 37.7879,
+   "lng": -122.4075
+  },
+  "landmark_center": {
+   "lat": 37.7955,
+   "lng": -122.3937,
+   "name": "the Ferry Building"
+  },
+  "hero": {
+   "art": "san-francisco.svg",
+   "caption": "The Golden Gate Bridge in the fog",
+   "alt": "Pen and ink sketch of a Golden Gate Bridge tower rising out of fog"
+  },
+  "mark": "san-francisco-mark.svg",
+  "groups": [
+   {
+    "id": "icons",
+    "name": "The icons"
+   },
+   {
+    "id": "parks",
+    "name": "Parks, museums and views"
+   },
+   {
+    "id": "hoods",
+    "name": "Neighborhoods and food"
+   },
+   {
+    "id": "marin",
+    "name": "Across the Golden Gate: Marin and the redwoods"
+   },
+   {
+    "id": "wine",
+    "name": "Wine country: Napa and Sonoma"
+   },
+   {
+    "id": "bay",
+    "name": "Around the bay and down the coast"
+   }
+  ],
+  "neighborhoods": [
+   {
+    "id": "union-square",
+    "name": "Union Square and downtown",
+    "center": {
+     "lat": 37.7879,
+     "lng": -122.4075
+    },
+    "central": true,
+    "tip": "The hotel and shopping center of the city. Cable cars start at Powell and Market; BART and Muni Metro run under Market Street.",
+    "aliases": [
+     "Union Square",
+     "Downtown",
+     "Powell",
+     "Market Street",
+     "Tenderloin",
+     "Theater District"
+    ]
+   },
+   {
+    "id": "fishermans-wharf",
+    "name": "Fisherman's Wharf",
+    "center": {
+     "lat": 37.808,
+     "lng": -122.4177
+    },
+    "central": true,
+    "tip": "On the north waterfront, near the bay cruises, Pier 39 and both Powell cable car lines. The F streetcar runs along the Embarcadero to the Ferry Building.",
+    "aliases": [
+     "Fisherman's Wharf",
+     "Fishermans Wharf",
+     "Pier 39",
+     "Ghirardelli",
+     "North Point",
+     "Beach Street"
+    ]
+   },
+   {
+    "id": "embarcadero",
+    "name": "Embarcadero and Financial District",
+    "center": {
+     "lat": 37.7946,
+     "lng": -122.3999
+    },
+    "central": true,
+    "tip": "Flat, by the water, close to the Ferry Building and the ferries. BART and Muni stop at Embarcadero station.",
+    "aliases": [
+     "Embarcadero",
+     "Financial District",
+     "FiDi",
+     "Ferry Building",
+     "Jackson Square"
+    ]
+   },
+   {
+    "id": "north-beach",
+    "name": "North Beach and Telegraph Hill",
+    "center": {
+     "lat": 37.8005,
+     "lng": -122.41
+    },
+    "central": true,
+    "tip": "Walkable to Chinatown, Coit Tower and the wharf. Hilly to the east.",
+    "aliases": [
+     "North Beach",
+     "Telegraph Hill",
+     "Columbus Avenue",
+     "Washington Square"
+    ]
+   },
+   {
+    "id": "chinatown",
+    "name": "Chinatown",
+    "center": {
+     "lat": 37.7941,
+     "lng": -122.4078
+    },
+    "central": true,
+    "tip": "Between Union Square and North Beach. The Central Subway stops at Chinatown-Rose Pak station.",
+    "aliases": [
+     "Chinatown",
+     "Grant Avenue",
+     "Stockton Street"
+    ]
+   },
+   {
+    "id": "nob-hill",
+    "name": "Nob Hill and Russian Hill",
+    "center": {
+     "lat": 37.793,
+     "lng": -122.4161
+    },
+    "central": true,
+    "tip": "Grand hotels at the top of very steep streets. All three cable car lines cross here, which saves the climb.",
+    "aliases": [
+     "Nob Hill",
+     "Russian Hill",
+     "California Street",
+     "Polk Street"
+    ]
+   },
+   {
+    "id": "soma",
+    "name": "South of Market",
+    "center": {
+     "lat": 37.781,
+     "lng": -122.4
+    },
+    "central": true,
+    "tip": "Flat and central, near SFMOMA, the convention center and the ballpark.",
+    "aliases": [
+     "SoMa",
+     "South of Market",
+     "Yerba Buena",
+     "Moscone",
+     "Mission Bay",
+     "South Beach",
+     "Oracle Park"
+    ]
+   },
+   {
+    "id": "marina",
+    "name": "Marina and Cow Hollow",
+    "center": {
+     "lat": 37.801,
+     "lng": -122.437
+    },
+    "central": false,
+    "tip": "Flat streets by the bay, near the Palace of Fine Arts and Crissy Field. Buses rather than trains.",
+    "aliases": [
+     "Marina",
+     "Cow Hollow",
+     "Chestnut Street",
+     "Union Street",
+     "Lombard Street",
+     "Fort Mason"
+    ]
+   },
+   {
+    "id": "hayes",
+    "name": "Hayes Valley and Civic Center",
+    "center": {
+     "lat": 37.7775,
+     "lng": -122.422
+    },
+    "central": false,
+    "tip": "Near City Hall, the opera and the symphony. Civic Center has BART and Muni Metro.",
+    "aliases": [
+     "Hayes Valley",
+     "Civic Center",
+     "Alamo Square",
+     "Lower Haight",
+     "NoPa"
+    ]
+   },
+   {
+    "id": "pac-heights",
+    "name": "Pacific Heights and Japantown",
+    "center": {
+     "lat": 37.789,
+     "lng": -122.433
+    },
+    "central": false,
+    "tip": "Quiet, grand houses and Fillmore Street shops, with Japantown just south. Buses and taxis.",
+    "aliases": [
+     "Pacific Heights",
+     "Japantown",
+     "Fillmore",
+     "Lower Pacific Heights",
+     "Presidio Heights"
+    ]
+   },
+   {
+    "id": "mission",
+    "name": "The Mission and the Castro",
+    "center": {
+     "lat": 37.761,
+     "lng": -122.425
+    },
+    "central": false,
+    "tip": "Sunny, lively and flat, with BART at 16th and 24th Street and Muni Metro at Castro.",
+    "aliases": [
+     "Mission",
+     "Mission District",
+     "Castro",
+     "Dolores",
+     "Valencia",
+     "Noe Valley",
+     "Bernal Heights",
+     "Potrero Hill"
+    ]
+   },
+   {
+    "id": "haight",
+    "name": "Haight-Ashbury and Golden Gate Park",
+    "center": {
+     "lat": 37.7692,
+     "lng": -122.4481
+    },
+    "central": false,
+    "tip": "At the east end of Golden Gate Park. The N Judah streetcar runs downtown.",
+    "aliases": [
+     "Haight",
+     "Haight-Ashbury",
+     "Cole Valley",
+     "Golden Gate Park",
+     "Inner Sunset"
+    ]
+   },
+   {
+    "id": "richmond",
+    "name": "Richmond, Sunset and the ocean",
+    "center": {
+     "lat": 37.778,
+     "lng": -122.483
+    },
+    "central": false,
+    "tip": "Residential and often foggy, between the park, the Presidio and Ocean Beach. Allow 30 to 40 minutes to downtown by bus or streetcar.",
+    "aliases": [
+     "Richmond",
+     "Inner Richmond",
+     "Outer Richmond",
+     "Sunset",
+     "Outer Sunset",
+     "Ocean Beach",
+     "Lands End",
+     "Presidio",
+     "Sea Cliff"
+    ]
+   },
+   {
+    "id": "sausalito",
+    "name": "Sausalito and Marin",
+    "center": {
+     "lat": 37.8591,
+     "lng": -122.4853
+    },
+    "central": false,
+    "tip": "Across the Golden Gate Bridge. The ferry to the Ferry Building takes about 30 minutes; check the last sailing.",
+    "aliases": [
+     "Sausalito",
+     "Mill Valley",
+     "Tiburon",
+     "Marin",
+     "Larkspur",
+     "San Rafael"
+    ]
+   },
+   {
+    "id": "east-bay",
+    "name": "Oakland and Berkeley",
+    "center": {
+     "lat": 37.827,
+     "lng": -122.265
+    },
+    "central": false,
+    "tip": "Across the Bay Bridge. BART reaches downtown San Francisco in 15 to 25 minutes.",
+    "aliases": [
+     "Oakland",
+     "Berkeley",
+     "Emeryville",
+     "Alameda",
+     "East Bay",
+     "Jack London Square"
+    ]
+   },
+   {
+    "id": "peninsula",
+    "name": "The Peninsula and Silicon Valley",
+    "center": {
+     "lat": 37.56,
+     "lng": -122.32
+    },
+    "central": false,
+    "tip": "South of the city. BART serves the airport area and Millbrae; Caltrain runs down to Palo Alto and San Jose.",
+    "aliases": [
+     "South San Francisco",
+     "Burlingame",
+     "Millbrae",
+     "San Mateo",
+     "Redwood City",
+     "Palo Alto",
+     "Mountain View",
+     "San Bruno",
+     "Daly City",
+     "San Jose"
+    ]
+   }
+  ],
+  "airports": [
+   {
+    "id": "SFO",
+    "name": "San Francisco airport (SFO)",
+    "short": "SFO",
+    "local": "San Francisco International Airport",
+    "location": {
+     "lat": 37.6213,
+     "lng": -122.379
+    },
+    "tip": "BART leaves from the International Terminal and reaches downtown in about 30 minutes. Taxis use the meter plus a $6 airport pick-up fee."
+   },
+   {
+    "id": "OAK",
+    "name": "Oakland airport (OAK)",
+    "short": "Oakland",
+    "local": "Oakland San Francisco Bay Airport",
+    "location": {
+     "lat": 37.7126,
+     "lng": -122.2197
+    },
+    "tip": "Take BART from the airport to Coliseum station, then a San Francisco train to one of the four downtown stations."
+   },
+   {
+    "id": "SJC",
+    "name": "San Jose airport (SJC)",
+    "short": "San Jose",
+    "local": "San Jose Mineta International Airport",
+    "location": {
+     "lat": 37.3639,
+     "lng": -121.9289
+    },
+    "tip": "About an hour south by car. Best if you are staying in Silicon Valley."
+   }
+  ],
+  "stations": [],
+  "getting_around": {
+   "items": [
+    {
+     "title": "Tap your card or phone",
+     "text": "On Muni buses, streetcars and Metro, on BART and on the Golden Gate ferries, tap a contactless credit or debit card, or your phone or watch, on the reader. Each rider needs their own card or device. No app or transit card needed."
+    },
+    {
+     "title": "Muni: buses, streetcars and Metro",
+     "text": "One adult ride is $2.85 when you tap, $3.00 in cash (exact change), and covers transfers for two hours. A Day Pass is $5.70 and does not include cable cars. Age 18 and under ride free on Muni, except cable cars."
+    },
+    {
+     "title": "Cable cars",
+     "text": "$9 a ride, with no transfers. From 8 a.m. to 5 p.m. at the three main turnarounds (Powell and Market, Bay and Taylor, Hyde and Beach), buy your fare before boarding. Children 4 and under ride free."
+    },
+    {
+     "title": "Visitor Passport",
+     "text": "Unlimited Muni rides including cable cars: $15 for one day, with 3-day and 7-day versions too. Worth it from the second cable car ride. It is not valid on BART or to the airport."
+    },
+    {
+     "title": "BART and the airports",
+     "text": "From SFO, the station is in the International Terminal; the free AirTrain connects the other terminals. Downtown is about 30 minutes. Tap in and tap out with the same card. Trains from SFO run from 4:58 a.m. on weekdays, 5:47 a.m. on Saturdays and 8:08 a.m. on Sundays, until midnight. Fares depend on distance: use the fare calculator on bart.gov."
+    },
+    {
+     "title": "Ferries",
+     "text": "Golden Gate Ferry sails from behind the Ferry Building (gates B and C) to Sausalito, Larkspur, Tiburon and Angel Island. A paper ticket to Sausalito is $14 one way; tapping a card or Clipper costs less. No service on New Year's Day, Thanksgiving or Christmas Day."
+    },
+    {
+     "title": "Driverless cars",
+     "text": "Waymo runs driverless taxis across the city, booked in the Waymo app like any ride app. Rides to and from SFO started in 2026, using the airport's Rental Car Center, with access widening in stages: check the app for what is offered on your dates."
+    },
+    {
+     "title": "The hills",
+     "text": "Maps do not show how steep the city is. Two blocks can feel like ten. Wear flat shoes with grip, and use a bus, a cable car or a short taxi ride for the climbs. The waterfront from the Ferry Building to Fisherman's Wharf and Crissy Field is flat."
+    },
+    {
+     "title": "Do you need a car?",
+     "text": "Not in the city, where parking is expensive and scarce. Rent one, or join a tour, for Muir Woods, wine country and the coast. Never leave anything visible in a parked car, not even for five minutes."
+    }
+   ],
+   "links": [
+    {
+     "label": "Muni fares (SFMTA, official)",
+     "url": "https://www.sfmta.com/fares"
+    },
+    {
+     "label": "BART from SFO (official)",
+     "url": "https://www.bart.gov/guide/airport/sfo"
+    },
+    {
+     "label": "Golden Gate Ferry (official)",
+     "url": "https://www.goldengate.org/ferry/"
+    }
+   ],
+   "checked": "2026-11-16",
+   "source": "SFMTA (fares, cable car, Visitor Passport, Tap to Pay), BART (SFO airport guide), Golden Gate Ferry (fares effective July 1, 2026), Waymo and SFO (airport service, January 2026)"
+  },
+  "taxis": {
+   "intro_bold": "San Francisco taxis run on the meter.",
+   "intro": "Hail one with its roof light on, find one at hotels and the airport, or book through the Flywheel app, which the city's transport agency recommends for taxis. Passengers pay bridge tolls. There is no charge for luggage. Tip about 15 to 20%.",
+   "numbers": [],
+   "apps": "Uber, Lyft and Waymo (driverless) all work in the city. Check the price in the app before you book.",
+   "checked": "2026-11-16"
+  },
+  "taxi_tariff": {
+   "currency_code": "USD",
+   "table_title": "San Francisco taxi meter",
+   "periods": [
+    {
+     "id": "all",
+     "label": "all times",
+     "rule": "all times",
+     "base": 4.15
+    }
+   ],
+   "per_km": 2.02,
+   "per_hour_slow": 39,
+   "slow_min_per_km": [
+    1,
+    3
+   ],
+   "road_factor": 1.35,
+   "supplements": [
+    {
+     "label": "Pick-up at SFO airport",
+     "amount": 6
+    }
+   ],
+   "rush_note": "The meter adds $0.65 for each minute the taxi is stopped or crawling, so traffic costs more. Trips ending more than 15 miles beyond the city limits are charged at 150% of the meter, and bridge tolls are added.",
+   "note": "Rough estimate from the city meter rates ($4.15 for the first fifth of a mile, then $0.65 for each further fifth, which is $3.25 a mile, shown here per km) and straight-line distance. The meter decides.",
+   "checked": "2026-11-16",
+   "source": "SFMTA Taxi Fares (rates in force since Nov 17, 2022)"
+  },
+  "rides": {
+   "title": "Drivers and rides",
+   "intro": "In the city, Muni, taxis and ride apps cover almost everything. For Muir Woods, wine country and the coast, rent a car or join a tour.",
+   "items": [
+    {
+     "name": "Taxis and the Flywheel app",
+     "what": "Metered city taxis can be hailed on the street, called by phone or booked in the Flywheel app.",
+     "area": "San Francisco and SFO",
+     "listed_by": "SFMTA (the city transport agency)",
+     "source_url": "https://www.sfmta.com/getting-around/taxi",
+     "checked": "2026-11-16"
+    },
+    {
+     "name": "Waymo",
+     "what": "Driverless taxis booked in the Waymo app. Airport rides use the SFO Rental Car Center.",
+     "area": "San Francisco, the Peninsula and SFO",
+     "listed_by": "San Francisco International Airport and Waymo",
+     "source_url": "https://waymo.com/blog/2026/01/waymo-rides-at-sfo/",
+     "checked": "2026-11-16"
+    }
+   ],
+   "note": "Listed because an official source names them, not because Wanderings has ridden with them."
+  },
+  "connections": [],
+  "emergency": {
+   "checked": "2026-11-16",
+   "source": "City and County of San Francisco (sf.gov, 911 and 311)"
+  },
+  "greeting_name": "San Francisco",
+  "brand": {
+   "tint": "#EEF1F1",
+   "note": "Clean theme: light fog-grey tint behind the city mark. The mark itself is art/san-francisco-mark.svg."
+  }
+ }
+]

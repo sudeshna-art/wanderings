@@ -36,10 +36,19 @@
       "mark": "washington-dc-mark.svg",
       "code": "DC",
       "maps": ""
+    },
+    {
+      "id": "san-francisco",
+      "dir": "san-francisco",
+      "title": "San Francisco",
+      "sub": "The city, the redwoods and wine country",
+      "mark": "san-francisco-mark.svg",
+      "code": "SF",
+      "maps": ""
     }
   ],
   "request_url": "https://forms.gle/38WPAquzjRQspBRg9",
   "_note_request": "request_url: the 'Request a destination' form (Google Form for now). Empty = the card shows without a button.",
   "_note_code": "code: the two-letter prefix on trip codes (PR-XXXXX-XXXXX), so a code opens the right destination.",
-  "_note_maps_none": "maps \"\" = online map only (Washington, DC, Nov 14 2026): no offline packs, so no map folder."
+  "_note_maps_none": "maps \"\" = online map only (Washington, DC, Nov 14 2026; San Francisco, Nov 16 2026): no offline packs, so no map folder."
 }

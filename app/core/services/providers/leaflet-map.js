@@ -1,6 +1,6 @@
 /* Leaflet map provider (bundled library, OpenStreetMap-based tiles for the beta).
    Implements the map-service interface. A later google-map.js implements the same functions. */
-import { CONFIG } from '../../config/default-config.js?v=202611141542';
+import { CONFIG } from '../../config/default-config.js?v=202611161128';
 
 const L = () => window.L;
 

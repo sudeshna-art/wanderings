@@ -1,0 +1,17 @@
+<svg viewBox="0 0 390 290" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pen and ink sketch of a Golden Gate Bridge tower rising out of fog">
+<path class="wash" d="M176 250 V70 H186 V250 Z M206 250 V70 H216 V250 Z"/>
+<rect class="wash" x="312" y="40" width="18" height="18" rx="9"/>
+<g class="ink">
+<path stroke-width="1.2" d="M176 250 V118 H177.5 V84 H179 V58 H185 V84 H186 V250 M206 250 V84 H207 V58 H213 V84 H214.5 V118 H216 V250"/>
+<path stroke-width="1" d="M186 64 H206 V74 H186 M186 100 H206 V111 H186 M186 142 H206 V154 H186 M186 186 H206 V199 H186"/>
+<path stroke-width=".5" d="M190 64 V74 M196 64 V74 M202 64 V74 M190 100 V111 M196 100 V111 M202 100 V111 M190 142 V154 M196 142 V154 M202 142 V154"/>
+<path stroke-width="1" d="M0 150 Q110 214 180 60 M212 60 Q290 250 390 132"/>
+<path stroke-width=".45" d="M20 162 V216 M40 172 V216 M60 178 V216 M80 180 V216 M100 177 V216 M120 166 V216 M140 146 V216 M160 112 V216 M232 104 V216 M252 142 V216 M272 168 V216 M292 182 V216 M312 184 V216 M332 176 V216 M352 162 V216 M372 146 V216"/>
+<path stroke-width="1.2" d="M0 216 H176 M216 216 H390 M0 222 H176 M216 222 H390"/>
+<path stroke-width=".5" d="M8 222 l8 5 l8 -5 l8 5 l8 -5 l8 5 l8 -5 l8 5 l8 -5 l8 5 l8 -5 l8 5 l8 -5 l8 5 l8 -5 l8 5 l8 -5 l8 5 l8 -5 l8 5 l8 -5 M222 222 l8 5 l8 -5 l8 5 l8 -5 l8 5 l8 -5 l8 5 l8 -5 l8 5 l8 -5 l8 5 l8 -5 l8 5 l8 -5 l8 5 l8 -5 l8 5 l8 -5 l8 5 l8 -5"/>
+<path stroke-width=".9" d="M10 246 C30 236 52 238 70 244 C92 234 120 236 140 246 M236 244 C258 234 286 236 304 244 C324 236 350 236 374 246"/>
+<path stroke-width=".8" d="M24 258 C50 250 84 252 110 258 C136 250 170 250 200 258 C230 250 262 252 290 258 C316 252 346 252 370 258"/>
+<path stroke-width=".7" d="M0 270 H390 M40 280 H110 M160 284 H250 M290 278 H360"/>
+<path stroke-width=".6" d="M70 60 q6 -4 12 0 M96 48 q5 -3 10 0 M300 96 q5 -3 10 0"/>
+</g>
+</svg>

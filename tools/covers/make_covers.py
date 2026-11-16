@@ -14,6 +14,7 @@ COVERS = [   # script, destination folder, file name, extra sketch options
     ('make_lisbon_cover.py', 'portugal', 'lisbon-cover.svg', []),
     ('make_algarve_cover.py', 'portugal', 'algarve-cover.svg', []),
     ('make_washington_dc_cover.py', 'washington-dc', 'washington-dc-cover.svg', []),
+    ('make_san_francisco_cover.py', 'san-francisco', 'san-francisco-cover.svg', []),   # drawn Nov 16 2026; not switched on in cities.json until the owner approves it
 ]
 with tempfile.TemporaryDirectory() as tmp:
     for script, d, name, opts in COVERS:

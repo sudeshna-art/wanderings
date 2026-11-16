@@ -1,12 +1,12 @@
 /* Personal code (Nov 13 2026): optional. Keeps one traveler's journal and phrase favorites on every device
    (phone, laptop, browser or home-screen app) that has the code. No email or password.
    The code is stored on the device for all destinations; what was last synced is kept per destination. */
-import { EDITION } from '../../../edition.config.js?v=202611141542';
-import { S, noPhrases } from '../state.js?v=202611141542';
-import { esc, toast, $ } from '../dom.js?v=202611141542';
-import { syncService } from '../../services/sync-service.js?v=202611141542';
-import { tripService } from '../../services/trip-service.js?v=202611141542';
-import { mineDiff, applyMine } from '../../models/mine.js?v=202611141542';
+import { EDITION } from '../../../edition.config.js?v=202611161128';
+import { S, noPhrases } from '../state.js?v=202611161128';
+import { esc, toast, $ } from '../dom.js?v=202611161128';
+import { syncService } from '../../services/sync-service.js?v=202611161128';
+import { tripService } from '../../services/trip-service.js?v=202611161128';
+import { mineDiff, applyMine } from '../../models/mine.js?v=202611161128';
 
 const KEY = 'wanderings-mycode';
 export const MINE = { code: '', status: '', msg: '', busy: false };

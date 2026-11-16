@@ -3,7 +3,7 @@
 Read this first in every new chat. It replaces re-exploring the code.
 
 ## What this is
-- One travel web app (installable on a phone's home screen) with a destination picker: Firenze, Portugal (Lisboa and the Algarve), Puerto Rico. Washington, DC and San Francisco are next.
+- One travel web app (installable on a phone's home screen) with a destination picker: Firenze, Portugal (Lisboa and the Algarve), Puerto Rico, Washington, DC and San Francisco.
 - Plain ES modules, no framework, no npm build. Shared code in `source/core/`, one folder per destination in `source/destinations/<dir>/`.
 - Live preview: https://sudeshna-art.github.io/wanderings/app/ (GitHub Pages serves `app/` from `main`).
 - Branches: `one-app` holds the source and the built `app/`. `main` is what's live: only the `app/` folder is copied over.
