@@ -12,7 +12,7 @@ import { storageService } from '../services/storage-service.js';
 import { shareService } from '../services/share-service.js';
 import { speechService } from '../services/speech-service.js';
 import { currencyService } from '../services/currency-service.js';
-import { newStay, syncLegs, setStatus, statusOf, setBooked, isBooked, addToDay, removeFromPlan, moveItem, planOf, tripDays, sortedStays } from '../models/schema.js';
+import { validDay, newStay, syncLegs, setStatus, statusOf, setBooked, isBooked, addToDay, removeFromPlan, moveItem, planOf, tripDays, sortedStays } from '../models/schema.js';
 import { renderToday, showSlide, startSlides, stopSlides } from './screens/today.js';
 import { renderPlaces, defaultView, addCustomPlace } from './screens/places.js';
 import { renderPlan, openSched, openAddSheet, closeSheet, setSheetDay, sheetDay, openAddStop, pickSheetWho, pickSchedWho, sheetWhoSel, schedWhoSel } from './screens/plan.js';
@@ -22,7 +22,7 @@ import { liveStart, shareFromPlan as liveShareFromPlan, customCode as liveCustom
 import { openSpot, recenter, refreshWanderer, wanderPos } from './screens/wanderer.js';
 import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js';
 import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js';
-import { renderEssentials, renderGuideHome, renderGuideBits, guideSubFor, showFare, updateConv, loadRate } from './screens/essentials.js';
+import { showFeedback, renderEssentials, renderGuideHome, renderGuideBits, guideSubFor, showFare, updateConv, loadRate } from './screens/essentials.js';
 import { renderWelcome, W, STEP_COUNT } from './screens/welcome.js';
 import { downloadPack, downloadAll, removePack, autoSaveMaps } from './screens/offline.js';
 import { openImport, importFind, importFile, importBack, importSave, openEditor, editorSave, editorDelete, changeKind } from './screens/bookings.js';
@@ -192,6 +192,7 @@ const A = {
   driver: () => showDriver(),
   homedriver: () => showDriver('__home'),
   closedriver: () => { $('#driver').hidden = true; },
+  feedback: () => showFeedback(),
   dismissinstall: () => { P().installTipDone = true; save(); rerender(); },
   welcome: el => { W.step = Math.min(+el.dataset.step || 1, STEP_COUNT); renderWelcome(); },
   wnext: () => { W.step = Math.min(STEP_COUNT, W.step + 1); renderWelcome(); $('#welcome').scrollTo(0, 0); },
@@ -313,7 +314,22 @@ let photoTarget = 'composer';
 document.addEventListener('click', e => { const l = e.target.closest && e.target.closest('[data-phtarget]'); if (l) photoTarget = l.dataset.phtarget; }, true);
 
 function setPath(obj, path, val) { const k = path.split('.'); let o = obj; for (let i = 0; i < k.length - 1; i++) { if (o[k[i]] == null) o[k[i]] = {}; o = o[k[i]]; } o[k[k.length - 1]] = val; }
+/* Date fields on a computer fire a change on every key, so typing 2026 passes through 0002, 0020 and 0202.
+   Wait until the year is real; when the field is left with a short year, fix 26 to 2026 or put back the last good date. */
+const badYear = el => el && el.type === 'date' && el.value && !validDay(el.value);
+let dateFocus = null;   /* Chrome reports the body as active in the middle of typing a date, so track focus ourselves */
+document.addEventListener('focusin', e => { dateFocus = e.target && e.target.type === 'date' ? e.target : null; });
+document.addEventListener('focusout', e => {
+  if (dateFocus === e.target) dateFocus = null;
+  const el = e.target;
+  if (!badYear(el)) { if (el.dataset && el.dataset.pend) { delete el.dataset.pend; setTimeout(() => el.dispatchEvent(new Event('change', { bubbles: true })), 0); } return; }   // redraw now that typing is done
+  const y = +el.value.slice(0, 4), rest = el.value.slice(4);
+  if (y >= 20 && y <= 99) { el.value = (2000 + y) + rest; el.dispatchEvent(new Event('change', { bubbles: true })); return; }
+  const bp = el.dataset && el.dataset.bind, last = bp ? bp.split('.').reduce((o, k) => (o == null ? o : o[k]), S.trip) : '';
+  el.value = typeof last === 'string' && validDay(last) ? last : (el.defaultValue || ''); toast('Type the full year, like 2026');
+});
 document.addEventListener('change', async e => {
+  if (badYear(e.target)) return;                                    // still typing the year
   /* The stay's address box: typed by hand counts as the address (no redraw, so a tap on Find still works). */
   if (e.target.dataset && e.target.dataset.stayq != null) { const s = S.trip.stays[+e.target.dataset.stayq]; if (s && e.target.value.trim() !== (s.address || '')) { s.address = e.target.value.trim(); s.lat = null; s.lng = null; save(); } return; }
   const el = e.target;
@@ -348,6 +364,7 @@ document.addEventListener('change', async e => {
   if (/^(stays|legs)\./.test(bp)) { syncLegs(S.trip); }
   save();
   if (bp === 'travel_style') { P().pview = defaultView(); renderTabs(); if (!inWelcome) toast(v === 'planner' ? 'Planner mode on. Places is now Plan.' : v === 'wanderer' ? 'True Wanderer on. Places is now Nearby.' : 'Go with the flow'); }
+  if (el.type === 'date' && dateFocus === el) { el.dataset.pend = '1'; return; }   // still typing: saved, redraw when the field is left
   if (/^(stays|legs)\./.test(bp)) { refreshStays(); }
   if (/^emergency\./.test(bp)) { toast('Saved on this phone'); showEmergency(); return; }
   if (/^occasions\./.test(bp)) { refreshOccasions(); }

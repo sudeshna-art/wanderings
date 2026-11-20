@@ -79,6 +79,11 @@ export function migrateTrip(t, editionId) {
   out.food = Object.assign({}, base.food, t.food || {});
   ['prefs', 'allergies'].forEach(k => { if (!Array.isArray(out.food[k])) out.food[k] = []; });
   ['occasions', 'drivers', 'people'].forEach(k => { if (!Array.isArray(out[k])) out[k] = []; });
+  /* Dates saved with a short year (0002) while typing on a computer are cleared so the app can plan again. */
+  if (out.dates && typeof out.dates === 'object') out.dates = { start: okDay(out.dates.start), end: okDay(out.dates.end) };
+  out.stays.forEach(s => { if (s) { s.start = okDay(s.start); s.end = okDay(s.end); } });
+  out.occasions.forEach(o => { if (o) o.date = okDay(o.date); });
+  out.bookings.forEach(b => { if (b) { b.date = okDay(b.date); b.end_date = okDay(b.end_date); } });
   if (!out.me_id) out.me_id = uid('p');
   if (!TRAVEL_STYLES.includes(out.travel_style)) out.travel_style = 'flow';
   if (!out.traveler_language) out.traveler_language = 'en';
@@ -103,17 +108,20 @@ export function walkMinutes(a, b) {
 /* ---------- dates ---------- */
 export const localISO = (d = new Date()) => new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
 const dayDate = iso => new Date(iso + 'T00:00:00');
+/* A real trip date: YYYY-MM-DD with a year from 2000 to 2100. A desktop date field lets a short year like 0002 through while typing. */
+export const validDay = s => /^\d{4}-\d\d-\d\d$/.test(s || '') && +s.slice(0, 4) >= 2000 && +s.slice(0, 4) <= 2100;
+const okDay = s => (validDay(s) ? s : '');
 
 export function sortedStays(trip) {
   return trip.stays.filter(s => s.city_id).slice().sort((a, b) => (a.start || '9').localeCompare(b.start || '9'));
 }
 export function tripRange(trip) {
   /* Nov 2026: trip dates can be set before any stay is booked (trip.dates); stays widen the range. */
-  const st = sortedStays(trip).filter(s => s.start), d = trip.dates || {};
+  const st = sortedStays(trip).filter(s => validDay(s.start)), d = { start: okDay((trip.dates || {}).start), end: okDay((trip.dates || {}).end) };
   const starts = st.map(s => s.start).concat(d.start ? [d.start] : []).sort();
   if (!starts.length) return { start: '', end: '' };
   const start = starts[0];
-  const end = st.map(s => s.end || s.start).concat(d.end ? [d.end] : d.start ? [d.start] : []).reduce((m, e) => e > m ? e : m, start);
+  const end = st.map(s => okDay(s.end) || s.start).concat(d.end ? [d.end] : d.start ? [d.start] : []).reduce((m, e) => e > m ? e : m, start);
   return { start, end };
 }
 export function tripDays(trip) {
@@ -275,13 +283,13 @@ export function everyone(trip) {
 export const isGroup = trip => (trip.people || []).length > 0;
 export const newPerson = () => ({ id: uid('p'), name: '', arrive: '', leave: '', hood: '', address: '' });
 /* Who is on the island that day (arrival and departure days count). */
-export const hereOn = (trip, iso) => everyone(trip).filter(p => p.arrive && iso >= p.arrive && iso <= (p.leave || p.arrive));
+export const hereOn = (trip, iso) => everyone(trip).filter(p => validDay(p.arrive) && iso >= p.arrive && iso <= (okDay(p.leave) || p.arrive));
 /* Days to plan: this traveler's days plus everyone else's, so the group plan covers the whole family's stay. */
 export function planDays(trip) {
   const set = new Set(tripDays(trip));
   (trip.people || []).forEach(p => {
-    if (!p.arrive) return;
-    const d = dayDate(p.arrive), e = dayDate(p.leave || p.arrive);
+    if (!validDay(p.arrive)) return;
+    const d = dayDate(p.arrive), e = dayDate(okDay(p.leave) || p.arrive);
     for (let i = 0; d <= e && i < 60; i++) { set.add(localISO(d)); d.setDate(d.getDate() + 1); }
   });
   return [...set].sort();

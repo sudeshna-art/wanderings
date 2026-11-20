@@ -1,13 +1,13 @@
 /* Plan together, live (Nov 2026): sign in once, start or join a shared trip, and see everyone's changes.
    Uses syncService for everything outside the phone and models/sync.js for what is shared. */
-import { EDITION } from '../../../edition.config.js?v=202611161128';
-import { S, save, placeById } from '../state.js?v=202611161128';
-import { esc, ic, toast, $ } from '../dom.js?v=202611161128';
-import { syncService, normCode } from '../../services/sync-service.js?v=202611161128';
-import { tripService } from '../../services/trip-service.js?v=202611161128';
-import { shareService } from '../../services/share-service.js?v=202611161128';
-import { mineSchedule } from './mine.js?v=202611161128';
-import { diffForPush, applyRemote, changeLine, entryId } from '../../models/sync.js?v=202611161128';
+import { EDITION } from '../../../edition.config.js?v=202611200940';
+import { S, save, placeById } from '../state.js?v=202611200940';
+import { esc, ic, toast, $ } from '../dom.js?v=202611200940';
+import { syncService, normCode } from '../../services/sync-service.js?v=202611200940';
+import { tripService } from '../../services/trip-service.js?v=202611200940';
+import { shareService } from '../../services/share-service.js?v=202611200940';
+import { mineSchedule } from './mine.js?v=202611200940';
+import { diffForPush, applyRemote, changeLine, entryId } from '../../models/sync.js?v=202611200940';
 
 const INVITE_KEY = 'wanderings-live-invite';
 export const LV = { on: false, user: null, mode: 'link', msg: '', busy: false, picking: null, members: 0 };

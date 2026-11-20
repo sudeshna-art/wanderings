@@ -1,18 +1,18 @@
 /* Essentials: emergency card, you and your trip, bookings, getting between places, currency, getting around,
    taxis, audio, know-how, emergencies. */
-import { mineBlock } from './mine.js?v=202611161128';
-import { EDITION } from '../../../edition.config.js?v=202611161128';
-import { S, P, save, curCityId, cityOf, cityName, cityIds, spot, spotOptions, homePoint, addMount, noPhrases, phrasesOff, hasMapPacks } from '../state.js?v=202611161128';
-import { esc, ic, fmtNum, parseNum, fmtISO, $, modeIcon } from '../dom.js?v=202611161128';
-import { masthead, cityBar, styleChoice, staysEditor, arrivalFields, homeCurrencySelect } from '../components.js?v=202611161128';
-import { currencyService } from '../../services/currency-service.js?v=202611161128';
-import { fareService } from '../../services/fare-service.js?v=202611161128';
-import { speechService } from '../../services/speech-service.js?v=202611161128';
-import { languageSelect } from './phrases.js?v=202611161128';
-import { offlineMapsBlock, fillOfflineMaps } from './offline.js?v=202611161128';
-import { bookingsBlock } from './bookings.js?v=202611161128';
-import { clean } from '../theme.js?v=202611161128';
-import { groupBlock, ridesBlock } from './group.js?v=202611161128';
+import { mineBlock } from './mine.js?v=202611200940';
+import { EDITION } from '../../../edition.config.js?v=202611200940';
+import { S, P, save, curCityId, cityOf, cityName, cityIds, spot, spotOptions, homePoint, addMount, noPhrases, phrasesOff, hasMapPacks } from '../state.js?v=202611200940';
+import { esc, ic, fmtNum, parseNum, fmtISO, $, modeIcon } from '../dom.js?v=202611200940';
+import { masthead, cityBar, styleChoice, staysEditor, arrivalFields, homeCurrencySelect } from '../components.js?v=202611200940';
+import { currencyService } from '../../services/currency-service.js?v=202611200940';
+import { fareService } from '../../services/fare-service.js?v=202611200940';
+import { speechService } from '../../services/speech-service.js?v=202611200940';
+import { languageSelect } from './phrases.js?v=202611200940';
+import { offlineMapsBlock, fillOfflineMaps } from './offline.js?v=202611200940';
+import { bookingsBlock } from './bookings.js?v=202611200940';
+import { clean } from '../theme.js?v=202611200940';
+import { groupBlock, ridesBlock } from './group.js?v=202611200940';
 
 export const E = { rate: null };
 
@@ -167,6 +167,7 @@ export function renderGuideHome() {
     ${tile('Getting around', 'Taxis, fares, drivers', 'taxi', 'data-act="go" data-tab="guide" data-sub="around"')}
     ${tile('Money', 'Currency and prices', 'convert', 'data-act="go" data-tab="guide" data-sub="money"')}
     ${tile('Local know-how', noPhrases() ? 'Tips, tipping, emergencies' : 'Tips, audio, emergencies', 'star', 'data-act="go" data-tab="guide" data-sub="knowhow"')}
+    ${EDITION.feedbackUrl ? tile('Send feedback', 'Tell us what looks wrong', 'star', 'data-act="feedback"') : ''}
     ${hasMapPacks() ? tile('Offline maps', 'Save maps for no signal', 'pin', 'data-act="go" data-tab="guide" data-sub="maps"') : ''}
   </div>`;
   document.querySelector('section[data-tab="guide"]').innerHTML = html;
@@ -195,4 +196,22 @@ export function renderGuideBits(sub) {
   const html = masthead() + back + `<div class="greet"><h1>${esc(GUIDE_SUBS[sub] || 'Guide')}.</h1></div>${cityIds().length > 1 && sub !== 'maps' ? cityBar() : ''}` + (parts[sub] || '') + `<p class="small faint" style="padding-top:28px">Prices, hours and fares checked ${esc(fmtISO(ess.checked, { month: 'short', day: 'numeric', year: 'numeric' }))} from official sites and travel sources. They change, so confirm when booking.</p>`;
   document.querySelector('section[data-tab="guidebits"]').innerHTML = html;
   addMount(() => { if (sub === 'money') loadRate(); if (sub === 'around') showFare(); if (sub === 'knowhow' && !noPhrases()) voiceBlock(); if (sub === 'maps') fillOfflineMaps(); });
+}
+
+/* Send feedback: opens the feedback form, with a line of details to paste into it. */
+export const feedbackDetails = () => {
+  const ua = navigator.userAgent, os = /iPhone|iPad/.test(ua) ? 'iPhone or iPad' : /Android/.test(ua) ? 'Android' : /Mac/.test(ua) ? 'Mac' : /Windows/.test(ua) ? 'Windows' : 'Other';
+  const br = /Edg\//.test(ua) ? 'Edge' : /Chrome\//.test(ua) ? 'Chrome' : /Safari\//.test(ua) ? 'Safari' : /Firefox\//.test(ua) ? 'Firefox' : 'Other browser';
+  const standalone = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || navigator.standalone;
+  return `${EDITION.name} · build ${EDITION.build} · ${os}, ${br}${standalone ? ' (home-screen app)' : ''} · ${window.innerWidth}x${window.innerHeight}`;
+};
+export function showFeedback() {
+  const d = $('#driver'), info = feedbackDetails();
+  d.innerHTML = `<div class="inner"><div class="label">Feedback</div><h1 style="margin:0">Something look wrong?</h1>
+    <p class="small">Tell us what happened and what you expected. A screenshot helps. It goes straight to the person who made this app.</p>
+    <a class="btn" href="${esc(EDITION.feedbackUrl)}" target="_blank" rel="noopener">Open the feedback form ↗</a>
+    <p class="small muted" style="margin:6px 0 0">Paste these details into the form so we can find the problem faster:</p>
+    <div class="tipbox" style="word-break:break-word">${esc(info)}</div>
+    <div style="display:flex;gap:8px;margin-top:auto"><button class="btn line" data-act="copy" data-text="${esc(info)}" style="flex:1">Copy details</button><button class="btn line" data-act="closedriver" style="flex:1">Close</button></div></div>`;
+  d.hidden = false;
 }

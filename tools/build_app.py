@@ -27,6 +27,7 @@ OUT.mkdir(parents=True)
 shell = json.loads((SRC / 'shell' / 'destinations.json').read_text())
 spec = shell['destinations']
 REQUEST = shell.get('request_url', '')
+FEEDBACK = shell.get('feedback_url', '')
 dests = []
 for d in spec:
     ed = json.loads((SRC / 'destinations' / d['dir'] / 'content' / 'edition.json').read_text())
@@ -56,6 +57,8 @@ export function chosenId() {{
   return DESTINATIONS.some(d => d.id === q) ? q : (DESTINATIONS.some(d => d.id === s) ? s : null);
 }}
 export const REQUEST_URL = {json.dumps(REQUEST)};
+export const FEEDBACK_URL = {json.dumps(FEEDBACK)};
+export const BUILD = {json.dumps(version)};
 export function remember(id) {{ try {{ localStorage.setItem(KEY, id); }} catch (e) {{}} }}
 ''')
 

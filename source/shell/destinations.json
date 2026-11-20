@@ -48,6 +48,8 @@
     }
   ],
   "request_url": "https://forms.gle/38WPAquzjRQspBRg9",
+  "feedback_url": "",
+  "_note_feedback": "feedback_url: the 'Send feedback' Google Form. Empty = the Send feedback tile is hidden. Replies go to the form owner's Sheet and email.",
   "_note_request": "request_url: the 'Request a destination' form (Google Form for now). Empty = the card shows without a button.",
   "_note_code": "code: the two-letter prefix on trip codes (PR-XXXXX-XXXXX), so a code opens the right destination.",
   "_note_maps_none": "maps \"\" = online map only (Washington, DC, Nov 14 2026; San Francisco, Nov 16 2026): no offline packs, so no map folder."
