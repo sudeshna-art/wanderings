@@ -1,10 +1,10 @@
 /* Bookings in one place (approved Oct 11 2026): flights, stays, trains, tours and drivers, with import from
    pasted confirmation emails or calendar files. Everything is read and kept on this phone. */
-import { S, P, save, cityOf, cityName, cityIds, today } from '../state.js?v=202611161128';
-import { esc, ic, toast, $, fmtDay } from '../dom.js?v=202611161128';
-import { bookingLine } from '../components.js?v=202611161128';
-import { BOOKING_KINDS, bookingKindLabel, newBooking, sortedBookings, upsertBooking, removeBooking, newStay, syncLegs, sortedStays, tripRange } from '../../models/schema.js?v=202611161128';
-import { parseAny } from '../../models/importer.js?v=202611161128';
+import { S, P, save, cityOf, cityName, cityIds, today } from '../state.js?v=202611200940';
+import { esc, ic, toast, $, fmtDay } from '../dom.js?v=202611200940';
+import { bookingLine } from '../components.js?v=202611200940';
+import { BOOKING_KINDS, bookingKindLabel, newBooking, sortedBookings, upsertBooking, removeBooking, newStay, syncLegs, sortedStays, tripRange } from '../../models/schema.js?v=202611200940';
+import { parseAny } from '../../models/importer.js?v=202611200940';
 
 const IM = { text: '', found: [], mode: 'paste' };
 

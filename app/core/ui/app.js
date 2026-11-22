@@ -1,37 +1,37 @@
 /* Wanderings app shell: boot, tabs, taps and form binding. All outside access goes through services. */
-import { CONFIG } from '../config/default-config.js?v=202611161128';
-import { S, P, save, copyOf, myLang, curCityId, cityIds, cityName, placeById, isPlanner, isWanderer, runMounts, runCleanups, today } from './state.js?v=202611161128';
-import { $, $$, esc, ic, toast } from './dom.js?v=202611161128';
-import { staysEditor, STAYQ } from './components.js?v=202611161128';
-import { geocodeService } from '../services/geocode-service.js?v=202611161128';
-import { nearestHood } from '../models/schema.js?v=202611161128';
-import { cityOf } from './state.js?v=202611161128';
-import { contentService } from '../services/content-service.js?v=202611161128';
-import { tripService } from '../services/trip-service.js?v=202611161128';
-import { storageService } from '../services/storage-service.js?v=202611161128';
-import { shareService } from '../services/share-service.js?v=202611161128';
-import { speechService } from '../services/speech-service.js?v=202611161128';
-import { currencyService } from '../services/currency-service.js?v=202611161128';
-import { newStay, syncLegs, setStatus, statusOf, setBooked, isBooked, addToDay, removeFromPlan, moveItem, planOf, tripDays, sortedStays } from '../models/schema.js?v=202611161128';
-import { renderToday, showSlide, startSlides, stopSlides } from './screens/today.js?v=202611161128';
-import { renderPlaces, defaultView, addCustomPlace } from './screens/places.js?v=202611161128';
-import { renderPlan, openSched, openAddSheet, closeSheet, setSheetDay, sheetDay, openAddStop, pickSheetWho, pickSchedWho, sheetWhoSel, schedWhoSel } from './screens/plan.js?v=202611161128';
-import { addPerson, removePerson, refreshPeople, shareGroup, checkJoin, cancelJoin, applyJoin } from './screens/together.js?v=202611161128';
-import { mineStart, mineMake, mineUse, mineOff, mineCopy } from './screens/mine.js?v=202611161128';
-import { liveStart, shareFromPlan as liveShareFromPlan, customCode as liveCustom, editCode as liveEditCode, closeCode as liveCloseCode, joinWithCode as liveJoin, sendLink as liveSendLink, signInPassword as livePw, toggleMode as liveMode, startTrip as liveStartTrip, invite as liveInvite, leave as liveLeave, signOutLive, pickMe as livePick, isLive, LV } from './screens/live.js?v=202611161128';
-import { openSpot, recenter, refreshWanderer, wanderPos } from './screens/wanderer.js?v=202611161128';
-import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js?v=202611161128';
-import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js?v=202611161128';
-import { renderEssentials, renderGuideHome, renderGuideBits, guideSubFor, showFare, updateConv, loadRate } from './screens/essentials.js?v=202611161128';
-import { renderWelcome, W, STEP_COUNT } from './screens/welcome.js?v=202611161128';
-import { downloadPack, downloadAll, removePack, autoSaveMaps } from './screens/offline.js?v=202611161128';
-import { openImport, importFind, importFile, importBack, importSave, openEditor, editorSave, editorDelete, changeKind } from './screens/bookings.js?v=202611161128';
-import { showEmergency, sharePlan, meetForm, meetSave, meetShare } from './screens/safety.js?v=202611161128';
-import { openAsk, closeAsk, askInput, askSet } from './screens/ask.js?v=202611161128';
-import { applyTheme, clean, onWideChange } from './theme.js?v=202611161128';
-import { openCover } from './screens/today.js?v=202611161128';
-import { togglePartyKids, togglePartyEasy, toggleFood, addOccasion, removeOccasion, refreshOccasions, showServerCard, driverForm, driverSave, driverDelete } from './screens/group.js?v=202611161128';
-import { stayHere, curCity } from './state.js?v=202611161128';
+import { CONFIG } from '../config/default-config.js?v=202611200940';
+import { S, P, save, copyOf, myLang, curCityId, cityIds, cityName, placeById, isPlanner, isWanderer, runMounts, runCleanups, today } from './state.js?v=202611200940';
+import { $, $$, esc, ic, toast } from './dom.js?v=202611200940';
+import { staysEditor, STAYQ } from './components.js?v=202611200940';
+import { geocodeService } from '../services/geocode-service.js?v=202611200940';
+import { nearestHood } from '../models/schema.js?v=202611200940';
+import { cityOf } from './state.js?v=202611200940';
+import { contentService } from '../services/content-service.js?v=202611200940';
+import { tripService } from '../services/trip-service.js?v=202611200940';
+import { storageService } from '../services/storage-service.js?v=202611200940';
+import { shareService } from '../services/share-service.js?v=202611200940';
+import { speechService } from '../services/speech-service.js?v=202611200940';
+import { currencyService } from '../services/currency-service.js?v=202611200940';
+import { validDay, newStay, syncLegs, setStatus, statusOf, setBooked, isBooked, addToDay, removeFromPlan, moveItem, planOf, tripDays, sortedStays } from '../models/schema.js?v=202611200940';
+import { renderToday, showSlide, startSlides, stopSlides } from './screens/today.js?v=202611200940';
+import { renderPlaces, defaultView, addCustomPlace } from './screens/places.js?v=202611200940';
+import { renderPlan, openSched, openAddSheet, closeSheet, setSheetDay, sheetDay, openAddStop, pickSheetWho, pickSchedWho, sheetWhoSel, schedWhoSel } from './screens/plan.js?v=202611200940';
+import { addPerson, removePerson, refreshPeople, shareGroup, checkJoin, cancelJoin, applyJoin } from './screens/together.js?v=202611200940';
+import { mineStart, mineMake, mineUse, mineOff, mineCopy } from './screens/mine.js?v=202611200940';
+import { liveStart, shareFromPlan as liveShareFromPlan, customCode as liveCustom, editCode as liveEditCode, closeCode as liveCloseCode, joinWithCode as liveJoin, sendLink as liveSendLink, signInPassword as livePw, toggleMode as liveMode, startTrip as liveStartTrip, invite as liveInvite, leave as liveLeave, signOutLive, pickMe as livePick, isLive, LV } from './screens/live.js?v=202611200940';
+import { openSpot, recenter, refreshWanderer, wanderPos } from './screens/wanderer.js?v=202611200940';
+import { renderPhrases, say, showDriver, setQuery } from './screens/phrases.js?v=202611200940';
+import { renderJournal, J, saveEntry, deletePhoto, backupText, summaryText, consentMany, consentOne, allPhotoIds, sharePhotos, openViewer } from './screens/journal.js?v=202611200940';
+import { showFeedback, renderEssentials, renderGuideHome, renderGuideBits, guideSubFor, showFare, updateConv, loadRate } from './screens/essentials.js?v=202611200940';
+import { renderWelcome, W, STEP_COUNT } from './screens/welcome.js?v=202611200940';
+import { downloadPack, downloadAll, removePack, autoSaveMaps } from './screens/offline.js?v=202611200940';
+import { openImport, importFind, importFile, importBack, importSave, openEditor, editorSave, editorDelete, changeKind } from './screens/bookings.js?v=202611200940';
+import { showEmergency, sharePlan, meetForm, meetSave, meetShare } from './screens/safety.js?v=202611200940';
+import { openAsk, closeAsk, askInput, askSet } from './screens/ask.js?v=202611200940';
+import { applyTheme, clean, onWideChange } from './theme.js?v=202611200940';
+import { openCover } from './screens/today.js?v=202611200940';
+import { togglePartyKids, togglePartyEasy, toggleFood, addOccasion, removeOccasion, refreshOccasions, showServerCard, driverForm, driverSave, driverDelete } from './screens/group.js?v=202611200940';
+import { stayHere, curCity } from './state.js?v=202611200940';
 
 /* Five tabs (Nov 2026): Today, Plan, Explore, Guide, Trip. Guide and Trip open short sub-pages (P().sub):
    Guide: phrases, around, money, knowhow, maps. Trip: journal. Each renders into its own section. */
@@ -192,6 +192,7 @@ const A = {
   driver: () => showDriver(),
   homedriver: () => showDriver('__home'),
   closedriver: () => { $('#driver').hidden = true; },
+  feedback: () => showFeedback(),
   dismissinstall: () => { P().installTipDone = true; save(); rerender(); },
   welcome: el => { W.step = Math.min(+el.dataset.step || 1, STEP_COUNT); renderWelcome(); },
   wnext: () => { W.step = Math.min(STEP_COUNT, W.step + 1); renderWelcome(); $('#welcome').scrollTo(0, 0); },
@@ -313,7 +314,22 @@ let photoTarget = 'composer';
 document.addEventListener('click', e => { const l = e.target.closest && e.target.closest('[data-phtarget]'); if (l) photoTarget = l.dataset.phtarget; }, true);
 
 function setPath(obj, path, val) { const k = path.split('.'); let o = obj; for (let i = 0; i < k.length - 1; i++) { if (o[k[i]] == null) o[k[i]] = {}; o = o[k[i]]; } o[k[k.length - 1]] = val; }
+/* Date fields on a computer fire a change on every key, so typing 2026 passes through 0002, 0020 and 0202.
+   Wait until the year is real; when the field is left with a short year, fix 26 to 2026 or put back the last good date. */
+const badYear = el => el && el.type === 'date' && el.value && !validDay(el.value);
+let dateFocus = null;   /* Chrome reports the body as active in the middle of typing a date, so track focus ourselves */
+document.addEventListener('focusin', e => { dateFocus = e.target && e.target.type === 'date' ? e.target : null; });
+document.addEventListener('focusout', e => {
+  if (dateFocus === e.target) dateFocus = null;
+  const el = e.target;
+  if (!badYear(el)) { if (el.dataset && el.dataset.pend) { delete el.dataset.pend; setTimeout(() => el.dispatchEvent(new Event('change', { bubbles: true })), 0); } return; }   // redraw now that typing is done
+  const y = +el.value.slice(0, 4), rest = el.value.slice(4);
+  if (y >= 20 && y <= 99) { el.value = (2000 + y) + rest; el.dispatchEvent(new Event('change', { bubbles: true })); return; }
+  const bp = el.dataset && el.dataset.bind, last = bp ? bp.split('.').reduce((o, k) => (o == null ? o : o[k]), S.trip) : '';
+  el.value = typeof last === 'string' && validDay(last) ? last : (el.defaultValue || ''); toast('Type the full year, like 2026');
+});
 document.addEventListener('change', async e => {
+  if (badYear(e.target)) return;                                    // still typing the year
   /* The stay's address box: typed by hand counts as the address (no redraw, so a tap on Find still works). */
   if (e.target.dataset && e.target.dataset.stayq != null) { const s = S.trip.stays[+e.target.dataset.stayq]; if (s && e.target.value.trim() !== (s.address || '')) { s.address = e.target.value.trim(); s.lat = null; s.lng = null; save(); } return; }
   const el = e.target;
@@ -348,6 +364,7 @@ document.addEventListener('change', async e => {
   if (/^(stays|legs)\./.test(bp)) { syncLegs(S.trip); }
   save();
   if (bp === 'travel_style') { P().pview = defaultView(); renderTabs(); if (!inWelcome) toast(v === 'planner' ? 'Planner mode on. Places is now Plan.' : v === 'wanderer' ? 'True Wanderer on. Places is now Nearby.' : 'Go with the flow'); }
+  if (el.type === 'date' && dateFocus === el) { el.dataset.pend = '1'; return; }   // still typing: saved, redraw when the field is left
   if (/^(stays|legs)\./.test(bp)) { refreshStays(); }
   if (/^emergency\./.test(bp)) { toast('Saved on this phone'); showEmergency(); return; }
   if (/^occasions\./.test(bp)) { refreshOccasions(); }

@@ -1,9 +1,9 @@
 /* Shared pieces of UI used by several screens. */
-import { EDITION } from '../../edition.config.js?v=202611161128';
-import { S, P, cityOf, cityName, curCityId, autoCityId, cityIds, placeById, isPlanner, today } from './state.js?v=202611161128';
-import { esc, ic, ill, KIND_NAME, fmtDay } from './dom.js?v=202611161128';
-import { whoSaved, statusOf, isBooked, planOf, BOOKING_LABEL, URGENCY_LABEL, priceText, priceShort, closedText, bookingKindLabel, goodForKids, hasKids, easyWalk, foodFlags, WALK_WARN, kidAges } from '../models/schema.js?v=202611161128';
-import { linkService } from '../services/link-service.js?v=202611161128';
+import { EDITION } from '../../edition.config.js?v=202611200940';
+import { S, P, cityOf, cityName, curCityId, autoCityId, cityIds, placeById, isPlanner, today } from './state.js?v=202611200940';
+import { esc, ic, ill, KIND_NAME, fmtDay } from './dom.js?v=202611200940';
+import { whoSaved, statusOf, isBooked, planOf, BOOKING_LABEL, URGENCY_LABEL, priceText, priceShort, closedText, bookingKindLabel, goodForKids, hasKids, easyWalk, foodFlags, WALK_WARN, kidAges } from '../models/schema.js?v=202611200940';
+import { linkService } from '../services/link-service.js?v=202611200940';
 
 export const art = file => (S.art && S.art[file]) || '';
 /* A city's own illustrated map (original line art drawn to a known area), for the offline sketch map. */
